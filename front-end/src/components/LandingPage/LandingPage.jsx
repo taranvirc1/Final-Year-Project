@@ -1,7 +1,10 @@
 import React from "react";
+import MapSection from "../MapSection";
 
 function LandingPage() {
-  return <div>This is the landing page!!!</div>;
+  return (
+    <MapSection />
+  );
 }
 
 export default LandingPage;
