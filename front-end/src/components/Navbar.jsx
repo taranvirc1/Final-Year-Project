@@ -5,6 +5,7 @@ import courseslogo from '../images/navIcons/courses.png'
 import quizzeslogo from '../images/navIcons/quizzes.png'
 import forumlogo from '../images/navIcons/forum.png'
 import rankinglogo from '../images/navIcons/ranking.png'
+import Loginlogo from '../images/navIcons/login.png'
 import "../Styles/NavBar.css";
 function Navbar() {
   return (
@@ -20,6 +21,7 @@ function Navbar() {
 				<li><a href="#Quizzes"><img src={quizzeslogo} alt =""  />Quizzes</a></li>
 				<li><a href="#Forum"><img src={forumlogo} alt =""  />Forum</a></li>
 				<li><a href="#Rankings"><img img src={rankinglogo} alt ="" />Rankings</a></li>
+                <li><a href="#login"><img img src={Loginlogo} alt ="" />Rankings</a></li>
 			</ul>
 			
 		</div>
