@@ -1,11 +1,11 @@
 import React from 'react'
-import Logo from './navIcons/logo.png'
-import donate from './navIcons/donate.png'
-import courseslogo from './navIcons/courses.png'
-import quizzeslogo from './navIcons/quizzes.png'
-import forumlogo from './navIcons/forum.png'
-import rankinglogo from './navIcons/ranking.png'
-import "./NavBar.css";
+import Logo from '../images/navIcons/logo.png'
+import donate from '../images/navIcons/donate.png'
+import courseslogo from '../images/navIcons/courses.png'
+import quizzeslogo from '../images/navIcons/quizzes.png'
+import forumlogo from '../images/navIcons/forum.png'
+import rankinglogo from '../images/navIcons/ranking.png'
+import "../Styles/NavBar.css";
 function Navbar() {
   return (
     <>
