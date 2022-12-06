@@ -5,7 +5,7 @@ import {
   AiFillInstagram,
   AiFillTwitterCircle,
 } from "react-icons/ai";
-import "../styles/Footer.css";
+import "../Styles/Footer.css";
 
 function Footer() {
   return (
