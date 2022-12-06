@@ -9,7 +9,7 @@ function App() {
       <h1>This is our React Project!!!</h1>
    
       <LandingPage />
-      <Footer />
+      
     </div>
   );
 }
