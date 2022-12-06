@@ -1,6 +1,6 @@
 import "./App.css";
 import LandingPage from "./components/LandingPage";
-//test
+import Footer from "./components/Footer";
 
 function App() {
   return (
