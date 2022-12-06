@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/Logo.png";
+import logo from "../images/navIcons/logo.png";
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -14,7 +14,7 @@ function Footer() {
         <div className="container-items">
           {/* Section_1 */}
           <div className="about">
-            <img src={logo} alt="logo"></img>
+            <img src={logo} alt="logo" style ={{width: 140}}></img>
             <ul>
               <li>
                 <h3>About-US</h3>
