@@ -21,7 +21,7 @@ function Navbar() {
 				<li><a href="#Quizzes"><img src={quizzeslogo} alt =""  />Quizzes</a></li>
 				<li><a href="#Forum"><img src={forumlogo} alt =""  />Forum</a></li>
 				<li><a href="#Rankings"><img img src={rankinglogo} alt ="" />Rankings</a></li>
-                <li><a href="#log"><img img src={Loginlogo} alt ="" />Rankings</a></li>
+                <li><a href="#log"><img img src={Loginlogo} alt ="" />Login</a></li>
 			</ul>
 			
 		</div>
