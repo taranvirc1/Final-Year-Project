@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FaArrowAltCircleRight,FaArrowAltCircleLeft } from 'react-icons/fa'
-import style from "./ImageSlider.css"
+import style from "../Styles/ImageSlider.css"
 
 const SliderData = [
     {image: "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068854141039/1.png"},
