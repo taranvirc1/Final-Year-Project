@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     
+    
 }
 
 
@@ -27,7 +28,7 @@
 
 .right-arrow{
     position: relative;
-    right: -82%;
+    right: -85%;
     top: 300px;
     font-size: 5rem;
     color: black;
@@ -68,6 +69,6 @@
 .slide-active img{
     border-radius: 15px;
     object-fit: cover;
-    width: 1000px;
+    width: 1100px;
     height: 500px;
 }
