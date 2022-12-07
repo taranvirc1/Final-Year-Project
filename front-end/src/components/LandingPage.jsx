@@ -5,12 +5,13 @@ import MapSection from "../components/MapSection";
 import Footer from "../components/Footer";
 import Whylearn from "../components/WhyLearn";
 import WhoAreWe from "../components/WhoAreWe";
-
+import Header from "./Header";
 import Navbar from "./Navbar";
 function LandingPage() {
   return (
     <div>
       <Navbar />
+      <Header/>
       <ImageSlider />
       <WhoAreWe />
       <Whylearn />
