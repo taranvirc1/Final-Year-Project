@@ -1,8 +1,9 @@
-div.title{
+.title{
+    background-color: rgb(216, 48, 48);
     text-align: center;
     font-size: 30px;
 }
-div.box1{
+.box1{
     border-style:outset;
     float: left;
     margin :20px;
@@ -14,7 +15,7 @@ div.box1{
 
 
 }
-div.box2{
+.box2{
     border-style:outset;
     float: right;
     margin: 20px;
@@ -24,7 +25,7 @@ div.box2{
     height:250px;
     width:400px;
 }
-div.box3{
+.box3{
     border-style:outset;
     float: left;
     margin :20px;
@@ -34,7 +35,7 @@ div.box3{
     height:250px;
     width:400px;
 }
-div.box4{
+.box4{
     border-style:outset;
     float: right;
     margin :20px;
@@ -46,6 +47,7 @@ div.box4{
 
 }
 .center{
+    
     margin: auto;
     width: 70%;
 }

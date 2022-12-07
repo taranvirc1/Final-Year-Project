@@ -3,7 +3,7 @@ import "../Styles/WhoAreWe.css"
 
 export default function WhoAreWe() {
   return (
-    <div>
+    <div className='body'>
     <div class="title">
         <h1>Who Are We?</h1>
     </div>
