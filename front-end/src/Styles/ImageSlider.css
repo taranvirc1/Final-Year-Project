@@ -1,6 +1,5 @@
 
 .slider {
-    background-color: #2e9ae2;
     display: flex;
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;

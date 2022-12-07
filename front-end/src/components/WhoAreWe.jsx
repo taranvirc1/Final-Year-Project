@@ -5,7 +5,7 @@ import Picture1 from "../images/WhoAreWe-icons/Picture1.png";
 export default function WhoAreWe() {
   return (
     <div>
-      <div className="title">
+      <div className="header">
         <h1>Who Are We?</h1>
       </div>
       <div className="center">
