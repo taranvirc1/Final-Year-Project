@@ -5,10 +5,12 @@
     justify-items: center;
 }
 
-h2 {
+.map-title {
     font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
     text-align: center;
     margin-bottom: 20px;
+    color: black;
 }
 
 iframe {

@@ -1,6 +1,6 @@
- .header{
+ .header h2{
     text-align: center;
-    font-size: 30px;
+    font-size: 2.5rem;
     margin: 20px 0;
     color:black;
 }
@@ -12,9 +12,9 @@
     grid-template-columns: auto auto;
     justify-content: center;
     align-items: center;
-    background-color: rgb(105, 138, 187);
+    background-color: #3161b5;
     position:relative;
-    left: 200px;
+    left: 180px;
     margin:auto;
     padding: 20px 0;
     width: 80%;
@@ -22,7 +22,6 @@
 }
 
 .box1{
-    /* border-style:outset; */
     border-radius: 10px;
     width: 450px;
     float: left;
@@ -33,8 +32,6 @@
 }
 
 .box2{
-    /* border-style:outset; */
-
     float: right;
     margin: 20px;
     font-size:20px;
@@ -45,7 +42,6 @@
     text-align: left;
 }
 .box3{
-    /* border-style:outset; */
     float: left;
     margin :20px;
     font-size:20px;
@@ -56,12 +52,10 @@
     text-align: left;
 }
 .box4{
-    /* border-style:outset; */
     width: 450px;
     position: relative;
     left:176px;
     margin:20px;
-    
     font-size:20px;
 }  
  

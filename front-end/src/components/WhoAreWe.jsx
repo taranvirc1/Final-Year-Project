@@ -6,7 +6,7 @@ export default function WhoAreWe() {
   return (
     <div>
       <div className="header">
-        <h1>Who Are We?</h1>
+        <h2>Who Are We?</h2>
       </div>
       <div className="center">
         <div className="box1">

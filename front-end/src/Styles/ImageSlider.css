@@ -68,6 +68,6 @@
 .slide-active img{
     border-radius: 15px;
     object-fit: cover;
-    width: 900px;
-    height: 500px;;
+    width: 1000px;
+    height: 500px;
 }

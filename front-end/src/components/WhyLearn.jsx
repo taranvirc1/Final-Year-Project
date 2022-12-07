@@ -5,7 +5,7 @@ export default function Whylearn() {
   return (
     <div class="whylearn">
       <div class="title">
-        <h1>Why Learn With Us?</h1>
+        <h2>Why Learn With Us?</h2>
       </div>
 
       <div class="box">
