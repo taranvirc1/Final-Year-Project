@@ -4,7 +4,7 @@
 
 
 .slider {
-    background-color: blueviolet;
+    background-color: #2e9ae2;
     display: flex;
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;
@@ -43,7 +43,7 @@
     user-select: none;
 }
 .right-arrow:hover{
-    color: orange;
+    color: #8700e0;
 }
 .right-arrow:active{
     transform:scale(0.9);
@@ -61,7 +61,7 @@
     user-select: none;
 }
 .left-arrow:hover{
-    color: orange;
+    color: #8700e0;
 }
 .left-arrow:active{
     transform:scale(0.9);
