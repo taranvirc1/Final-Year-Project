@@ -4,6 +4,7 @@ import ImageSlider from "../components/ImageSlider";
 import MapSection from "../components/MapSection";
 import Footer from "../components/Footer";
 import Whylearn from "../components/WhyLearn";
+import WhoAreWe from "../components/WhoAreWe";
 
 import Navbar from "./Navbar";
 function LandingPage() {
@@ -11,6 +12,7 @@ function LandingPage() {
     <div>
       <Navbar />
       <ImageSlider />
+      <WhoAreWe />
       <Whylearn />
       <MapSection />
       <Footer />

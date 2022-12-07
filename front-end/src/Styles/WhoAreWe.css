@@ -1,0 +1,51 @@
+div.title{
+    text-align: center;
+    font-size: 30px;
+}
+div.box1{
+    border-style:outset;
+    float: left;
+    margin :20px;
+    font-size:20px;
+    padding:30px;
+    text-align: right;
+    height:250px;
+    width:400px;
+
+
+}
+div.box2{
+    border-style:outset;
+    float: right;
+    margin: 20px;
+    font-size:20px;
+    padding:30px;
+    text-align: left;
+    height:250px;
+    width:400px;
+}
+div.box3{
+    border-style:outset;
+    float: left;
+    margin :20px;
+    font-size:20px;
+    padding:30px;
+    text-align: right;
+    height:250px;
+    width:400px;
+}
+div.box4{
+    border-style:outset;
+    float: right;
+    margin :20px;
+    font-size:20px;
+    padding:30px;
+    text-align: left;
+    height:250px;
+    width:400px;
+
+}
+.center{
+    margin: auto;
+    width: 70%;
+}
