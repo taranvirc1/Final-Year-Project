@@ -1,5 +1,6 @@
 import React from "react";
 import "../Styles/WhoAreWe.css";
+import Picture1 from "../images/WhoAreWe-icons/Picture1.png"
 
 export default function WhoAreWe() {
   return (
@@ -9,7 +10,7 @@ export default function WhoAreWe() {
       </div>
       <div class="center">
         <div class="box1">
-          <img src="Picture1.png" height="250px" width="400px" alt="picture1" />
+          <img src={Picture1} height="250px" width="400px" alt="picture1" />
         </div>
         <div class="box2">
           <p>
@@ -26,7 +27,7 @@ export default function WhoAreWe() {
           </p>
         </div>
         <div class="box4">
-          <img src="Picture1.png" height="250px" width="400px" alt="picture2" />
+          <img src={Picture1} height="250px" width="400px" alt="picture2" />
         </div>
       </div>
     </body>
