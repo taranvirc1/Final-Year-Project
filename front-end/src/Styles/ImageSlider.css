@@ -28,15 +28,12 @@
 
 .right-arrow{
     position: relative;
-
-    
     right: -82%;
     top: 300px;
     font-size: 5rem;
     color: black;
     z-index: 1;
     cursor: pointer;
-    user-select: none;
 }
 .right-arrow:hover{
     color: #8700e0;
@@ -46,15 +43,12 @@
 }
 .left-arrow{
     position: relative;
-
-    
     left: 0%;
     top: 300px;
     font-size: 5rem;
     color: black;
     z-index: 1;
     cursor: pointer;
-    user-select: none;
 }
 .left-arrow:hover{
     color: #8700e0;
