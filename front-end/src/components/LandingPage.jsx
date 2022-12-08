@@ -7,6 +7,7 @@ import Whylearn from "../components/WhyLearn";
 import WhoAreWe from "../components/WhoAreWe";
 import Header from "./Header";
 import Navbar from "./Navbar";
+import Sponsors from "../components/Sponsors";
 function LandingPage() {
   return (
     <div>
@@ -15,6 +16,7 @@ function LandingPage() {
       <ImageSlider />
       <WhoAreWe />
       <Whylearn />
+      <Sponsors />
       <MapSection />
       <Footer />
     </div>
