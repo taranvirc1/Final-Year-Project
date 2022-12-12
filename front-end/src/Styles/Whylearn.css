@@ -1,0 +1,107 @@
+.whylearn{
+	width: 100%;
+	padding: 100px 0px;
+}
+button.container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+	min-height: 20vh;
+}
+.title h2{
+	color: black;
+	font-size: 2.5rem;
+    font-weight: bold ;
+	width: 1130px;
+	margin: 30px auto;
+	text-align: center;
+}
+
+.btn-1{
+    position: relative;
+	width: 250px;
+	height: 70px;
+	border: none;
+	color:  white;
+    font-weight: bold;
+	background-color:#f9004d;
+	border-radius: 4px;
+	transition: ease-out 0.3s;
+	font-size: 2rem;
+	outline: none;
+	border: 3px solid 42 #131616;
+    border-radius: 25px;
+}
+.btn-1:hover {
+	color:black;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.btn-1::before {
+	transition: 0.5s all ease;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	right: 50%;
+	bottom: 0;
+	opacity: 0;
+	content: "";
+    border-radius: 25px;
+	background-color: #416bb9;
+}
+
+.btn-1:hover::before{
+	transition: 0.4s all ease;
+	left: 0;
+	right: 0;
+	opacity: 1;
+	z-index: -1;
+}
+.box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 400px;
+}
+
+.card{
+	height: 365px;
+	width: 335px;
+	padding: 20px 35px;
+	background: #3161b5;
+	border-radius: 20px;
+	margin: 15px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+}
+svg{
+margin-top: 25px;
+
+
+}
+.card i{
+	font-size: 50px;
+	display: block;
+	text-align: center;
+	margin: 25px 0px;
+	color: white;
+    line-height: 50px;
+
+
+
+}
+h2{
+	color: white;
+	font-size: 23px;
+	margin-bottom: 15px;
+}
+.pra p{
+	color: white;
+	font-size: 16px;
+	line-height: 16px;
+	margin-bottom: 27px;
+}
