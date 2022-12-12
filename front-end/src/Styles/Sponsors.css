@@ -1,0 +1,17 @@
+.Sponsors {
+    position: relative;
+    width: 92vw;
+    margin: auto;
+    text-align: center;
+  }
+
+  .Sponsors .key {
+    color: #000;
+    margin-bottom: 1em;
+    font-size: 2.5rem;
+  }
+
+  .Sponsors-header img {
+  margin-right: 20px;
+  
+  }
