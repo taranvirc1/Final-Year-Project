@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 .right-arrow:hover{
-    color: #8700e0;
+    color: #f86732;
 }
 .right-arrow:active{
     transform:scale(0.9);
@@ -57,7 +57,7 @@
     cursor: pointer;
 }
 .left-arrow:hover{
-    color: #8700e0;
+    color: #f86732;
 }
 .left-arrow:active{
     transform:scale(0.9);
