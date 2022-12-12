@@ -70,8 +70,8 @@ export default function Whylearn() {
           </div>
         </div>
       </div>
-      <div class="container">
-        <a href="#">
+      <div className="button-container">
+        <a href="/">
           <button class="btn-1">Get started</button>
         </a>
       </div>
