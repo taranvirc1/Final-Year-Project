@@ -1,20 +1,16 @@
 .whylearn{
-	background: white (244, 244, 248);
 	width: 100%;
-	padding: 100px 0px;
+	padding: 50px 0px 0px 0px;
 }
 .title h2{
 	color: black;
-	font-size: 2.5rem;
-    font-weight: bold ;
-	width: 1130px;
-	margin: 30px auto;
+	font-size: 2rem;
+    font-weight: bold;
 	text-align: center;
 }
 .button-container{
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
 	min-height: 16vh;
@@ -28,13 +24,13 @@
 	color:  white;
     font-weight: bold;
 	background-color:#f9004d;
-	border-radius: 4px;
 	transition: ease-out 0.3s;
 	font-size: 2rem;
 	outline: none;
 	border: 3px solid 42 #131616;
     border-radius: 25px;
 }
+
 .btn-1::before {
 	transition: 0.5s all ease;
 	position: absolute;
