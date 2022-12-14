@@ -8,6 +8,7 @@
 
 .App{
 	background-color: aliceblue;
+	min-height: 100vh;
 }
 
 h2 {
