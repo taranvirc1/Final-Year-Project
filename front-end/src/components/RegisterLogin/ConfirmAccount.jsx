@@ -1,0 +1,27 @@
+import React from "react";
+import "../../Styles/RegisterLoginStyles/ConfirmAccount.css";
+import tick_img from "../../images/login-register-icons/404-tick.png";
+import { Link } from "react-router-dom";
+
+function ConfirmAccount() {
+  return (
+    <div className="body">
+      <div className="confirm-container">
+        <div className="confirm-message">
+          <div className="popup">
+            <img src={tick_img} alt="tick img" />
+            <h2 className="confirm-title">Thank you!</h2>
+            <p>Your account has been created successfully!</p>
+            <Link to="/">
+              <button type="button" className="btn">
+                OK
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ConfirmAccount;
