@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import LandingPage from "./components/LandingPage";
 import Account from "./components/RegisterLogin/Account";
+import NewPassword from "./components/RegisterLogin/NewPassword";
 import ResetPassword from "./components/RegisterLogin/ResetPassword";
 
 function AppRoute() {
@@ -13,7 +14,8 @@ function AppRoute() {
             <Route path="/" element={<App />}>
                 <Route index element={<LandingPage />} />
                 <Route path="/account" element={<Account />} />
-                <Route path="/reset" element={<ResetPassword />}/>
+                <Route path="/resetPassword" element={<ResetPassword />}/>
+                <Route path="/newPassword" element={<NewPassword />}/>         
             </Route>
         </Routes>
       </BrowserRouter>
