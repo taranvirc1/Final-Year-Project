@@ -37,7 +37,7 @@ function Account() {
               <Link to="/">
                 <input type="submit" value="Login" class="btn solid" />
               </Link>
-              <Link to="/reset">
+              <Link to="/resetPassword">
                 <a href="/" className="forgot">
                   Forgot your password?
                 </a>
