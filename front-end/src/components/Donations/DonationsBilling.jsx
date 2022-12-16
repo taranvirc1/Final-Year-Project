@@ -15,6 +15,7 @@ function DonationsBilling() {
 
 <div class="buttons">
   <button onClick={showForm}>Card</button> 
+  <button> <a href='https://www.paypal.com/uk/signin' style={{color: 'white'}}>Paypal</a></button>
 </div>
 
 <form class="billing-form">
