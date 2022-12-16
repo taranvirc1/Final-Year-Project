@@ -17,7 +17,7 @@ function Navbar() {
 			<a href="index.html"><img src={Logo} alt="" style ={{width: 140}} /></a></div>
 			<ul id="list-switch">
 			
-				<li><a href="#donate"><img src={donate} alt="" />Donate</a></li>
+				<li><Link to="/donations"><a href="#donate"><img src={donate} alt="" />Donate</a></Link></li>
 				<li><a href="#courses"><img src={courseslogo} alt=""  />Courses</a></li>
 				<li><a href="#Quizzes"><img src={quizzeslogo} alt =""  />Quizzes</a></li>
 				<li><a href="#Forum"><img src={forumlogo} alt =""  />Forum</a></li>
