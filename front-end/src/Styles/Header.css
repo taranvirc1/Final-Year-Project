@@ -1,8 +1,8 @@
-.overflow-hidden{
+.overflow{
     text-align: center;
     padding-top: 70px;
 }
-.drop-in-2{
+.desc{
     position: relative;
     top: 50px;
     font-size: 2.5rem;
@@ -11,7 +11,7 @@
     z-index: 1;
 }
 
-h5 {
+.text2 {
     position: relative;
     top: 40px;
     font-size: 4vw;
@@ -20,7 +20,7 @@ h5 {
     text-transform: uppercase;
     z-index: 1;
   }
-  h5::before {
+  .text2::before {
     content: attr(data-text);
     position: absolute;
     
@@ -39,6 +39,6 @@ h5 {
     }
     70%,
     90% {
-      width: 12.5%;
+      width: 25%;
     }
   }
