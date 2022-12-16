@@ -1,74 +1,106 @@
 .footer {
-    color: rgba(255, 255, 255, 0.623);
     background-color: rgb(55, 50, 53);
-    text-align: center;
-    position: relative;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-li,
-a {
-    list-style: none;
-    text-decoration: none;
-    color: black;
-}
-
-.container {
-    margin-left: 90px;
-}
-
-.container-items {
-    text-align: center;
+    position: sticky;
+    top: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
     display: flex;
-    margin: 0px;
+    flex-flow: row wrap;
+    padding: 50px 0 50px 10%;
 }
 
-.contact-us,
-.links,
-.socials {
-    margin-left: 70px;
-    padding-left: 19px;
+.footer > * {
+    flex: 1 100%;
 }
 
-.socials li {
-    display: inline;
+.footer-container-left {
+    margin-left: 10px;
+    margin-right: 1.25em;
+    margin-bottom: 2em;
 }
 
-@media only screen and (max-width: 1024px) {
+.footer-about-us {
+    margin-top: 20px;
+}
 
-    .footer {
-        color: white;
-        background-color: white;
-        text-align: center;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
+.footer-about-us,
+.footer-title {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.footer ul {
+    padding-left: 0;
+}
+
+.footer li {
+    line-height: 2em;
+}
+
+.footer-container-right {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+ .footer-container-right > * {
+    flex: 1 50%;
+    flex-direction: column;
+    margin-right: 1.25em;
+    list-style: none;
+ }
+
+ .h-box {
+    column-count:  2;
+    column-gap: 2.5em;
+ }
+
+ .contact,
+ .link {
+    display: inline-block;
+    list-style: none;
+    color: #999;
+ }
+
+ .social {
+    display:inline-flex;
+    list-style: none;
+ }
+
+ .social a {
+    color: #999;
+    font-size: 25px;
+ }
+
+.footer-container-bottom {
+    text-align: center;
+    color: #999;
+    padding-top: 50px;
+    margin-left: -12%;
+}
+
+.footer-container-left p {
+    padding-right: 20%;
+    color: #999;
+}
+
+@media screen and (min-width: 600px) {
+    .footer-container-right > * {
+        flex: 1;
     }
 
-    li,
-    a {
-        list-style: none;
-        text-decoration: none;
-        color: black;
+    .footer-container-left {
+        flex: 1 0px;
     }
 
-    .container {
-        margin-left: 40px;
-    }
-
-    .container-items {
-        text-align: center;
-        display: flex;
-        margin: 0px;
-    }
-
-    .contact-us,
-    .links,
-    .socials {
-        margin-left: 70px;
-        padding-left: 19px;
+    .footer-container-right {
+        flex: 2 0px;
     }
 }
+
