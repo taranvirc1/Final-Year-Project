@@ -96,3 +96,22 @@ h2{
 	line-height: 16px;
 	margin-bottom: 27px;
 }
+
+@media  (max-width: 570px) {
+
+    .title h2 {
+		font-size: 1.5rem;
+		margin-bottom: 25px;
+	}
+
+	.box {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.card {
+		margin: auto;
+		margin-bottom: 30px;
+	}
+
+}
