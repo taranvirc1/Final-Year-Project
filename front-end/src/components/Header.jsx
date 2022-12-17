@@ -4,9 +4,9 @@ import "../Styles/Header.css"
 function Header() {
   return (
     <div>
-       <div className="overflow-hidden">
+       <div className="overflow">
            <h5 class="text2" data-text="Coding4All">Coding4All</h5>
-           <h2 class="drop-in-2">
+           <h2 class="desc">
                Learn everything about computer science anywhere.
   
             </h2>
