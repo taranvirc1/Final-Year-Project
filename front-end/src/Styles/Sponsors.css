@@ -15,3 +15,15 @@
   margin-right: 20px;
   
   }
+
+  @media  (max-width: 570px) {
+
+    .Sponsors .key {
+      font-size: 1.5rem;
+    }
+
+    .Sponsors img {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+}
