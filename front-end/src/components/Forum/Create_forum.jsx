@@ -54,7 +54,7 @@ function Create_forum() {
             </ul>
             </div>
             <div className='ThreadCreatorText'>
-            <textarea rows="25" cols="129"name="text_body"></textarea>
+            <textarea rows="20" name="text_body"></textarea>
             </div>
         </div>
         <div className='ThreadCreatorTextTrash'><button className='threadcreatetrashbutton'><img src={DeleteIcon}/></button></div>

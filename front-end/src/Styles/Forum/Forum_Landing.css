@@ -145,9 +145,8 @@
     border-radius: 10px;
     border-color: rgb(75, 75, 75);
 }
-.thread-creator{
-    
-    padding-left: 5px;
+.thread-creatorname{
+    margin: 5px;
 }
 .Stats{
     display: grid;
