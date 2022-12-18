@@ -31,7 +31,7 @@
     overflow: hidden;
     animation: animate 6s linear infinite;
   }
-  @keyframes animate {
+   @keyframes animate {
     0%,
     10%,
     100% {
@@ -42,3 +42,17 @@
       width: 25%;
     }
   }
+  
+  @media  (max-width: 570px) {
+
+    .text2 {
+      font-size: 12vw;
+      margin-top: 70px;
+    }
+
+    .desc {
+      margin-top: 10px;
+      font-size: 2rem;
+      padding: 0 10px;
+    }
+}

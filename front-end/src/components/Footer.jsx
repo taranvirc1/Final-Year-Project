@@ -6,18 +6,21 @@ import {
   AiFillTwitterCircle,
 } from "react-icons/ai";
 import "../Styles/Footer.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
     <div className="footer">
       {/* Section 1 */}
       <div className="footer-container-left">
-        <img src={logo} alt="logo" style={{ width: 140 }} />
+        <Link to="/">
+          <img src={logo} alt="logo" style={{ width: 140 }} />
+        </Link>
         <h3 className="footer-about-us">About Us</h3>
         <p className="about-par">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos autem
-          culpa ipsam deleniti accusamus repudiandae, quis exercitationem qui.
-          Sunt repudiandae architecto voluptas praesentium possimus aliquid.
+          Coding4All was developed by a team of young developers, at Brunel
+          Univeristy, with the sole purpose to change the lives of other
+          students.
         </p>
       </div>
       {/* Section 2 */}
@@ -31,9 +34,9 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a className="link" href="/">
+              <p className="link">
                 Phone: +44 123-456-7890
-              </a>
+              </p>
             </li>
           </ul>
         </li>

@@ -22,7 +22,7 @@
 }
 
 .footer-about-us {
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .footer-about-us,
@@ -54,6 +54,14 @@
     flex-direction: column;
     margin-right: 1.25em;
     list-style: none;
+ }
+
+ .footer-container-right a {
+    font-size: 0.9rem;
+ }
+
+ .footer-container-right a:hover {
+    text-decoration: underline;
  }
 
  .h-box {
@@ -90,6 +98,10 @@
     color: #999;
 }
 
+.footer-container-left img {
+    margin-left: -2px;
+}
+
 @media screen and (min-width: 600px) {
     .footer-container-right > * {
         flex: 1;
@@ -101,6 +113,20 @@
 
     .footer-container-right {
         flex: 2 0px;
+    }
+}
+
+@media  (max-width: 599px) {
+    .footer-container-left img {
+        margin-left: -13px;
+    }
+    
+    .footer-container-left p {
+        margin-left: -10px;
+    }
+
+    .footer-container-left h3 {
+        margin-left: -10px;
     }
 }
 
