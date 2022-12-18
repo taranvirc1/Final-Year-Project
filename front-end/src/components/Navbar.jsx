@@ -14,9 +14,11 @@ function Navbar() {
     <>
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
+        <Link to="/">
           <a href="/">
             <img src={Logo} alt="" style={{ width: 140 }} />
           </a>
+          </Link>
         </div>
         <ul id="list-switch">
           <li>
@@ -28,11 +30,14 @@ function Navbar() {
             </Link>
           </li>
           <li>
+          <Link to="/courses">
             <a href="#courses">
               <img src={courseslogo} alt="" />
               Courses
             </a>
+            </Link>
           </li>
+          
           <li>
             <a href="#Quizzes">
               <img src={quizzeslogo} alt="" />
