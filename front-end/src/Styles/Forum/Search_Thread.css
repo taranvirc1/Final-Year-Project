@@ -1,0 +1,136 @@
+.SearchForum-Title{
+    margin-top: 20px;
+    position: relative;
+    padding: 20px 40px;
+    user-select: none;
+    color: black;
+    font-size: 2rem;
+}
+.thread-search{
+    width: 96%;
+    margin: auto;
+    margin-top: 15px;
+    padding: 15px 15px;
+    padding-bottom: 100px;
+    background-color: #a6aefd;
+    border: 2px solid black;
+    border-radius: 25px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+.searchthread-title{
+    margin-top: 15px;
+    position: relative;
+    padding-left: 20px;
+}
+.searchthread-title label{
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    padding-right: 5px;
+    font-size: 23px;
+}
+#sthread-title{
+    position: relative;
+    display:inline-block;
+    font-family:'Poppins', sans-serif;
+    font-size: 20px;
+    width: 89.3%;
+    border-radius: 10px;
+}
+
+.searchtags{
+    margin-top: 15px;
+    position: relative;
+    padding-left: 109px;
+}
+.searchtags label{
+    position: relative;
+    padding-right: 5px;
+    font-size: 23px;
+}
+#s_tags{
+    position: relative;
+    display:inline-block;
+    font-family:'Poppins', sans-serif;
+    font-size: 20px;
+    width: 94%;
+    border-radius: 10px;
+}
+
+.searchsort{
+    margin-top: 15px;
+    position: relative;
+    padding-left: 80px;
+    
+}
+.searchsort label{
+    position: relative;
+    padding-right: 5px;
+    font-size: 23px;
+    
+}
+#ssort{
+    position: relative;
+    display:inline-block;
+    text-align: center;
+    width: 300px;
+    font-family:'Poppins', sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+}
+#ssort:active{
+    box-shadow: 0 1px #666;
+    transition-duration: 1s;
+    transform:scale(0.99);
+}
+.ClearSearch{
+    margin-top: 20px;
+    padding-left: 10px;
+
+}
+.clearbutton{
+    border: 1px outset black;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+.clearbutton:active {
+    background-color: #b1b1b1;
+    box-shadow: 0 1px #666;
+    transform:scale(0.99);
+  }
+.clearbutton img{
+    height:40px;
+    width:40px
+}
+.searchpost{
+    margin-top: 10px;
+    align-items: center;
+    position:relative;
+    display:inline;
+    float:right;
+    border: 1px outset black;
+    border-radius: 15px;
+    padding: 10px 10px;
+    margin-right: 45px;
+    box-shadow: 0 1px #646464;
+    background-color:#6193ff;
+}
+.searchpost:hover{
+    background-color:#4882ff;
+}
+.searchpost:active{
+    box-shadow: 0 1px #646464;
+    transform:scale(0.99);
+}
+.searchpost label{
+    padding-left: 10px;
+    font-family:'Poppins', sans-serif;
+    font-size: 25px;
+    color: black;
+    border-radius: 10px;
+}
+
+.spost img{
+    height:40px;
+    width:40px;
+}
