@@ -1,0 +1,164 @@
+
+.navbar-spacing{
+    margin-top: 80px;
+}
+.forums-title h2{
+    margin-top: 10px;
+    position: relative;
+    color: black;
+    font-size: 2rem;
+    margin-bottom: -5px;
+}
+
+.LandingPage-list{
+    background-color: aliceblue;
+    display: inline-block;
+    position: relative;
+    justify-content: left;
+    margin-left: 40px;
+    
+}
+.LandingPage-list a{
+    background-color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    font-size: 20px;
+    color:black;
+    cursor: pointer;
+    outline: auto;
+    outline-style: inset;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+.LandingPage-list a:active {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    outline-color: black;
+}
+.LandingOptions{
+    display: inline;
+    float: right;
+    position: relative;
+    block-size: fit-content;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    margin-right: 40px;
+}
+.LandingOptions a{
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    height: 45px;
+    
+}
+
+.LandingOptions a img{
+    user-select: none;
+    position: relative;
+    margin:auto;
+    height:45px;
+    width:50px;
+    border: 1px solid black;
+}
+
+.LandingSort {
+    cursor: pointer;
+    width : 50px;
+    height: 43px;
+}
+.LandingSort img {
+    padding : 4px;
+    cursor : pointer;
+    position: relative;
+}
+
+.landingsort-optn {
+    width:180px;
+    height:0px;
+    overflow: hidden;
+    transition: height .4s ease;
+    list-style: none;
+    
+}
+.landingsort-optn :hover{
+    background-color: orange;
+}
+
+.landingsort-optn li a{
+    padding: 10px;
+    background-color: black;
+    color:white;
+    font-size:20px;
+    text-align: left;
+}
+
+#lsortbtn { /* hidden checkbox*/
+    position: absolute; opacity: 0; height: 0px;
+}    
+
+#lsortbtn:checked + .landingsort-optn {
+    height: 130px;
+    background-color: black;
+}
+
+/* Thread-list */
+
+.Thread-List{
+    width: 96%;
+    margin: auto;
+    margin-top: 15px;
+    padding: 15px 15px;
+    background-color: #6870b9;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin-bottom: 25px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+.thread{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+.topic-items{
+    text-align: left;
+    position: relative;
+}
+.thread-title{
+    color: black;
+    font-size: 25px;
+    display: inline-block;
+}
+.thread-title:hover{
+    text-decoration: underline;
+    color: rgb(255, 161, 19);
+}
+.tags{
+    display: inline-block;
+    margin: -3px 0px;
+    padding: 5px;
+}
+
+.tags li{
+    display: inline-block;
+    margin-left: 5px;
+    padding:0px 3px;
+    border-style: inset;
+    border-radius: 10px;
+    border-color: rgb(75, 75, 75);
+}
+.thread-creator{
+    
+    padding-left: 5px;
+}
+.Stats{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    Float:right;
+    margin:auto;
+    padding-right: 50px;
+
+}
+.Stats img{
+    height:25px;
+    width:25px;
+}
