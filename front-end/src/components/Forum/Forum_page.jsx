@@ -158,7 +158,7 @@ function Forum_page() {
           </ul>
         </div>
         <div className='ThreadEditorText'>
-          <textarea rows="15" cols="129" name="pagetext_body"></textarea>
+          <textarea rows="15" name="pagetext_body"></textarea>
         </div>
       </div>
       <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div>
