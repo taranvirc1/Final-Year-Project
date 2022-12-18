@@ -75,7 +75,6 @@
     overflow: hidden;
     transition: height .4s ease;
     list-style: none;
-    
 }
 .landingsort-optn :hover{
     background-color: orange;
@@ -96,6 +95,7 @@
 #lsortbtn:checked + .landingsort-optn {
     height: 130px;
     background-color: black;
+    z-index: 5;
 }
 
 /* Thread-list */
@@ -155,7 +155,6 @@
     Float:right;
     margin:auto;
     padding-right: 50px;
-
 }
 .Stats img{
     height:25px;
