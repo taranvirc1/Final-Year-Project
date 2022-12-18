@@ -45,10 +45,12 @@ function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#Forum">
-              <img src={forumlogo} alt="" />
-              Forum
-            </a>
+            <Link to="/Forum_landing">
+              <a href="/">
+                <img img src={forumlogo} alt="" />
+                Forum
+              </a>
+            </Link>
           </li>
           <li>
             <a href="#Rankings">
