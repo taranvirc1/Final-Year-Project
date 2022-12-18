@@ -9,6 +9,7 @@ import Account from "./components/RegisterLogin/Account";
 import ConfirmAccount from "./components/RegisterLogin/ConfirmAccount";
 import NewPassword from "./components/RegisterLogin/NewPassword";
 import ResetPassword from "./components/RegisterLogin/ResetPassword";
+import Courses from "./components/CcoursesPage/Courses";
 
 function AppRoute() {
   return (
@@ -24,6 +25,9 @@ function AppRoute() {
             <Route path="/donations" element={<DonationsPage />} />
             <Route path="/donationsBilling" element={<DonationsBilling />} />
             <Route path="/confirmDonation" element={<DonationsConfirmation />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/landingpage" element={<LandingPage />} />
+
           </Route>
         </Routes>
       </BrowserRouter>
