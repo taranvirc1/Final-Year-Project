@@ -16,7 +16,7 @@ import Forum_page from './components/Forum/Forum_page';
 import Create_forum from './components/Forum/Create_forum';
 import FAQ from './components/FAQ/FAQ';
 import Contact from './components/FAQ/Contact'
-
+import UPM from './components/UPM/Main'
 function AppRoute() {
   return (
     <div>
@@ -34,17 +34,19 @@ function AppRoute() {
             <Route path="/donationsBilling" element={<DonationsBilling />} />
             <Route path="/confirmDonation" element={<DonationsConfirmation />} />
             {/* route for courses */}
-            <Route path="/courses" element={<Courses />} /> 
+            <Route path="/courses" element={<Courses />} />
             {/* route for student forum */}
-            <Route path="/Forum_landing" element={<Forum_landing/>}/>
-            <Route path="/Search_thread" element={<Search_thread/>}/>
-            <Route path="/Forum_page" element={<Forum_page/>}/>
-            <Route path="/Create_forum" element={<Create_forum/>}/>
-            {/* route for quizzes */} 
+            <Route path="/Forum_landing" element={<Forum_landing />} />
+            <Route path="/Search_thread" element={<Search_thread />} />
+            <Route path="/Forum_page" element={<Forum_page />} />
+            <Route path="/Create_forum" element={<Create_forum />} />
+            {/* route for quizzes */}
 
             {/* route for FAQ */}
-            <Route path="/FAQ" element={<FAQ/>}/>
-            <Route path="/Contact" element={<Contact/>}/>
+            <Route path="/FAQ" element={<FAQ />} />
+            <Route path="/Contact" element={<Contact />} />
+            {/*Route fpr UPM*/}
+            <Route path="/UPM" element={<UPM />} />
           </Route>
         </Routes>
       </BrowserRouter>
