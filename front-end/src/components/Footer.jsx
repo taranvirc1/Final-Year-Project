@@ -50,9 +50,11 @@ function Footer() {
               </a>
             </li>
             <li>
+              <Link to="/FAQ">
               <a className="link" href="/faq">
                 FAQ
               </a>
+              </Link>
             </li>
             <li>
               <a className="link" href="/courses">

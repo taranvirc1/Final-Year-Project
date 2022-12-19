@@ -6,7 +6,7 @@ import Whylearn from "../components/WhyLearn";
 import WhoAreWe from "../components/WhoAreWe";
 import Header from "./Header";
 import Sponsors from "../components/Sponsors";
-import { Link } from "react-router-dom";
+
 function LandingPage() {
   return (
     <div>
