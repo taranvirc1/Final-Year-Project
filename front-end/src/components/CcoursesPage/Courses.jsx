@@ -8,7 +8,7 @@ import cssimage from '../../images/Courseimages/css.jpg'
 import pythonimage from '../../images/Courseimages/python.jpg'
 import reactimage from '../../images/Courseimages/react.jpg'
 import mysqlimage from '../../images/Courseimages/mssql.webp'
-import { Link } from "react-router-dom";
+
 
 
 function Courses() {

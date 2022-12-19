@@ -14,6 +14,8 @@ import Forum_landing from './components/Forum/Forum_landing'
 import Search_thread from './components/Forum/Search_thread';
 import Forum_page from './components/Forum/Forum_page';
 import Create_forum from './components/Forum/Create_forum';
+import FAQ from './components/FAQ/FAQ';
+import Contact from './components/FAQ/Contact'
 
 function AppRoute() {
   return (
@@ -38,8 +40,11 @@ function AppRoute() {
             <Route path="/Search_thread" element={<Search_thread/>}/>
             <Route path="/Forum_page" element={<Forum_page/>}/>
             <Route path="/Create_forum" element={<Create_forum/>}/>
-            {/* route for quizzes */}
-            
+            {/* route for quizzes */} 
+
+            {/* route for FAQ */}
+            <Route path="/FAQ" element={<FAQ/>}/>
+            <Route path="/Contact" element={<Contact/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
