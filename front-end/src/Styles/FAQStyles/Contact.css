@@ -26,7 +26,7 @@
       width: 75%;
       margin: 0 auto;
     }
-    form {
+    .contact-form {
       background-color: aliceblue;
       display: flex;
       flex-direction: column;
@@ -36,7 +36,7 @@
       justify-content: center;
      
     }
-    form input, textarea {
+    .contact-form input, textarea {
       border: 0;
       margin: 10px 0px;
       padding: 20px;
@@ -47,7 +47,7 @@
       resize: none;
     }
     
-    form button {
+    .contact-form button {
       background: white;
       color: lightblue;
       border: 1px solid lightblue;
@@ -62,7 +62,7 @@
       transition: all .5s ease-in;
     }
     
-    form button:hover {
+    .contact-form button:hover {
       border: 1px solid lightblue;
       background: lightblue;
       color: white;
@@ -81,7 +81,7 @@
       transform: translate(-50%,-50%) scale(0.1);
       text-align: center;
       padding: 0 30px 30px;
-      color: #333;
+      color: #999;
       visibility: hidden;
     }
     .popup img{
