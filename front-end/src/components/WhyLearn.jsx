@@ -4,8 +4,8 @@ import "../Styles/Whylearn.css";
 export default function Whylearn() {
   return (
     <div class="whylearn">
-      <div class="title">
-        <h2>Why Learn With Us?</h2>
+      <div>
+        <h2 class="why-title">Why Learn With Us?</h2>
       </div>
 
       <div class="box">

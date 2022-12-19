@@ -1,13 +1,14 @@
 .Quiz-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: black;
     margin-top: 100px;
+    text-align: center;
 }
 
 .Quiz-title1 {
     font-size: 1.1rem;
     color: black;
-    
+    text-align: center;
 }
 
 .body{
