@@ -17,6 +17,7 @@ import Create_forum from './components/Forum/Create_forum';
 import FAQ from './components/FAQ/FAQ';
 import Contact from './components/FAQ/Contact'
 import UPM from './components/UPM/Main'
+import Quizzes from './components/Quizzes/Quizz'
 function AppRoute() {
   return (
     <div>
@@ -41,7 +42,7 @@ function AppRoute() {
             <Route path="/Forum_page" element={<Forum_page />} />
             <Route path="/Create_forum" element={<Create_forum />} />
             {/* route for quizzes */}
-
+            <Route path="/Quizzes" element={<Quizzes />} />
             {/* route for FAQ */}
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/Contact" element={<Contact />} />

@@ -1,0 +1,20 @@
+.Quiz-title {
+    font-size: 1.5rem;
+    color: black;
+    margin-top: 100px;
+}
+
+.Quiz-title1 {
+    font-size: 1.1rem;
+    color: black;
+    
+}
+
+.body{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    color:white;
+    font-size: 18px;
+ }

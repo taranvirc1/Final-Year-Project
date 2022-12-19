@@ -39,10 +39,12 @@ function Navbar() {
           </li>
 
           <li>
+            <Link to="/Quizzes">
             <a href="#Quizzes">
               <img src={quizzeslogo} alt="" />
               Quizzes
-            </a>
+            </a> 
+            </Link>
           </li>
           <li>
             <Link to="/Forum_landing">

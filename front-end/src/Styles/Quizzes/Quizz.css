@@ -1,0 +1,33 @@
+.App{
+    text-align: center;
+    font-family: Arial;
+}
+
+
+.options {
+    padding: 8px;
+    border: 3px solid rgb(210, 193, 10);
+    cursor: pointer;
+    width: 80%;
+    background-color: white;
+    color: steelblue;
+    font-weight: bold;
+    border-radius: 7;
+    margin:auto;
+ 
+
+    
+}
+
+.Quizz-ul {
+    list-style-type: none;
+}
+
+.Quizz-ul li {
+    margin: 5px;
+}
+
+.Quiz-button {
+    display: flex;
+    margin:auto;
+}
