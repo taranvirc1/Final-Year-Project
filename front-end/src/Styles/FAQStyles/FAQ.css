@@ -18,6 +18,9 @@
     margin-bottom: 40px;
     margin-top: 40px;
   }
+  .faq-question {
+    color: black;
+  }
   .faq-body{
     display: none;
     margin-top: 30px;

@@ -16,7 +16,7 @@ function FAQ() {
         </div>
         <div className="faq-inner">
           <div className="faq-item">
-            <h3>
+            <h3 className='faq-question'>
               Is Coding4All free ?
               <span className="faq-plus">&#43;</span>
             </h3>
@@ -26,7 +26,7 @@ function FAQ() {
           </div>
           <hr/>
           <div className="faq-item">
-            <h3>
+            <h3 className='faq-question'>
               What is an FAQ page ?
               <span className="faq-plus">&#43;</span>
             </h3>
@@ -36,7 +36,7 @@ function FAQ() {
           </div>
           <hr/>
           <div className="faq-item">
-            <h3>
+            <h3 className='faq-question'>
               What is an FAQ page ?
               <span className="faq-plus">&#43;</span>
             </h3>
@@ -46,7 +46,7 @@ function FAQ() {
           </div>
           <hr/>
           <div className="faq-item">
-            <h3>
+            <h3 className='faq-question'>
               What is an FAQ page ?
               <span className="faq-plus">&#43;</span>
             </h3>
@@ -56,7 +56,7 @@ function FAQ() {
           </div>
           <hr/>
           <div className="faq-item">
-            <h3>
+            <h3 className='faq-question'>
               What is an FAQ page ?
               <span className="faq-plus">&#43;</span>
             </h3>

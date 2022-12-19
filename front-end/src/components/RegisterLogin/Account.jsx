@@ -93,6 +93,10 @@ function Account() {
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Password" />
               </div>
+              <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Confirm Password" />
+              </div>
               <Link to="/confirmAccount">
                 <input type="submit" class="btn" value="Sign up" />
               </Link>
