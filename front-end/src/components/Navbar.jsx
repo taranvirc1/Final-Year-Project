@@ -14,10 +14,10 @@ function Navbar() {
     <>
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
-        <Link to="/">
-          <a href="/">
-            <img src={Logo} alt="" style={{ width: 140 }} />
-          </a>
+          <Link to="/">
+            <a href="/">
+              <img src={Logo} alt="" style={{ width: 140 }} />
+            </a>
           </Link>
         </div>
         <ul id="list-switch">
@@ -30,14 +30,14 @@ function Navbar() {
             </Link>
           </li>
           <li>
-          <Link to="/courses">
-            <a href="#courses">
-              <img src={courseslogo} alt="" />
-              Courses
-            </a>
+            <Link to="/courses">
+              <a href="#courses">
+                <img src={courseslogo} alt="" />
+                Courses
+              </a>
             </Link>
           </li>
-          
+
           <li>
             <a href="#Quizzes">
               <img src={quizzeslogo} alt="" />
@@ -52,12 +52,17 @@ function Navbar() {
               </a>
             </Link>
           </li>
+
+
           <li>
-            <a href="#Rankings">
-              <img img src={rankinglogo} alt="" />
-              Rankings
-            </a>
+            <Link to="/UPM">
+              <a href="#Rankings">
+                <img img src={rankinglogo} alt="" />
+                Rankings
+              </a>
+            </Link>
           </li>
+
           <li>
             <Link to="/account">
               <a href="#log">
