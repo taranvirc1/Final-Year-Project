@@ -28,6 +28,10 @@
     margin-bottom: 20px;
 }
 
+.options:hover {
+    background-color: #ddd;
+}
+
 .Quiz-questionTitle {
     margin-top: 40px;
     font-size: 1.5rem;
