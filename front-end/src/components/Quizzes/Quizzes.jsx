@@ -82,8 +82,8 @@ finishHandler =() => {
     if(quizEnd) {
         return(
             <div>
-                <h2 className='Quiz-title'>Quiz Ended: Your result is {this.state.score} /  {QuizData.length}</h2>
-                <p className='Quiz-title1'>The correct Answers for the quiz are</p>
+                <h2 className='Quiz-questionTitle'>Quiz Ended: Your result is {this.state.score} /  {QuizData.length}</h2>
+                <p className='Quiz-questionNo'>The correct Answers for the quiz are</p>
                 <ul className='Quizz-ul'>
                     {QuizData.map((item, index) => (
                         <li className='options'
@@ -101,8 +101,8 @@ finishHandler =() => {
 
     return (
         <div>
-        <h2 className='Quiz-title'>{question}</h2>
-        <span className='Quiz-title1'>Question  {currentIndex + 1 } of  {QuizData.length} </span>
+        <h2 className='Quiz-questionTitle'>{question}</h2>
+        <span className='Quiz-questionNo'>Question  {currentIndex + 1 } of  {QuizData.length} </span>
         {
             options.map(option => 
                 <p key = {option.id} className={'options ${userAnswer === option? "selected" : null } '} 
