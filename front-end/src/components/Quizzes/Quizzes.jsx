@@ -81,7 +81,7 @@ finishHandler =() => {
 
     if(quizEnd) {
         return(
-            <div>
+            <div className='final-container'>
                 <h2 className='Quiz-questionTitle'>Quiz Ended: Your result is {this.state.score} /  {QuizData.length}</h2>
                 <p className='Quiz-questionNo'>The correct Answers for the quiz are</p>
                 <ul className='Quizz-ul'>
@@ -100,7 +100,7 @@ finishHandler =() => {
 
 
     return (
-        <div>
+        <div className='quiz-container'>
         <h2 className='Quiz-questionTitle'>{question}</h2>
         <span className='Quiz-questionNo'>Question  {currentIndex + 1 } of  {QuizData.length} </span>
         {
