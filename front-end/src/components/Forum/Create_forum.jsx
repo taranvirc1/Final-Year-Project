@@ -27,7 +27,7 @@ function Create_forum() {
     <section className='thread-create'>
       <div className='createthread-title'>
         <label for="cthread-title">Thread Title: </label>
-        <input type="text" id="cthread-title" name="cthread-title" placeholder="  Search For Topic Thread Title"/>
+        <input type="text" id="cthread-title" name="cthread-title" placeholder="  Add Topic Thread Title"/>
       </div>
       <div className='createtags'>
         <label for="c_tags">Tags: </label>
@@ -54,7 +54,7 @@ function Create_forum() {
             </ul>
             </div>
             <div className='ThreadCreatorText'>
-            <textarea rows="20" name="text_body"></textarea>
+            <textarea rows="20" name="text_body" placeholder=' First Message'></textarea>
             </div>
         </div>
         <div className='ThreadCreatorTextTrash'><button className='threadcreatetrashbutton'><img src={DeleteIcon}/></button></div>

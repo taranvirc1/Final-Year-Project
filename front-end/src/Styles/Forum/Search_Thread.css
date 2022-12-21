@@ -33,14 +33,14 @@
     display:inline-block;
     font-family:'Poppins', sans-serif;
     font-size: 20px;
-    width: 89.3%;
+    width: 89.5%;
     border-radius: 10px;
 }
 
 .searchtags{
     margin-top: 15px;
     position: relative;
-    padding-left: 109px;
+    padding-left: 100px;
 }
 .searchtags label{
     position: relative;
@@ -52,14 +52,14 @@
     display:inline-block;
     font-family:'Poppins', sans-serif;
     font-size: 20px;
-    width: 94%;
+    width: 93.6%;
     border-radius: 10px;
 }
 
 .searchsort{
     margin-top: 15px;
     position: relative;
-    padding-left: 80px;
+    padding-left: 78px;
     
 }
 .searchsort label{
@@ -84,13 +84,13 @@
 }
 .ClearSearch{
     margin-top: 20px;
-    padding-left: 10px;
+    padding-left: 20px;
 
 }
 .clearbutton{
     border: 1px outset black;
     border-radius: 10px;
-    padding: 10px;
+    padding:0.25%;
 
 }
 .clearbutton:active {
@@ -111,7 +111,7 @@
     border: 1px outset black;
     border-radius: 15px;
     padding: 10px 10px;
-    margin-right: 45px;
+    margin-right: 40px;
     box-shadow: 0 1px #646464;
     background-color:#6193ff;
 }
