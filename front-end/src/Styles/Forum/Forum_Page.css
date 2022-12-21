@@ -45,8 +45,7 @@
 .PageOptions a{
     background-color: rgb(255, 255, 255);
     cursor: pointer;
-    height: 45px;
-    border: 2px solid black;
+    height: 50px;
     
 }
 
@@ -54,8 +53,11 @@
     user-select: none;
     position: relative;
     margin:auto;
-    height:40px;
-    width:40px;
+    height:50px;
+    width:55px;
+    border: 2px solid black;
+    padding: 2px;
+    -webkit-user-drag: none;
 }
 
 
@@ -64,9 +66,9 @@
     padding: 0 20px;
     color: black;
     font-family:'Poppins', sans-serif;
-    font-size: 26px;
+    font-size: 31px;
     background-color: white;
-    border-width: 1px;
+    border-width: 2px;
     margin:auto;
 }
 
@@ -80,22 +82,21 @@
 
 .PageSort {
     cursor: pointer;
-    width : 50px;
-    height: 43px;
+    height: 50px;
+    width : 55px;
+    user-select: none;
 
 }
-.PageSort img {
-    padding : 4px;
-    cursor : pointer;
-    position: relative;
+.PageSort:active{
+    background-color: orange;
 }
-
 .pagesort-optn {
-    width:180px;
+    width:225px;
     height:0px;
     overflow: hidden;
     transition: height .4s ease;
     list-style: none;
+    padding-left:0;
     background-color: black;
     
 }
@@ -105,6 +106,7 @@
 
 .pagesort-optn li a{
     padding: 10px;
+    width: 100%;
     background-color: black;
     color:white;
     font-size:20px;
@@ -116,84 +118,79 @@
 }    
 
 #psortbtn:checked + .pagesort-optn {
-    height: 130px;
+    height: 150px;
     background-color: black;
+    
 }
 
 .Thread-Messages{
     width: 96%;
     margin: auto;
     margin-top: 25px;
-    padding: 15px 19px;
-    padding-bottom: 50px;
     background-color: #a6aefd;
     border: 2px solid black;
     border-radius: 25px;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
     margin-bottom: 50px;
+    padding: 25px;
 }
 .ThreadProfile{
     display: inline-block;
-    margin-top: 1%;
-    margin-left: 1%;
+    margin-top: 0;
+    position: relative;
     background-color: white;
     border: 2px solid black;
     border-radius: 40px;
-    height: 220px;
-    width: 220px;
+    height: 200px;
+    width: 200px;
 }
 .ThreadProfile img{
-    position: relative;
     padding: 15px;
-    width: 220px;
+    width: 200px;
     user-select: none;
+    -webkit-user-drag: none;
 }
-.ThreadMessage{
-    box-sizing: border-box;
-    display: inline-block;
+.ThreadParagraph{
+    float:right;
+    position: relative;
+    width:86%;
+    height: 200px;
     background-color: white;
-    margin-left: 2%;
     border: 2px solid black;
     border-radius: 40px;
-    height: 100%;
-    width: 82%;
 }
-.ThreadMessage p{
-    text-align: justify;
-    font-size: 30px;
-    width: 95%;
-    padding-left: 4%;
-    bottom:10%;
+.ThreadParagraph p{
+    box-sizing: border-box;
     padding-top: 10px;
-    margin:20px 0;
-    position: relative;
+    padding-left: 10px;
+    justify-content: center;
+    font-size: 1.5rem;
 }
 .ThreadUser{
     display: inline-block;
-    margin-left: 4%;
+    margin-left: 2.5%;
     font-family:'Poppins', sans-serif;
-    font-size: 23px;
+    font-size: 1.5rem;
 }
 .ThreadTime{
     display: inline-block;
     margin-top: 1%;
     margin-left: 8%;
     font-family:'Poppins', sans-serif;
-    font-size: 20px;
+    font-size: 1.5rem;
 }
 .ThreadInteraction{
     display: inline;
     float:right;
-    margin-right:5%;
-    margin-top: 0.5%;
+    margin-top: 10px;
 }
 .ThreadLike{
-    display: inline-block;
+    display: inline;
     position: relative;
-    top: 5px;
+    top: 10px;
     border:1px black solid;
     border-radius: 20px;
-    padding:5px 10px;
+    padding:15px 10px;
     box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     user-select: none;
     
@@ -206,7 +203,8 @@
     transform: scale(0.97);
 }
 .ThreadReply{
-    display: inline-block;
+    float: right;
+    display: inline;
     border:1px outset black;
     border-radius: 20px;
     padding: 5px 15px;
