@@ -45,36 +45,38 @@
 .LandingOptions a{
     background-color: rgb(255, 255, 255);
     cursor: pointer;
-    height: 45px;
+    height: 50px;
     
+}
+.LandingOptions a:active{
+    background-color: orange;
 }
 
 .LandingOptions a img{
     user-select: none;
     position: relative;
     margin:auto;
-    height:45px;
-    width:50px;
-    border: 1px solid black;
+    height:50px;
+    width:55px;
+    border: 2px solid black;
+    padding: 2px;
 }
 
 .LandingSort {
     cursor: pointer;
-    width : 50px;
-    height: 43px;
-}
-.LandingSort img {
-    padding : 4px;
-    cursor : pointer;
-    position: relative;
+    width : 55px;
+    height: 50px;
+    user-select: none;
 }
 
 .landingsort-optn {
-    width:180px;
+    width:160px;
     height:0px;
     overflow: hidden;
     transition: height .4s ease;
     list-style: none;
+    padding-left:0;
+    background-color: black;
 }
 .landingsort-optn :hover{
     background-color: orange;
@@ -82,6 +84,7 @@
 
 .landingsort-optn li a{
     padding: 10px;
+    width: 100%;
     background-color: black;
     color:white;
     font-size:20px;
@@ -93,7 +96,7 @@
 }    
 
 #lsortbtn:checked + .landingsort-optn {
-    height: 130px;
+    height: 150px;
     background-color: black;
     z-index: 5;
 }
@@ -155,6 +158,9 @@
     Float:right;
     margin:auto;
     padding-right: 50px;
+}
+.Stats h4{
+    font-size: 20px;
 }
 .Stats img{
     height:25px;
