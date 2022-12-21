@@ -3,7 +3,7 @@ import "../../Styles/FAQStyles/Contact.css"
 import tick_img from "../../images/login-register-icons/404-tick.png"
 
 function Contact() {
-    const popup = document.getElementById("popup");
+    const popup = document.getElementById("pop-up");
 
     function openPopup(){
         popup.classList.add("open-popup");
@@ -25,7 +25,7 @@ function Contact() {
         
                     <textarea id="message" rows="6" placeholder="Please Provide A Brief Description Of Your Problem"></textarea>
                     <button type="submit" onClick={openPopup}>Send</button>
-                    <div className="popup" id="popup">
+                    <div className="pop-up" id="popup">
                         <img src={tick_img}/>
                         <h2>Thank You!</h2>
                         <p>Your details have been successfully submitted. A moderator will respond soon.</p>
