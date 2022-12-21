@@ -21,7 +21,7 @@
 .createthread-title{
     margin-top: 15px;
     position: relative;
-    padding-left: 20px;
+    padding-left: 30px;
 }
 .createthread-title label{
     font-family: 'Poppins', sans-serif;
@@ -34,7 +34,7 @@
     display:inline-block;
     font-family:'Poppins', sans-serif;
     font-size: 20px;
-    width: 89.3%;
+    width: 90%;
     border-radius: 10px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .ThreadCreator{
-    width: 96%;
+    width: 97%;
     margin: auto;
     margin-top: 25px;
     background-color: #ffffff;
@@ -119,6 +119,7 @@
     border-bottom-right-radius: 25px;
     border-style: none;
     outline-style: none;
+    background-color: white;
 }
 
 .ThreadCreatorTextTrash{
@@ -126,16 +127,19 @@
     padding-left: 30px;
 }
 .threadcreatetrashbutton{
-    padding:10px;
+    padding:0.25%;
     margin-top: 15px;
     border: 1px outset black;
     border-radius: 10px;
 
 }
+.threadcreatetrashbutton:hover{
+    background-color: #b1b1b1;
+
+}
 .threadcreatetrashbutton:active {
     background-color: #b1b1b1;
-    box-shadow: 0 1px #666;
-    transform:scale(0.99);
+    transform:scale(0.98);
   }
 .threadcreatetrashbutton img{
     height:40px;
