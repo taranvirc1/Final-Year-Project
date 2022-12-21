@@ -12,6 +12,7 @@ import ResetPassword from "./components/RegisterLogin/ResetPassword";
 import Courses from "./components/CcoursesPage/Courses";
 import Forum_landing from './components/Forum/Forum_landing'
 import Search_thread from './components/Forum/Search_thread';
+import SearchThread_results from "./components/Forum/SearchThread_results";
 import Forum_page from './components/Forum/Forum_page';
 import Create_forum from './components/Forum/Create_forum';
 import FAQ from './components/FAQ/FAQ';
@@ -39,6 +40,7 @@ function AppRoute() {
             {/* route for student forum */}
             <Route path="/Forum_landing" element={<Forum_landing />} />
             <Route path="/Search_thread" element={<Search_thread />} />
+            <Route path="/SearchThread_results" element={<SearchThread_results />} />
             <Route path="/Forum_page" element={<Forum_page />} />
             <Route path="/Create_forum" element={<Create_forum />} />
             {/* route for quizzes */}

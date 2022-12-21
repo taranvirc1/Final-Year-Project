@@ -29,7 +29,7 @@ function Search_thread() {
           <button className='clearbutton'><img src={DeleteIcon}/></button>
         </div>
         <div className='searchpost'>
-        <Link to="/Forum_landing">
+        <Link to="/SearchThread_results">
           <a href="/" className='spost'><img src={SearchIcon}/></a>
           <label>Search Thread</label>
         </Link>
