@@ -100,7 +100,8 @@
 #srsortbtn:checked + .searchresultsort-optn {
     height: 150px;
     background-color: black;
-    z-index: 5;
+    z-index: 1;
+    position: absolute;
 }
 
 /* Thread-list */

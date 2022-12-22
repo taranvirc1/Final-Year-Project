@@ -120,6 +120,8 @@
 #psortbtn:checked + .pagesort-optn {
     height: 150px;
     background-color: black;
+    z-index: 1;
+    position: absolute;
     
 }
 
