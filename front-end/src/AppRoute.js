@@ -19,6 +19,7 @@ import FAQ from './components/FAQ/FAQ';
 import Contact from './components/FAQ/Contact'
 import UPM from './components/UPM/Main'
 import Quizzes from './components/Quizzes/Quizz'
+import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
 function AppRoute() {
   return (
     <div>
@@ -37,6 +38,7 @@ function AppRoute() {
             <Route path="/confirmDonation" element={<DonationsConfirmation />} />
             {/* route for courses */}
             <Route path="/courses" element={<Courses />} />
+            <Route path="/coursesvideos" element={<CoursesVideos />} />
             {/* route for student forum */}
             <Route path="/Forum_landing" element={<Forum_landing />} />
             <Route path="/Search_thread" element={<Search_thread />} />

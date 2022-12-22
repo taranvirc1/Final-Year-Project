@@ -8,7 +8,7 @@ import cssimage from '../../images/Courseimages/css.jpg'
 import pythonimage from '../../images/Courseimages/python.jpg'
 import reactimage from '../../images/Courseimages/react.jpg'
 import mysqlimage from '../../images/Courseimages/mssql.webp'
-
+import { Link } from "react-router-dom";
 
 
 function Courses() {
@@ -42,7 +42,9 @@ function Courses() {
           <div className="info">
             <h1>JAVA</h1>
             <p>In this course, you will get to learn everything about java </p>
-            <button  onclick="window.open('videos.html');"> Watch Videos</button>
+            <Link to="/coursesvideos">
+            <button> Watch Videos</button>
+            </Link>
           </div>
         </div>
         <div className="Coursescard"><img src={pythonimage} alt=""/>
