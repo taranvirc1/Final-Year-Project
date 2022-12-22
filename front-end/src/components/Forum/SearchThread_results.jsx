@@ -39,6 +39,7 @@ function SearchThread_results() {
         </a>
           
     </div>
+    <div className='ThreadResultsFound'><h2>5 results found</h2></div>
     <section className='ThreadResults-List'>
       
       <div className="threadresult">
