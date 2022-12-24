@@ -7,7 +7,7 @@
     
     width: 800px;
     height: 200px;
-    
+    margin-bottom: 5%;
     top: 22%;
     left: 26%;
     color: aliceblue;
@@ -82,7 +82,7 @@
   
   width: 100%;
  
-  height: 100%;
+  height:145%;
 
   background: #2d2c41;
   
@@ -110,9 +110,10 @@
     
     width: 500px;
     position: relative;
-    left: 60%;
+   
     z-index: 1;
-    margin-top: 5%;
+    margin-top: 10%;
+    margin: 0 auto;
     margin-bottom: 5%;
     background-color: #111;
     overflow-x: hidden;
@@ -197,4 +198,19 @@
     transform: rotate(180deg);
     
    
+  }
+  .Coursediscription{
+    margin-top: 5%;
+    position: relative;
+    height:300px;
+    width: 400px;
+    left:32%;
+   z-index: 2;
+    color: #f1f1f1;
+  }
+  .Coursediscription .DescriptionHeader{
+    font-size: 15px;
+  }
+  .Coursediscription .DescriptionText{
+    font-size: 10px;
   }
