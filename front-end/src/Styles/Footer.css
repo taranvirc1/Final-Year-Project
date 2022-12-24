@@ -57,11 +57,12 @@
  }
 
  .footer-container-right a {
-    font-size: 0.9rem;
+    font-size: 1rem;
  }
 
  .footer-container-right a:hover {
     text-decoration: underline;
+    color: #999;
  }
 
  .h-box {
