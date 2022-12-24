@@ -69,8 +69,14 @@
 	overflow: hidden;
 	text-align: center;
 }
+
+.card svg {
+	position: inherit;
+	left: 110px;
+}
+
 svg{
-margin-top: 25px;
+margin-top: 60px;
 
 
 }
