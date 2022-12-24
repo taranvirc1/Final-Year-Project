@@ -1,5 +1,6 @@
 import React from "react";
 import "../Styles/Whylearn.css";
+import { Link } from "react-router-dom";
 
 export default function Whylearn() {
   return (
@@ -71,9 +72,11 @@ export default function Whylearn() {
         </div>
       </div>
       <div className="button-container">
+      <Link to="/account">
         <a href="/">
           <button class="btn-1">Get started</button>
         </a>
+        </Link>
       </div>
     </div>
   );
