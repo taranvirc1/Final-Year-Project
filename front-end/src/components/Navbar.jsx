@@ -23,7 +23,7 @@ function Navbar() {
         <ul id="list-switch">
           <li>
             <Link to="/donations">
-              <a href="#donate">
+              <a className="navLink" href="#donate">
                 <img src={donate} alt="" />
                 Donate
               </a>
@@ -31,7 +31,7 @@ function Navbar() {
           </li>
           <li>
             <Link to="/courses">
-              <a href="#courses">
+              <a className="navLink" href="#courses">
                 <img src={courseslogo} alt="" />
                 Courses
               </a>
@@ -40,7 +40,7 @@ function Navbar() {
 
           <li>
             <Link to="/Quizzes">
-            <a href="#Quizzes">
+            <a className="navLink" href="#Quizzes">
               <img src={quizzeslogo} alt="" />
               Quizzes
             </a> 
@@ -48,7 +48,7 @@ function Navbar() {
           </li>
           <li>
             <Link to="/Forum_landing">
-              <a href="/">
+              <a className="navLink" href="/">
                 <img img src={forumlogo} alt="" />
                 Forum
               </a>
@@ -58,7 +58,7 @@ function Navbar() {
 
           <li>
             <Link to="/UPM">
-              <a href="#Rankings">
+              <a className="navLink" href="#Rankings">
                 <img img src={rankinglogo} alt="" />
                 Rankings
               </a>
@@ -67,7 +67,7 @@ function Navbar() {
 
           <li>
             <Link to="/account">
-              <a href="#log">
+              <a className="navLink" href="#log">
                 <img img src={Loginlogo} alt="" />
                 Login
               </a>
