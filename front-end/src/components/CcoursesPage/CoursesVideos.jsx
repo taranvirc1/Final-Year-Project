@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import "../../Styles/CoursesStyles/CoursesVideos.css";
-import 'font-awesome/css/font-awesome.min.css';
-
+import '../../../node_modules/font-awesome/css/font-awesome.min.css';
 import videosjs from './videos'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 function CoursesVideos() {
+  const [open, setOpen] = useState(false);
   return (
     <div>
 
@@ -33,52 +35,47 @@ function CoursesVideos() {
           </div>
         
         </div>
+        
 
+<div className="sidenav">
+
+  <button className='dropdown-btn' onClick={() => {setOpen(!open)}}>
+                <span className="line-1">Fundamentals of Programming</span>
+                <span className="line-2">5 Lectures- 50min</span>    
+    <i className="fa fa-caret-down"></i>
+  </button>
+  <div className={`dropdown-container ${open? 'active' : 'inactive'}`} >
+    <a href="#" >Link 1  
+    <i className="fa-regular fa-circle-play"></i>
+    </a>
+    <a href="#">Link 2
+    <i className="fa-regular fa-circle-play"></i>
+    </a>
+    <a href="#">Link 3
+    <i className="fa-regular fa-circle-play"></i>
+    </a>
+  </div>
+  <button className="dropdown-btn">Dropdown 
+    <i className="fa fa-caret-down"></i>
+  </button>
+  <div className="dropdown-container">
+    <a href="#">Link 1
+    <i className="fa-regular fa-circle-play"></i>
+    </a>
+    <a href="#">Link 2
+    <i className="fa-regular fa-circle-play"></i>
+    </a>
+    <a href="#">Link 3
+    <i className="fa-regular fa-circle-play"></i>
+    </a>
+  </div>
+ 
+</div>
 
         
 
 
-        <div className="VideoList">
-            
-            <button className="dropdown-btn">
-                <span className="line-1">Fundamentals of Programming</span>
-                <span className="line-2">5 Lectures- 50min</span>        
-              <i className="fa fa-caret-up"></i>
-            </button>
-            <div className="dropdown-container">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
-            <button className="dropdown-btn">Topic1
-                <i className="fa fa-caret-up"></i>
-              </button>
-            <div className="dropdown-container">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
-            <button className="dropdown-btn">Topic1
-                <i className="fa fa-caret-up"></i>
-                
-            </button>
-            <div className="dropdown-container">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
-            <button className="dropdown-btn">Topic1
-                <i className="fa fa-caret-up"></i>
-               
-            </button>
-            <div className="dropdown-container">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
-            
-        </div>
-        <div className="padding"></div>
+       
         <script script="/videos.js"></script>
 
           
