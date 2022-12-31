@@ -21,10 +21,8 @@ for (i = 0; i < dropdown.length; i++) {
 
 const styleObj = {
   height:'145px',
-  width :'15330px'
-
+  width :'150px'
 }
-
 
 
 window.document.onkeydown = function (event,e) {
@@ -37,14 +35,15 @@ window.document.onkeydown = function (event,e) {
 };
 
 function lightbox_open() {
-  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  var lightBoxVideo = document.getElementById("light");
+  
   document.getElementById("light").style.display = "block";
   document.getElementById("fade").style.display = "block";
   lightBoxVideo.play();
 }
 
 function lightbox_close() {
-  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  var lightBoxVideo = document.getElementById("light");
   document.getElementById("light").style.display = "none";
   document.getElementById("fade").style.display = "none";
   lightBoxVideo.pause();
@@ -109,10 +108,22 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-          <a className="popup-vimeo"
-            href="https://vimeo.com/67341671"
-            onClick={() => shoot(".popup-vimeo")}>
-            Link 1<i className="fa-regular fa-circle-play"></i>
+        < a href="#!" className="lightbox" onClick={() => lightbox_open()}
+
+>        
+         
+
+         {/*<div id="light">*/}
+         <ReactPlayer id="light"className="reactplayer"
+               url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
+     
+               controls={true}
+               width='60%'
+               height='50%'
+           
+          /> 
+        {/*</div>*/}
+          Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
             Link 2<i className="fa-regular fa-circle-play"></i>
@@ -190,12 +201,16 @@ function lightbox_close() {
           >        
                    
 
-                   <div id="light">
-                  <video id="VisaChipCardVideo" width={600} controls>
-                  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-                  {/*Browser does not support <video> tag */}
-                  </video>
-                  </div>
+                   {/*<div id="light">*/}
+                   <ReactPlayer id="light"className="reactplayer"
+                         url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
+               
+                      
+                         width='60%'
+                         height='50%'
+                     
+                    /> 
+                  {/*</div>*/}
 
             Link 1 k<i className="fa-regular fa-circle-play"></i>
           </a>
