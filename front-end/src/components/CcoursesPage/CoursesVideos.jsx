@@ -40,7 +40,7 @@ const styleObj = {
     });
   };
   return (
-    <div>
+    <div className= "couresesVideos">
       <div className="curved-background-videos">
         <div className="curved-background__curved"></div>
       </div>
