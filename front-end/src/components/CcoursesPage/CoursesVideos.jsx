@@ -68,6 +68,8 @@ const styleObj = {
         </div>
       </div>
       <div className= "Space"> </div>
+     <div className = "courseContent"> 
+     <h1 className="courseContenttitle"> Course Content </h1>
 
       <div className="sidenav">
         <button
@@ -163,6 +165,7 @@ const styleObj = {
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
+      </div>
       </div>
 
       <div className="Coursediscription">

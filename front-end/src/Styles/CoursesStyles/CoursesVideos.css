@@ -92,7 +92,11 @@ padding: 30px;  }
 
 
 
-
+.courseContenttitle{
+ font-size: 20px;
+text-align: center;  
+color: aquamarine;
+}
   
 
 
@@ -192,7 +196,7 @@ padding: 30px;  }
     min-block-size: 25ch;
     inline-size: 100%;
     max-inline-size: 800px;
-    background: rgb(159, 155, 155);
+    background: rgb(178, 133, 203);
     padding: 2rem;
     box-sizing: border-box;
     margin: auto;
