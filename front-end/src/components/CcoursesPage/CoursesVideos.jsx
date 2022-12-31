@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 
 function CoursesVideos() {
+  const [play, setPlay] = useState(true);
+
+  const videoref = useRef()
   function dropdown(){
     var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
@@ -39,21 +42,20 @@ function lightbox_open() {
   
   document.getElementById("light").style.display = "block";
   document.getElementById("fade").style.display = "block";
-  lightBoxVideo.play();
+  setPlay(true);
 }
 
 function lightbox_close() {
   var lightBoxVideo = document.getElementById("light");
   document.getElementById("light").style.display = "none";
   document.getElementById("fade").style.display = "none";
-  lightBoxVideo.pause();
+  setPlay(false);
 }
 
 
 
 
 
-  const [open, setOpen] = useState(false);
   const shoot = (a) => {
     a.magnificPopup({
       disableOn: 700,
@@ -115,13 +117,12 @@ function lightbox_close() {
 
          {/*<div id="light">*/}
          <ReactPlayer id="light"className="reactplayer"
-               url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
+               url="https://youtu.be/YaEG2aWJnZ8"
      
                controls={true}
                width='60%'
                height='50%'
-           
-          /> 
+               playing={play}          /> 
         {/*</div>*/}
           Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
