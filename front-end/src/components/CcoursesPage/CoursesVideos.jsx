@@ -93,12 +93,14 @@ const styleObj = {
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
-        <button className="dropdown-btn">
-          Dropdown
+        <button className="dropdown-btn"
+          onClick={() => dropdown()} >
+          <span className="line-1">Fundamentals of data structures </span>
+          <span className="line-2">5 Lectures- 50min</span>
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-          <a
+          <a href="#"
             
           >
             Link 1<i className="fa-regular fa-circle-play"></i>
@@ -110,8 +112,9 @@ const styleObj = {
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
-        <button className="dropdown-btn">
-          Dropdown
+        <button className="dropdown-btn" onClick={() => dropdown()} >
+          <span className="line-1">Fundamentals of algorithms </span>
+          <span className="line-2">5 Lectures- 50min</span>
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
@@ -127,8 +130,9 @@ const styleObj = {
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
-        <button className="dropdown-btn">
-          Dropdown
+        <button className="dropdown-btn" onClick={() => dropdown()} >
+          <span className="line-1">Theory of computation </span>
+          <span className="line-2">5 Lectures- 50min</span>
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
@@ -146,8 +150,9 @@ const styleObj = {
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
-        <button className="dropdown-btn">
-          Dropdown
+        <button className="dropdown-btn" onClick={() => dropdown()} >
+          <span className="line-1">Fundamentals of computer systems</span>
+          <span className="line-2">5 Lectures- 50min</span>
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
