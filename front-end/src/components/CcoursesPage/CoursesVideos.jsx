@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 
 function CoursesVideos() {
@@ -20,9 +21,34 @@ for (i = 0; i < dropdown.length; i++) {
 
 const styleObj = {
   height:'145px',
-  width :'150px'
+  width :'15330px'
+
 }
 
+
+
+window.document.onkeydown = function (event,e) {
+  if (!e) {
+    e = event;
+  }
+  if (e.keyCode == 27) {
+    lightbox_close();
+  }
+};
+
+function lightbox_open() {
+  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  document.getElementById("light").style.display = "block";
+  document.getElementById("fade").style.display = "block";
+  lightBoxVideo.play();
+}
+
+function lightbox_close() {
+  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  document.getElementById("light").style.display = "none";
+  document.getElementById("fade").style.display = "none";
+  lightBoxVideo.pause();
+}
 
 
 
@@ -41,6 +67,7 @@ const styleObj = {
   };
   return (
     <div className= "couresesVideos">
+
       <div className="curved-background-videos">
         <div className="curved-background__curved"></div>
       </div>
@@ -70,6 +97,7 @@ const styleObj = {
       <div className= "Space"> </div>
      <div className = "courseContent"> 
      <h1 className="courseContenttitle"> Course Content </h1>
+     <div id="fade" onClick={() => lightbox_close()}></div>
 
       <div className="sidenav">
         <button
@@ -155,13 +183,21 @@ const styleObj = {
           <span className="line-2">5 Lectures- 50min</span>
           <i className="fa fa-caret-down"></i>
         </button>
+        
         <div className="dropdown-container">
-          <a
-            className="popup-vimeo"
-            href="https://vimeo.com/67341671"
-            onClick={() => shoot(".popup-vimeo")}
-          >
-            Link 1<i className="fa-regular fa-circle-play"></i>
+          < a href="#!" className="lightbox" onClick={() => lightbox_open()}
+
+          >        
+                   
+
+                   <div id="light">
+                  <video id="VisaChipCardVideo" width={600} controls>
+                  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                  {/*Browser does not support <video> tag */}
+                  </video>
+                  </div>
+
+            Link 1 k<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
             Link 2<i className="fa-regular fa-circle-play"></i>
