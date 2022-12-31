@@ -2,19 +2,19 @@
 
 
   .objectVideos {  
-     
+  
     position: relative;
     
     width: 800px;
     height: 200px;
-    margin-bottom: 5%;
-    top: 22%;
-    left: 26%;
+    margin:auto;    
     color: aliceblue;
     outline:1px solid rgb(238, 219, 219);
    
    
   }
+  .Space {
+padding: 30px;  }
   .objectVideos .wyl{
     font-size: 16px;
     font-weight: bold;
@@ -108,7 +108,7 @@
 
   .sidenav {
     
-    width: 500px;
+    width: 800px;
     position: relative;
    
     z-index: 1;
@@ -214,3 +214,24 @@
   .Coursediscription .DescriptionText{
     font-size: 10px;
   }
+
+
+  /*for Demo Only*/
+.demo-row {
+  background: #2d2c41;
+
+  padding: 50px 0;
+}
+
+
+/*Implement*/
+.sponsor-feature {
+    background-color: #fff;
+
+    border-radius: 5px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
