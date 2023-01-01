@@ -248,13 +248,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .btn.transparent {
-    margin-left: 39%;
     background: none;
     border: 2px solid #fff;
     width: 130px;
     height: 41px;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   .btn.transparent:hover {
@@ -421,6 +420,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
     .container {
       padding: 1.5rem;
+    }
+
+    .panel p {
+      padding: 0.8rem 0 0 0;
+    }
+
+    .btn.transparent {
+      font-size: .8rem;
+    }
+
+    .left-panel {
+      padding-top: 12.5%;
     }
   
     .account-container:before {
