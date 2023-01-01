@@ -1,20 +1,84 @@
+#fade {
+  display: none;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+/*#light {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height:800px ;
+  margin-left: -450px;
+  margin-top: -180px;
+  border: 2px solid #fff;
+  background: #fff;
+  z-index: 1002;
+  overflow: visible;
+}*/
+
+#boxclose {
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #aeaeae;
+  width: 100%;
+  height: 100%;
+  background: #222222;
+  font-size: 31px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 0px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  z-index: 1002;
+}
+
+.reactplayer{
+  
+ 
+  color: antiquewhite;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -550px;
+    margin-top: -180px;
+    
+  
+    z-index: 1002;
+    overflow: visible;
+  
+  
+}
+
 
 
 
   .objectVideos {  
-     
+  
     position: relative;
     
     width: 800px;
     height: 200px;
-    margin-bottom: 5%;
-    top: 22%;
-    left: 26%;
+    margin:auto;    
     color: aliceblue;
     outline:1px solid rgb(238, 219, 219);
    
    
   }
+  .Space {
+padding: 30px;  }
   .objectVideos .wyl{
     font-size: 16px;
     font-weight: bold;
@@ -59,7 +123,7 @@
    font-size: 20px;
     color: rgb(224, 210, 210);
     
-   padding-top: 5%;
+   padding-top: 8%;
 }
 .discription .sub-header{
   position: relative;
@@ -74,20 +138,10 @@
 
 
 
-.curved-background__curved:before {
-  content: "";
-    
-  position: absolute;
-  
-  
-  width: 100%;
- 
-  height:145%;
 
-  background: #2d2c41;
-  
+  .couresesVideos{
+    background: #2d2c41;
 
-    
   }
 .padding{
   padding: 10%;
@@ -102,14 +156,17 @@
 
 
 
-
+.courseContenttitle{
+ font-size: 20px;
+text-align: center;  
+color: aquamarine;
+}
   
 
 
   .sidenav {
     
-    width: 500px;
-    position: relative;
+    width: 800px;
    
     z-index: 1;
     margin-top: 10%;
@@ -189,8 +246,7 @@
   }
   /* Optional: Style the caret down icon */
   .fa-caret-down {
-    padding: 6px 8px 6px 16px;
-
+    padding-top: 6px;
     float: left;
     margin-right: 10px;
   }
@@ -200,13 +256,13 @@
    
   }
   .Coursediscription{
-    margin-top: 5%;
-    position: relative;
-    height:300px;
-    width: 400px;
-    left:32%;
-   z-index: 2;
-    color: #f1f1f1;
+    min-block-size: 25ch;
+    inline-size: 100%;
+    max-inline-size: 800px;
+    background: rgb(178, 133, 203);
+    padding: 2rem;
+    box-sizing: border-box;
+    margin: auto;
   }
   .Coursediscription .DescriptionHeader{
     font-size: 15px;
@@ -214,3 +270,24 @@
   .Coursediscription .DescriptionText{
     font-size: 10px;
   }
+
+
+  /*for Demo Only*/
+.demo-row {
+  background: #2d2c41;
+
+  padding: 50px 0;
+}
+
+
+/*Implement*/
+.sponsor-feature {
+    background-color: #fff;
+
+    border-radius: 5px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
