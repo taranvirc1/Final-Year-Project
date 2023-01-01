@@ -24,7 +24,7 @@
 	color:  white;
     font-weight: bold;
 	background-color:#f9004d;
-	transition: ease-out 0.3s;
+	transition: ease-in-out 0.8s;
 	font-size: 2rem;
 	outline: none;
 	border: 3px solid 42 #131616;
@@ -45,7 +45,7 @@
 } */
 
 .btn-1:hover{
-	transition: 1s all ease;
+	transition: 0.8s all ease-in-out;
 	box-shadow: inset 300px 0 0 0 #416bb9;
     cursor: pointer;
     /* color: #000; */
