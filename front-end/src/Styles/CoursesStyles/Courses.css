@@ -1,0 +1,198 @@
+ 
+  .Courseswrapper {
+    display:flex;
+    
+    width: 100%;
+    justify-content:center;
+  }
+  
+  .Coursescard {
+    width: 220px;
+    height: 240px;
+    margin:30px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    background: rgb(203, 39, 39);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  }
+  .Coursescard:hover {
+    transform: translateY(20px);
+  }
+  .Coursescard:hover:before {
+    opacity: 1;
+  }
+  .Coursescard:hover .info {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  .Coursescard:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    transition: 0.5s;
+    opacity: 0;
+  }
+  .Coursescard img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit:contain;
+       object-fit:cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+  }
+  .Coursescard .info {
+    position: relative;
+    z-index: 3;
+    color: rgb(217, 220, 220);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s;
+  }
+  .Coursescard.info h1 {
+  
+    text-align: left;
+   
+  }
+  .Coursescard .info p {
+    Font: Monospace ;
+    color: aqua;
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin-top: 8px;
+    
+    text-align: left;
+  }
+  .Coursescard .info button {
+    padding: 0.6rem;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    background: rgb(39, 20, 150);
+    color: rgb(197, 181, 181);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s ease;
+    float:left    
+    
+    }
+  .Coursescard .info button:hover {
+    background: dodgerblue;
+    color: white;
+  }
+ 
+
+
+
+   
+  
+   
+  
+   
+   
+   /* animation class and keyframes */
+   .overflow-hidden {
+    overflow: hidden;
+    
+   }
+   
+   .header-drop-in {
+    animation: drop-in 1200ms ease 200ms backwards;
+   
+   }
+   .Courseswrapper{
+    animation: drop-in 1200ms ease 500ms backwards;
+   }
+   
+   .drop-in-2 {
+    
+    animation: drop-in 1300ms ease 500ms backwards;
+   }
+   
+   @keyframes drop-in {
+    from {
+     opacity: 0;
+     transform: translateY(-100px);
+    }
+    to {
+     opacity: 1;
+     transform: translate(0px);
+    }
+   }
+    .background::before {
+    content: "";
+    
+    position: absolute;
+    top:80px;
+    transform: translateY(-50%);
+    width: 100%;
+   
+    height: 120%;
+  
+    background: rgb(126, 106, 250);
+    
+    border-radius:  50%/50%;
+  }
+
+  .drop-in-2 {
+   
+   
+    position: relative;
+    margin-left: 5%;
+    text-align: left;
+    font-family: "Lucida Console", "Courier New", monospace;
+	  font-size: 25px;
+	  color: #010101;
+	  margin-bottom: 50px;
+  }
+
+
+
+  .header-drop-in {
+    position: relative;
+    margin-top: 10%;
+    margin-left: 5%;
+    text-align: left;
+    font-size: 30px;
+    
+    color: #252839;
+    -webkit-text-stroke: 0.3vw #383d52;
+    text-transform: uppercase;
+  }
+  .header-drop-in::before {
+    content: attr(data-text);
+    position: absolute;
+   font-size: 30px;
+    width: 100%;
+    height: 100%;
+    color: #01fe87;
+    -webkit-text-stroke: 0vw #383d52;
+    border-right: 2px solid #01fe87;
+    overflow: hidden;
+    animation: animatecourses 6s linear infinite;
+  }
+  @keyframes animatecourses {
+    0%,
+    10%,
+    100% {
+      width: 0;
+    }
+    70%,
+    90% {
+      width:13%;
+    }
+  }
+  
+  

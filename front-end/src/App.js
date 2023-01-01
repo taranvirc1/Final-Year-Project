@@ -1,16 +1,18 @@
+import React from "react";
 import "./App.css";
+import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Main from "./components/Main";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Profile from "./pages/Profile";
+import Footer from "./components/Footer";
+
+
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Main />
-        <Routes></Routes>
-      </BrowserRouter>
+      <Navbar />
+      <main className="App-main">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
 }
