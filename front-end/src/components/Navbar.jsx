@@ -16,9 +16,9 @@ function Navbar() {
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
           {/* <Link to="/"> */}
-            <Link href="/">
-              <img src={Logo} alt="" style={{ width: 140 }} />
-            </Link>
+          <Link to="/">
+            <img src={Logo} alt="" style={{ width: 140 }} />
+          </Link>
           {/* </Link> */}
         </div>
         <div className="menu-icon" onClick={() => setClicked(!clicked)}>
@@ -35,53 +35,53 @@ function Navbar() {
         >
           <li>
             {/* <Link to="/donations"> */}
-              <Link to="donations" className="navLink" href="#donate">
-                <img src={donate} alt="" />
-                Donate
-              </Link>
+            <Link to="donations" className="navLink" href="#donate">
+              <img src={donate} alt="" />
+              Donate
+            </Link>
             {/* </Link> */}
           </li>
           <li>
             {/* <Link to="/courses"> */}
-              <Link to="courses" className="navLink" href="#courses">
-                <img src={courseslogo} alt="" />
-                Courses
-              </Link>
+            <Link to="courses" className="navLink" href="#courses">
+              <img src={courseslogo} alt="" />
+              Courses
+            </Link>
             {/* </Link> */}
           </li>
 
           <li>
             {/* <Link to="/Quizzes"> */}
-              <Link to="Quizzes" className="navLink" href="#Quizzes">
-                <img src={quizzeslogo} alt="" />
-                Quizzes
-              </Link>
+            <Link to="Quizzes" className="navLink" href="#Quizzes">
+              <img src={quizzeslogo} alt="" />
+              Quizzes
+            </Link>
             {/* </Link> */}
           </li>
           <li>
             {/* <Link to="/Forum_landing"> */}
-              <Link to="Forum_landing" className="navLink" href="/">
-                <img img src={forumlogo} alt="" />
-                Forum
-              </Link>
+            <Link to="Forum_landing" className="navLink" href="/">
+              <img img src={forumlogo} alt="" />
+              Forum
+            </Link>
             {/* </Link> */}
           </li>
 
           <li>
             {/* <Link to="/UPM"> */}
-              <Link to="UPM" className="navLink" href="#Rankings">
-                <img img src={rankinglogo} alt="" />
-                Rankings
-              </Link>
+            <Link to="UPM" className="navLink" href="#Rankings">
+              <img img src={rankinglogo} alt="" />
+              Rankings
+            </Link>
             {/* </Link> */}
           </li>
 
           <li>
             {/* <Link to="/account"> */}
-              <Link to="account" className="navLink" href="#log">
-                <img img src={Loginlogo} alt="" />
-                Login
-              </Link>
+            <Link to="account" className="navLink" href="#log">
+              <img img src={Loginlogo} alt="" />
+              Login
+            </Link>
             {/* </Link> */}
           </li>
         </ul>
