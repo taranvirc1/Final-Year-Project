@@ -47,12 +47,13 @@
 
     .text2 {
       font-size: 12vw;
-      margin-top: 70px;
     }
 
     .desc {
       margin-top: 10px;
       font-size: 2rem;
       padding: 0 10px;
+      margin-bottom: -15px;
     }
+
 }
