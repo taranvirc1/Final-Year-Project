@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .map-container {
-    padding: 40px;
+    padding: 60px;
     justify-items: center;
 }
 
 .map-title {
     font-size: 2rem;
     text-align: center;
-    padding: 20px 0 15px 0;
+    padding: 0 0 15px 0;
     color: black;
     font-weight: bold;
 }

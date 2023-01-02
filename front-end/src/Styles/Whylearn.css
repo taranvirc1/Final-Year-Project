@@ -68,17 +68,12 @@
 	overflow: hidden;
 	text-align: center;
 }
-
 .card svg {
 	position: inherit;
 	left: 110px;
+	margin-top: 60px;
 }
 
-svg{
-margin-top: 60px;
-
-
-}
 .card i{
 	font-size: 50px;
 	display: block;
@@ -86,9 +81,6 @@ margin-top: 60px;
 	margin: 25px 0px;
 	color: white;
     line-height: 50px;
-
-
-
 }
 h2{
 	color: white;
