@@ -248,13 +248,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .btn.transparent {
-    margin-left: 39%;
     background: none;
     border: 2px solid #fff;
     width: 130px;
     height: 41px;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   .btn.transparent:hover {
@@ -313,7 +312,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .signin-signup {
       width: 100%;
       top: 95%;
-      transform: translate(-50%, -100%);
+      transform: translate(-50%, -87%);
       transition: 1s 0.8s ease-in-out;
     }
   
@@ -385,6 +384,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       transform: translate(-50%, 100%);
       bottom: 32%;
       right: initial;
+      z-index: 1;
     }
   
     .account-container.sign-up-mode .left-panel .image,
@@ -421,6 +421,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
     .container {
       padding: 1.5rem;
+    }
+
+    .panel p {
+      padding: 0.8rem 0 0 0;
+    }
+
+    .btn.transparent {
+      font-size: .8rem;
+    }
+
+    .left-panel {
+      padding-top: 12.5%;
     }
   
     .account-container:before {

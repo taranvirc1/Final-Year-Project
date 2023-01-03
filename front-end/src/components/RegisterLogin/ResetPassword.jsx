@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import forgotPassword from "../../images/login-register-icons/forgot_password.svg";
+import "../../Styles/RegisterLoginStyles/ResetPassword.css";
 
 function ResetPassword() {
   return (
     <div className="body">
       <div class="account-container">
         <div class="forms-container">
-          <div class="signin-signup">
+          <div class="reset">
             <form action="#" class="sign-in-form">
               <h2 class="form-title">Reset Password</h2>
               <div class="input-field">
@@ -25,9 +26,9 @@ function ResetPassword() {
           </div>
         </div>
 
-        <div class="panels-container">
-          <div class="panel left-panel">
-            <div class="panel-content">
+        <div class="reset-panels-container">
+          <div class="reset-panel reset-left-panel">
+            <div class="reset-panel-content">
               <h3>Forgot your password ?</h3>
               <p>
                 No problem, tech friend. Just enter your email and we'll send

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../images/navIcons/logo.png";
 import donate from "../images/navIcons/donate.png";
 import courseslogo from "../images/navIcons/courses.png";
@@ -10,68 +10,79 @@ import "../Styles/NavBar.css";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const [clicked, setClicked] = useState(false);
   return (
     <>
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
+          {/* <Link to="/"> */}
           <Link to="/">
-            <a href="/">
-              <img src={Logo} alt="" style={{ width: 140 }} />
-            </a>
+            <img src={Logo} alt="" style={{ width: 140 }} />
           </Link>
+          {/* </Link> */}
         </div>
-        <ul id="list-switch">
+        <div className="menu-icon" onClick={() => setClicked(!clicked)}>
+          {clicked ? (
+            <i className="fas fa-times"></i>
+          ) : (
+            <i className="fas fa-bars"></i>
+          )}
+        </div>
+        <ul
+          id="list-switch"
+          className={clicked ? "list-switch mobile" : "list-switch"}
+          onClick={() => setClicked(false)}
+        >
           <li>
-            <Link to="/donations">
-              <a className="navLink" href="#donate">
-                <img src={donate} alt="" />
-                Donate
-              </a>
+            {/* <Link to="/donations"> */}
+            <Link to="donations" className="navLink" href="#donate">
+              <img src={donate} alt="" />
+              Donate
             </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link to="/courses">
-              <a className="navLink" href="#courses">
-                <img src={courseslogo} alt="" />
-                Courses
-              </a>
+            {/* <Link to="/courses"> */}
+            <Link to="courses" className="navLink" href="#courses">
+              <img src={courseslogo} alt="" />
+              Courses
             </Link>
+            {/* </Link> */}
           </li>
 
           <li>
-            <Link to="/Quizzes">
-            <a className="navLink" href="#Quizzes">
+            {/* <Link to="/Quizzes"> */}
+            <Link to="Quizzes" className="navLink" href="#Quizzes">
               <img src={quizzeslogo} alt="" />
               Quizzes
-            </a> 
             </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link to="/Forum_landing">
-              <a className="navLink" href="/">
-                <img img src={forumlogo} alt="" />
-                Forum
-              </a>
+            {/* <Link to="/Forum_landing"> */}
+            <Link to="Forum_landing" className="navLink" href="/">
+              <img img src={forumlogo} alt="" />
+              Forum
             </Link>
-          </li>
-
-
-          <li>
-            <Link to="/UPM">
-              <a className="navLink" href="#Rankings">
-                <img img src={rankinglogo} alt="" />
-                Rankings
-              </a>
-            </Link>
+            {/* </Link> */}
           </li>
 
           <li>
-            <Link to="/account">
-              <a className="navLink" href="#log">
-                <img img src={Loginlogo} alt="" />
-                Login
-              </a>
+            {/* <Link to="/UPM"> */}
+            <Link to="UPM" className="navLink" href="#Rankings">
+              <img img src={rankinglogo} alt="" />
+              Rankings
             </Link>
+            {/* </Link> */}
+          </li>
+
+          <li>
+            {/* <Link to="/account"> */}
+            <Link to="account" className="navLink" href="#log">
+              <img img src={Loginlogo} alt="" />
+              Login
+            </Link>
+            {/* </Link> */}
           </li>
         </ul>
       </div>
