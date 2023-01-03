@@ -78,17 +78,17 @@ function Footer() {
           <h3 className="footer-title">Social Media</h3>
           <ul className="footer-box social">
             <li>
-              <a href="http://www.facebook.com">
+              <a href="http://www.facebook.com" target="_blank" rel="noreferrer">
                 <AiFillFacebook />
               </a>
             </li>
             <li>
-              <a href="http://www.instagram.com">
+              <a href="http://www.instagram.com" target="_blank" rel="noreferrer">
                 <AiFillInstagram />
               </a>
             </li>
             <li>
-              <a href="http://www.twitter.com">
+              <a href="http://www.twitter.com" target="_blank" rel="noreferrer">
                 <AiFillTwitterCircle />
               </a>
             </li>
