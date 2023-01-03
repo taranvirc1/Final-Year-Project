@@ -1,13 +1,14 @@
 import React from "react";
 import newPassword from "../../images/login-register-icons/reset_email.svg";
 import { Link } from "react-router-dom";
+import "../../Styles/RegisterLoginStyles/NewPassword.css";
 
 function NewPassword() {
   return (
     <div className="body">
       <div className="account-container">
         <div className="forms-container">
-          <div className="signin-signup">
+          <div className="new">
             <form action="#" className="sign-in-form">
               <h2 className="form-title">New Password</h2>
               <div className="input-field">
@@ -25,9 +26,9 @@ function NewPassword() {
           </div>
         </div>
 
-        <div className="panels-container">
-          <div className="panel left-panel">
-            <div className="panel-content">
+        <div className="new-panels-container">
+          <div className="new-panel new-left-panel">
+            <div className="new-panel-content">
               <h3>Have received a reset password email?</h3>
               <p>
                 Jut enter your new password here and you'll have access to your
