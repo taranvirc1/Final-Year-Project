@@ -3,6 +3,18 @@ import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 
 function CoursesVideos() {
+
+
+  const [showPlayer, setShowPlayer] = useState(false);
+  const [videoUrl, setVideoUrl] = useState('');
+
+  function handleClick(url) {
+    setVideoUrl(url);
+    setShowPlayer(true);
+  }
+
+
+
   const [play, setPlay] = useState(true);
 
   const videoref = useRef()
@@ -67,7 +79,29 @@ function lightbox_close() {
     });
   };
   return (
+
+
+
+
+    
     <div className= "couresesVideos">
+
+ 
+{showPlayer && (
+        <div className="video-player-popup">
+          <button className="closeIcon" onClick={() => setShowPlayer(false)}><i className="fa-sharp fa-solid fa-xmark" size ={"10px"}></i></button>
+          <ReactPlayer className="videoPlayer"
+                         url={videoUrl}
+               
+                      
+                         width='120%'
+                         height='100%'
+                     
+                    /> 
+        </div>
+      )}
+
+
 
       <div className="curved-background-videos">
         <div className="curved-background__curved"></div>
@@ -110,23 +144,15 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-        < a href="#!" className="lightbox" onClick={() => lightbox_open()}
+        < a href="#!"onClick={() => handleClick('https://www.youtube.com/embed/b_3qa0uYVb8')}
 
 >        
          
 
-         {/*<div id="light">*/}
-         <ReactPlayer id="light"className="reactplayer"
-               url="https://youtu.be/YaEG2aWJnZ8"
-     
-               controls={true}
-               width='60%'
-               height='50%'
-               playing={play}          /> 
-        {/*</div>*/}
+         
           Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
