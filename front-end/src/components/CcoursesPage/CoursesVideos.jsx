@@ -89,7 +89,7 @@ function lightbox_close() {
  
 {showPlayer && (
         <div className="video-player-popup">
-          <button className="closeIcon" onClick={() => setShowPlayer(false)}><i className="fa-sharp fa-solid fa-xmark" size ={"10px"}></i></button>
+          <button className="closeIcon" onClick={() => setShowPlayer(false)}><i class="fa-sharp fa-solid fa-xmark fa-2x" size ={"10px"}></i></button>
           <ReactPlayer className="videoPlayer"
                          url={videoUrl}
                
