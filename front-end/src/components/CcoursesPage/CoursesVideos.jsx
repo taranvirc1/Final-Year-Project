@@ -134,7 +134,7 @@ function lightbox_close() {
      <h1 className="courseContenttitle"> Course Content </h1>
      <div id="fade" onClick={() => lightbox_close()}></div>
 
-      <div className="sidenav">
+      <div className="sidenava">
         <button
           className="dropdown-btn"
           onClick={() => dropdown()}
