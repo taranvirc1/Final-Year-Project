@@ -1,90 +1,68 @@
 import React from "react";
-import '../../Styles/UPM/Main.css'
-import { FaTimes, FaBars } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { useState, useRef } from "react";
+import "../../Styles/UPM/Main.css";
+import avatar from "../../images/UPM/assets/avatar.jpg";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/UPM/assets/logo.png";
-import { CiBellOn } from "react-icons/ci";
-import { IoLogoAngular } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
-import { MdMenu } from "react-icons/md";
-import { AiOutlineHome } from "react-icons/ai";
-import { AiOutlineNotification } from "react-icons/ai";
-import { AiOutlineBgColors } from "react-icons/ai";
-import { BiLogOut } from "react-icons/bi";
-import profile from "../../images/UPM/assets/avatar.jpg";
-import { ImProfile } from "react-icons/im";
-import { RiLockPasswordLine } from "react-icons/ri";
-function Main(props) {
-    function title_change() { }
+
+function Main() {
     return (
         <>
-            <section>
-                <div className="main-container">
-                    <div className="content-select">
-                        <div className="content-select-items">
-                            <div className="main-item" id="profiless">
-                                <a href="/">
-                                    <CgProfile size={40} />
-                                </a>
-                                <a href="/">Profile</a>
-                            </div>
-                            <div className="main-item">
-                                <a href="/">
-                                    <RiLockPasswordLine size={40} />
-                                </a>
-                                <a href="/">Change password</a>
-                            </div>
+            <div className="container">
+                <div className="left-side">
+                    <nav className="navMenu">
+                        <a href="/">
+                            <span className="title">Account</span>
+                        </a>
+                        <a href="/profile">
+                            <span className="title">Profile</span>
+                        </a>
+                        <a href="/">
+                            <span className="title">Themes</span>
+                        </a>
+                        <a href="/">
+                            <span className="title">Privacy</span>
+                        </a>
+                        <div className="dot"></div>
+                    </nav>
+                </div>
+                <div className="right-side">
+                    <div className="card">
+                        <div className="background-avatar"></div>
+                        <div className="avatar">
+                            <img src={avatar}></img>
                         </div>
-                    </div>
-                    <div className="chosen-content">
-                        <div className="chosen-select">
-                            <li className="list-c">
-                                <h1 className="chosen-title">Profile</h1>
-                                <p className="chosen-info">
-                                    Your profile information and image will be shown here
-                                </p>
-
-                                <div className="content-avatar">
-                                    <div className="avatar">
-                                        <img className="profile" src={profile} alt="avatar" />
+                        <button className="edit">Change avatar</button>
+                        <div className="info-container">
+                            <form>
+                                <li className="item">
+                                    <label>USERNAME</label>
+                                    <div className="spacer">
+                                        <input placeholder="default" readOnly="readonly"></input>
+                                        <button>Edit</button>
                                     </div>
-                                </div>
+                                </li>
+                                <li className="item">
+                                    <label>EMAIL</label>
+                                    <div className="spacer">
+                                        <input placeholder="default" readOnly="readonly"></input>
+                                        <button>Edit</button>
+                                    </div>
+                                </li>
 
-                                <label className="content-text">Username</label>
-                                <input className="chosen-input" placeholder="Username"></input>
-                                <label className="content-text">Email</label>
-                                <input
-                                    className="chosen-input"
-                                    placeholder="email@gmail.com"
-                                ></input>
-                                <label className="content-text">Bio</label>
-                                <input
-                                    className="chosen-input"
-                                    placeholder="Hey"
-                                    id="bio"
-                                ></input>
-                                <button className="save">Save me</button>
-                            </li>
-                        </div>
-                    </div>
-
-                    <div className="chosen-content">
-                        <div className="chosen-select">
-                            <li className="list-c">
-                                <h1 className="chosen-title">Profile</h1>
-                                <p className="chosen-info">
-                                    Your profile information and image will be shown here
-                                </p>
-
-                                <button className="save">Save me</button>
-                            </li>
+                                <li className="item">
+                                    <label>PHONE</label>
+                                    <div className="spacer">
+                                        <input placeholder="default" readOnly="readonly"></input>
+                                        <button>Edit</button>
+                                    </div>
+                                </li>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </>
     );
 }
+
 export default Main;
