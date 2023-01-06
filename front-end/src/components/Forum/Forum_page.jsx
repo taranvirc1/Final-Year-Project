@@ -79,7 +79,7 @@ function Forum_page() {
     <div className="forums-title">
         <h2>Student Forum Threads</h2>
     </div>
-    <nav className='LandingPage-list'>
+    <nav className='ForumPage-list'>
         <a >Previous</a>
         <a >1</a>
         <a >2</a>
@@ -88,7 +88,7 @@ function Forum_page() {
     
     <div className='PageOptions'>
         
-    <a className="PageSort">
+      <a className="PageSort">
           
           <label for="psortbtn"><img src={SortIcon}/></label>               
           <input type="checkbox" id="psortbtn"/> 
@@ -99,10 +99,10 @@ function Forum_page() {
             <li><a href="#">Most Replies</a></li>
           </ul>
 
-        </a>
-        <a>
-          <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();subbg();}}>{SubButton}</button>
-        </a> 
+      </a>
+      <a>
+        <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();subbg();}}>{SubButton}</button>
+      </a> 
           
     </div>
     
