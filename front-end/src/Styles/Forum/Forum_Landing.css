@@ -43,10 +43,9 @@
     margin-right: 40px;
 }
 .LandingOptions a{
+    display: inline-block;
     background-color: rgb(255, 255, 255);
     cursor: pointer;
-    height: 50px;
-    
 }
 .LandingOptions a:active{
     background-color: orange;
@@ -63,6 +62,7 @@
 }
 
 .LandingSort {
+    display: inline-block;
     cursor: pointer;
     width : 55px;
     height: 50px;
@@ -89,6 +89,7 @@
     color:white;
     font-size:20px;
     text-align: left;
+    text-decoration: none;
 }
 
 #lsortbtn { /* hidden checkbox*/
@@ -100,15 +101,6 @@
     background-color: black;
     z-index: 1;
     position: absolute;
-}
-
-.ThreadResultsFound h2{
-    margin-top: 10px;
-    margin-left: 40px;
-    position: relative;
-    color: black;
-    font-size: 1.5rem;
-    margin-bottom: -5px;
 }
 /* Thread-list */
 
@@ -135,6 +127,7 @@
     position: relative;
 }
 .thread-title{
+    text-decoration: none;
     color: black;
     font-size: 25px;
     display: inline-block;
