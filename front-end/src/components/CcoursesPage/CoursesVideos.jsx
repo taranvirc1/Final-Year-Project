@@ -92,7 +92,7 @@ function lightbox_close() {
           <button className="closeIcon" onClick={() => setShowPlayer(false)}><i class="fa-sharp fa-solid fa-xmark fa-2x" size ={"10px"}></i></button>
           <ReactPlayer className="videoPlayer"
                          url={videoUrl}
-               
+                         controls={true}
                       
                          width='120%'
                          height='100%'
@@ -144,7 +144,7 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://www.youtube.com/embed/b_3qa0uYVb8')}
+        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
 
 >        
          
@@ -275,7 +275,13 @@ function lightbox_close() {
         </div>
       </div>
         
+      <div className="reviewsContainer">
+       <div className="averageRating"> <i className="star fa fa-star"> 4.5 Course Rating | 1K ratings</i></div>
+       <button className="submitButton" href="#popup1">Review</button>
 
+       
+
+      </div>
    
       
         {/* Hello world */}
