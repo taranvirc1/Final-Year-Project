@@ -1,318 +1,165 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
-
-.main-container {
+.container {
+    background-color: rgb(55, 56, 56);
+    width: 50%;
     height: 100vh;
-    width: fit-content;
     margin: auto;
-    margin-top: 10rem;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
-.content-select {
+.left-side {
+    background-color: rgb(36, 37, 37);
     width: 25%;
-    height: 100%;
+    height: 100vh;
 }
 
-.content-select-items {
-    width: 90%;
-    height: fit-content;
-    margin: auto;
-
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    background-color: aliceblue;
-}
-
-.main-item {
-    width: auto;
-    height: fit-content;
+.navMenu {
+    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-
+    justify-content: center;
     text-align: center;
-    margin-top: 10px;
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
 }
 
-.main-item a {
+.navMenu a {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
     text-decoration: none;
-    color: black;
-    font-family: "Kanit", sans-serif;
+    color: white;
+    font-size: 20px;
+    font-weight: 1px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navMenu a:hover {
+    border-left-color: rgb(255, 255, 255);
+    border-left-style: solid;
+    background-color: rgb(55, 56, 56);
+}
+
+.title {
     margin-left: 10px;
 }
 
-.chosen-content {
-    width: fit-content;
-    height: fit-content;
-
-    margin-right: auto;
+.right-side {
+    width: 75%;
+    height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-bottom: auto;
+    justify-content: flex-start;
 }
 
-.chosen-select {
-    width: fit-content;
+.card {
+    background-color: #f3f5f8;
+    width: 80%;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
     border-radius: 10px;
-    margin: auto;
-    background-color: rgb(250, 250, 250);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.background-avatar {
+    background-color: rgb(36, 37, 37);
+    width: 100%;
+    height: 150px;
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    border-width: 1px;
-    border-style: solid;
-}
-
-.chosen-select li {
-    list-style: none;
-}
-
-.list-c {
-    height: fit-content;
-    width: fit-content;
-    align-items: center;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background-color: blue;
-
-    margin-bottom: 20px;
-}
-
-.list-c {
-    height: fit-content;
-    width: fit-content;
-    align-items: center;
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.content-text {
-    margin-top: 20px;
-    margin-left: 10px;
-    font-family: "Kanit", sans-serif;
-    font-weight: bold;
-}
-
-.chosen-input {
-    margin-top: 10px;
-    margin-left: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-#bio {
-    width: 59vh;
-    height: 100px;
-    margin-right: 10px;
-}
-
-.chosen-title {
-    margin-top: 20px;
-    margin-left: 10px;
-    font-family: "Kanit", sans-serif;
-}
-
-.chosen-info {
-    width: fit-content;
-    height: fit-content;
-    margin-top: 0px;
-    margin-left: 10px;
-    font-family: "Raleway", sans-serif;
-    color: black;
-}
-
-.list-d {
-    height: fit-content;
-    width: fit-content;
-    align-items: center;
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.content-avatar {
-    margin-top: 50px;
-    width: 30vw;
-    height: 20vh;
-
-    background-color: rgb(161, 148, 148);
-    border-radius: 5px;
-    border-width: 1px;
-    border-style: solid;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: black;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 .avatar {
-    width: fit-content;
-    height: fit-content;
-    border-style: solid;
-    border-width: 2px;
+    border-color: black;
     border-radius: 100px;
-    background-color: rgb(248, 246, 246);
+    border-width: 1px;
+    border-style: solid;
+    width: 100px;
+    height: 100px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: black;
+    border-radius: 100px;
+    position: absolute;
+    margin: auto;
+    top: 100px;
+}
+
+.avatar img {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    border-radius: 100px;
+}
+
+.edit {
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: rgb(31, 107, 207);
+    border-color: transparent;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.info-container {
+    position: static;
+    background-color: rgb(36, 37, 37);
+    margin-top: 60px;
+    width: 95%;
+    height: fit-content;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.item {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    margin-top: 10px;
+    margin-bottom: 20px;
     margin-left: 10px;
 }
 
-.profile {
-    border-radius: 100px;
-    height: 100px;
-    width: 100px;
-}
-
-.list-c {
-    list-style: none;
-    font-family: "Kanit", sans-serif;
-    font-weight: bold;
-    margin: auto;
-    background-color: aliceblue;
-    display: flex;
-    width: fit-content;
-    height: fit-content;
-}
-
-.list-d {
-    margin-top: 10px;
-    list-style: none;
-    font-family: "Kanit", sans-serif;
-    font-weight: bold;
-
-    background-color: aliceblue;
-    display: flex;
-    width: fit-content;
-    height: fit-content;
-}
-
-.save {
-    font-family: "Kanit", sans-serif;
-    font-weight: bold;
-    border-radius: 10px;
-    background-color: #115e59;
-    color: white;
-    padding: 10px;
-    border: none;
-    margin-left: auto;
+.item label {
+    color: rgb(117, 111, 111);
+    font-size: 15px;
+    font-weight: bolder;
+    font-family: sans-serif;
     margin-bottom: 10px;
-    margin-right: 10px;
-    cursor: pointer;
+}
+
+.item input {
+    color: rgb(117, 111, 111);
+    padding: 5px;
+    border-radius: 8px;
+    border-color: rgb(59, 56, 51);
+    border-style: solid;
+    border-width: 1px;
     width: fit-content;
-    height: fit-content;
 }
 
-@media screen and (max-width: 1040px) {
-    .main-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .content-select-items {
-        width: 100%;
-        height: 70px;
-        margin: auto;
-
-        display: flex;
-    }
-
-    .content-select {
-        width: 100%;
-        height: fit-content;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .chosen-content {}
-
-    .content-avatar {
-        margin-top: 50px;
-        width: 95%;
-        background-color: rgb(187, 83, 83);
-        border-radius: 5px;
-        border-width: 1px;
-        border-style: solid;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: black;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    #bio {
-        width: 25vh;
-        height: 100px;
-        margin-right: 10px;
-    }
+.spacer {
+    display: flex;
 }
 
-@media screen and (max-width: 1517px) {
-    .main-container {
-        display: flex;
-        flex-direction: column;
-        background-color: aquamarine;
-        width: fit-content;
-    }
-
-    .content-select-items {
-        width: 100%;
-        height: 70px;
-        margin: auto;
-
-        display: flex;
-    }
-
-    .content-select {
-        width: 100%;
-        height: fit-content;
-        margin-right: auto;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .main-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .content-avatar {
-        width: 95%;
-        height: 20vh;
-    }
+.spacer button {
+    width: 11%;
+    height: 30px;
+    margin-left: auto;
+    background-color: rgb(79, 81, 83);
+    border-color: transparent;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
 }
