@@ -1,3 +1,72 @@
+.reviewsContainer{
+  position: relative;
+  padding-top: 20px;
+  padding-left: 20px;
+  border-radius: 25px;
+
+
+   width: 800px;
+   height: 500px;
+margin-top: 5%;
+top: 50;
+left: 30.5%;
+background: #4d1771;
+
+ 
+}
+.averageRating{
+  color: rgb(73, 179, 12);
+  border-bottom: 3px solid black;
+  padding-bottom: 8px;
+  margin-right: 20px;
+
+}
+.reviewsContainer .submitButton{
+  float:right;
+  position: absolute;
+  margin-top: 15px;
+  margin-right: 25px;
+  top:0%;
+  right: 0%;
+  width: 6rem;
+	border-radius: 10px;
+	border: 3px solid #0a9739;
+	background: none;
+	color: #1ad02f;
+	overflow: hidden;
+	transition: color 800ms ease, transform 500ms ease;
+
+}
+
+.reviewsContainer .submitButton::before {
+	content: "";
+	width: 100%;
+	height: 11rem;
+	background: #1ad02f;
+	position: absolute;
+	left: 0;
+	top: 110%;
+	border-radius: 50%;
+	transition: top 500ms ease;
+	z-index: -1;
+}
+
+.reviewsContainer .submitButton:hover:before {
+	top: -150%;
+}
+
+.reviewsContainer .submitButton:hover {
+	background: #0a942c;
+	color:#111;
+}
+
+.reviewsContainer .submitButton:active {
+	transform: scale(0.9);
+}
+
+
+
+
 
 
 .video-player-popup,videoPlayer {
@@ -15,7 +84,6 @@
   position: relative;
   top: -5%;
 color: aquamarine;
-  right:6%;
   background: none;
   border: 0ch;
   float: right;
