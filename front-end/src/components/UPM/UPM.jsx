@@ -33,7 +33,7 @@ function UPM() {
                         </div>
                         <button className="upm-edit">Change avatar</button>
                         <div className="upm-info-container">
-                            <form>
+                            <form className="upm-form">
                                 <li className="upm-item">
                                     <label>USERNAME</label>
                                     <div className="upm-spacer">
