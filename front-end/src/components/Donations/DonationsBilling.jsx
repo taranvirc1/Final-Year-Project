@@ -19,6 +19,7 @@ function DonationsBilling() {
 </div>
 
 <form class="billing-form">
+    <label for="card-number">Donation Amount: <input type="text" name="DAmount" /></label>
     <label for="card-number">Card number:<input type="text" id="card-number" name="card-number" maxlength="16"/></label>
 
     <label for="card-number">Blling First Name: <input type="text" name="bfname" /></label>
