@@ -11,7 +11,7 @@
     margin: auto;
     margin-top: 15px;
     padding: 15px 15px;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
     background-color: #a6aefd;
     border: 2px solid black;
     border-radius: 25px;
@@ -83,6 +83,7 @@
     transform:scale(0.99);
 }
 .ClearSearch{
+    display: inline-block;
     margin-top: 20px;
     padding-left: 20px;
 
@@ -103,6 +104,7 @@
     width:40px
 }
 .searchpost{
+    display: inline;
     margin-top: 10px;
     align-items: center;
     position:relative;
