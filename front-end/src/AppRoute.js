@@ -17,7 +17,7 @@ import Forum_page from './components/Forum/Forum_page';
 import Create_forum from './components/Forum/Create_forum';
 import FAQ from './components/FAQ/FAQ';
 import Contact from './components/FAQ/Contact'
-import UPM from './components/UPM/Main'
+import UPM from './components/UPM/UPM'
 import Quizzes from './components/Quizzes/Quizz'
 import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
 function AppRoute() {
