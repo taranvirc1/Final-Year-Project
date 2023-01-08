@@ -29,14 +29,12 @@ function Footer() {
           <h3 className="footer-title">Contact Us</h3>
           <ul className="footer-box contact">
             <li>
-              <a className="link" href="/">
+              <a className="link" href="mailto:Code4All@hotmail.com">
                 Code4All@hotmail.com
               </a>
             </li>
             <li>
-              <p className="link">
-                Phone: +44 123-456-7890
-              </p>
+              <p className="link">Phone: +44 123-456-7890</p>
             </li>
           </ul>
         </li>
@@ -51,9 +49,9 @@ function Footer() {
             </li>
             <li>
               <Link to="/FAQ">
-              <a className="link" href="/faq">
-                FAQ
-              </a>
+                <a className="link" href="/faq">
+                  FAQ
+                </a>
               </Link>
             </li>
             <li>
@@ -78,12 +76,20 @@ function Footer() {
           <h3 className="footer-title">Social Media</h3>
           <ul className="footer-box social">
             <li>
-              <a href="http://www.facebook.com" target="_blank" rel="noreferrer">
+              <a
+                href="http://www.facebook.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <AiFillFacebook />
               </a>
             </li>
             <li>
-              <a href="http://www.instagram.com" target="_blank" rel="noreferrer">
+              <a
+                href="http://www.instagram.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <AiFillInstagram />
               </a>
             </li>
