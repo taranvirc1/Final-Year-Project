@@ -1,5 +1,5 @@
 .upm-container {
-    background-color: rgb(55, 56, 56);
+    background-color: white;
     width: 50%;
     height: 100vh;
     margin: auto;
@@ -54,7 +54,7 @@
 
 .upm-right-side {
     position: relative;
-    top: 12%;
+    top: 10%;
     width: 75%;
     height: 100vh;
     display: flex;
@@ -65,7 +65,7 @@
 
 .upm-card {
     background-color: #f3f5f8;
-    width: 80%;
+    width: 90%;
     height: fit-content;
     display: flex;
     flex-direction: column;

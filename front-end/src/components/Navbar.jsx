@@ -6,6 +6,7 @@ import quizzeslogo from "../images/navIcons/quizzes.png";
 import forumlogo from "../images/navIcons/forum.png";
 import rankinglogo from "../images/navIcons/ranking.png";
 import Loginlogo from "../images/navIcons/login.png";
+import Profilelogo from "../images/navIcons/profile.jpeg";
 import "../Styles/NavBar.css";
 import { Link } from "react-router-dom";
 
@@ -81,6 +82,15 @@ function Navbar() {
             <Link to="account" className="navLink" href="#log">
               <img img src={Loginlogo} alt="" />
               Login
+            </Link>
+            {/* </Link> */}
+          </li>
+
+          <li>
+            {/* <Link to="/account"> */}
+            <Link to="UPM" className="navLink" href="#log">
+              <img img src={Profilelogo} alt="" />
+              Profile
             </Link>
             {/* </Link> */}
           </li>
