@@ -10,16 +10,17 @@ import ConfirmAccount from "./components/RegisterLogin/ConfirmAccount";
 import NewPassword from "./components/RegisterLogin/NewPassword";
 import ResetPassword from "./components/RegisterLogin/ResetPassword";
 import Courses from "./components/CcoursesPage/Courses";
-import Forum_landing from './components/Forum/Forum_landing'
-import Search_thread from './components/Forum/Search_thread';
+import Forum_landing from "./components/Forum/Forum_landing";
+import Search_thread from "./components/Forum/Search_thread";
 import SearchThread_results from "./components/Forum/SearchThread_results";
-import Forum_page from './components/Forum/Forum_page';
-import Create_forum from './components/Forum/Create_forum';
-import FAQ from './components/FAQ/FAQ';
-import Contact from './components/FAQ/Contact'
-import UPM from './components/UPM/UPM'
-import Quizzes from './components/Quizzes/Quizz'
+import Forum_page from "./components/Forum/Forum_page";
+import Create_forum from "./components/Forum/Create_forum";
+import FAQ from "./components/FAQ/FAQ";
+import Contact from "./components/FAQ/Contact";
+import UPM from "./components/UPM/UPM";
+import Quizzes from "./components/Quizzes/Quizz";
 import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
+import Avatar from "./components/Section Avatar/Avatar";
 function AppRoute() {
   return (
     <div>
@@ -35,14 +36,20 @@ function AppRoute() {
             {/* route for donations */}
             <Route path="/donations" element={<DonationsPage />} />
             <Route path="/donationsBilling" element={<DonationsBilling />} />
-            <Route path="/confirmDonation" element={<DonationsConfirmation />} />
+            <Route
+              path="/confirmDonation"
+              element={<DonationsConfirmation />}
+            />
             {/* route for courses */}
             <Route path="/courses" element={<Courses />} />
             <Route path="/coursesvideos" element={<CoursesVideos />} />
             {/* route for student forum */}
             <Route path="/Forum_landing" element={<Forum_landing />} />
             <Route path="/Search_thread" element={<Search_thread />} />
-            <Route path="/SearchThread_results" element={<SearchThread_results />} />
+            <Route
+              path="/SearchThread_results"
+              element={<SearchThread_results />}
+            />
             <Route path="/Forum_page" element={<Forum_page />} />
             <Route path="/Create_forum" element={<Create_forum />} />
             {/* route for quizzes */}
@@ -50,6 +57,8 @@ function AppRoute() {
             {/* route for FAQ */}
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/Contact" element={<Contact />} />
+            {/*Route fpr UPM*/}
+            <Route path="/Ranking" element={<Avatar />} />
             {/*Route fpr UPM*/}
             <Route path="/UPM" element={<UPM />} />
           </Route>
