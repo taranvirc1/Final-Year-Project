@@ -63,39 +63,39 @@ function Account() {
               <h2 class="form-title">Sign up</h2>
               <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="First Name" />
+                <input type="text" placeholder="First Name*" />
               </div>
               <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Last Name" />
+                <input type="text" placeholder="Last Name*" />
               </div>
               <div class="input-field">
                 <i class="fas fa-calendar-alt"></i>
                 <input
                   className="date"
                   type="date"
-                  placeholder="Date of Birth"
+                  placeholder="Date of Birth*"
                 />
               </div>
               <div class="input-field">
                 <i class="fas fa-globe-americas"></i>
-                <input type="text" placeholder="Country" />
+                <input type="text" placeholder="Country*" />
               </div>
               <div class="input-field">
                 <i class="fas fa-phone"></i>
-                <input type="text" placeholder="Phone Number" />
+                <input type="text" placeholder="Phone Number*" />
               </div>
               <div class="input-field">
                 <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Email" />
+                <input type="email" placeholder="Email*" />
               </div>
               <div class="input-field">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
+                <input type="password" placeholder="Password*" />
               </div>
               <div class="input-field">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Confirm Password" />
+                <input type="password" placeholder="Confirm Password*" />
               </div>
               <Link to="/confirmAccount">
                 <input type="submit" class="btn" value="Sign up" />
