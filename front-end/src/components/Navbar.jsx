@@ -69,7 +69,7 @@ function Navbar() {
 
           <li>
             {/* <Link to="/UPM"> */}
-            <Link to="UPM" className="navLink" href="#Rankings">
+            <Link to="Ranking" className="navLink" href="#Rankings">
               <img img src={rankinglogo} alt="" />
               Rankings
             </Link>
