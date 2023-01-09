@@ -35,7 +35,7 @@ function Account() {
                 <input type="password" placeholder="Password" />
               </div>
               <Link to="/">
-                <input type="submit" value="Login" class="btn solid" />
+                <input type="submit" value="Login" class="account-btn solid" />
               </Link>
               <Link to="/resetPassword">
                 <a href="/" className="forgot">
@@ -98,7 +98,7 @@ function Account() {
                 <input type="password" placeholder="Confirm Password*" />
               </div>
               <Link to="/confirmAccount">
-                <input type="submit" class="btn" value="Sign up" />
+                <input type="submit" class="account-btn" value="Sign up" />
               </Link>
             </form>
           </div>
@@ -113,7 +113,7 @@ function Account() {
                 start journey with us!
               </p>
               <button
-                class="btn transparent"
+                class="account-btn transparent"
                 id="sign-up-btn"
                 onClick={panelAnimation}
               >
@@ -130,7 +130,7 @@ function Account() {
                 click here to sign in with your personal info!
               </p>
               <button
-                class="btn transparent"
+                class="account-btn transparent"
                 id="sign-in-btn"
                 onClick={panelAnimation}
               >
