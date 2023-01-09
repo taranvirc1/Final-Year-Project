@@ -23,7 +23,7 @@
   
   .signin-signup {
     position: absolute;
-    top: 52.5%;
+    top: 55%;
     transform: translate(-50%, -50%);
     left: 75%;
     width: 50%;
@@ -147,7 +147,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-color: #4481eb;
   }
   
-  .btn {
+  .account-btn {
     width: 150px;
     background-color: #5995fd;
     border: none;
@@ -162,7 +162,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: 0.5s;
   }
   
-  .btn:hover {
+  .account-btn:hover {
     background-color: #4d84e2;
     color: #fff;
   }
@@ -247,7 +247,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0.7rem 0;
   }
 
-  .btn.transparent {
+  .account-btn.transparent {
     background: none;
     border: 2px solid #fff;
     width: 130px;
@@ -256,7 +256,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 1rem;
   }
 
-  .btn.transparent:hover {
+  .account-btn.transparent:hover {
     color: #fff;
   }
   
