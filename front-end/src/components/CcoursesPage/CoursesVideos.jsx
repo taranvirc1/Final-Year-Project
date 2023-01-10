@@ -166,12 +166,15 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-          <a href="#"
-            
-          >
-            Link 1<i className="fa-regular fa-circle-play"></i>
+        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
+
+>        
+         
+
+         
+          Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -184,12 +187,15 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-          
-           
-          <a href="#">
-            Link 2<i className="fa-regular fa-circle-play"></i>
+        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
+
+>        
+         
+
+         
+          Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -202,14 +208,15 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-          <a
-            className="popup-vimeo"
-            href="https://vimeo.com/67341671"
-            onClick={() => shoot(".popup-vimeo")}
-          >
-            Link 1<i className="fa-regular fa-circle-play"></i>
+        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
+
+>        
+         
+
+         
+          Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -223,25 +230,15 @@ function lightbox_close() {
         </button>
         
         <div className="dropdown-container">
-          < a href="#!" className="lightbox" onClick={() => lightbox_open()}
+        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
 
-          >        
-                   
+>        
+         
 
-                   {/*<div id="light">*/}
-                   <ReactPlayer id="light"className="reactplayer"
-                         url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
-               
-                      
-                         width='60%'
-                         height='50%'
-                     
-                    /> 
-                  {/*</div>*/}
-
-            Link 1 k<i className="fa-regular fa-circle-play"></i>
+         
+          Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -285,36 +282,32 @@ function lightbox_close() {
    
       
         {/* Hello world */}
-        <div className="demo-row">
-          <div className="container" id="id-sponsors">
-            <div className="text-center">
-              <h2 style={{margin: '20px 0', color: '#fff'}}>Our Sponsors</h2>
-            </div>
+      
             {/* Indicators */}
             
             {/* Wrapper for slides */}
-            <div className="carousel-inner" role="listbox">
-              <div className="item active">
+            
+            <div class="sponsor-header">
+y
+                        <h2 >Sponsored By</h2>
+                        
                 <div className="row">
-                  <div className="col-sm-3 col-xs-6">
+         
                     <div className="sponsor-feature"><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Logo_of_the_United_Nations.svg/1200px-Logo_of_the_United_Nations.svg.png" style={{width: '200px'}} /></div>
-                  </div>
-                  <div className="col-sm-3 col-xs-6">
+                
+               
                     <div className="sponsor-feature"><img alt="" src="https://www.dcs.bbk.ac.uk/site/assets/files/4102/ioc_logo_onwhite_aw.258x0-is-hidpi.png" style={{width: '155px'}} /></div>
-                  </div>
-                  <div className="col-sm-3 col-xs-6">
+                 
+                 
                     <div className="sponsor-feature"><img alt="" src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg" style={{width: '155px'}} /></div>
-                  </div>
-                  <div className="col-sm-3 col-xs-6">
-                    <div className="sponsor-feature"><img alt="" src="https://www.thetransitionphase.com/wp-content/uploads/2021/02/Brunel-Logo.png"  style={styleObj}/></div>
-                  </div>
+                  
+                  
+                    <div className="sponsor-feature"><img alt="" src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg" style={{width: '155px'}} /></div>
+         
+                 
                   
                 </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        
+                </div>
 
 
 
