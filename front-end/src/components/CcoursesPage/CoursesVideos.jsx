@@ -3,7 +3,8 @@ import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 
 function CoursesVideos() {
-
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
 
   const [showPlayer, setShowPlayer] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
@@ -12,6 +13,15 @@ function CoursesVideos() {
     setVideoUrl(url);
     setShowPlayer(true);
   }
+
+
+  const [showForm, setForm] = useState(false);
+  function handleForm(){
+    setForm(true);
+  }
+
+
+ 
 
 
 
@@ -166,15 +176,12 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
-
->        
-         
-
-         
-          Link 1<i className="fa-regular fa-circle-play"></i>
+          <a href="#"
+            
+          >
+            Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
+          <a href="#">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -187,15 +194,12 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
-
->        
-         
-
-         
-          Link 1<i className="fa-regular fa-circle-play"></i>
+          
+           
+          <a href="#">
+            Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
+          <a href="#">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -208,15 +212,14 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
-
->        
-         
-
-         
-          Link 1<i className="fa-regular fa-circle-play"></i>
+          <a
+            className="popup-vimeo"
+            href="https://vimeo.com/67341671"
+            onClick={() => shoot(".popup-vimeo")}
+          >
+            Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
+          <a href="#">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -230,15 +233,25 @@ function lightbox_close() {
         </button>
         
         <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
+          < a href="#!" className="lightbox" onClick={() => lightbox_open()}
 
->        
-         
+          >        
+                   
 
-         
-          Link 1<i className="fa-regular fa-circle-play"></i>
+                   {/*<div id="light">*/}
+                   <ReactPlayer id="light"className="reactplayer"
+                         url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
+               
+                      
+                         width='60%'
+                         height='50%'
+                     
+                    /> 
+                  {/*</div>*/}
+
+            Link 1 k<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
+          <a href="#">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -274,10 +287,41 @@ function lightbox_close() {
         
       <div className="reviewsContainer">
        <div className="averageRating"> <i className="star fa fa-star"> 4.5 Course Rating | 1K ratings</i></div>
-       <button className="submitButton" href="#popup1">Review</button>
+       <button className="submitButton" onClick={() => handleForm()}>Review</button>
 
-       
+       {showForm && (
 
+
+
+        <div className="ratingContainer">
+                <button className="ratingcloseIcon"
+                 onClick={() => setForm(false)}><i class="fa-sharp fa-solid fa-xmark fa-1x" size ={"1px"}></i></button>
+        <h1> How was the Course?</h1>
+        <div className="star-rating">
+        {[...Array(5)].map((star, index) => {
+          index += 1;
+          return (
+            <button
+              type="button"
+              key={index}
+              className={index <= (hover || rating) ? "on" : "off"}
+              onClick={() => setRating(index)}
+              onMouseEnter={() => setHover(index)}
+              onMouseLeave={() => setHover(rating)}
+            >
+              <span className="fa fa-star"></span>
+            </button>
+            
+          );
+        })}
+
+      </div>
+      <textarea Classname="textReview" id="" ></textarea>
+
+      <button className="submitButton"> Submit </button>
+
+      </div>
+      )}
       </div>
    
       
@@ -290,7 +334,7 @@ function lightbox_close() {
             <div class="sponsor-header">
 y
                         <h2 >Sponsored By</h2>
-                        
+                       
                 <div className="row">
          
                     <div className="sponsor-feature"><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Logo_of_the_United_Nations.svg/1200px-Logo_of_the_United_Nations.svg.png" style={{width: '200px'}} /></div>
@@ -308,6 +352,7 @@ y
                   
                 </div>
                 </div>
+                
 
 
 

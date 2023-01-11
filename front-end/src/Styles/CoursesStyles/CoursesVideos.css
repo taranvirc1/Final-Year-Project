@@ -1,4 +1,9 @@
-
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
 
 
 .reviewsContainer{
@@ -67,10 +72,67 @@ background: #4d1771;
 	transform: scale(0.9);
 }
 
+.ratingContainer{
+  width: 300px;
+  height: 250px;
+  background-color: #510bc4;
+  position:absolute;
+  left:55%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
 
+.star-rating >button{
+  position: relative;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
 
+   
+  left:33%;
+  top: 5px;
+  
+  
+}
+.ratingContainer>textarea{
+  font-size: small;
+  position: relative;
+  left: 10%;
+  width: 80%;
+  margin-top: 10%;
+}
+.ratingContainer .submitButton{
+  position: relative;
+  right:25%;
+top:-13px;
+  background-color: #2d2c41;
 
+}
+.ratingContainer>h1{
+  color:#000;
+  font-size: 17px;
+  text-align: center;
+  margin-top: 10%;
 
+}
+
+.ratingcloseIcon{
+  background: none;
+  border: 0ch;
+  padding: 5px;
+  float: right;
+  position: relative;
+  top: -3%;
+}
+
+.textReview{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 10px;
+}
 
 .video-player-popup,videoPlayer {
   margin-top: 3%;
