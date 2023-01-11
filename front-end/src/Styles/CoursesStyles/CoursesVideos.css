@@ -120,14 +120,22 @@ top:-13px;
 }
 
 .ratingcloseIcon{
-  background: none;
+  background-color: white;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 20px;
   border: 0ch;
-  padding: 5px;
+ 
   float: right;
   position: relative;
-  top: -3%;
+  top: -2%;
+  right:-2%;
 }
-
+.ratingcloseIcon:hover{
+  color: #0a942c;
+}
 .textReview{
   position: absolute;
   left: 50%;
