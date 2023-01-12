@@ -19,7 +19,7 @@ function ResetPassword() {
                 <input
                   type="submit"
                   value="Send Reset Email"
-                  class="btn solid"
+                  class="account-btn"
                 />
               </Link>
             </form>
