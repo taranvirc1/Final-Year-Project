@@ -13,7 +13,7 @@ function ConfirmAccount() {
             <h2 className="confirm-title">Thank you!</h2>
             <p>Your account has been created successfully!</p>
             <Link to="/">
-              <button type="button" className="btn">
+              <button type="button" className="confirm-btn">
                 OK
               </button>
             </Link>

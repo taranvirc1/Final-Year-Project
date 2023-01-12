@@ -28,7 +28,7 @@
     z-index: 5;
 }
 
-.btn {
+.confirm-btn {
     width: 200px;
     height: 49px;
     border: none;
@@ -108,7 +108,7 @@
         color: #333;
     }
 
-    .btn {
+    .confirm-btn {
         height: 49px;
         border: none;
         outline: none;
