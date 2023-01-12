@@ -20,7 +20,7 @@ function NewPassword() {
                 <input type="password" placeholder="Confirm Password" />
               </div>
               <Link to="/account">
-                <input type="submit" class="btn" value="Change" />
+                <input type="submit" class="account-btn" value="Change" />
               </Link>
             </form>
           </div>
