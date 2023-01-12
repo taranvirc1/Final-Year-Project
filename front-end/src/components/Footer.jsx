@@ -42,32 +42,30 @@ function Footer() {
         <li className="features">
           <h3 className="footer-title">Links</h3>
           <ul className="footer-box link h-box">
-            <li>
-              <a className="link" href="/donate">
+            <l>
+              <Link to="donations" className="link" href="/donate">
                 Donate
-              </a>
-            </li>
+              </Link>
+            </l>
             <li>
-              <Link to="/FAQ">
-                <a className="link" href="/faq">
-                  FAQ
-                </a>
+              <Link to="FAQ" className="link" href="/faq">
+                FAQ
               </Link>
             </li>
             <li>
-              <a className="link" href="/courses">
+              <Link to="courses" className="link" href="/courses">
                 Courses
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="link" href="/quizzes">
+              <Link to="quizzes" className="link" href="/quizzes">
                 Quizzes
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="link" href="/rankings">
+              <Link to="Ranking" className="link" href="/rankings">
                 Rankings
-              </a>
+              </Link>
             </li>
           </ul>
         </li>
