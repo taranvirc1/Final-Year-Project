@@ -4,7 +4,7 @@ import  "../../Styles/Forum/Search_Thread.css"
 import DeleteIcon from "../../images/forum/delete.png"
 import SearchIcon from "../../images/forum/search.png"
 
-function Search_thread() {
+function SearchThread() {
   return (
     <div className='navbar-spacing'>
       <h2 className='SearchForum-Title'>Search Forum Threads</h2>
@@ -40,4 +40,4 @@ function Search_thread() {
   )
 }
 
-export default Search_thread
+export default SearchThread

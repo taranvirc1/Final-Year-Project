@@ -30,11 +30,11 @@ const likeselect = { LikeIcon, LikedIcon }
 
 
 
-function Forum_page() {
+function ForumPage() {
   //subscribe button colour changer white to orange
   const [subcolor,setsubcolor]=useState('white');
   function subbg(){
-    if(subcolor=="white"){
+    if(subcolor==="white"){
       setsubcolor("orange")
     }
     else{
@@ -44,7 +44,7 @@ function Forum_page() {
   //subscribe button text changer "Subscribe" to "Subscribed"
   const[SubButton, setSubButton] = useState("Subscribe");
   function watchthread(){
-    if(SubButton=="Subscribed"){
+    if(SubButton==="Subscribed"){
       setSubButton("Subscribe")
     }
     else{
@@ -55,7 +55,7 @@ function Forum_page() {
   //like button colour changer white to Dodger Blue
   const [likecolor,setlikeColor]=useState('white');
   function likebg(){
-    if(likecolor=="white"){
+    if(likecolor==="white"){
       setlikeColor("#4882ff")
     }
     else{
@@ -65,7 +65,7 @@ function Forum_page() {
   //subscribe button image changer "LikeIcon" to "LikedIcon"
   const[LikeButton, setLikeButton] = useState(likeselect.LikeIcon);
   function presslike(){
-    if(LikeButton==likeselect.LikedIcon){
+    if(LikeButton===likeselect.LikedIcon){
       setLikeButton(likeselect.LikeIcon)
     }
     else{
@@ -179,4 +179,4 @@ function Forum_page() {
   )
 }
 
-export default Forum_page
+export default ForumPage

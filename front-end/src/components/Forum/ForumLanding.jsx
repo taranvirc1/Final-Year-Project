@@ -8,7 +8,7 @@ import SortIcon from "../../images/forum/sort.png"
 import LikeIcon from "../../images/forum/like.png"
 import ReplyIcon from "../../images/forum/reply.png"
 
-function Forum_landing() {
+function ForumLanding() {
   return (
     <>
     <div className='navbar-spacing'>
@@ -178,4 +178,4 @@ function Forum_landing() {
   )
 }
 
-export default Forum_landing
+export default ForumLanding

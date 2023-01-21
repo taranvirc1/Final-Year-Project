@@ -10,11 +10,11 @@ import ConfirmAccount from "./components/RegisterLogin/ConfirmAccount";
 import NewPassword from "./components/RegisterLogin/NewPassword";
 import ResetPassword from "./components/RegisterLogin/ResetPassword";
 import Courses from "./components/CcoursesPage/Courses";
-import Forum_landing from "./components/Forum/Forum_landing";
-import Search_thread from "./components/Forum/Search_thread";
-import SearchThread_results from "./components/Forum/SearchThread_results";
-import Forum_page from "./components/Forum/Forum_page";
-import Create_forum from "./components/Forum/Create_forum";
+import ForumLanding from "./components/Forum/ForumLanding";
+import SearchThread from "./components/Forum/SearchThread";
+import SearchThreadResults from "./components/Forum/SearchThreadResults";
+import ForumPage from "./components/Forum/ForumPage";
+import CreateForum from "./components/Forum/CreateForum";
 import FAQ from "./components/FAQ/FAQ";
 import Contact from "./components/FAQ/Contact";
 import UPM from "./components/UPM/UPM";
@@ -44,14 +44,14 @@ function AppRoute() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/coursesvideos" element={<CoursesVideos />} />
             {/* route for student forum */}
-            <Route path="/Forum_landing" element={<Forum_landing />} />
-            <Route path="/Search_thread" element={<Search_thread />} />
+            <Route path="/Forum_landing" element={<ForumLanding />} />
+            <Route path="/Search_thread" element={<SearchThread />} />
             <Route
               path="/SearchThread_results"
-              element={<SearchThread_results />}
+              element={<SearchThreadResults />}
             />
-            <Route path="/Forum_page" element={<Forum_page />} />
-            <Route path="/Create_forum" element={<Create_forum />} />
+            <Route path="/Forum_page" element={<ForumPage />} />
+            <Route path="/Create_forum" element={<CreateForum />} />
             {/* route for quizzes */}
             <Route path="/Quizzes" element={<Quizzes />} />
             {/* route for FAQ */}

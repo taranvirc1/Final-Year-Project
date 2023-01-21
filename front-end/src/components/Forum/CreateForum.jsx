@@ -18,7 +18,7 @@ import TextAlignIcon from "../../images/forum/text-editor/textalign.png"
 import QuoteIcon from "../../images/forum/text-editor/quote.png"
 import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 
-function Create_forum() {
+function CreateForum() {
   return (
     <>
     <div className='navbar-spacing'>
@@ -69,4 +69,4 @@ function Create_forum() {
   )
 }
 
-export default Create_forum
+export default CreateForum

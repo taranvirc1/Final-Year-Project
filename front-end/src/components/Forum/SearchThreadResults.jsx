@@ -8,7 +8,7 @@ import SortIcon from "../../images/forum/sort.png"
 import LikeIcon from "../../images/forum/like.png"
 import ReplyIcon from "../../images/forum/reply.png"
 
-function SearchThread_results() {
+function SearchThreadResults() {
   return (
     <>
     <div className='navbar-spacing'>
@@ -155,4 +155,4 @@ function SearchThread_results() {
   )
 }
 
-export default SearchThread_results
+export default SearchThreadResults
