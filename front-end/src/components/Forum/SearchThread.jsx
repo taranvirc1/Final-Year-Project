@@ -26,11 +26,11 @@ function SearchThread() {
           </select>
         </div>
         <div className='ClearSearch'>
-          <button className='clearbutton'><img src={DeleteIcon}/></button>
+          <button className='clearbutton'><img src={DeleteIcon} alt="delete icon"/></button>
         </div>
         <div className='searchpost'>
         <Link to="/SearchThread_results">
-          <a href="/" className='spost'><img src={SearchIcon}/></a>
+          <a href="/" className='spost'><img src={SearchIcon} alt="search icon"/></a>
           <label>Search Thread</label>
         </Link>
         </div>

@@ -105,7 +105,7 @@ finishHandler =() => {
         <span className='Quiz-questionNo'>Question  {currentIndex + 1 } of  {QuizData.length} </span>
         {
             options.map(option => 
-                <p key = {option.id} className={'options ${userAnswer === option? "selected" : null } '} 
+                <p key = {option.id} className={`options ${userAnswer === option? "selected" : null } `} 
                 onClick = {() => this.checkAnswer(option) }
                 > 
                 {option}
