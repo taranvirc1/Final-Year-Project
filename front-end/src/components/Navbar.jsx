@@ -16,11 +16,11 @@ function Navbar() {
     <>
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
-          {/* <Link to="/"> */}
+          
           <Link to="/">
             <img src={Logo} alt="" style={{ width: 140 }} />
           </Link>
-          {/* </Link> */}
+          
         </div>
         <div className="menu-icon" onClick={() => setClicked(!clicked)}>
           {clicked ? (
@@ -35,64 +35,64 @@ function Navbar() {
           onClick={() => setClicked(false)}
         >
           <li>
-            {/* <Link to="/donations"> */}
+            
             <Link to="donations" className="navLink" href="#donate">
-              <img src={donate} alt="" />
+              <img src={donate} alt="donate icon" />
               Donate
             </Link>
-            {/* </Link> */}
+            
           </li>
           <li>
-            {/* <Link to="/courses"> */}
+            
             <Link to="courses" className="navLink" href="#courses">
-              <img src={courseslogo} alt="" />
+              <img src={courseslogo} alt="courses icon" />
               Courses
             </Link>
-            {/* </Link> */}
+            
           </li>
 
           <li>
-            {/* <Link to="/Quizzes"> */}
+            
             <Link to="Quizzes" className="navLink" href="#Quizzes">
-              <img src={quizzeslogo} alt="" />
+              <img src={quizzeslogo} alt="quizzes icon" />
               Quizzes
             </Link>
-            {/* </Link> */}
+            
           </li>
           <li>
-            {/* <Link to="/Forum_landing"> */}
+            
             <Link to="Forum_landing" className="navLink" href="/">
-              <img img src={forumlogo} alt="" />
+              <img img src={forumlogo} alt="forum icon" />
               Forum
             </Link>
-            {/* </Link> */}
+            
           </li>
 
           <li>
-            {/* <Link to="/UPM"> */}
+            
             <Link to="Ranking" className="navLink" href="#Rankings">
-              <img img src={rankinglogo} alt="" />
+              <img img src={rankinglogo} alt="rankings icon" />
               Rankings
             </Link>
-            {/* </Link> */}
+            
           </li>
 
           <li>
-            {/* <Link to="/account"> */}
+            
             <Link to="account" className="navLink" href="#log">
-              <img img src={Loginlogo} alt="" />
+              <img img src={Loginlogo} alt="login icon" />
               Login
             </Link>
-            {/* </Link> */}
+            
           </li>
 
           <li>
-            {/* <Link to="/account"> */}
+            
             <Link to="UPM" className="navLink" href="#log">
-              <img img src={Profilelogo} alt="" />
+              <img img src={Profilelogo} alt="profile icon" />
               Profile
             </Link>
-            {/* </Link> */}
+            
           </li>
         </ul>
       </div>
