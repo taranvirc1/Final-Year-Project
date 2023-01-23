@@ -8,7 +8,7 @@ export default function Whylearn() {
       <div>
         <h2 class="why-title">Why Learn With Us?</h2>
       </div>
-
+      {/* Card number one */}
       <div class="box">
         <div class="card">
           <svg
@@ -26,7 +26,7 @@ export default function Whylearn() {
             <p>At Coding4all, we provide courses for all coding languages.</p>
           </div>
         </div>
-
+        {/* Card number two */}
         <div class="card">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ export default function Whylearn() {
             </p>
           </div>
         </div>
-
+        {/* Card number three */}
         <div class="card">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,10 +72,11 @@ export default function Whylearn() {
         </div>
       </div>
       <div className="button-container">
-      <Link to="/account">
-        <a href="/">
-          <button class="btn-1">Get started</button>
-        </a>
+      {/* Link to login/signup page */}
+        <Link to="/account">
+          <a href="/">
+            <button class="btn-1">Get started</button>
+          </a>
         </Link>
       </div>
     </div>

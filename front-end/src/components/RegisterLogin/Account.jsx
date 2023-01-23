@@ -24,6 +24,7 @@ function Account() {
       <div class="account-container">
         <div class="forms-container">
           <div class="signin-signup">
+            {/* Signin/login form which contains email and password */}
             <form action="#" class="sign-in-form">
               <h2 class="form-title">Sign in</h2>
               <div class="input-field">
@@ -34,14 +35,17 @@ function Account() {
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Password" />
               </div>
+              {/* Redirect to home page after login */}
               <Link to="/">
                 <input type="submit" value="Login" class="account-btn solid" />
               </Link>
+              {/* Link to reset password form when user forgets password */}
               <Link to="/resetPassword">
                 <a href="/" className="forgot">
                   Forgot your password?
                 </a>
               </Link>
+
               {/* <p class="social-text">Or Sign in with social platforms</p>
               <div class="social-media">
                 <a href="https://www.facebook.com" class="social-icon">
@@ -59,6 +63,7 @@ function Account() {
               </div> */}
             </form>
 
+            {/* Signup form which contains name, dob, country, phone, email and password */}
             <form action="#" class="sign-up-form">
               <h2 class="form-title">Sign up</h2>
               <div class="input-field">
@@ -97,13 +102,15 @@ function Account() {
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Confirm Password*" />
               </div>
+              {/* Link to confirmation page after sign up */}
               <Link to="/confirmAccount">
                 <input type="submit" class="account-btn" value="Sign up" />
               </Link>
             </form>
           </div>
         </div>
-
+        
+        {/* Panel with link to sign up form */}
         <div class="panels-container">
           <div class="panel left-panel">
             <div class="panel-content">
@@ -122,6 +129,8 @@ function Account() {
             </div>
             <img src={registerLogo} class="image" alt="sign up logo" />
           </div>
+
+          {/* Panel with link to signin/login form */}
           <div class="panel right-panel">
             <div class="panel-content">
               <h3>One of us ?</h3>

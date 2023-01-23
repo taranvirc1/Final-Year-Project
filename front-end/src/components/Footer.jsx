@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <div className="footer">
-      {/* Section 1 */}
+      {/* Section 1 - Footer About */}
       <div className="footer-container-left">
         <Link to="/">
           <img src={logo} alt="logo" style={{ width: 140 }} />
@@ -23,7 +23,7 @@ function Footer() {
           students.
         </p>
       </div>
-      {/* Section 2 */}
+      {/* Section 2 - Footer Contact */}
       <ul className="footer-container-right">
         <li>
           <h3 className="footer-title">Contact Us</h3>
@@ -38,7 +38,7 @@ function Footer() {
             </li>
           </ul>
         </li>
-        {/* Section 3 */}
+        {/* Section 3 - Footer Links */}
         <li className="features">
           <h3 className="footer-title">Links</h3>
           <ul className="footer-box link h-box">
@@ -69,7 +69,7 @@ function Footer() {
             </li>
           </ul>
         </li>
-
+        {/* Section 3 - Footer Social Media */}
         <li>
           <h3 className="footer-title">Social Media</h3>
           <ul className="footer-box social">

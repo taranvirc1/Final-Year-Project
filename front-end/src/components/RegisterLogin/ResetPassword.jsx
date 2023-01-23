@@ -9,12 +9,14 @@ function ResetPassword() {
       <div class="account-container">
         <div class="forms-container">
           <div class="reset">
+            {/* Form that contains email address field */}
             <form action="#" class="sign-in-form">
               <h2 class="form-title">Reset Password</h2>
               <div class="input-field">
                 <i class="fas fa-envelope"></i>
                 <input type="email" placeholder="Email" />
               </div>
+              {/* Link to new password page */}
               <Link to="/newPassword">
                 <input
                   type="submit"
