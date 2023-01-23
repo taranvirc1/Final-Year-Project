@@ -12,6 +12,7 @@ function ConfirmAccount() {
             <img src={tick_img} alt="tick img" />
             <h2 className="confirm-title">Thank you!</h2>
             <p>Your account has been created successfully!</p>
+            {/* Redirect to home page */}
             <Link to="/">
               <button type="button" className="confirm-btn">
                 OK

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FaArrowAltCircleRight,FaArrowAltCircleLeft } from 'react-icons/fa'
-import style from "../Styles/ImageSlider.css"
+import "../Styles/ImageSlider.css"
 
 const SliderData = [
     {image: "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068854141039/1.png"},
@@ -36,7 +36,7 @@ const ImageSlider = ({}) => {
                             key={index}
                         >
                             {index ===current && (
-                                <img src={slide.image} alt = "image slider"/>
+                                <img src={slide.image} alt = "slider"/>
                             )}
                             
                         </div>
