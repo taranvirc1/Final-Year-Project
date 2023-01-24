@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
+/* Font styling for account files */
 .body{
   font-family: 'Poppins', sans-serif;
 }
 
-/* New styling */
+
 .account-container {
     position: relative;
     width: 100%;
@@ -12,6 +13,8 @@
     min-height: 100vh;
     overflow: hidden;
   }
+
+  /* Stylinf for both forms in the account file - signup and signin */
   
   .forms-container {
     position: absolute;
@@ -100,6 +103,8 @@
     color: #333;
   }
 
+  /* Styling for Date picker input field in the signup form */
+
 ::-webkit-datetime-edit-text,
 ::-webkit-datetime-edit-month-field,
 ::-webkit-datetime-edit-day-field,
@@ -117,7 +122,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 500;
   }
   
-  .social-text {
+  /* .social-text {
     padding: 0.7rem 0;
     font-size: 1rem;
   }
@@ -145,8 +150,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .social-icon:hover {
     color: #4481eb;
     border-color: #4481eb;
-  }
+  } */
   
+  /* Styling for the buttons in the account files */
+
   .account-btn {
     width: 200px;
     background-color: #5995fd;
@@ -167,6 +174,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #fff;
   }
 
+  /* Styling for forgot password link the signin form */
+
   .forgot {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
@@ -177,6 +186,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #666;
     font-weight: 500;
 }
+
+/* Styling for the panel containers used for the sliding animation */
 
   .panels-container {
     position: absolute;
@@ -207,6 +218,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: transform 1.1s ease-in-out;
     transition-delay: 0.4s;
   }
+
+  /* Styling for panel containers which include the content and the image */
   
   .panel {
     display: flex;
@@ -246,6 +259,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0.7rem 0;
   }
 
+  /* Styling for the buttons in the panel containers called signup and signin */
+
   .account-btn.transparent {
     background: none;
     border: 2px solid #fff;
@@ -264,12 +279,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transform: translateX(800px);
   }
   
-  /* ANIMATION */
+  /* Styling for sliding animation when clicking signup/signin buttons in the panel containers */
   
   .account-container.sign-up-mode:before {
     transform: translate(100%, -50%);
     right: 52%;
   }
+
+  /* move the left panel to the right side of the screen */
   
   .account-container.sign-up-mode .left-panel .image,
   .account-container.sign-up-mode .left-panel .panel-content {
@@ -279,17 +296,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .account-container.sign-up-mode .signin-signup {
     left: 25%;
   }
+
+  /* Sliding animation - when clicking on the sign up button, the signup form appears */
   
   .account-container.sign-up-mode form.sign-up-form {
     opacity: 1;
     z-index: 2;
   }
+
+  /* and the signin form disappears */
   
   .account-container.sign-up-mode form.sign-in-form {
     opacity: 0;
     z-index: 1;
   }
   
+/* move the right panel to the left and place it on the right side of the screen */
+
   .account-container.sign-up-mode .right-panel .image,
   .account-container.sign-up-mode .right-panel .panel-content {
     transform: translateX(0%);
@@ -302,6 +325,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .account-container.sign-up-mode .right-panel {
     pointer-events: all;
   }
+
+   /* Signup/login styling - tablet version */
 
   @media (max-width: 870px) {
     .account-container {
@@ -406,6 +431,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       transform: translate(-50%, 0);
     }
   }
+
+  /* Signup/login styling - mobile version */
   
   @media (max-width: 570px) {
     form {
