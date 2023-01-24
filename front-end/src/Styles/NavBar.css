@@ -108,6 +108,8 @@ html {
 	transition: all 0.3s ease 0s;
 }
 
+/* Styling for menu in mobile version */
+
 .fa-bars {
 	color: #fff;
 }
@@ -119,6 +121,8 @@ html {
 .menu-icon {
 	display: none;
 }
+
+/* Styling for navbar - mobile version */
 
 @media  (max-width: 570px) {
 
