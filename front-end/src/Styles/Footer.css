@@ -130,5 +130,17 @@
     .footer-container-left h3 {
         margin-left: -10px;
     }
+
+    .footer-container-right .social {
+        margin-left: -0.5%;
+    }
+
+    .footer-container-right .footer-title:last-of-type {
+        padding-top: 10%;
+    }
+
+    .footer-container-bottom {
+        padding-top: 20%;
+    }
 }
 

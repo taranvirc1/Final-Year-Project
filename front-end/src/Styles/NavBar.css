@@ -23,7 +23,6 @@ html {
 .nav
 {
 	width: 100%;
-	/* background-color: rgb(55, 50, 53); */
 	background-color: rgb(36, 32, 44);
 	display: flex;
 	align-items: center;
@@ -44,17 +43,6 @@ html {
 	justify-content: flex-end;
 }
 
-/* #list-switch a
-{
-	font-family: "Poppins", sans-serif;
-	font-weight: 500;
-	font-size: 15px;
-	color: #d2dbe2;
-	display: block;
-	text-decoration: none;
-	text-align: center;
-} */
-
 #list-switch a
 {
 	font-family: "Poppins", sans-serif;
@@ -68,8 +56,6 @@ html {
 #list-switch img {
 	width: 20px;
 	margin-right: 10px;
-	/* transform: translateY(5px); */
-	/* padding-top: 5px; */
 }
 
 .navLink {
@@ -77,24 +63,12 @@ html {
 	top: 10px;
 }
 
-/* #list-switch li 
-{
-	list-style: none;
-	display: inline-block;
-	padding: 0px 20px;
-} */
-
 #list-switch a:hover
 {
 	color: #FA4B37;
     
 	transform: scaleX(1);
 }
-
- 
-
-
-
 
 .nav button
 {
