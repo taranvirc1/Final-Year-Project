@@ -64,14 +64,13 @@
   @media  (max-width: 570px) {
 
     .text2 {
-      font-size: 12vw;
+      font-size: 4rem;
     }
 
     .desc {
-      margin-top: 10px;
+      margin-top: 2%;
       font-size: 2rem;
-      padding: 0 10px;
-      margin-bottom: -15px;
+      padding: 0 10%;
     }
 
 }
