@@ -31,24 +31,10 @@
     border-radius: 25px;
 }
 
-/* .btn-1::before {
-	transition: 0.5s all ease;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	right: 50%;
-	bottom: 0;
-	opacity: 0;
-	content: "";
-    border-radius: 25px;
-	background-color: #416bb9;
-} */
-
 .btn-1:hover{
 	transition: 0.8s all ease-in-out;
 	box-shadow: inset 300px 0 0 0 #416bb9;
     cursor: pointer;
-    /* color: #000; */
 }
 .box{
 	display: flex;
