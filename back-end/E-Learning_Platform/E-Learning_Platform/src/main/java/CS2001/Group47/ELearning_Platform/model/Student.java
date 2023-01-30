@@ -48,6 +48,7 @@ public class Student implements Serializable {
 	String phone;
 	
 	@NotBlank
+	@Column(unique = true)
 	String email;
 	
 	@NotBlank
