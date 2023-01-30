@@ -21,20 +21,20 @@ public class StudentService {
 	}
 	
 	
-	public List<Student> getUsers() {
+	public List<Student> getStudents() {
 		return (List<Student>) studentRepository.findAll();
 	}
 
 	
-	public void addUser(Student newUser) {
+	public void addStudent(Student newUser) {
 		studentRepository.save(newUser);
 	}
 	
-	public Optional<Student> findByID(Long id) {
+	public Optional<Student> findByID(Integer id) {
 		 return studentRepository.findById(id);
 	}
 	
-	public void deleteUser(Long id) {
+	public void deleteStudent(Integer id) {
 		Student student = studentRepository.findById(id)
 				  .orElseThrow(() -> new ResourceNotFoundException("Student", "id", id));
 		studentRepository.delete(student);

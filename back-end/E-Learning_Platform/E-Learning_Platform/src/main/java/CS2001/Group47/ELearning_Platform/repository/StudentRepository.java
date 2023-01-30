@@ -13,6 +13,6 @@ import CS2001.Group47.ELearning_Platform.model.Student;
  *
  */
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 	Student findByEmail(String email);
 }
