@@ -132,6 +132,88 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .input-field input::placeholder {
     color: #aaa;
   }
+
+/* Styling for password indicator */
+
+.show-pass {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: none;
+  color: #000;
+}
+
+.pass-indicator {
+  width: 50%;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  display: none;
+}
+
+.pass-indicator span {
+  width: 100%;
+  height: 50%;
+  background: lightgray;
+  border-radius: 15px;
+  padding: 0px 50px;
+  margin-right: 5px;
+}
+
+.pass-indicator .weak::before {
+  content: '';
+  position: absolute;
+  left: 29.55%;
+  width: 13%;
+  height: 1.35%;
+  border-radius: 10px;
+  background-color: red;
+}
+
+.pass-indicator .medium::before {
+  content: '';
+  position: absolute;
+  left: 43.2%;
+  width: 13%;
+  height: 1.35%;
+  border-radius: 10px;
+  background-color: red;
+} 
+
+.pass-indicator .strong::before {
+  content: '';
+  position: absolute;
+  left: 56.7%;
+  width: 13%;
+  height: 1.35%;
+  border-radius: 10px;
+  background-color: red;
+}
+
+.pass-indicator span.active.weak::before {
+  background:#ff4757;
+}
+
+.pass-indicator span.active.medium::before {
+  background:orange;
+}
+
+.pass-indicator span.active.strong::before {
+  background:#23ad5c;
+}
+
+.pass-text {
+  font-size: .75rem;
+  font-weight: 600;
+  display: none;
+  color: #000;
+}
   
   /* Styling for the buttons in the account files */
 
