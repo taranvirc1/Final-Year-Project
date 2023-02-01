@@ -49,6 +49,17 @@
     opacity: 0;
     z-index: 1;
   }
+
+  .sign-up-form p {
+    color: #000;
+    padding: 3px;
+    background-color: rgb(218, 189, 189);
+    border: 1px solid red;
+    width: 50%;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.6rem;
+  }
   
   form.sign-in-form {
     display: flex;
@@ -75,9 +86,9 @@
     max-width: 380px;
     width: 100%;
     background-color: #f0f0f0;
-    margin: 10px 0;
-    height: 55px;
-    border-radius: 55px;
+    margin: 7px 0;
+    height: 40px;
+    border-radius: 50px;
     display: grid;
     grid-template-columns: 15% 85%;
     padding: 0 0.4rem;
@@ -86,7 +97,7 @@
   
   .input-field i {
     text-align: center;
-    line-height: 55px;
+    line-height: 40px;
     color: #acacac;
     transition: 0.5s;
     font-size: 1.1rem;
@@ -99,7 +110,7 @@
     line-height: 1;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #333;
   }
 
@@ -119,7 +130,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   
   .input-field input::placeholder {
     color: #aaa;
-    font-weight: 500;
   }
   
   /* Styling for the buttons in the account files */
