@@ -3,8 +3,15 @@ import registerLogo from "../../images/login-register-icons/undraw_launching_re_
 import loginLogo from "../../images/login-register-icons/undraw_secure_login_pdn4.svg";
 import { Link } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/Account.css";
+import useForm from "./AccountFunctionality/useForm";
+import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
 
-function Account() {
+function Account({ submitForm }) {
+  const { handleChange, values, handleSubmit, errors } = useForm(
+    submitForm,
+    validateSignUpForm
+  );
+
   const panelAnimation = () => {
     const sign_in_btn = document.querySelector("#sign-in-btn");
     const sign_up_btn = document.querySelector("#sign-up-btn");
@@ -25,7 +32,7 @@ function Account() {
         <div class="forms-container">
           <div class="signin-signup">
             {/* Signin/login form which contains email and password */}
-            <form action="#" class="sign-in-form">
+            <form action="#" class="sign-in-form" noValidate>
               <h2 class="form-title">Sign in</h2>
               <div class="input-field">
                 <i class="fas fa-envelope"></i>
@@ -48,52 +55,110 @@ function Account() {
             </form>
 
             {/* Signup form which contains name, dob, country, phone, email and password */}
-            <form action="#" class="sign-up-form">
+            <form
+              action="#"
+              class="sign-up-form"
+              noValidate
+              onSubmit={handleSubmit}
+            >
               <h2 class="form-title">Sign up</h2>
               <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="First Name*" />
+                <input
+                  type="text"
+                  name="firstName"
+                  value={values.firstName}
+                  onChange={handleChange}
+                  placeholder="First Name*"
+                />
               </div>
+              {errors.firstName && <p>{errors.firstName}</p>}
               <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Last Name*" />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={values.lastName}
+                  onChange={handleChange}
+                  placeholder="Last Name*"
+                />
               </div>
+              {errors.lastName && <p>{errors.lastName}</p>}
               <div class="input-field">
                 <i class="fas fa-calendar-alt"></i>
                 <input
                   className="date"
                   type="date"
+                  name="dateOfBirth"
+                  value={values.dateOfBirth}
+                  onChange={handleChange}
                   placeholder="Date of Birth*"
                 />
               </div>
+              {errors.dateOfBirth && <p>{errors.dateOfBirth}</p>}
               <div class="input-field">
                 <i class="fas fa-globe-americas"></i>
-                <input type="text" placeholder="Country*" />
+                <input
+                  type="text"
+                  name="country"
+                  value={values.country}
+                  onChange={handleChange}
+                  placeholder="Country*"
+                />
               </div>
+              {errors.country && <p>{errors.country}</p>}
               <div class="input-field">
                 <i class="fas fa-phone"></i>
-                <input type="text" placeholder="Phone Number*" />
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  value={values.phoneNumber}
+                  onChange={handleChange}
+                  placeholder="Phone Number*"
+                />
               </div>
+              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
               <div class="input-field">
                 <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Email*" />
+                <input
+                  type="email"
+                  name="emailAddress"
+                  value={values.emailAddress}
+                  onChange={handleChange}
+                  placeholder="Email*"
+                />
               </div>
+              {errors.emailAddress && <p>{errors.emailAddress}</p>}
               <div class="input-field">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password*" />
+                <input
+                  type="password"
+                  name="studentPassword"
+                  value={values.studentPassword}
+                  onChange={handleChange}
+                  placeholder="Password*"
+                />
               </div>
+              {errors.studentPassword && <p>{errors.studentPassword}</p>}
               <div class="input-field">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Confirm Password*" />
+                <input
+                  type="password"
+                  name="repPassword"
+                  value={values.repPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm Password*"
+                />
               </div>
+              {errors.repPassword && <p>{errors.repPassword}</p>}
               {/* Link to confirmation page after sign up */}
-              <Link to="/confirmAccount">
-                <input type="submit" class="account-btn" value="Sign up" />
-              </Link>
+              {/* <Link to="/confirmAccount"> */}
+              <input type="submit" class="account-btn" value="Sign up" />
+              {/* </Link> */}
             </form>
           </div>
         </div>
-        
+
         {/* Panel with link to sign up form */}
         <div class="panels-container">
           <div class="panel left-panel">
