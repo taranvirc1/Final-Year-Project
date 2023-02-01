@@ -133,24 +133,24 @@ function Account({ submitForm }) {
                 <i class="fas fa-lock"></i>
                 <input
                   type="password"
-                  name="studentPassword"
-                  value={values.studentPassword}
+                  name="password"
+                  value={values.password}
                   onChange={handleChange}
                   placeholder="Password*"
                 />
               </div>
-              {errors.studentPassword && <p>{errors.studentPassword}</p>}
+              {errors.password && <p>{errors.password}</p>}
               <div class="input-field">
                 <i class="fas fa-lock"></i>
                 <input
                   type="password"
-                  name="repPassword"
-                  value={values.repPassword}
+                  name="confirmPassword"
+                  value={values.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm Password*"
                 />
               </div>
-              {errors.repPassword && <p>{errors.repPassword}</p>}
+              {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
               {/* Link to confirmation page after sign up */}
               {/* <Link to="/confirmAccount"> */}
               <input type="submit" class="account-btn" value="Sign up" />

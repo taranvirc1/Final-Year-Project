@@ -41,7 +41,7 @@ const useForm = (callback, validateForm) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isRegistered) {
-      callback();
+      // callback();
     }
   }, [errors]);
 

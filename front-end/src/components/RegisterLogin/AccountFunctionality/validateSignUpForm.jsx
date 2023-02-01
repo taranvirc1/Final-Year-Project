@@ -19,12 +19,12 @@ function validateSignUpForm(values) {
 
   //Error handling for Date of Birth
   if (!values.dateOfBirth) {
-    errors.dateOfBirth = "Date of Birth required";
+    errors.dateOfBirth = "Date of Birth required!";
   }
 
   //Error handling for Country
   if (!values.country) {
-    errors.country = "Country required";
+    errors.country = "Country required!";
   } else if (values.country.length < 3) {
     errors.country =
       "Invalid country name. Must be at least three characters long.";
@@ -32,12 +32,12 @@ function validateSignUpForm(values) {
 
   //Error handling for Phone Number
   if (!values.phoneNumber) {
-    errors.phoneNumber = "Phone Number required";
+    errors.phoneNumber = "Phone Number required!";
   }
 
   //Error handling for Email Address
   if (!values.emailAddress) {
-    errors.emailAddress = "Email Address required";
+    errors.emailAddress = "Email Address required!";
   }
 
   //Error handling for Password
@@ -51,7 +51,7 @@ function validateSignUpForm(values) {
   if (!values.confirmPassword) {
     errors.confirmPassword = "Password required!";
   } else if (values.confirmPassword !== values.password) {
-    errors.confirmPassword = "Password do not match!";
+    errors.confirmPassword = "Passwords do not match!";
   }
 
   return errors;
