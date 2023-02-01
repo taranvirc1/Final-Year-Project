@@ -28,11 +28,11 @@ function Account({ submitForm }) {
 
   const indicator = document.querySelector(".pass-indicator");
   const input = document.querySelector(".pass");
-  const weak = document.querySelector(".pass");
-  const medium = document.querySelector(".pass");
-  const strong = document.querySelector(".pass");
-  const text = document.querySelector(".pass");
-  const showPass = document.querySelector(".pass");
+  const weak = document.querySelector(".weak");
+  const medium = document.querySelector(".medium");
+  const strong = document.querySelector(".strong");
+  const text = document.querySelector(".pass-text");
+  const showPass = document.querySelector(".show-pass");
   var passRegexWeak = /[a-z]/;
   var passRegexMedium = /\d+/;
   var passRegexStrong = /.[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
@@ -215,14 +215,16 @@ function Account({ submitForm }) {
               <div class="input-field">
                 <i class="fas fa-lock"></i>
                 <input
+                  className="pass"
                   type="password"
                   name="password"
                   value={values.password}
                   onChange={handleChange}
+                  onKeyUp={passwordIndicator}
                   placeholder="Password*"
                 />
+                <span className="show-pass">SHOW</span>
               </div>
-              <span className="show-pass">SHOW</span>
               <div className="pass-indicator">
                 <span className="weak"></span>
                 <span className="medium"></span>
