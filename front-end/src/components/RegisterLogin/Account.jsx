@@ -219,7 +219,7 @@ function Account({ submitForm }) {
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
-                  // className="pass"
+                  className="pass"
                   type="password"
                   name="studentPassword"
                   value={values.studentPassword}
