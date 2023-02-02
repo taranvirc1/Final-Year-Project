@@ -6,14 +6,14 @@ import "../../Styles/RegisterLoginStyles/ResetPassword.css";
 function ResetPassword() {
   return (
     <div className="body">
-      <div class="account-container">
-        <div class="forms-container">
-          <div class="reset">
+      <div className="account-container">
+        <div className="forms-container">
+          <div className="reset">
             {/* Form that contains email address field */}
-            <form action="#" class="sign-in-form">
-              <h2 class="form-title">Reset Password</h2>
-              <div class="input-field">
-                <i class="fas fa-envelope"></i>
+            <form className="sign-in-form">
+              <h2 className="form-title">Reset Password</h2>
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
                 <input type="email" placeholder="Email" />
               </div>
               {/* Link to new password page */}

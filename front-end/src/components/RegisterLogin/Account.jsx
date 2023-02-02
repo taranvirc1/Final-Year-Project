@@ -111,42 +111,46 @@ function Account({ submitForm }) {
 
   return (
     <div className="body">
-      <div class="account-container">
-        <div class="forms-container">
-          <div class="signin-signup">
+      <div className="account-container">
+        <div className="forms-container">
+          <div className="signin-signup">
             {/* Signin/login form which contains email and password */}
-            <form action="#" class="sign-in-form" noValidate>
-              <h2 class="form-title">Sign in</h2>
-              <div class="input-field">
-                <i class="fas fa-envelope"></i>
+            <form className="sign-in-form" noValidate>
+              <h2 className="form-title">Sign in</h2>
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
                 <input type="text" placeholder="Email Address" />
               </div>
-              <div class="input-field">
-                <i class="fas fa-lock"></i>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
                 <input type="password" placeholder="Password" />
               </div>
               {/* Redirect to home page after login */}
               <Link to="/">
-                <input type="submit" value="Login" class="account-btn solid" />
+                <input
+                  type="submit"
+                  value="Login"
+                  className="account-btn solid"
+                />
               </Link>
               {/* Link to reset password form when user forgets password */}
-              <Link to="/resetPassword">
-                <a href="/" className="forgot">
-                  Forgot your password?
-                </a>
+              <Link to="/resetPassword" className="forgot">
+                {/* <a href="/" className="forgot"> */}
+                Forgot your password?
+                {/* </a> */}
               </Link>
             </form>
 
             {/* Signup form which contains name, dob, country, phone, email and password */}
             <form
-              action="#"
-              class="sign-up-form"
+              // action="#"
+              className="sign-up-form"
               noValidate
               onSubmit={handleSubmit}
             >
-              <h2 class="form-title">Sign up</h2>
-              <div class="input-field">
-                <i class="fas fa-user"></i>
+              <h2 className="form-title">Sign up</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
                 <input
                   type="text"
                   name="firstName"
@@ -156,8 +160,8 @@ function Account({ submitForm }) {
                 />
               </div>
               {errors.firstName && <p>{errors.firstName}</p>}
-              <div class="input-field">
-                <i class="fas fa-user"></i>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
                 <input
                   type="text"
                   name="lastName"
@@ -167,8 +171,8 @@ function Account({ submitForm }) {
                 />
               </div>
               {errors.lastName && <p>{errors.lastName}</p>}
-              <div class="input-field">
-                <i class="fas fa-calendar-alt"></i>
+              <div className="input-field">
+                <i className="fas fa-calendar-alt"></i>
                 <input
                   className="date"
                   type="date"
@@ -179,8 +183,8 @@ function Account({ submitForm }) {
                 />
               </div>
               {errors.dateOfBirth && <p>{errors.dateOfBirth}</p>}
-              <div class="input-field">
-                <i class="fas fa-globe-americas"></i>
+              <div className="input-field">
+                <i className="fas fa-globe-americas"></i>
                 <input
                   type="text"
                   name="country"
@@ -190,8 +194,8 @@ function Account({ submitForm }) {
                 />
               </div>
               {errors.country && <p>{errors.country}</p>}
-              <div class="input-field">
-                <i class="fas fa-phone"></i>
+              <div className="input-field">
+                <i className="fas fa-phone"></i>
                 <input
                   type="text"
                   name="phoneNumber"
@@ -201,8 +205,8 @@ function Account({ submitForm }) {
                 />
               </div>
               {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
-              <div class="input-field">
-                <i class="fas fa-envelope"></i>
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
                 <input
                   type="email"
                   name="emailAddress"
@@ -212,13 +216,13 @@ function Account({ submitForm }) {
                 />
               </div>
               {errors.emailAddress && <p>{errors.emailAddress}</p>}
-              <div class="input-field">
-                <i class="fas fa-lock"></i>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
                 <input
-                  className="pass"
-                  type="password"
-                  name="password"
-                  value={values.password}
+                  // className="pass"
+                  type="text"
+                  name="studentPassword"
+                  value={values.studentPassword}
                   onChange={handleChange}
                   onKeyUp={passwordIndicator}
                   placeholder="Password*"
@@ -232,12 +236,12 @@ function Account({ submitForm }) {
               </div>
               <div className="pass-text">Yours password is too weak</div>
               {errors.password && <p>{errors.password}</p>}
-              <div class="input-field">
-                <i class="fas fa-lock"></i>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
                 <input
-                  type="password"
-                  name="confirmPassword"
-                  value={values.confirmPassword}
+                  type="text"
+                  name="repPassword"
+                  value={values.repPassword}
                   onChange={handleChange}
                   placeholder="Confirm Password*"
                 />
@@ -245,49 +249,49 @@ function Account({ submitForm }) {
               {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
               {/* Link to confirmation page after sign up */}
               {/* <Link to="/confirmAccount"> */}
-              <input type="submit" class="account-btn" value="Sign up" />
+              <input type="submit" className="account-btn" value="Sign up" />
               {/* </Link> */}
             </form>
           </div>
         </div>
 
         {/* Panel with link to sign up form */}
-        <div class="panels-container">
-          <div class="panel left-panel">
-            <div class="panel-content">
+        <div className="panels-container">
+          <div className="panel left-panel">
+            <div className="panel-content">
               <h3>New here ?</h3>
               <p>
                 Hello, tech friend. Please click here to create an account and
                 start journey with us!
               </p>
               <button
-                class="account-btn transparent"
+                className="account-btn transparent"
                 id="sign-up-btn"
                 onClick={panelAnimation}
               >
                 Sign up
               </button>
             </div>
-            <img src={registerLogo} class="image" alt="sign up logo" />
+            <img src={registerLogo} className="image" alt="sign up logo" />
           </div>
 
           {/* Panel with link to signin/login form */}
-          <div class="panel right-panel">
-            <div class="panel-content">
+          <div className="panel right-panel">
+            <div className="panel-content">
               <h3>One of us ?</h3>
               <p>
                 Welcome back, tech friend. To keep connected with us please
                 click here to sign in with your personal info!
               </p>
               <button
-                class="account-btn transparent"
+                className="account-btn transparent"
                 id="sign-in-btn"
                 onClick={panelAnimation}
               >
                 Sign in
               </button>
             </div>
-            <img src={loginLogo} class="image" alt="sign in logo" />
+            <img src={loginLogo} className="image" alt="sign in logo" />
           </div>
         </div>
       </div>
