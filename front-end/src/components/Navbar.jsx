@@ -11,6 +11,7 @@ import "../Styles/NavBar.css";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  //used for setting the state of the navbar menu in mobile version
   const [clicked, setClicked] = useState(false);
   return (
     <>

@@ -9,8 +9,8 @@ function NewPassword() {
       <div className="account-container">
         <div className="forms-container">
           <div className="new">
-          {/* Form that contains new password and confirm password fields */}
-            <form action="#" className="sign-in-form">
+            {/* Form that contains new password and confirm password fields */}
+            <form className="sign-in-form">
               <h2 className="form-title">New Password</h2>
               <div className="input-field">
                 <i className="fas fa-lock"></i>

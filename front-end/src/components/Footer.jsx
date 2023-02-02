@@ -42,11 +42,11 @@ function Footer() {
         <li className="features">
           <h3 className="footer-title">Links</h3>
           <ul className="footer-box link h-box">
-            <l>
+            <li>
               <Link to="donations" className="link" href="/donate">
                 Donate
               </Link>
-            </l>
+            </li>
             <li>
               <Link to="FAQ" className="link" href="/faq">
                 FAQ
