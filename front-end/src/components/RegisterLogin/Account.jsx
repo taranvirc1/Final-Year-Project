@@ -220,7 +220,7 @@ function Account({ submitForm }) {
                 <i className="fas fa-lock"></i>
                 <input
                   // className="pass"
-                  type="text"
+                  type="password"
                   name="studentPassword"
                   value={values.studentPassword}
                   onChange={handleChange}
@@ -239,7 +239,7 @@ function Account({ submitForm }) {
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
-                  type="text"
+                  type="password"
                   name="repPassword"
                   value={values.repPassword}
                   onChange={handleChange}
