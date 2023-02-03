@@ -235,13 +235,13 @@ function Account({ submitForm }) {
                 <span className="strong"></span>
               </div>
               <div className="pass-text">Yours password is too weak</div>
-              {errors.password && <p>{errors.password}</p>}
+              {errors.studentPassword && <p>{errors.studentPassword}</p>}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
                   type="password"
-                  name="repPassword"
-                  value={values.repPassword}
+                  name="confirmPassword"
+                  value={values.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm Password*"
                 />
