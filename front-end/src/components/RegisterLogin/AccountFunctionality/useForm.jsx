@@ -12,7 +12,7 @@ const useForm = (callback, validateForm) => {
     phoneNumber: "",
     emailAddress: "",
     studentPassword: "",
-    repPassword: "",
+    confirmPassword: "",
   });
 
   //this is used to check errors for the sign up form

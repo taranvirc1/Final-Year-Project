@@ -41,16 +41,16 @@ function validateSignUpForm(values) {
   }
 
   //Error handling for Password
-  if (!values.password) {
-    errors.password = "Password required!";
-  } else if (values.password.length < 8) {
-    errors.password = "Password must be at least 8 characters long.";
+  if (!values.studentPassword) {
+    errors.studentPassword = "Password required!";
+  } else if (values.studentPassword.length < 8) {
+    errors.studentPassword = "Password must be at least 8 characters long.";
   }
 
   //Error handling for Confirm Password
   if (!values.confirmPassword) {
     errors.confirmPassword = "Password required!";
-  } else if (values.confirmPassword !== values.password) {
+  } else if (values.confirmPassword !== values.studentPassword) {
     errors.confirmPassword = "Passwords do not match!";
   }
 
