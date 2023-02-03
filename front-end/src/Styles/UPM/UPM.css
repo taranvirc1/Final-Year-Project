@@ -1,175 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+
+
+* {
+    border: 0px;
+    box-sizing: border-box;
+}
+
 .upm-container {
-    background-color: white;
-    width: 50%;
-    height: 100vh;
-    margin: auto;
+    min-height: 100vh;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0px auto;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+    padding-top: 3%;
 }
 
 .upm-left-side {
-    position: relative;
-    top: 10%;
-    background-color: rgb(36, 37, 37);
-    width: 25%;
+    flex-basis: 10%;
+    min-height: 100vh;
     height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
-.upm-navMenu {
-    width: 100%;
+
+.upm-navigation {
+    flex-basis: 80%;
+    min-height: 100vh;
+    max-height: 100vh;
+    position: fixed;
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
     flex-direction: column;
+}
+
+.upm-navigation li {
+    list-style: none;
+}
+
+.li-1 {
+    list-style: none;
+    margin-top: 40px;
+}
+
+.upm-item-1 {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    margin-top: auto;
+}
+
+.upm-item-1 a {
+    flex-basis: 100%;
+    width: 100%;
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-.upm-navMenu a {
-    width: 100%;
-    height: 50px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 10px;
     text-decoration: none;
-    color: white;
-    font-size: 20px;
-    font-weight: 1px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
 }
 
-.upm-navMenu a:hover {
-    border-left-color: rgb(255, 255, 255);
-    border-left-style: solid;
-    background-color: rgb(55, 56, 56);
-}
-
-.upm-title {
-    margin-left: 10px;
+.upm-log {
+    position: absolute;
+ bottom: 150px;
 }
 
 .upm-right-side {
-    position: relative;
-    top: 10%;
-    width: 75%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    flex-basis: 85%;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
 }
 
-.upm-card {
-    background-color: #f3f5f8;
-    width: 90%;
+.upm-box-1 {
+    width: 100%;
     height: fit-content;
     display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    list-style: none;
     flex-direction: column;
+}
+.upm-ver{
+    font-family: 'Poppins', sans-serif;
+    margin-left: 10px;
+}
+.upm-sp{
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    color: black;
+    justify-content: center;
+}
+.upm-card-container-1 {
+    width:80%;
+    height: fit-content;
+    display: flex;
+    align-items:flex-start;
+    justify-content: space-evenly;
+    list-style: none;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+.upm-card-container-1 h2{
+    font-family: 'Poppins', sans-serif;
+    margin-right: 20px;
 }
 
-.upm-background-avatar {
-    background-color: rgb(36, 37, 37);
-    width: 100%;
-    height: 150px;
-    display: flex;
-}
 
 .upm-avatar {
-    border-color: black;
+    background-color:rgba(105, 102, 107, 0.363);;
+    width: 150px;
+    height: 150px;
     border-radius: 100px;
-    border-width: 1px;
+    position: relative;
     border-style: solid;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    border-radius: 100px;
-    position: absolute;
-    margin: auto;
-    top: 100px;
+    border-color: rgb(110, 106, 106);
+    border-width: 1px;
 }
 
-.upm-avatar img {
-    width: 100px;
-    height: 100px;
-    display: flex;
+.upm-avatar button {
+    background-color: blueviolet;
+    position: relative;
+    top: 70%;
+    left: 75%;
     border-radius: 100px;
-}
-
-.upm-edit {
-    margin-left: auto;
-    margin-top: 10px;
-    margin-right: 10px;
-    background-color: rgb(31, 107, 207);
-    border-color: transparent;
-    padding: 5px;
-    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    border-style: solid;
+    border-color: rgb(247, 247, 247);
+    border-width: 1px;
     color: white;
     cursor: pointer;
 }
 
-.upm-info-container {
-    position: static;
-    background-color: rgb(36, 37, 37);
-    margin-top: 60px;
-    width: 95%;
+.upm-card-container-2 {
+    max-width: 1000px;
+    margin: 0 auto;
     height: fit-content;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    color: black;
-}
-
-.upm-form { 
-    display: block;
-}
-
-.upm-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     list-style: none;
-    display: flex;
     flex-direction: column;
-    width: 97%;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: 10px;
-}
+    border-top-width: 11px;
+    border-color: rgb(110, 106, 106);
+    margin-top: 50px;
 
-.upm-item label {
-    color: rgb(117, 111, 111);
-    font-size: 15px;
-    font-weight: bolder;
-    font-family: sans-serif;
-    margin-bottom: 10px;
-}
-
-.upm-item input {
-    color: rgb(117, 111, 111);
-    padding: 5px;
-    border-radius: 8px;
-    border-color: rgb(59, 56, 51);
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 13px 8px #d0d0d0;
+    border-top-color: rgb(100, 94, 94);
     border-style: solid;
-    border-width: 1px;
-    width: fit-content;
+    background-color: rgba(255, 255, 255, 0.534);
 }
 
-.upm-spacer {
+.upm-card {
+    max-width: 1000px;
+    width: 98%;
+    margin: 10px auto;
+}
+
+.upm-card h2 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.upm-card p {
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.upm-outer-form {
+    max-width: 1000px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.upm-spacer button {
-    width: 11%;
-    height: 30px;
-    margin-left: auto;
-    background-color: rgb(79, 81, 83);
-    border-color: transparent;
-    border-radius: 8px;
+.upm-form-container {
+    width: 100%;
+    max-width: 1160px;
+    margin-right: auto;
+}
+
+.upm-form-container label {
+    font-family: 'Poppins', sans-serif;
+}
+
+.upm-form-input-holder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+    width: 80%;
+}
+.upm-ic{
+    color:rgb(110, 106, 106);
+}
+.upm-form-input-holder input {
+    border: 2px solid #eee;
+    padding: 5px 10px 5px 50px;
+    font-size: 18px;
+    line-height: 30px;
+    outline: 0;
+    display: block;
+    width: 100%;
+    height: 65px;
+}
+
+.upm-form-input-holder-rad {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30%;
+}
+.upm-form-input-holder-rad input {
+    border: 2px solid #eee;
+    width:10%;
+    height: 65px;
+}
+
+.upm-form-input-holder-rad label {
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   font-weight: bolder;
+   margin-left: 20px;
+   font-size: 20px;
+}
+.upm-form-input-holder .in {
+    border: 2px solid #eee;
+    padding: 5px 10px 5px 50px;
+    font-size: 18px;
+    line-height: 30px;
+    outline: 0;
+    display: block;
+    width: 100%;
+    height: 65px;
+    padding-top: 20px;
+    padding-bottom: 200px;
+}
+
+.icon {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    font-size: 25px;
+    color: #4b00ff;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upm-form-rad {
+    max-width: 1000px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    flex-direction: column;
+}
+.upm-form {
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.upm-form-1 {
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.upm-form-2 {
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.upm-form-button-holder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80%;
+    height: fit-content;
+}
+
+.upm-form-button-holder button {
+    font-size: 18px;
+    line-height: 30px;
+    outline: 0;
+    display: block;
+    width: 40%;
+    height: 65px;
+    text-align: center;
+    border-radius: 10px;
     color: white;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.upm-del {
+    background-color: red;
+    border-color: #ffffff;
+    border-radius: 1px;
+    border-width: 1px;
+    border-style: solid;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.upm-dis {
+    background-color: gray;
+    border-color: #A12D2F;
+    border-radius: 1px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.upm-form-button-holder-2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: fit-content;
+}
+
+.upm-form-button-holder-2 button {
+    margin-right: 20px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 100px;
+}
+
+.upm-icon-sub:hover {
+    color: rgb(177, 113, 113);
+}
+
+.upm-icon-del:hover {
+    color: rgb(44, 216, 159);
+}
+
+.upm-card-container-4 {
+    max-width: 1000px;
+    margin: 0 auto;
+    height: fit-content;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    list-style: none;
+    flex-direction: column;
+    margin-top: 0px;
+}
+
+.upm-edit-button {
+    background-color: transparent;
     cursor: pointer;
 }
