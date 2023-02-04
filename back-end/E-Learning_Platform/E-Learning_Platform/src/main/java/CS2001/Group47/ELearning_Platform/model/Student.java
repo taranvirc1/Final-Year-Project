@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Students")
@@ -39,7 +40,8 @@ public class Student implements Serializable {
 	String lastName;
 	
 	@NotBlank
-	Date dateOfBirth;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	String dateOfBirth;
 	
 	@NotBlank
 	String country;
@@ -70,7 +72,7 @@ public class Student implements Serializable {
 	
 	}
 	
-	public Student(String firstName, String lastName, Date dateOfBirth, String country, String phone, String email, String password) {
+	public Student(String firstName, String lastName, String dateOfBirth, String country, String phone, String email, String password) {
 		
 		super();
 		this.firstName = firstName;
@@ -107,11 +109,11 @@ public class Student implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
