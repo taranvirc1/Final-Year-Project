@@ -98,7 +98,7 @@ function Account({ submitForm }) {
       if (no === 1) {
         weak.classList.add("active");
         text.style.display = "block";
-        text.textContent = "Your password is too week";
+        text.textContent = "Your password is too weak";
         text.classList.add("weak");
       }
       if (no === 2) {

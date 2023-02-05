@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import forgotPassword from "../../images/login-register-icons/forgot_password.svg";
 import "../../Styles/RegisterLoginStyles/ResetPassword.css";
 
@@ -48,7 +48,7 @@ function ResetPassword() {
                   type="email"
                   value={validEmail}
                   onChange={(e) => setValidEmail(e.target.value)}
-                  placeholder="Email"
+                  placeholder="Email Address*"
                 />
               </div>
               {/* Link to new password page */}

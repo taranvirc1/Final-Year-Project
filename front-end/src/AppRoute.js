@@ -21,6 +21,7 @@ import UPM from "./components/UPM/UPM";
 import Quizzes from "./components/Quizzes/Quizz";
 import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
 import Avatar from "./components/Section Avatar/Avatar";
+// import Signup from "./components/RegisterLogin/AccountFunctionality/Signup";
 function AppRoute() {
   return (
     <div>
@@ -29,6 +30,7 @@ function AppRoute() {
           <Route path="/" element={<App />}>
             <Route index element={<LandingPage />} />
             {/* route for login */}
+            {/* <Route path="/account" element={<Signup />} /> */}
             <Route path="/account" element={<Account />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/newPassword" element={<NewPassword />} />
