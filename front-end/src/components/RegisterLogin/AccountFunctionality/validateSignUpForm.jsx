@@ -1,6 +1,8 @@
 function validateSignUpForm(values) {
   let errors = {};
 
+  const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
+
   //Error handling for First Name
   if (!values.firstName.trim()) {
     errors.firstName = "First Name required!";
@@ -38,6 +40,8 @@ function validateSignUpForm(values) {
   //Error handling for Email Address
   if (!values.emailAddress) {
     errors.emailAddress = "Email Address required!";
+  } else if (!values.emailAddress.match(regexEmail)) {
+    errors.emailAddress = "Invalid email address. Try again!";
   }
 
   //Error handling for Password
