@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import registerLogo from "../../images/login-register-icons/undraw_launching_re_tomg.svg";
 import loginLogo from "../../images/login-register-icons/undraw_secure_login_pdn4.svg";
 import { Link } from "react-router-dom";
@@ -11,6 +11,35 @@ function Account({ submitForm }) {
     submitForm,
     validateSignUpForm
   );
+
+  const [validLoginAttempts, setValidLoginAttempts] = useState(0);
+  const [validEmail, setValidEmail] = useState("");
+  const [validPassword, setValidPassword] = useState("");
+  const [loginErrorMessages, setLoginErrorMessages] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState("");
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+
+    if (validLoginAttempts >= 2) {
+      setLoginErrorMessages(
+        "Maximum login attempts reached. Please try again later!"
+      );
+      return;
+    }
+
+    if (
+      validEmail === "2007048@brunel.ac.uk" &&
+      validPassword === "PassWorD20.2*2."
+    ) {
+      setLoginSuccess("You have logged in successfully!!!");
+      setLoginErrorMessages("");
+      setValidLoginAttempts(0);
+    } else {
+      setLoginErrorMessages("Incorrect email address or password!");
+      setValidLoginAttempts(validLoginAttempts + 1);
+    }
+  };
 
   const panelAnimation = () => {
     const sign_in_btn = document.querySelector("#sign-in-btn");
@@ -35,7 +64,7 @@ function Account({ submitForm }) {
   const showPass = document.querySelector(".show-pass");
   var passRegexWeak = /[a-z]/;
   var passRegexMedium = /\d+/;
-  var passRegexStrong = /.[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+  var passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
   var no;
 
   function passwordIndicator() {
@@ -115,24 +144,40 @@ function Account({ submitForm }) {
         <div className="forms-container">
           <div className="signin-signup">
             {/* Signin/login form which contains email and password */}
-            <form className="sign-in-form" noValidate>
+            <form
+              className="sign-in-form"
+              noValidate
+              onSubmit={handleLoginSubmit}
+            >
               <h2 className="form-title">Sign in</h2>
+              {loginSuccess && <p className="loginSuccess">{loginSuccess}</p>}
+              {loginErrorMessages && <p>{loginErrorMessages}</p>}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
-                <input type="text" placeholder="Email Address" />
+                <input
+                  type="text"
+                  value={validEmail}
+                  onChange={(e) => setValidEmail(e.target.value)}
+                  placeholder="Email Address"
+                />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
+                <input
+                  type="password"
+                  value={validPassword}
+                  onChange={(e) => setValidPassword(e.target.value)}
+                  placeholder="Password"
+                />
               </div>
               {/* Redirect to home page after login */}
-              <Link to="/">
-                <input
-                  type="submit"
-                  value="Login"
-                  className="account-btn solid"
-                />
-              </Link>
+              {/* <Link to="/"> */}
+              <input
+                type="submit"
+                value="Login"
+                className="account-btn solid"
+              />
+              {/* </Link> */}
               {/* Link to reset password form when user forgets password */}
               <Link to="/resetPassword" className="forgot">
                 {/* <a href="/" className="forgot"> */}
