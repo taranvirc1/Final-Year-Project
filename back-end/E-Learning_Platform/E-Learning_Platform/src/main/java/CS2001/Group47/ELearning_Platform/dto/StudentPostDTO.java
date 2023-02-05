@@ -6,13 +6,13 @@ public class StudentPostDTO {
 	
     String firstName;
     String lastName;
-    Date dateoOfBirth;
+    String dateoOfBirth;
     String country;
     String phone;
     String email;
     String password;
     
-    public StudentPostDTO(String firstName, String lastName, Date dateoOfBirth, String country, String phone,
+    public StudentPostDTO(String firstName, String lastName, String dateoOfBirth, String country, String phone,
             String email, String password) {
         super();
         this.firstName = firstName;
@@ -40,11 +40,11 @@ public class StudentPostDTO {
         this.lastName = lastName;
     }
 
-    public Date getDateoOfBirth() {
+    public String getDateoOfBirth() {
         return dateoOfBirth;
     }
 
-    public void setDateoOfBirth(Date dateoOfBirth) {
+    public void setDateoOfBirth(String dateoOfBirth) {
         this.dateoOfBirth = dateoOfBirth;
     }
 
