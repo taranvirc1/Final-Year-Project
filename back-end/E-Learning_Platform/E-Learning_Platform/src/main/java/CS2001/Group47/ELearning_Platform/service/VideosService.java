@@ -14,8 +14,8 @@ public class VideosService {
     @Autowired
    private VideosRepository videosRepository;
 
-   public List<Videos> getVideos() {
-    return (List<Videos>) videosRepository.findAll();
+   public List<Videos> getURl(Integer courseID, String videoName) {
+    return (List<Videos>) videosRepository.findURL(courseID,videoName);
    }
 
 

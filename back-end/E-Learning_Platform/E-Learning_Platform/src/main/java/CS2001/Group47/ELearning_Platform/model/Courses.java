@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "Courses")
+@Table(name = "Course")
 @EntityListeners(AuditingEntityListener.class)
 public class Courses implements Serializable {
 
@@ -30,7 +30,6 @@ public class Courses implements Serializable {
 	String courseName;
 	
 	@NotBlank
-	String courseDescription;
 
 	public Courses() {
 		super();
@@ -40,7 +39,6 @@ public class Courses implements Serializable {
 	public Courses(@NotBlank String courseName, @NotBlank String courseDescription) {
 		super();
 		this.courseName = courseName;
-		this.courseDescription = courseDescription;
 	}
 
 	public Integer getCourseID() {
@@ -59,17 +57,10 @@ public class Courses implements Serializable {
 		this.courseName = courseName;
 	}
 
-	public String getCourseDescription() {
-		return courseDescription;
-	}
-
-	public void setCourseDescription(String courseDescription) {
-		this.courseDescription = courseDescription;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Courses [courseID=" + courseID + ", courseName=" + courseName + ", courseDescription=" + courseDescription + "]";
+		return "Courses [courseID=" + courseID + ", courseName=" + courseName + "]";
 	}
 	
 }
