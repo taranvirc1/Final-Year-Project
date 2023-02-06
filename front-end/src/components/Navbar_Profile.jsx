@@ -7,22 +7,20 @@ import forumlogo from "../images/navIcons/forum.png";
 import rankinglogo from "../images/navIcons/ranking.png";
 import Loginlogo from "../images/navIcons/login.png";
 import Profilelogo from "../images/navIcons/profile.jpeg";
-import "../Styles/NavBar.css";
+import "../Styles/NavBar_Profile.css";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar_Profile() {
   //used for setting the state of the navbar menu in mobile version
   const [clicked, setClicked] = useState(false);
   return (
     <>
-    {/* Logo for website */}
+      {/* Logo for website */}
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
-          
           <Link to="/">
             <img src={Logo} alt="" style={{ width: 140 }} />
           </Link>
-          
         </div>
         {/* Menu for mobile version */}
         {/* When menu is open show cross otherwise show a hamburguer menu when closed */}
@@ -44,7 +42,6 @@ function Navbar() {
               <img src={donate} alt="donate icon" />
               Donate
             </Link>
-            
           </li>
           <li>
             {/* Link for courses page */}
@@ -52,7 +49,6 @@ function Navbar() {
               <img src={courseslogo} alt="courses icon" />
               Courses
             </Link>
-            
           </li>
 
           <li>
@@ -61,7 +57,6 @@ function Navbar() {
               <img src={quizzeslogo} alt="quizzes icon" />
               Quizzes
             </Link>
-            
           </li>
           <li>
             {/* Link for forum page */}
@@ -69,7 +64,6 @@ function Navbar() {
               <img img src={forumlogo} alt="forum icon" />
               Forum
             </Link>
-            
           </li>
 
           <li>
@@ -78,7 +72,6 @@ function Navbar() {
               <img img src={rankinglogo} alt="rankings icon" />
               Rankings
             </Link>
-            
           </li>
 
           <li>
@@ -87,20 +80,19 @@ function Navbar() {
               <img img src={Loginlogo} alt="login icon" />
               Login
             </Link>
-            
           </li>
 
-          {/* <li> */}
+          <li>
             {/* Link for profile page */}
-            {/* <Link to="UPM" className="navLink" href="#log">
+            <Link to="UPM" className="navLink" href="#log">
               <img img src={Profilelogo} alt="profile icon" />
               Profile
             </Link>
-          </li> */}
+          </li>
         </ul>
       </div>
     </>
   );
 }
 
-export default Navbar;
+export default Navbar_Profile;
