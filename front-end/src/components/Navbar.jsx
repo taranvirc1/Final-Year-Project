@@ -90,14 +90,13 @@ function Navbar() {
             
           </li>
 
-          <li>
+          {/* <li> */}
             {/* Link for profile page */}
-            <Link to="UPM" className="navLink" href="#log">
+            {/* <Link to="UPM" className="navLink" href="#log">
               <img img src={Profilelogo} alt="profile icon" />
               Profile
             </Link>
-            
-          </li>
+          </li> */}
         </ul>
       </div>
     </>
