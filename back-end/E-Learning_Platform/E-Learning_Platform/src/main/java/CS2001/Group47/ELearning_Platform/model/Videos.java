@@ -29,7 +29,7 @@ public class Videos implements Serializable{
     private String Url;
 
 	@NotBlank
-	private String topicName;
+	private String videoName;
 
 	
 	
@@ -47,7 +47,7 @@ public class Videos implements Serializable{
 	public Videos(@NotBlank String Url, @NotBlank String topicName) {
 		super();
 		this.Url = Url;
-		this.topicName = topicName;
+		this.videoName = videoName;
 	}
 
 
@@ -70,18 +70,18 @@ public class Videos implements Serializable{
 
 
 	public String getTopicName() {
-		return this.topicName;
+		return this.videoName;
 	}
 
-	public void setTopicName(String topicName) {
-		this.topicName = topicName;
+	public void setTopicName(String videoName) {
+		this.videoName = videoName;
 	}
 
 	
 
 	@Override
 	public String toString() {
-		return "Videos [videoID=" + videoID + ", Url=" + Url + ", topicName=" + topicName + "]";
+		return "Videos [videoID=" + videoID + ", Url=" + Url + ", videoName=" + videoName + "]";
 	}
 	
       
