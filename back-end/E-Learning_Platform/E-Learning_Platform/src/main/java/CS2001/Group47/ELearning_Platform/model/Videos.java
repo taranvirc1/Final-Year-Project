@@ -33,9 +33,9 @@ public class Videos implements Serializable{
 
 	
 	
-    @ManyToOne
-	@Column(name = "courseID")
-    private Courses courses;
+    // @ManyToOne
+	// @Column(name = "courseID")
+    // private Courses courses;
 
 	
 	public Videos() {

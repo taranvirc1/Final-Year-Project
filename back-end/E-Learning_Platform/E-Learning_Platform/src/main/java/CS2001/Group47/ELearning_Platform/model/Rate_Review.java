@@ -87,13 +87,13 @@ public class Rate_Review implements Serializable {
 		this.reviewDesc = reviewDesc;
 	}
 
-	@ManyToOne
-	@Column(name = "courseID")
-	private Courses courses;
+	// @ManyToOne
+	// @Column(name = "courseID")
+	// private Courses courses;
 	
-	@ManyToOne
-	@Column(name = "studentID")
-    private Student student;
+	// @ManyToOne
+	// @Column(name = "studentID")
+    // private Student student;
 
 
 @Override
