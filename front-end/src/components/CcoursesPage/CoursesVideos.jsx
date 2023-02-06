@@ -314,7 +314,7 @@ function lightbox_close() {
             
           );
         })}
-
+<p> Rating is {rating}</p>
       </div>
       <textarea Classname="textReview" id="" ></textarea>
 
