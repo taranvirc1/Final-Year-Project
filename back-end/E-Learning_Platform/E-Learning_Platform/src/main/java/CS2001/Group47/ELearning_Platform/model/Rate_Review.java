@@ -29,20 +29,78 @@ public class Rate_Review implements Serializable {
 	Integer ratingID;
 	
 	@NotBlank
-	int rankingStars;
+	int ratingStars;
 	
 	@NotBlank
 	double averageRating;
+
 	
 	@NotBlank
 	String reviewDesc;
+
 	
-//	@ManyToOne
-//	@Column(name = "Courses")
-//	private Courses courses;
-//	
-//	@ManyToOne
-//	@Column(name = "Student")
-//	private Student student;
+
+	public Rate_Review() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Rate_Review(@NotBlank int ratingStars, @NotBlank double averageRating,@NotBlank String reviewDesc) {
+		super();
+		this.ratingStars = ratingStars;
+		this.averageRating = averageRating;
+		this.reviewDesc = reviewDesc;
+
+	}
+
+
+	public Integer getRatingID() {
+		return this.ratingID;
+	}
+
+	public void setRatingID(Integer ratingID) {
+		this.ratingID = ratingID;
+	}
+
+	public int getRatingStars() {
+		return this.ratingStars;
+	}
+
+	public void setRatingStars(int ratingStars) {
+		this.ratingStars = ratingStars;
+	}
+	
+	public double getAverageRating() {
+		return this.averageRating;
+	}
+
+	public void setAverageRating(double averageRating) {
+		this.averageRating = averageRating;
+	}
+	
+	public String getReviewDesc() {
+		return this.reviewDesc;
+	}
+
+	public void setReviewDesc(String reviewDesc) {
+		this.reviewDesc = reviewDesc;
+	}
+
+	@ManyToOne
+	@Column(name = "courseID")
+	private Courses courses;
+	
+	@ManyToOne
+	@Column(name = "studentID")
+    private Student student;
+
+
+@Override
+	public String toString() {
+		return "Rate_Review [ratingID=" + ratingID + ", ratingStars=" + ratingStars + ", averageRating=" + averageRating + ", reviewDesc=" + averageRating +"]";
+	}
+	
+      
 
 }
