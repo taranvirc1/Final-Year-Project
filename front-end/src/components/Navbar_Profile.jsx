@@ -7,7 +7,7 @@ import forumlogo from "../images/navIcons/forum.png";
 import rankinglogo from "../images/navIcons/ranking.png";
 import Loginlogo from "../images/navIcons/login.png";
 import Profilelogo from "../images/navIcons/profile.jpeg";
-import "../Styles/NavBar.css";
+import "../Styles/NavBar_Profile.css";
 import { Link } from "react-router-dom";
 
 function Navbar_Profile() {
