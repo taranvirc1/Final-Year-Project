@@ -13,7 +13,12 @@ public class VideosService {
 
     @Autowired
    private VideosRepository videosRepository;
+    
 
+    
+    public List<Videos>  findUrlByCourseAndVideoName(String videoName, Integer courseID){
+      return videosRepository.findAllByVideoNameAndCourses_CourseID(videoName,courseID);
+    }
    
 	
 
