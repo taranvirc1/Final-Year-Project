@@ -4,6 +4,7 @@ import loginLogo from "../../images/login-register-icons/undraw_secure_login_pdn
 import { Link } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/Account.css";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 // import useForm from "./AccountFunctionality/useForm";
 // import validateSignUpForm from "./AccountFunctionality/validateSignUpForm";
 
@@ -26,6 +27,7 @@ function AccountTest() {
   const [vPassword, setVPassword] = useState("");
   const [vConfirmPassword, setVConfirmPassword] = useState("");
   const [regSuccess, setRegSuccess] = useState(false);
+  const navigate = Navigate();
 
   // let errors = {};
 
@@ -102,6 +104,21 @@ function AccountTest() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+
+    try {
+      axios.get("http://localhost:8080/user", validEmail, validPassword).then(
+        () => {
+          navigate("/");
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      alert("Invalid Login!!!");
+    }
 
     if (validLoginAttempts >= 2) {
       setLoginErrorMessages(
