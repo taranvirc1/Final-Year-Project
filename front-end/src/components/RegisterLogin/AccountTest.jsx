@@ -25,9 +25,18 @@ function AccountTest() {
   const [vEmail, setVEmail] = useState("");
   const [vPassword, setVPassword] = useState("");
   const [vConfirmPassword, setVConfirmPassword] = useState("");
+  const [regSuccess, setRegSuccess] = useState(false);
+
+  // let errors = {};
 
   // const validateRegistration = () => {
-  //   if()
+  //   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
+
+  //   if (!firstName.trim()) {
+  //     errors.firstName = "First Name Required!";
+  //   }
+
+  //   return errors;
   // };
 
   //fields in sign up form
@@ -45,24 +54,27 @@ function AccountTest() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = {
-      firstName,
-      lastname,
-      dateOfBirth,
-      country,
-      phone,
-      email,
-      password,
-    };
     await axios
-      .post("http://localhost:8080/user", JSON.stringify({ user }), {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
+      .post("http://localhost:8080/user", {
+        // JSON.stringify({
+        firstName: firstName,
+        lastName: lastname,
+        dateOfBirth: dateOfBirth,
+        country: country,
+        phone: phone,
+        email: email,
+        password: password,
       })
+      // {
+      //   headers: { "Content-Type": "application/json" },
+      //   withCredentials: true,
+      // }
+      // )
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
           alert("Registered Successfully!!!");
+          setRegSuccess(true);
         }
       })
       .then(() => {
@@ -76,22 +88,10 @@ function AccountTest() {
         setConfirmPassword("");
       })
       .catch((error) => {
-        console.log(user);
         console.log(error);
         alert("Registration not sent!!!");
       });
-    //change the value to true
-    // setIsRegistered(true);
   };
-
-  // const handleChange = (e) => {
-  //   //get the value from user input
-  //   const { name, value } = e.target;
-  //   setValues({
-  //     ...values,
-  //     [name]: value,
-  //   });
-  // };
 
   //Login
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
@@ -288,6 +288,7 @@ function AccountTest() {
                   placeholder="First Name*"
                 />
               </div>
+              {/* {errors.firstName && <p>{errors.firstName}</p>} */}
               {/* {errors.firstName && <p>{errors.firstName}</p>} */}
               <div className="input-field">
                 <i className="fas fa-user"></i>
