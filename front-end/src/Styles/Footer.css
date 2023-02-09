@@ -1,11 +1,16 @@
 .footer {
-    background-color: rgb(55, 50, 53);
-    position: sticky;
+
+   position: relative;
+  background: #05b3a4;
+  min-height: 100px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top:20%;
     top: 100%;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
+   
     display: flex;
     flex-flow: row wrap;
     padding: 50px 0 35px 10%;
@@ -22,7 +27,7 @@
 }
 
 .footer-about-us {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .footer-about-us,
@@ -63,7 +68,7 @@
 
  .footer-container-right a:hover {
     text-decoration: underline;
-    color: #999;
+    color:blue;
  }
 
  .h-box {
@@ -73,9 +78,9 @@
 
  .contact,
  .link {
-    display: inline-block;
+    display: inline;
     list-style: none;
-    color: #999;
+    color: white;
  }
 
  .social {
@@ -84,25 +89,83 @@
  }
 
  .social a {
-    color: #999;
+    color: white;
     font-size: 40px;
  }
 
 .footer-container-bottom {
     text-align: center;
-    color: #999;
+    color: white;
     padding-top: 50px;
     margin-left: -12%;
 }
 
 .footer-container-left p {
     padding-right: 20%;
-    color: #999;
+    color: white;
 }
 
 .footer-container-left img {
-    margin-left: -2px;
+   
 }
+
+.animation {
+    position: absolute;
+    top: -70px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url("https://i.imgur.com/ZAts69f.png");
+    background-size: 1000px 100px;
+  }
+  
+  .animation#animation1 {
+    z-index: 1000;
+    opacity: 1;
+    bottom: 0;
+    animation: animateWaves 4s linear infinite;
+  }
+  
+  .animation#animation2 {
+    z-index: 999;
+    opacity: 0.5;
+    bottom: 10px;
+    animation: animate 4s linear infinite !important;
+  }
+  
+  .animation#animation3 {
+    z-index: 1000;
+    opacity: 0.2;
+    bottom: 15px;
+    animation: animateWaves 3s linear infinite;
+  }
+  .animation#animation4{
+    z-index: 999;
+    opacity: 0.7;
+    bottom: 20px;
+    animation: animate 3s linear infinite !important;
+  }
+  
+  
+  
+  @keyframes animateWaves {
+    0% {
+      background-position-x: 1000px;
+    }
+    100% {
+      background-positon-x: 0px;
+    }
+  }
+  @keyframes animate {
+    0% {
+      background-position-x: -1000px;
+    }
+    100% {
+      background-positon-x: 0px;
+    }
+  }
+
+
 
 @media screen and (min-width: 600px) {
     .footer-container-right > * {

@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../images/navIcons/logo.png";
+import logo from "../images/navIcons/Code4ALL Logo.png";
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -99,6 +99,14 @@ function Footer() {
           </ul>
         </li>
       </ul>
+
+
+    <div className="animations">
+		<div className="animation" id="animation1"></div>
+		<div className="animation" id="animation2"></div>
+		<div className="animation" id="animation3"></div>
+		<div className="animation4" id="animation4"></div>
+	</div>
 
       <div className="footer-container-bottom">
         <p>All Rights Reserved by &copy;Code4All 2022</p>
