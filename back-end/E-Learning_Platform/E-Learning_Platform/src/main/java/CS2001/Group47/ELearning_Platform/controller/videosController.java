@@ -2,6 +2,7 @@ package CS2001.Group47.ELearning_Platform.controller;
 
 import java.util.List;
 
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,10 @@ public class videosController {
         @RequestMapping("/videos")
 public Iterable<Videos> getVideos() {
     return videosRepository.findAllByOrderByVideoNameAsc();
+}
+@RequestMapping("/videos/{videoName}/{courseID}")
+public Iterable<Videos> getVideosbyName( @PathVariable("videoName")String videoName,@PathVariable("courseID") Integer courseID) {
+    return videosRepository.findAllByVideoNameAndCourses_CourseID(videoName, courseID) ;
 }
 }
 

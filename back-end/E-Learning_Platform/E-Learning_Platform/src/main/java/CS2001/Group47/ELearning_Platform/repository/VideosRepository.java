@@ -12,5 +12,7 @@ import CS2001.Group47.ELearning_Platform.model.Videos;
 @Repository
 public interface VideosRepository extends CrudRepository<Videos, Integer> {
    List<Videos> findAllByOrderByVideoNameAsc();
+   List<Videos> findAllByVideoNameAndCourses_CourseID(String videoName,Integer courseID);
 
+   
 }
