@@ -5,14 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Rate_Review")
@@ -22,26 +26,33 @@ public class Rate_Review implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ratingid")
 	Integer ratingID;
 	
 	@NotBlank
+	@Column(name="rating_stars")
 	int ratingStars;
 	
 	@NotBlank
+	@Column(name="average_rating")
 	double averageRating;
 
 	
 	@NotBlank
+	@Column(name="review_desc")
 	String reviewDesc;
 
-	
+
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "course")
+	@JsonIgnore
+	private Courses courses;
+
 
 	public Rate_Review() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -87,9 +98,7 @@ public class Rate_Review implements Serializable {
 		this.reviewDesc = reviewDesc;
 	}
 
-	// @ManyToOne
-	// @Column(name = "courseID")
-	// private Courses courses;
+	
 	
 	// @ManyToOne
 	// @Column(name = "studentID")
