@@ -56,7 +56,7 @@ public class ELearningPlatformApplication {
             Videos javaVideos = new Videos("Youtube", "Mustang", Java);
             videosrepository.save(javaVideos);
             Videos pythonVideos = new Videos("Nissan", "Leaf",  Python);
-            videosrepository.save(pythonVideos);*/
+            videosrepository.save(pythonVideos);/* */
            
 		};
 	}
