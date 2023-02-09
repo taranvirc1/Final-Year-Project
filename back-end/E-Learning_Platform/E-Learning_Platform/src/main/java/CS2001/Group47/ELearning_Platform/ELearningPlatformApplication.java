@@ -62,8 +62,8 @@ public class ELearningPlatformApplication {
             Videos pythonVideos = new Videos("Nissan", "Leaf",  Python);
             videosrepository.save(pythonVideos);/* */
 
-			Student student1 = new Student("Johann", "Cardona", "2001-06-06", "Colombia", "07553266228", "johcar20@hotmail.com", "1234567890");
-			studentRepository.save(student1);
+			// Student student1 = new Student("Johann", "Cardona", "2001-06-06", "Colombia", "07553266228", "johcar20@hotmail.com", "1234567890");
+			// studentRepository.save(student1);
 
 			System.out.println("Let's inspect the beans provided by Spring Boot:");
 						String[] beanNames = ctx.getBeanDefinitionNames();
