@@ -55,7 +55,10 @@ function AccountTest() {
       password,
     };
     await axios
-      .post("http://localhost:8080/user", user)
+      .post("http://localhost:8080/user", JSON.stringify({ user }), {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
