@@ -1,17 +1,22 @@
 package CS2001.Group47.ELearning_Platform.model;
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "videos")
@@ -19,45 +24,61 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 public class Videos implements Serializable{
 
-	private static final long serialVersionUID = 1L;
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer videoID;
+	@Column(name="videoid")
+	private Integer id;
 
 	@NotBlank
+	@Column(name="url")
     private String Url;
 
 	@NotBlank
+	@Column(name="videos_name")
 	private String videoName;
 
 	
 	
-    // @ManyToOne
-	// @Column(name = "courseID")
-    // private Courses courses;
+    @ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "course")
+	@JsonIgnore
+
+    private Courses courses;
 
 	
+	
+
 	public Videos() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Videos(@NotBlank String Url, @NotBlank String topicName) {
+	public Videos(@NotBlank String Url, @NotBlank String videoName, Courses courses ) {
 		super();
 		this.Url = Url;
 		this.videoName = videoName;
+		this.courses = courses; 
+	}
+
+
+	public Courses getCourse() {
+		return courses;
+	}
+
+
+	public void setCourses(Courses course) {
+		this.courses= courses;
 	}
 
 
 
 	public Integer getVideoID() {
-		return this.videoID;
+		return this.id;
 	}
 
-	public void setVideoID(Integer videoID) {
-		this.videoID = videoID;
+	public void setVideoID(Integer id) {
+		this.id = id;
 	}
 
 	public String getUrl() {
@@ -69,11 +90,11 @@ public class Videos implements Serializable{
 	}
 
 
-	public String getTopicName() {
+	public String getVideoName() {
 		return this.videoName;
 	}
 
-	public void setTopicName(String videoName) {
+	public void setVideoName(String videoName) {
 		this.videoName = videoName;
 	}
 
@@ -81,7 +102,7 @@ public class Videos implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Videos [videoID=" + videoID + ", Url=" + Url + ", videoName=" + videoName + "]";
+		return "Videos [videoID=" + id + ", Url=" + Url + ", videoName=" + videoName +", course="+ courses+"]";
 	}
 	
       
