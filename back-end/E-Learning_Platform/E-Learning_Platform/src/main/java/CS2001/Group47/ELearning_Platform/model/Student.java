@@ -20,7 +20,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "students_2007048")
+@Table(name = "student")
 @EntityListeners(AuditingEntityListener.class)
 public class Student implements Serializable {
 
