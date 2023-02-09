@@ -9,8 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-// import org.springframework.web.servlet.config.annotation.CorsRegistry;
-// import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import CS2001.Group47.ELearning_Platform.model.Courses;
 import CS2001.Group47.ELearning_Platform.model.Videos;
@@ -25,18 +25,18 @@ public class ELearningPlatformApplication {
 		SpringApplication.run(ELearningPlatformApplication.class, args);
 	}
 
-	// @Bean
-	// public WebMvcConfigurer corsConfigurer() {
-	// 	return new WebMvcConfigurer() {
-	// 		@Override
-	// 		public void addCorsMappings(CorsRegistry registry) {
-	// 			registry.addMapping("/**")
-	// 			.allowedOrigins("http://localhost:3000")
-	// 			.allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS")
-	// 			.allowCredentials(true);
-	// 		}
-	// 	};
-	// }
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+				.allowedOrigins("http://localhost:3000")
+				.allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS")
+				.allowCredentials(true);
+			}
+		};
+	}
 	@Autowired 
         private CoursesRepository coursesrepository;
 
@@ -44,7 +44,7 @@ public class ELearningPlatformApplication {
         private VideosRepository videosrepository;
   
 	@Bean
-	public CommandLineRunner commandLineRunner( ) {
+	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 			/*Courses Java = new Courses("Java");
             Courses Python = new Courses("Mary");
@@ -57,6 +57,13 @@ public class ELearningPlatformApplication {
             videosrepository.save(javaVideos);
             Videos pythonVideos = new Videos("Nissan", "Leaf",  Python);
             videosrepository.save(pythonVideos);/* */
+
+			System.out.println("Let's inspect the beans provided by Spring Boot:");
+						String[] beanNames = ctx.getBeanDefinitionNames();
+					Arrays.sort(beanNames);
+					for (String beanName : beanNames) {
+						System.out.println(beanName);
+					}
            
 		};
 	}
