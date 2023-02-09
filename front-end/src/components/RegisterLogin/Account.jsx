@@ -6,9 +6,8 @@ import "../../Styles/RegisterLoginStyles/Account.css";
 import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
 
-function Account({ submitForm }) {
+function Account({ }) {
   const { handleChange, values, handleSubmit, errors } = useForm(
-    submitForm,
     validateSignUpForm
   );
 
@@ -220,7 +219,7 @@ function Account({ submitForm }) {
                 <i className="fas fa-calendar-alt"></i>
                 <input
                   className="date"
-                  type="date"
+                  type="text"
                   name="dateOfBirth"
                   value={values.dateOfBirth}
                   onChange={handleChange}
