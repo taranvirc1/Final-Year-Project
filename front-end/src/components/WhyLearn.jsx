@@ -12,7 +12,7 @@ export default function Whylearn() {
       <div className="box">
         <div className="card">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="https://media2.giphy.com/media/RbDKaczqWovIugyJmW/giphy.gif?cid=ecf05e470rbsi337vv94s2pqydjn7dzqudotfrfnzbcsedf0&rid=giphy.gif&ct=g"
             width="50"
             height="50"
             fill="white"
@@ -29,7 +29,7 @@ export default function Whylearn() {
         {/* Card number two */}
         <div className="card">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="https://media2.giphy.com/media/RbDKaczqWovIugyJmW/giphy.gif?cid=ecf05e470rbsi337vv94s2pqydjn7dzqudotfrfnzbcsedf0&rid=giphy.gif&ct=g"
             width="50"
             height="50"
             fill="white"
