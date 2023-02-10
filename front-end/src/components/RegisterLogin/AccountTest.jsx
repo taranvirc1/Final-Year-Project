@@ -3,14 +3,99 @@ import registerLogo from "../../images/login-register-icons/undraw_launching_re_
 import loginLogo from "../../images/login-register-icons/undraw_secure_login_pdn4.svg";
 import { Link } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/Account.css";
-import useForm from "./AccountFunctionality/useForm";
-import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+// import useForm from "./AccountFunctionality/useForm";
+// import validateSignUpForm from "./AccountFunctionality/validateSignUpForm";
 
-function Account() {
-  const { handleChange, values, handleSubmit, errors } = useForm(
-    validateSignUpForm
-  );
+function AccountTest() {
+  //Registration
+  const [firstName, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [country, setCountry] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [vFirstName, setVFirstName] = useState("");
+  const [vLastname, setVLastName] = useState("");
+  const [vDateOfBirth, setVDateOfBirth] = useState("");
+  const [vCountry, setVCountry] = useState("");
+  const [vPhone, setVPhone] = useState("");
+  const [vEmail, setVEmail] = useState("");
+  const [vPassword, setVPassword] = useState("");
+  const [vConfirmPassword, setVConfirmPassword] = useState("");
+  const [regSuccess, setRegSuccess] = useState(false);
+  const navigate = Navigate();
 
+  // let errors = {};
+
+  // const validateRegistration = () => {
+  //   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
+
+  //   if (!firstName.trim()) {
+  //     errors.firstName = "First Name Required!";
+  //   }
+
+  //   return errors;
+  // };
+
+  //fields in sign up form
+  //values set to empty
+  // const [values, setValues] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   dateOfBirth: "",
+  //   country: "",
+  //   phone: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:8080/user", {
+        // JSON.stringify({
+        firstName: firstName,
+        lastName: lastname,
+        dateOfBirth: dateOfBirth,
+        country: country,
+        phone: phone,
+        email: email,
+        password: password,
+      })
+      // {
+      //   headers: { "Content-Type": "application/json" },
+      //   withCredentials: true,
+      // }
+      // )
+      .then((response) => {
+        console.log(response);
+        if (response.status === 201) {
+          alert("Registered Successfully!!!");
+          setRegSuccess(true);
+        }
+      })
+      .then(() => {
+        setFirstName("");
+        setLastName("");
+        setDateOfBirth("");
+        setCountry("");
+        setPhone("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Registration not sent!!!");
+      });
+  };
+
+  //Login
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
   const [validEmail, setValidEmail] = useState("");
   const [validPassword, setValidPassword] = useState("");
@@ -19,6 +104,21 @@ function Account() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+
+    try {
+      axios.get("http://localhost:8080/user", validEmail, validPassword).then(
+        () => {
+          navigate("/");
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      alert("Invalid Login!!!");
+    }
 
     if (validLoginAttempts >= 2) {
       setLoginErrorMessages(
@@ -197,77 +297,92 @@ function Account() {
                 <i className="fas fa-user"></i>
                 <input
                   type="text"
-                  name="firstName"
-                  value={values.firstName}
-                  onChange={handleChange}
+                  // name="firstName"
+                  // value={values.firstName}
+                  // onChange={handleChange}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder="First Name*"
                 />
               </div>
-              {errors.firstName && <p>{errors.firstName}</p>}
+              {/* {errors.firstName && <p>{errors.firstName}</p>} */}
+              {/* {errors.firstName && <p>{errors.firstName}</p>} */}
               <div className="input-field">
                 <i className="fas fa-user"></i>
                 <input
                   type="text"
-                  name="lastName"
-                  value={values.lastName}
-                  onChange={handleChange}
+                  // name="lastName"
+                  // value={values.lastName}
+                  // onChange={handleChange}
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
                   placeholder="Last Name*"
                 />
               </div>
-              {errors.lastName && <p>{errors.lastName}</p>}
+              {/* {errors.lastName && <p>{errors.lastName}</p>} */}
               <div className="input-field">
                 <i className="fas fa-calendar-alt"></i>
                 <input
                   className="date"
                   type="text"
-                  name="dateOfBirth"
-                  value={values.dateOfBirth}
-                  onChange={handleChange}
+                  // name="dateOfBirth"
+                  // value={values.dateOfBirth}
+                  // onChange={handleChange}
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
                   placeholder="Date of Birth*"
                 />
               </div>
-              {errors.dateOfBirth && <p>{errors.dateOfBirth}</p>}
+              {/* {errors.dateOfBirth && <p>{errors.dateOfBirth}</p>} */}
               <div className="input-field">
                 <i className="fas fa-globe-americas"></i>
                 <input
                   type="text"
-                  name="country"
-                  value={values.country}
-                  onChange={handleChange}
+                  // name="country"
+                  // value={values.country}
+                  // onChange={handleChange}
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
                   placeholder="Country*"
                 />
               </div>
-              {errors.country && <p>{errors.country}</p>}
+              {/* {errors.country && <p>{errors.country}</p>} */}
               <div className="input-field">
                 <i className="fas fa-phone"></i>
                 <input
                   type="text"
-                  name="phoneNumber"
-                  value={values.phoneNumber}
-                  onChange={handleChange}
+                  // name="phone"
+                  // value={values.phone}
+                  // onChange={handleChange}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder="Phone Number*"
                 />
               </div>
-              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+              {/* {errors.phoneNumber && <p>{errors.phoneNumber}</p>} */}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
                   type="email"
-                  name="emailAddress"
-                  value={values.emailAddress}
-                  onChange={handleChange}
+                  // name="email"
+                  // value={values.email}
+                  // onChange={handleChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email*"
                 />
               </div>
-              {errors.emailAddress && <p>{errors.emailAddress}</p>}
+              {/* {errors.emailAddress && <p>{errors.emailAddress}</p>} */}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
                   className="pass"
                   type="password"
-                  name="studentPassword"
-                  value={values.studentPassword}
-                  onChange={handleChange}
+                  // name="password"
+                  // value={values.password}
+                  // onChange={handleChange}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   onKeyUp={passwordIndicator}
                   placeholder="Password*"
                 />
@@ -279,18 +394,20 @@ function Account() {
                 <span className="strong"></span>
               </div>
               <div className="pass-text">Yours password is too weak</div>
-              {errors.studentPassword && <p>{errors.studentPassword}</p>}
+              {/* {errors.studentPassword && <p>{errors.studentPassword}</p>} */}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
                   type="password"
-                  name="confirmPassword"
-                  value={values.confirmPassword}
-                  onChange={handleChange}
+                  // name="confirmPassword"
+                  // value={values.confirmPassword}
+                  // onChange={handleChange}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password*"
                 />
               </div>
-              {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+              {/* {errors.confirmPassword && <p>{errors.confirmPassword}</p>} */}
               {/* Link to confirmation page after sign up */}
               {/* <Link to="/confirmAccount"> */}
               <input type="submit" className="account-btn" value="Sign up" />
@@ -343,4 +460,4 @@ function Account() {
   );
 }
 
-export default Account;
+export default AccountTest;
