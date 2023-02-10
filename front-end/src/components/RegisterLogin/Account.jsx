@@ -7,9 +7,8 @@ import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
 
 function Account() {
-  const { handleChange, values, handleSubmit, errors } = useForm(
-    validateSignUpForm
-  );
+  const { handleChange, values, handleSubmit, errors } =
+    useForm(validateSignUpForm);
 
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
   const [validEmail, setValidEmail] = useState("");
@@ -242,31 +241,31 @@ function Account() {
                 <i className="fas fa-phone"></i>
                 <input
                   type="text"
-                  name="phoneNumber"
-                  value={values.phoneNumber}
+                  name="phone"
+                  value={values.phone}
                   onChange={handleChange}
                   placeholder="Phone Number*"
                 />
               </div>
-              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+              {errors.phone && <p>{errors.phone}</p>}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
                   type="email"
-                  name="emailAddress"
-                  value={values.emailAddress}
+                  name="email"
+                  value={values.email}
                   onChange={handleChange}
                   placeholder="Email*"
                 />
               </div>
-              {errors.emailAddress && <p>{errors.emailAddress}</p>}
+              {errors.email && <p>{errors.email}</p>}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
                   className="pass"
                   type="password"
-                  name="studentPassword"
-                  value={values.studentPassword}
+                  name="password"
+                  value={values.password}
                   onChange={handleChange}
                   onKeyUp={passwordIndicator}
                   placeholder="Password*"
@@ -279,7 +278,7 @@ function Account() {
                 <span className="strong"></span>
               </div>
               <div className="pass-text">Yours password is too weak</div>
-              {errors.studentPassword && <p>{errors.studentPassword}</p>}
+              {errors.password && <p>{errors.password}</p>}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
