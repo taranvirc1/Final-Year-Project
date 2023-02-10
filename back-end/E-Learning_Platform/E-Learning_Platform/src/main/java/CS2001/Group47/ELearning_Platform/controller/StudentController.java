@@ -36,19 +36,20 @@ public class StudentController {
         //StudentDTO has null attributes
         if(newStudentDTO.getFirstName() == null ||
         newStudentDTO.getLastName() == null ||
-        newStudentDTO.getDateoOfBirth() == null ||
+        newStudentDTO.getDateOfBirth() == null ||
         newStudentDTO.getCountry() == null ||
         newStudentDTO.getPhone() == null ||
         newStudentDTO.getEmail() == null ||
         newStudentDTO.getPassword() == null) {
 
+            System.out.println(newStudentDTO.toString());
             //Return response entity with error and BAD REQUEST status
             return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
 
         }
 
         //Else create a student with DTO
-        Student newStudent = new Student(newStudentDTO.getFirstName(), newStudentDTO.getLastName(), newStudentDTO.getDateoOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(), newStudentDTO.getEmail(), newStudentDTO.getPassword());
+        Student newStudent = new Student(newStudentDTO.getFirstName(), newStudentDTO.getLastName(), newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(), newStudentDTO.getEmail(), newStudentDTO.getPassword());
         //Add student through StudentService
         studentService.addStudent(newStudent);
 

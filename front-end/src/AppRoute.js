@@ -32,8 +32,8 @@ function AppRoute() {
             <Route index element={<LandingPage />} />
             {/* route for login */}
             {/* <Route path="/account" element={<Signup />} /> */}
-            {/* <Route path="/account" element={<Account />} /> */}
-            <Route path="/account" element={<AccountTest />} />
+            <Route path="/account" element={<Account />} />
+            {/* <Route path="/account" element={<AccountTest />} /> */}
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/newPassword" element={<NewPassword />} />
             <Route path="/confirmAccount" element={<ConfirmAccount />} />

@@ -40,7 +40,7 @@ public class Student implements Serializable {
 	String lastName;
 	
 	@NotBlank
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	String dateOfBirth;
 	
 	@NotBlank
