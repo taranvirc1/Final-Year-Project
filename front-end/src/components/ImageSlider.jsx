@@ -16,6 +16,7 @@ const SliderData = [
   {
     image:
       "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068673781821/3.png",
+      Text:"test",
   },
   { image: Gif },
   {
