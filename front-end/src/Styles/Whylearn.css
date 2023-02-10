@@ -48,7 +48,7 @@
 	height: 365px;
 	width: 335px;
 	padding: 20px 35px;
-	background: #357960;
+	background: linear-gradient(147deg,#3f39fe 0%, #5956ad 74%);
 	margin: 15px;
 	position: relative;
 	overflow: hidden;
