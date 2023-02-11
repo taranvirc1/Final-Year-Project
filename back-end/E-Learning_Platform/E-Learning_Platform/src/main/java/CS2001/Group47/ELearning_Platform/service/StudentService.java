@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.management.ServiceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
@@ -60,9 +61,9 @@ public class StudentService {
 	}
 
 	public void updatePassword(Student student, String newPassword) {
-		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		// String encodedPassword = passwordEncoder.encode(newPassword);
-		// student.setPassword(encodedPassword);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(newPassword);
+		student.setPassword(encodedPassword);
 
 		student.setResetPasswordToken(null);
 		studentRepository.save(student);
