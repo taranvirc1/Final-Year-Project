@@ -1,7 +1,5 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
-import java.util.Date;
-
 public class StudentPostDTO {
 	
     String firstName;

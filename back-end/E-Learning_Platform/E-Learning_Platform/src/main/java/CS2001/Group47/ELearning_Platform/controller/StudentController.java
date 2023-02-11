@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,14 +43,18 @@ public class StudentController {
         newStudentDTO.getEmail() == null ||
         newStudentDTO.getPassword() == null) {
 
+            // This is for testing purposes
             System.out.println(newStudentDTO.toString());
             //Return response entity with error and BAD REQUEST status
             return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
 
         }
 
+        // Create password encoder object
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         //Else create a student with DTO
-        Student newStudent = new Student(newStudentDTO.getFirstName(), newStudentDTO.getLastName(), newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(), newStudentDTO.getEmail(), newStudentDTO.getPassword());
+        Student newStudent = new Student(newStudentDTO.getFirstName(), newStudentDTO.getLastName(), newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(), newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()));
         //Add student through StudentService
         studentService.addStudent(newStudent);
 
