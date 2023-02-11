@@ -5,38 +5,66 @@ import { Link } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/Account.css";
 import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
+import axios from "axios";
 
 function Account() {
   const { handleChange, values, handleSubmit, errors } =
     useForm(validateSignUpForm);
 
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
-  const [validEmail, setValidEmail] = useState("");
-  const [validPassword, setValidPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loginErrorMessages, setLoginErrorMessages] = useState("");
   const [loginSuccess, setLoginSuccess] = useState("");
+  const baseUrl = "http://localhost:8080/login";
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    if (validLoginAttempts >= 2) {
-      setLoginErrorMessages(
-        "Maximum login attempts reached. Please try again later!"
-      );
-      return;
-    }
+    axios
+      .post(baseUrl, { email, password })
+      .then((res) => {
+        if (res.status === 200) {
+          const token = res.headers.authorization.split(" ")[1];
+          if (token !== null) {
+            console.log(res);
+            console.log(token);
+            sessionStorage.setItem("jwt", token);
+            setLoginSuccess("You have logged in successfully");
+          } else {
+            alert("Failed token!!!");
+          }
+        } else {
+          alert("Login unsuccessful!!!");
+        }
+      })
+      .then(() => {
+        setEmail("");
+        setPassword("");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("PROBLEM WITH LOGIN!!!");
+      });
 
-    if (
-      validEmail === "2007048@brunel.ac.uk" &&
-      validPassword === "PassWorD20.2*2."
-    ) {
-      setLoginSuccess("You have logged in successfully!!!");
-      setLoginErrorMessages("");
-      setValidLoginAttempts(0);
-    } else {
-      setLoginErrorMessages("Incorrect email address or password!");
-      setValidLoginAttempts(validLoginAttempts + 1);
-    }
+    // if (validLoginAttempts >= 2) {
+    //   setLoginErrorMessages(
+    //     "Maximum login attempts reached. Please try again later!"
+    //   );
+    //   return;
+    // }
+
+    // if (
+    //   validEmail === "2007048@brunel.ac.uk" &&
+    //   validPassword === "PassWorD20.2*2."
+    // ) {
+    //   setLoginSuccess("You have logged in successfully!!!");
+    //   setLoginErrorMessages("");
+    //   setValidLoginAttempts(0);
+    // } else {
+    //   setLoginErrorMessages("Incorrect email address or password!");
+    //   setValidLoginAttempts(validLoginAttempts + 1);
+    // }
   };
 
   const panelAnimation = () => {
@@ -154,8 +182,8 @@ function Account() {
                 <i className="fas fa-envelope"></i>
                 <input
                   type="text"
-                  value={validEmail}
-                  onChange={(e) => setValidEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address"
                 />
               </div>
@@ -163,8 +191,8 @@ function Account() {
                 <i className="fas fa-lock"></i>
                 <input
                   type="password"
-                  value={validPassword}
-                  onChange={(e) => setValidPassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                 />
               </div>

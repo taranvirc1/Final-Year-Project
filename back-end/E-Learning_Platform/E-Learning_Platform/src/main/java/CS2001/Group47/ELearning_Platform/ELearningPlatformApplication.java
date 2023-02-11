@@ -3,7 +3,7 @@ package CS2001.Group47.ELearning_Platform;
 import java.util.Arrays;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,11 +12,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import CS2001.Group47.ELearning_Platform.model.Student;
+// import CS2001.Group47.ELearning_Platform.model.Student;
 // import CS2001.Group47.ELearning_Platform.model.Courses;
 // import CS2001.Group47.ELearning_Platform.model.Videos;
 // import CS2001.Group47.ELearning_Platform.repository.CoursesRepository;
-import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
+// import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
 // import CS2001.Group47.ELearning_Platform.repository.VideosRepository;
 
 @SpringBootApplication
@@ -45,8 +45,8 @@ public class ELearningPlatformApplication {
         // @Autowired 
         // private VideosRepository videosrepository;
 
-		@Autowired 
-        private StudentRepository studentRepository;
+		// @Autowired 
+        // private StudentRepository studentRepository;
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
