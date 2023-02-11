@@ -60,6 +60,16 @@ const useForm = (validateForm) => {
         console.log(response);
         if (response.status === 201) {
           alert("Registered Successfully!!!");
+          setValues({
+            firstName: "",
+            lastName: "",
+            dateOfBirth: "",
+            country: "",
+            phone: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          });
         }
       })
       .catch(async (error) => {
