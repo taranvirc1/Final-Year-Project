@@ -1,12 +1,10 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
-import java.util.Date;
-
 public class StudentPostDTO {
 	
     String firstName;
     String lastName;
-    String dateoOfBirth;
+    String dateOfBirth;
     String country;
     String phone;
     String email;
@@ -17,7 +15,7 @@ public class StudentPostDTO {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateoOfBirth = dateoOfBirth;
+        this.dateOfBirth = dateoOfBirth;
         this.country = country;
         this.phone = phone;
         this.email = email;
@@ -40,12 +38,12 @@ public class StudentPostDTO {
         this.lastName = lastName;
     }
 
-    public String getDateoOfBirth() {
-        return dateoOfBirth;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDateoOfBirth(String dateoOfBirth) {
-        this.dateoOfBirth = dateoOfBirth;
+    public void setDateOfBirth(String dateoOfBirth) {
+        this.dateOfBirth = dateoOfBirth;
     }
 
     public String getCountry() {
@@ -79,5 +77,13 @@ public class StudentPostDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "StudentPostDTO [firstName=" + firstName + ", lastName=" + lastName + ", dateoOfBirth=" + dateOfBirth
+                + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password=" + password + "]";
+    }
+
+    
 
 }

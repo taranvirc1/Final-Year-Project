@@ -3,6 +3,9 @@ import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import "../Styles/ImageSlider.css";
 import Gif from "../images/elearning.gif";
 import Gif2 from "../images/online-learning.gif";
+import Gif3 from "../images/donate-gif.gif";
+import Gif4 from "../images/forum.gif";
+import Gif5 from "../images/leaderboard.gif";
 
 const SliderData = [
   {
@@ -16,14 +19,23 @@ const SliderData = [
   {
     image:
       "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068673781821/3.png",
-      Text:"test",
+    Text: "test",
   },
   { image: Gif },
   {
     image: Gif2,
   },
+  {
+    image: Gif3,
+  },
+  {
+    image: Gif4,
+  },
+  {
+    image: Gif5,
+  },
 ];
-const ImageSlider = ({}) => {
+const ImageSlider = () => {
   const [current, setCurrent] = useState(0);
   const length = SliderData.length;
 

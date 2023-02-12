@@ -1,43 +1,75 @@
 import React, { useState } from "react";
 import registerLogo from "../../images/login-register-icons/undraw_launching_re_tomg.svg";
 import loginLogo from "../../images/login-register-icons/undraw_secure_login_pdn4.svg";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/Account.css";
 import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
+import axios from "axios";
 
 function Account() {
-  const { handleChange, values, handleSubmit, errors } = useForm(
-    validateSignUpForm
-  );
+  const { handleChange, values, handleSubmit, errors } =
+    useForm(validateSignUpForm);
 
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
-  const [validEmail, setValidEmail] = useState("");
-  const [validPassword, setValidPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loginErrorMessages, setLoginErrorMessages] = useState("");
   const [loginSuccess, setLoginSuccess] = useState("");
+  const baseUrl = "http://localhost:8080/login";
+  const [loggedInUser, setLoggedinUser] = useOutletContext();
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    if (validLoginAttempts >= 2) {
-      setLoginErrorMessages(
-        "Maximum login attempts reached. Please try again later!"
-      );
-      return;
-    }
+    axios
+      .post(baseUrl, { email, password })
+      .then((res) => {
+        if (res.status === 200) {
+          const token = res.headers.authorization.split(" ")[1];
+          if (token !== null) {
+            console.log(res);
+            console.log(token);
+            sessionStorage.setItem("jwt", token);
+            setLoginSuccess("You have logged in successfully!!!");
+            setLoggedinUser(email);
+          } else {
+            alert("Failed token!!!");
+            setLoggedinUser("");
+          }
+        } else {
+          alert("Login unsuccessful!!!");
+          setLoggedinUser("");
+        }
+      })
+      .then(() => {
+        setEmail("");
+        setPassword("");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("PROBLEM WITH LOGIN!!!");
+        setLoggedinUser("");
+      });
 
-    if (
-      validEmail === "2007048@brunel.ac.uk" &&
-      validPassword === "PassWorD20.2*2."
-    ) {
-      setLoginSuccess("You have logged in successfully!!!");
-      setLoginErrorMessages("");
-      setValidLoginAttempts(0);
-    } else {
-      setLoginErrorMessages("Incorrect email address or password!");
-      setValidLoginAttempts(validLoginAttempts + 1);
-    }
+    // if (validLoginAttempts >= 2) {
+    //   setLoginErrorMessages(
+    //     "Maximum login attempts reached. Please try again later!"
+    //   );
+    //   return;
+    // }
+
+    // if (
+    //   validEmail === "2007048@brunel.ac.uk" &&
+    //   validPassword === "PassWorD20.2*2."
+    // ) {
+    //   setLoginSuccess("You have logged in successfully!!!");
+    //   setLoginErrorMessages("");
+    //   setValidLoginAttempts(0);
+    // } else {
+    //   setLoginErrorMessages("Incorrect email address or password!");
+    //   setValidLoginAttempts(validLoginAttempts + 1);
+    // }
   };
 
   const panelAnimation = () => {
@@ -155,8 +187,8 @@ function Account() {
                 <i className="fas fa-envelope"></i>
                 <input
                   type="text"
-                  value={validEmail}
-                  onChange={(e) => setValidEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address"
                 />
               </div>
@@ -164,8 +196,8 @@ function Account() {
                 <i className="fas fa-lock"></i>
                 <input
                   type="password"
-                  value={validPassword}
-                  onChange={(e) => setValidPassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                 />
               </div>
@@ -242,31 +274,31 @@ function Account() {
                 <i className="fas fa-phone"></i>
                 <input
                   type="text"
-                  name="phoneNumber"
-                  value={values.phoneNumber}
+                  name="phone"
+                  value={values.phone}
                   onChange={handleChange}
                   placeholder="Phone Number*"
                 />
               </div>
-              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+              {errors.phone && <p>{errors.phone}</p>}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
                   type="email"
-                  name="emailAddress"
-                  value={values.emailAddress}
+                  name="email"
+                  value={values.email}
                   onChange={handleChange}
                   placeholder="Email*"
                 />
               </div>
-              {errors.emailAddress && <p>{errors.emailAddress}</p>}
+              {errors.email && <p>{errors.email}</p>}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
                   className="pass"
                   type="password"
-                  name="studentPassword"
-                  value={values.studentPassword}
+                  name="password"
+                  value={values.password}
                   onChange={handleChange}
                   onKeyUp={passwordIndicator}
                   placeholder="Password*"
@@ -279,7 +311,7 @@ function Account() {
                 <span className="strong"></span>
               </div>
               <div className="pass-text">Yours password is too weak</div>
-              {errors.studentPassword && <p>{errors.studentPassword}</p>}
+              {errors.password && <p>{errors.password}</p>}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input

@@ -33,28 +33,28 @@ function validateSignUpForm(values) {
   }
 
   //Error handling for Phone Number
-  if (!values.phoneNumber) {
-    errors.phoneNumber = "Phone Number required!";
+  if (!values.phone) {
+    errors.phone = "Phone Number required!";
   }
 
   //Error handling for Email Address
-  if (!values.emailAddress) {
-    errors.emailAddress = "Email Address required!";
-  } else if (!values.emailAddress.match(regexEmail)) {
-    errors.emailAddress = "Invalid email address. Try again!";
+  if (!values.email) {
+    errors.email = "Email Address required!";
+  } else if (!values.email.match(regexEmail)) {
+    errors.email = "Invalid email address. Try again!";
   }
 
   //Error handling for Password
-  if (!values.studentPassword) {
-    errors.studentPassword = "Password required!";
-  } else if (values.studentPassword.length < 8) {
-    errors.studentPassword = "Password must be at least 8 characters long.";
+  if (!values.password) {
+    errors.password = "Password required!";
+  } else if (values.password.length < 8) {
+    errors.password = "Password must be at least 8 characters long.";
   }
 
   //Error handling for Confirm Password
   if (!values.confirmPassword) {
     errors.confirmPassword = "Password required!";
-  } else if (values.confirmPassword !== values.studentPassword) {
+  } else if (values.confirmPassword !== values.password) {
     errors.confirmPassword = "Passwords do not match!";
   }
 

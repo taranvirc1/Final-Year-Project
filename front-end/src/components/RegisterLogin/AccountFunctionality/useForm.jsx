@@ -9,9 +9,9 @@ const useForm = (validateForm) => {
     lastName: "",
     dateOfBirth: "",
     country: "",
-    phoneNumber: "",
-    emailAddress: "",
-    studentPassword: "",
+    phone: "",
+    email: "",
+    password: "",
     confirmPassword: "",
   });
 
@@ -23,6 +23,15 @@ const useForm = (validateForm) => {
   //set to true when no errors in form when clicking the sign up button
   // const [isRegistered, setIsRegistered] = useState(false);
 
+  const handleChange = (e) => {
+    //get the value from user input
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //check the values in the signup form
@@ -32,18 +41,18 @@ const useForm = (validateForm) => {
       lastName,
       dateOfBirth,
       country,
-      phoneNumber,
-      emailAddress,
-      studentPassword,
+      phone,
+      email,
+      password,
     } = values;
     const user = {
       firstName,
       lastName,
       dateOfBirth,
       country,
-      phoneNumber,
-      emailAddress,
-      studentPassword,
+      phone,
+      email,
+      password,
     };
     await axios
       .post("http://localhost:8080/user", user)
@@ -51,6 +60,16 @@ const useForm = (validateForm) => {
         console.log(response);
         if (response.status === 201) {
           alert("Registered Successfully!!!");
+          setValues({
+            firstName: "",
+            lastName: "",
+            dateOfBirth: "",
+            country: "",
+            phone: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          });
         }
       })
       .catch(async (error) => {
@@ -60,15 +79,6 @@ const useForm = (validateForm) => {
       });
     //change the value to true
     // setIsRegistered(true);
-  };
-
-  const handleChange = (e) => {
-    //get the value from user input
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
   };
 
   // useEffect(() => {
