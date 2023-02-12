@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import registerLogo from "../../images/login-register-icons/undraw_launching_re_tomg.svg";
 import loginLogo from "../../images/login-register-icons/undraw_secure_login_pdn4.svg";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/Account.css";
 import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
@@ -17,6 +17,7 @@ function Account() {
   const [loginErrorMessages, setLoginErrorMessages] = useState("");
   const [loginSuccess, setLoginSuccess] = useState("");
   const baseUrl = "http://localhost:8080/login";
+  const [loggedInUser, setLoggedinUser] = useOutletContext();
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -30,12 +31,15 @@ function Account() {
             console.log(res);
             console.log(token);
             sessionStorage.setItem("jwt", token);
-            setLoginSuccess("You have logged in successfully");
+            setLoginSuccess("You have logged in successfully!!!");
+            setLoggedinUser(email);
           } else {
             alert("Failed token!!!");
+            setLoggedinUser("");
           }
         } else {
           alert("Login unsuccessful!!!");
+          setLoggedinUser("");
         }
       })
       .then(() => {
@@ -45,6 +49,7 @@ function Account() {
       .catch((err) => {
         console.log(err);
         alert("PROBLEM WITH LOGIN!!!");
+        setLoggedinUser("");
       });
 
     // if (validLoginAttempts >= 2) {
