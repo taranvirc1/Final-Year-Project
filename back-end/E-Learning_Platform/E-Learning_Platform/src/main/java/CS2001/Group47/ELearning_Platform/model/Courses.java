@@ -46,6 +46,14 @@ public class Courses implements Serializable {
 
 	private List <Videos> videos = new ArrayList<>() ;
 
+	@OneToMany(mappedBy = "courses"
+	, cascade = CascadeType.ALL
+	  )
+	  @JsonIgnore
+
+   private List <Rate_Review> rate_Reviews = new ArrayList<>() ;
+
+
 
 
 
@@ -83,7 +91,14 @@ public class Courses implements Serializable {
 	public void setVideos(List<Videos> videos) {
 		this.videos = videos;
 	}
+	
+	public List<Rate_Review> getRate_Reviews() {
+		return rate_Reviews;
+	}
 
+	public void setRate_Reviews(List<Rate_Review> rate_Reviews) {
+		this.rate_Reviews = rate_Reviews;
+	}
 
 	
 	@Override
