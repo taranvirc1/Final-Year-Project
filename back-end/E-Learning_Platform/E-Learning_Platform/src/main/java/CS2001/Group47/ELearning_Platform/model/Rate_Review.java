@@ -51,17 +51,26 @@ public class Rate_Review implements Serializable {
 	@JsonIgnore
 	private Courses courses;
 
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "student")
+	@JsonIgnore
+	private Student students;
+
+
+	
 
 	public Rate_Review() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Rate_Review(@NotBlank int ratingStars, @NotBlank double averageRating,@NotBlank String reviewDesc) {
+	public Rate_Review(@NotBlank int ratingStars, @NotBlank double averageRating,@NotBlank String reviewDesc, Courses courses, Student students) {
 		super();
 		this.ratingStars = ratingStars;
 		this.averageRating = averageRating;
 		this.reviewDesc = reviewDesc;
+		this.courses= courses;
+		this.students = students;
 
 	}
 
@@ -98,6 +107,26 @@ public class Rate_Review implements Serializable {
 		this.reviewDesc = reviewDesc;
 	}
 
+	public Courses getCourses() {
+		return courses;
+	}
+
+
+	public void setCourses(Courses courses) {
+		this.courses = courses;
+	}
+
+
+	public Student getStudents() {
+		return students;
+	}
+
+
+	public void setStudents(Student students) {
+		this.students = students;
+	}
+
+
 	
 	
 	// @ManyToOne
@@ -107,7 +136,7 @@ public class Rate_Review implements Serializable {
 
 @Override
 	public String toString() {
-		return "Rate_Review [ratingID=" + ratingID + ", ratingStars=" + ratingStars + ", averageRating=" + averageRating + ", reviewDesc=" + averageRating +"]";
+		return "Rate_Review [ratingID=" + ratingID + ", ratingStars=" + ratingStars + ", averageRating=" + averageRating + ", reviewDesc=" + averageRating + ", courses="+ courses+ "students="+ students+"]";
 	}
 	
       
