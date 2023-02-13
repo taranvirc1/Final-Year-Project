@@ -43,6 +43,8 @@ function DonationsBilling() {
 
    if (!dAmount) {
      newErrors.dAmount = 'Donation Amount is required';
+   }else if (!/^\d+$/.test(dAmount)) {
+    newErrors.dAmount = 'Donation Amount should only contain numbers';
    }
    if (!bfName) {
      newErrors.bfName = 'First name is required';
@@ -52,13 +54,19 @@ function DonationsBilling() {
    }
    if (!cardNo) {
      newErrors.cardNo = 'Card number is required';
-   }
+   } else if (!/^\d{16}$/.test(cardNo)) {
+    newErrors.cardNo = 'Invalid card number';
+  }
    if (!cvv) {
      newErrors.cvv = 'CVV is required';
-   }
+   } else if (!/^\d{3}$/.test(cvv)) {
+    newErrors.cvv = 'Invalid CVV';
+  }
    if (!expiryDate) {
      newErrors.expiryDate = 'Expiry date is required';
-   }
+   }else if (!/^\d{2}\/\d{2}$/.test(expiryDate)) {
+      newErrors.expiryDate = 'Invalid expiry date. Please use MM/YY format.';
+    }
    if (!cardType) {
      newErrors.cardType = 'Card type is required';
    }
@@ -70,10 +78,14 @@ function DonationsBilling() {
    }
    if (!address) {
      newErrors.address = 'Address is required';
+   } else if (!/^[a-zA-Z0-9\s,'-]+$/.test(address)) {
+    newErrors.address = 'Invalid address';
    }
    if (!postalCode) {
      newErrors.postalCode = 'Postal code is required';
-   }
+   } else if (!/^[a-zA-Z0-9]+$/.test(postalCode)) {
+    newErrors.postalCode = 'Invalid postal code';
+  }
 
 
    setErrors(newErrors);
