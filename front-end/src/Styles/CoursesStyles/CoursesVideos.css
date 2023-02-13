@@ -6,142 +6,6 @@
 }
 
 
-.reviewsContainer{
-  position: relative;
-  padding-top: 20px;
-  padding-left: 20px;
-  border-radius: 25px;
-
-  margin: auto;
-  margin-top: 5%;
-   width: 800px;
-   height: 500px;
-    justify-content: center;
-    align-items: center;
-background: #4d1771;
-
- 
-}
-.averageRating{
-  color: rgb(73, 179, 12);
-  border-bottom: 3px solid black;
-  padding-bottom: 8px;
-  margin-right: 20px;
-
-}
-.reviewsContainer .submitButton{
-  float:right;
-  position: absolute;
-  margin-top: 15px;
-  margin-right: 25px;
-  top:0%;
-  right: 0%;
-  width: 6rem;
-	border-radius: 10px;
-	border: 3px solid #0a9739;
-	background: none;
-	color: #1ad02f;
-	overflow: hidden;
-	transition: color 800ms ease, transform 500ms ease;
-
-}
-
-.reviewsContainer .submitButton::before {
-	content: "";
-	width: 100%;
-	height: 11rem;
-	background: #1ad02f;
-	position: absolute;
-	left: 0;
-	top: 110%;
-	border-radius: 50%;
-	transition: top 500ms ease;
-	z-index: -1;
-}
-
-.reviewsContainer .submitButton:hover:before {
-	top: -150%;
-}
-
-.reviewsContainer .submitButton:hover {
-	background: #0a942c;
-	color:#111;
-}
-
-.reviewsContainer .submitButton:active {
-	transform: scale(0.9);
-}
-
-.ratingContainer{
-  width: 300px;
-  height: 250px;
-  background-color: #510bc4;
-  position:absolute;
-  left:55%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-}
-
-.star-rating >button{
-  position: relative;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-   
-  left:33%;
-  top: 5px;
-  
-  
-}
-.ratingContainer>textarea{
-  font-size: small;
-  position: relative;
-  left: 10%;
-  width: 80%;
-  margin-top: 10%;
-}
-.ratingContainer .submitButton{
-  position: relative;
-  background-color: #4d1771;
-  right:25%;
-top:-13px;
-  background-color: #2d2c41;
-
-}
-.ratingContainer>h1{
-  color:#000;
-  font-size: 17px;
-  text-align: center;
-  margin-top: 10%;
-
-}
-
-.ratingcloseIcon{
-  background-color: white;
-  padding-left: 7px;
-  padding-right: 7px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  border-radius: 20px;
-  border: 0ch;
- 
-  float: right;
-  position: relative;
-  top: -2%;
-  right:-2%;
-}
-.ratingcloseIcon:hover{
-  color: #0a942c;
-}
-.textReview{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  font-size: 10px;
-}
 
 .video-player-popup,videoPlayer {
   margin-top: 3%;
@@ -432,3 +296,179 @@ font-style: italic;
   
 
 }
+
+
+
+
+.reviewsContainer{
+  position: relative;
+  padding-top: 20px;
+  padding-left: 20px;
+  border-radius: 25px;
+
+  margin: auto;
+  margin-top: 5%;
+   width: 800px;
+   height:auto;
+    justify-content: center;
+    align-items: center;
+background: #4d1771;
+
+ 
+}
+.averageRating{
+  color: rgb(73, 179, 12);
+  border-bottom: 3px solid black;
+  padding-bottom: 8px;
+  margin-right: 20px;
+
+}
+.reviewsContainer .submitButton{
+  float:right;
+  position: absolute;
+  margin-top: 15px;
+  margin-right: 25px;
+  top:0%;
+  right: 0%;
+  width: 6rem;
+	border-radius: 10px;
+	border: 3px solid #0a9739;
+	background: none;
+	color: #1ad02f;
+	overflow: hidden;
+	transition: color 800ms ease, transform 500ms ease;
+
+}
+
+.reviewsContainer .submitButton::before {
+	content: "";
+	width: 100%;
+	height: 11rem;
+	background: #1ad02f;
+	position: absolute;
+	left: 0;
+	top: 110%;
+	border-radius: 50%;
+	transition: top 500ms ease;
+	z-index: -1;
+}
+
+.reviewsContainer .submitButton:hover:before {
+	top: -150%;
+}
+
+.reviewsContainer .submitButton:hover {
+	background: #0a942c;
+	color:#111;
+}
+
+.reviewsContainer .submitButton:active {
+	transform: scale(0.9);
+}
+
+.ratingContainer{
+  width: 300px;
+  height: 250px;
+  background-color: #510bc4;
+  position:absolute;
+  left:55%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.star-rating >button{
+  position: relative;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+   
+  left:33%;
+  top: 5px;
+  
+  
+}
+.ratingContainer>textarea{
+  font-size: small;
+  position: relative;
+  left: 10%;
+  width: 80%;
+  margin-top: 10%;
+}
+.ratingContainer .submitButton{
+  position: relative;
+  background-color: #4d1771;
+  right:25%;
+top:-13px;
+  background-color: #2d2c41;
+
+}
+.ratingContainer>h1{
+  color:#000;
+  font-size: 17px;
+  text-align: center;
+  margin-top: 10%;
+
+}
+
+.ratingcloseIcon{
+  background-color: white;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 20px;
+  border: 0ch;
+ 
+  float: right;
+  position: relative;
+  top: -2%;
+  right:-2%;
+}
+.ratingcloseIcon:hover{
+  color: #0a942c;
+}
+.textReview{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 10px;
+}
+
+
+
+
+
+.reviews {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  justify-content: space-between;
+}
+.reviews .eachReview .top-review .reviewerName {
+  font-size: 15px;
+  color: rgb(180, 129, 33);
+
+
+  margin-right: 15px;
+}
+.reviews .eachReview .top-review .reviewDiscription{
+
+  display: block;
+  margin-bottom: 10px;
+color: #f1f1f1;
+}
+
+.reviews .eachReview{
+  width: 45%;
+  margin-right: 10px;
+}
+
+.reviews .viewMore{
+  margin-bottom: 10px;
+  background: none;
+}
+

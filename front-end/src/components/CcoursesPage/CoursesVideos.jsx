@@ -322,6 +322,87 @@ function lightbox_close() {
 
       </div>
       )}
+
+
+             <div className="reviews">
+              
+              <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            <div className="eachReview">
+                <div className="top-review">
+                  <h4 className="reviewerName">Murad Hussain</h4>
+                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
+                </div>
+                <div className="reviewDiscription">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div>
+            </div>
+            
+            <button className="viewMore"> View More</button>
+            </div>
+
+
       </div>
    
       
