@@ -13,13 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "Rate_Review")
+@Table(name = "rate_review")
 @EntityListeners(AuditingEntityListener.class)
 public class Rate_Review implements Serializable {
 
@@ -36,11 +37,8 @@ public class Rate_Review implements Serializable {
 	@Column(name="rating_stars")
 	int ratingStars;
 	
-	@NotBlank
-	@Column(name="average_rating")
-	double averageRating;
-
 	
+
 	@NotBlank
 	@Column(name="review_desc")
 	String reviewDesc;
@@ -64,10 +62,9 @@ public class Rate_Review implements Serializable {
 	}
 
 
-	public Rate_Review(@NotBlank int ratingStars, @NotBlank double averageRating,@NotBlank String reviewDesc, Courses courses, Student students) {
+	public Rate_Review(@NotBlank int ratingStars,@NotBlank String reviewDesc, Courses courses, Student students) {
 		super();
 		this.ratingStars = ratingStars;
-		this.averageRating = averageRating;
 		this.reviewDesc = reviewDesc;
 		this.courses= courses;
 		this.students = students;
@@ -91,13 +88,7 @@ public class Rate_Review implements Serializable {
 		this.ratingStars = ratingStars;
 	}
 	
-	public double getAverageRating() {
-		return this.averageRating;
-	}
-
-	public void setAverageRating(double averageRating) {
-		this.averageRating = averageRating;
-	}
+	
 	
 	public String getReviewDesc() {
 		return this.reviewDesc;
@@ -126,6 +117,15 @@ public class Rate_Review implements Serializable {
 		this.students = students;
 	}
 
+	public int getCourseID(Courses courses){
+          return courses.courseID;
+
+	}
+	public int studentID(Courses courses){
+		return students.studentId;
+
+  }
+
 
 	
 	
@@ -136,7 +136,7 @@ public class Rate_Review implements Serializable {
 
 @Override
 	public String toString() {
-		return "Rate_Review [ratingID=" + ratingID + ", ratingStars=" + ratingStars + ", averageRating=" + averageRating + ", reviewDesc=" + averageRating + ", courses="+ courses+ "students="+ students+"]";
+		return "Rate_Review [ratingID=" + ratingID + ", ratingStars=" + ratingStars + ", reviewDesc=" + reviewDesc + ", courses="+ courses+ "students="+ students+"]";
 	}
 	
       
