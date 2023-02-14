@@ -75,7 +75,7 @@ public class Student implements Serializable {
 	private Date updatedAt;
 
 
-	@OneToMany(mappedBy = "courses"
+	@OneToMany(mappedBy = "students"
 	, cascade = CascadeType.ALL
 	  )
 	  @JsonIgnore
@@ -91,7 +91,7 @@ public class Student implements Serializable {
 	
 	}
 	
-	public Student(String firstName, String lastName, String dateOfBirth, String country, String phone, String email, String password,List<Rate_Review> rate_Reviews) {
+	public Student(String firstName, String lastName, String dateOfBirth, String country, String phone, String email, String password) {
 		
 		super();
 		this.firstName = firstName;
@@ -101,7 +101,7 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
-		this.rate_Reviews = rate_Reviews;
+		
 		
 	}
 
