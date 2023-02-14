@@ -91,7 +91,7 @@ public class Courses implements Serializable {
 	public void setVideos(List<Videos> videos) {
 		this.videos = videos;
 	}
-	
+
 	public List<Rate_Review> getRate_Reviews() {
 		return rate_Reviews;
 	}
@@ -103,7 +103,7 @@ public class Courses implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Courses [courseID=" + courseID + ", courseName=" + courseName + "]";
+		return "Courses [courseID=" + courseID + ", courseName=" + courseName + ", rate_reviews="+ rate_Reviews+"]";
 	}
 	
 }

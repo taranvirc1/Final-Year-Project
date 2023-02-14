@@ -1,14 +1,18 @@
 package CS2001.Group47.ELearning_Platform.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,6 +22,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "student")
@@ -67,14 +73,25 @@ public class Student implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date updatedAt;
+
+
+	@OneToMany(mappedBy = "courses"
+	, cascade = CascadeType.ALL
+	  )
+	  @JsonIgnore
+
+   private List <Rate_Review> rate_Reviews = new ArrayList<>() ;
 	
+
+   
+
 	public Student() {
 		
 		super();
 	
 	}
 	
-	public Student(String firstName, String lastName, String dateOfBirth, String country, String phone, String email, String password) {
+	public Student(String firstName, String lastName, String dateOfBirth, String country, String phone, String email, String password,List<Rate_Review> rate_Reviews) {
 		
 		super();
 		this.firstName = firstName;
@@ -84,6 +101,7 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+		this.rate_Reviews = rate_Reviews;
 		
 	}
 
@@ -174,6 +192,15 @@ public class Student implements Serializable {
 	public void setResetPasswordToken(String resetPasswordToken) {
 		this.resetPasswordToken = resetPasswordToken;
 	}
+
+	public List<Rate_Review> getRate_Reviews() {
+		return rate_Reviews;
+	}
+
+	public void setRate_Reviews(List<Rate_Review> rate_Reviews) {
+		this.rate_Reviews = rate_Reviews;
+	}
+
 
 	@Override
 	public String toString() {
