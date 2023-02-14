@@ -2,30 +2,34 @@ import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 import forgotPassword from "../../images/login-register-icons/forgot_password.svg";
 import "../../Styles/RegisterLoginStyles/ResetPassword.css";
+import axios from "axios";
 
 function ResetPassword() {
-  const [validEmail, setValidEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
+  const baseUrl = "http://localhost:8080/reset_password";
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
 
-    if (validEmail === "2007048@brunel.ac.uk") {
-      setEmailSuccess(
-        `An email has been sent to ${validEmail} with instructions to reset password!!!`
-      );
-      setEmailErrorMessage("");
-    }
-    if (validEmail === "") {
-      setEmailErrorMessage("Email Address required!");
-    } else if (!validEmail.match(regexEmail)) {
-      setEmailErrorMessage(
-        "The email address you entered is invalid. Please, try again!"
-      );
-    }
+    axios.post(baseUrl, email);
+
+    // if (validEmail === "2007048@brunel.ac.uk") {
+    //   setEmailSuccess(
+    //     `An email has been sent to ${validEmail} with instructions to reset password!!!`
+    //   );
+    //   setEmailErrorMessage("");
+    // }
+    // if (validEmail === "") {
+    //   setEmailErrorMessage("Email Address required!");
+    // } else if (!validEmail.match(regexEmail)) {
+    //   setEmailErrorMessage(
+    //     "The email address you entered is invalid. Please, try again!"
+    //   );
+    // }
   };
 
   return (
@@ -46,8 +50,8 @@ function ResetPassword() {
                 <i className="fas fa-envelope"></i>
                 <input
                   type="email"
-                  value={validEmail}
-                  onChange={(e) => setValidEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address*"
                 />
               </div>
