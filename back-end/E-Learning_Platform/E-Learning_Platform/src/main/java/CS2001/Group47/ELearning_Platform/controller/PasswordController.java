@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -148,8 +148,8 @@ public ModelAndView setNewPassword(ModelAndView modelAndView, @RequestParam Stri
 		Student resetUser = user; 
             
 	    // Set new password
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        resetUser.setPassword(encoder.encode(password));
+        // BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        // resetUser.setPassword(encoder.encode(password));
             
 		// Set the reset token to null so it cannot be used again
 		resetUser.setResetPasswordToken(null);
