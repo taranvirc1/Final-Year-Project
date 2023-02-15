@@ -33,7 +33,6 @@ public class Rate_Review implements Serializable {
 	@Column(name="ratingid")
 	Integer ratingID;
 	
-	@NotBlank
 	@Column(name="rating_stars")
 	int ratingStars;
 	
