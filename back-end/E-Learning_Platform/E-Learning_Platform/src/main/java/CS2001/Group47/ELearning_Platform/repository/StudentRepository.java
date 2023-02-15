@@ -21,6 +21,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	@Query("SELECT s FROM Student s WHERE s.reset_password_token = ?")
 	Student findByResetPasswordToken(String token);
 
-	Student findByStudentId(int studentId);
+	Student findByStudentId(Integer studentId);
 
 }

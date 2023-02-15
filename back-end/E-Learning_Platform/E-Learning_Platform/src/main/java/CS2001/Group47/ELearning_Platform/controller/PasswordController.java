@@ -143,7 +143,7 @@ public ModelAndView processForgotPassword(ModelAndView modelAndView, @RequestPar
 public ModelAndView setNewPassword(ModelAndView modelAndView, @RequestParam String token, @RequestParam String password) {
 
 	// Find the user associated with the reset token
-	Student user = studentService.findByResetToken(token);
+	Student user = studentService.getResetPasswordToken(token);
 
 	// This should always be non-null but we check just in case
 	if (user != null) {

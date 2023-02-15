@@ -8,7 +8,7 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
-  const baseUrl = "http://localhost:8080/reset_password";
+  const baseUrl = "http://localhost:8080/user/findByEmail";
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
@@ -44,8 +44,11 @@ function ResetPassword() {
               onSubmit={handleEmailSubmit}
             >
               <h2 className="form-title">Reset Password</h2>
-              {emailSuccess && <p className="emailSuccess">{emailSuccess}</p>}
-              {emailErrorMessage && <p>{emailErrorMessage}</p>}
+              {emailSuccess ? (
+                <p className="emailSuccess">{emailSuccess}</p>
+              ) : (
+                emailErrorMessage && <p>{emailErrorMessage}</p>
+              )}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
