@@ -5,17 +5,17 @@ import "../../Styles/RegisterLoginStyles/NewPassword.css";
 import axios from "axios";
 
 function NewPassword() {
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [updateSuccess, setUpdateSuccess] = useState("");
-  const baseUrl = "http://localhost:8080/new_password";
+  const baseUrl = "http://localhost:8080/reset_password";
 
   //use axios.patch to update password
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(baseUrl, password);
+    axios.post(baseUrl, newPassword);
 
     // if (validConfirmPassword === validPassword) {
     //   setUpdateSuccess("Password has been reset successfully!");
@@ -132,8 +132,8 @@ function NewPassword() {
                 <input
                   className="pass"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
                   onKeyUp={passwordIndicator}
                   placeholder="New Password*"
                 />
