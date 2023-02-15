@@ -69,6 +69,8 @@ public class StudentService {
 		student.setResetPasswordToken(null);
 		studentRepository.save(student);
 	}
+
+	//added by murad here and in student repo as well
 	public Student getStudentbyId(int studentId) {
 		return studentRepository.findByStudentId(studentId);
 	}
