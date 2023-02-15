@@ -295,7 +295,13 @@ function lightbox_close() {
 
         <div className="ratingContainer">
                 <button className="ratingcloseIcon"
-                 onClick={() => setForm(false)}><i class="fa-sharp fa-solid fa-xmark fa-1x" size ={"1px"}></i></button>
+                 onClick={()=>{  setForm(false); 
+                 setRating(0);
+                 setHover(0)
+                
+                  }}
+                 
+                 ><i class="fa-sharp fa-solid fa-xmark fa-1x" size ={"1px"}></i></button>
         <h1> How was the Course?</h1>
         <div className="star-rating">
         {[...Array(5)].map((star, index) => {
@@ -314,9 +320,8 @@ function lightbox_close() {
             
           );
         })}
-<p> Rating is {rating}</p>
       </div>
-      <textarea Classname="textReview" id="" ></textarea>
+      <textarea Classname="textReview" placeholder= "review here" id="" ></textarea>
 
       <button className="submitButton"> Submit </button>
 
@@ -412,7 +417,7 @@ function lightbox_close() {
             
             {/* Wrapper for slides */}
             
-            <div class="sponsor-header">
+            <div className="sponsor-header">
 y
                         <h2 >Sponsored By</h2>
                        
