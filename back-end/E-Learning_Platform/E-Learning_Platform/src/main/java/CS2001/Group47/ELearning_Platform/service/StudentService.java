@@ -69,4 +69,9 @@ public class StudentService {
 		studentRepository.save(student);
 	}
 
+
+	public Student getStudentbyId(int studentId) {
+		return studentRepository.findByStudentId(studentId);
+	}
+
 }
