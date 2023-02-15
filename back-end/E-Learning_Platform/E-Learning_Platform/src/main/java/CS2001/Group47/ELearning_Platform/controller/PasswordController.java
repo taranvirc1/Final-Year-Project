@@ -35,10 +35,7 @@ private StudentRepository studentRepository;
 @Autowired
 private EmailService emailService;
 
-@Autowired
-private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-@GetMapping("/forgot_password")
+@GetMapping("/forgot_password/show")
 public String showForgotPasswordForm(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
     String email = request.getParameter("email");
     String token = RandomString.make(30);
@@ -55,11 +52,11 @@ public String showForgotPasswordForm(HttpServletRequest request, Model model) th
     return "showForgotPasswordForm";
 }
 
-@PostMapping("/forgot_password")
-public String processForgotPassword() {
-    return null;
+// @PostMapping("/forgot_password/process")
+// public String processForgotPassword() {
+//     return null;
     
-}
+// }
 
 public void sendEmail(String recepientEmail, String link) throws UnsupportedEncodingException {
     String subject = "Here's the  link to reset your password";
@@ -139,19 +136,20 @@ public ModelAndView processForgotPassword(ModelAndView modelAndView, @RequestPar
 
 }
 
-@PostMapping("reset_password")
+@PostMapping("/reset_password/token=")
 public ModelAndView setNewPassword(ModelAndView modelAndView, @RequestParam String token, @RequestParam String password) {
 
 	// Find the user associated with the reset token
-	Student user = studentService.findByResetToken(token);
+	Student user = studentService.getResetPasswordToken(token);
 
 	// This should always be non-null but we check just in case
 	if (user != null) {
 			
 		Student resetUser = user; 
             
-	    // Set new password    
-        resetUser.setPassword(bCryptPasswordEncoder.encode(password));
+	    // Set new password
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        resetUser.setPassword(encoder.encode(password));
             
 		// Set the reset token to null so it cannot be used again
 		resetUser.setResetPasswordToken(null);

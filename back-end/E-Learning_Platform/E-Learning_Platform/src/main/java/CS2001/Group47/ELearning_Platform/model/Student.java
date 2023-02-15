@@ -21,7 +21,6 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,7 +45,6 @@ public class Student implements Serializable {
 	String lastName;
 	
 	@NotBlank
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	String dateOfBirth;
 	
 	@NotBlank
