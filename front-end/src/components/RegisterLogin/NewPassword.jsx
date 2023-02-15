@@ -11,11 +11,27 @@ function NewPassword() {
   const [updateSuccess, setUpdateSuccess] = useState("");
   const baseUrl = "http://localhost:8080/reset_password";
 
-  //use axios.patch to update password
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(baseUrl, newPassword);
+    axios
+      .post(baseUrl, newPassword)
+      .then((res) => {
+        console.log(res);
+        console.log(newPassword);
+        if (res.status === 200) {
+          alert("Password has been updated!!!");
+          setUpdateSuccess(`Password has been reset successfully!!!`);
+          setNewPassword("");
+          setConfirmPassword("");
+        }
+      })
+      .catch((error) => {
+        console.log(newPassword);
+        console.log(error);
+        alert("Password could not be updated!!!");
+        setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
+      });
 
     // if (validConfirmPassword === validPassword) {
     //   setUpdateSuccess("Password has been reset successfully!");
