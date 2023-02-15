@@ -1,10 +1,62 @@
+import axios from "axios";
 import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 
 function CoursesVideos() {
-  const [rating, setRating] = useState(0);
+  //const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [review, setReview] = useState({
+   courseID:"1",
+   studentId:"1",
+   ratingStars:"",
+   reviewDesc:""
+  
+
+  });
+
+  const{courseID,ratingStars,reviewDesc,studentId}=review
+  const onInputChange=(e)=>{
+    setReview({...review,[e.target.name]: e.target.value})
+  };
+  
+  const onStarsClick=(rating)=> {
+  setReview({...review,ratingStars:rating,courseID: courseID})
+  };
+
+
+  const onSubmit= async (e)=>{
+    e.preventDefault();
+    setForm(false);
+
+    await axios
+    .post("http://localhost:8080/review", review,{ headers: {"Authorization" : `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXJhZDdAZ21haWwuY29tIiwiZXhwIjoxNjc2NTg3OTIxfQ.KKbg_HlpuNC6mRB6PXu3IeliXqZ81SogHJQ9Fnt84e49nmq4nebu-ewXbgsU4PK9d18NLuGOiFtRYl-3EPnmow"}`} })
+    .then((response) => {
+      console.log(response);
+      if (response.status === 201) {
+        alert("Registered Successfully!!!");
+        setReview({
+          courseID:"1",
+   ratingStars:"",
+   reviewDesc:"",
+   studentId:"1"
+
+        });
+      }
+    })
+    .catch(async (error) => {
+      console.log(review);
+      console.log(error);
+      alert("Registration not sent!!!");
+    });
+  //change the value to true
+  // setIsRegistered(true);
+
+
+  };
+
+
+ 
 
   const [showPlayer, setShowPlayer] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
@@ -19,6 +71,9 @@ function CoursesVideos() {
   function handleForm(){
     setForm(true);
   }
+
+
+
 
 
  
@@ -288,15 +343,15 @@ function lightbox_close() {
       <div className="reviewsContainer">
        <div className="averageRating"> <i className="star fa fa-star"> 4.5 Course Rating | 1K ratings</i></div>
        <button className="submitButton" onClick={() => handleForm()}>Review</button>
-
+        
        {showForm && (
 
 
-
+        
         <div className="ratingContainer">
                 <button className="ratingcloseIcon"
                  onClick={()=>{  setForm(false); 
-                 setRating(0);
+                  onStarsClick(0)
                  setHover(0)
                 
                   }}
@@ -310,10 +365,15 @@ function lightbox_close() {
             <button
               type="button"
               key={index}
-              className={index <= (hover || rating) ? "on" : "off"}
-              onClick={() => setRating(index)}
+              className={index <= (hover || ratingStars) ? "on" : "off"}
+              onClick={() => onStarsClick(index)}
               onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(rating)}
+              onMouseLeave={() => setHover(ratingStars)}
+              name = "ratingStars"
+              value = {index}
+             // onChange={(e) =>  onInputChange(e.target.value)}
+
+
             >
               <span className="fa fa-star"></span>
             </button>
@@ -321,9 +381,13 @@ function lightbox_close() {
           );
         })}
       </div>
-      <textarea Classname="textReview" placeholder= "review here" id="" ></textarea>
+      <textarea Classname="textReview"  type="review"
+                  name = "reviewDesc"
+                  value={reviewDesc}
+                  onChange={(e) => onInputChange(e)}
+                  placeholder="Reivew Here..."></textarea>
 
-      <button className="submitButton"> Submit </button>
+      <button className="submitButton" onClick={onSubmit}> Submit </button>
 
       </div>
       )}
