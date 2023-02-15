@@ -8,14 +8,34 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
-  const baseUrl = "http://localhost:8080/user/findByEmail";
+  const baseUrl = "http://localhost:8080/user/forgot_password";
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(baseUrl, email);
+    axios
+      .post(baseUrl, email)
+      .then((res) => {
+        console.log(res);
+        console.log(email);
+        if (res.status === 200) {
+          alert(`Found email address. We have sent an email to ${email}`);
+          setEmailSuccess(
+            `An email has been sent to ${email} with instructions to reset password!!!`
+          );
+          setEmail("");
+        }
+      })
+      .catch((error) => {
+        console.log(email);
+        console.log(error);
+        alert("Email does not exist!!!");
+        setEmailErrorMessage(
+          "The email address you entered is invalid. Please, try again!"
+        );
+      });
 
     // if (validEmail === "2007048@brunel.ac.uk") {
     //   setEmailSuccess(

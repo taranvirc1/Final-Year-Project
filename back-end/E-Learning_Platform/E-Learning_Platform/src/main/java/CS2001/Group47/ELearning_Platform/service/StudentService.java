@@ -7,7 +7,6 @@ import javax.management.ServiceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
