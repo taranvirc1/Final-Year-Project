@@ -2,27 +2,32 @@ import React, { useState } from "react";
 import newPassword from "../../images/login-register-icons/reset_email.svg";
 // import { Link } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/NewPassword.css";
+import axios from "axios";
 
 function NewPassword() {
-  const [validPassword, setValidPassword] = useState("");
-  const [validConfirmPassword, setValidConfirmPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [updateSuccess, setUpdateSuccess] = useState("");
+  const baseUrl = "http://localhost:8080/new_password";
 
   //use axios.patch to update password
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
-    if (validConfirmPassword === validPassword) {
-      setUpdateSuccess("Password has been reset successfully!");
-      setErrorMessage("");
-    }
-    if (validPassword === "") {
-      setErrorMessage("Password required!");
-    } else if (validConfirmPassword === "") {
-      setErrorMessage("Password confirmation required!");
-    } else if (validConfirmPassword !== validPassword) {
-      setErrorMessage("Passwords do not match!");
-    }
+
+    axios.post(baseUrl, password);
+
+    // if (validConfirmPassword === validPassword) {
+    //   setUpdateSuccess("Password has been reset successfully!");
+    //   setErrorMessage("");
+    // }
+    // if (validPassword === "") {
+    //   setErrorMessage("Password required!");
+    // } else if (validConfirmPassword === "") {
+    //   setErrorMessage("Password confirmation required!");
+    // } else if (validConfirmPassword !== validPassword) {
+    //   setErrorMessage("Passwords do not match!");
+    // }
   };
 
   const indicator = document.querySelector(".pass-indicator");
@@ -125,10 +130,10 @@ function NewPassword() {
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
-                className="pass"
+                  className="pass"
                   type="password"
-                  value={validPassword}
-                  onChange={(e) => setValidPassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   onKeyUp={passwordIndicator}
                   placeholder="New Password*"
                 />
@@ -144,8 +149,8 @@ function NewPassword() {
                 <i className="fas fa-lock"></i>
                 <input
                   type="password"
-                  value={validConfirmPassword}
-                  onChange={(e) => setValidConfirmPassword(e.target.value)}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password*"
                 />
               </div>

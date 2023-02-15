@@ -39,9 +39,19 @@
     background-color: #f7f7f7;
     border-radius: 5px;
     box-shadow: 0 0 10px #ccc;
-
-    
   }
+  .billing-form p {
+    color: #000;
+    padding: 3px;
+    margin-bottom: 5px;
+    background-color: rgb(218, 189, 189);
+    border: 1px solid red;
+    width: 25%;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.7rem;
+  }
+ 
   .billing-form label {
     display: block;
     margin-bottom: 10px;
