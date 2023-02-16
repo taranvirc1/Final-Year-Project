@@ -1,5 +1,7 @@
 package CS2001.Group47.ELearning_Platform.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,13 @@ public class Rate_ReviewService {
 
 	public void addReview(Rate_Review newReview) {
 		reviewRepository.save(newReview);
+	}
+
+	
+
+    public List<Rate_Review> getReviews() {
+		return (List<Rate_Review>) reviewRepository.findAllByOrderByRatingStarsAsc();  
+  
 	}
 
 }

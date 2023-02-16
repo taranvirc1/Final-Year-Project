@@ -45,12 +45,12 @@ public class Rate_Review implements Serializable {
 
 	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name = "course")
-	@JsonIgnore
+	//@JsonIgnore
 	private Courses courses;
 
 	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name = "student")
-	@JsonIgnore
+	//@JsonIgnore
 	private Student students;
 
 
@@ -116,14 +116,8 @@ public class Rate_Review implements Serializable {
 		this.students = students;
 	}
 
-	public int getCourseID(Courses courses){
-          return courses.courseID;
-
-	}
-	public int studentID(Courses courses){
-		return students.studentId;
-
-  }
+	
+  
 
 
 	
