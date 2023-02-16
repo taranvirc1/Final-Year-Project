@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 
-function CoursesVideos() {
+function CoursesVideos () {
   //const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState({
@@ -49,11 +49,91 @@ function CoursesVideos() {
       console.log(error);
       alert("Registration not sent!!!");
     });
-  //change the value to true
-  // setIsRegistered(true);
+ 
 
 
   };
+
+
+
+
+  const [reviews, setReviews] = useState([]);
+  const [average, setAverage] = useState(0);
+
+  
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXJhZDdAZ21haWwuY29tIiwiZXhwIjoxNjc2NTg3OTIxfQ.KKbg_HlpuNC6mRB6PXu3IeliXqZ81SogHJQ9Fnt84e49nmq4nebu-ewXbgsU4PK9d18NLuGOiFtRYl-3EPnmow"}`} })
+      .then(response => {
+        setReviews(response.data);
+    
+ 
+      })
+      .catch(error=>{
+         console.error(error)
+         alert("cant get reviews")
+      });
+    },[]);
+
+  useEffect(()=>{
+   // getReviews();
+
+   
+},[]);
+
+const [visible, setVisible] = useState(2);
+
+const showMoreReviews =()=>{
+setVisible((prevValue)=> prevValue+2)
+};
+const showLessReviews =()=>{
+  setVisible(2)  };
+
+
+console.log(reviews);
+
+const getAverage=(reviews)=>{
+  if (reviews.length==null){
+    return ;
+  }
+  const sum = 0;
+  for (let i = 0; i < reviews.length; i++) {
+    sum += parseInt (reviews[i].ratingStars);
+  }
+  const averagee = sum / reviews.length;
+ // console.log(averagee)
+  return averagee;
+}
+
+/*
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXJhZDdAZ21haWwuY29tIiwiZXhwIjoxNjc2NTg3OTIxfQ.KKbg_HlpuNC6mRB6PXu3IeliXqZ81SogHJQ9Fnt84e49nmq4nebu-ewXbgsU4PK9d18NLuGOiFtRYl-3EPnmow"}`} })
+      .then(response => {
+        setReviews(response.data.reviews);
+   setAverage(getAverage(response.data.reviews));
+ 
+      })
+      .catch(error=>{
+         console.error(error)
+         alert("cant get reviews")
+      });
+  
+    }, []);
+
+
+
+
+
+console.log(reviews);
+
+const getAverage=(reviews)=>{
+  const total = reviews.reduce((acc, review) => acc + review.ratingStars, 0);
+  return total / reviews.length;
+};
+
+
+*/
 
 
  
@@ -341,7 +421,10 @@ function lightbox_close() {
       </div>
         
       <div className="reviewsContainer">
-       <div className="averageRating"> <i className="star fa fa-star"> 4.5 Course Rating | 1K ratings</i></div>
+  
+
+       
+       <div className="averageRating"> <i className="star fa fa-star">{average} Course Rating | 1K ratings</i></div>
        <button className="submitButton" onClick={() => handleForm()}>Review</button>
         
        {showForm && (
@@ -387,90 +470,34 @@ function lightbox_close() {
                   onChange={(e) => onInputChange(e)}
                   placeholder="Reivew Here..."></textarea>
 
-      <button className="submitButton" onClick={onSubmit}> Submit </button>
-
+      <button className="submitButton"
+      
+      onClick={onSubmit}> Submit </button>
+   
       </div>
       )}
 
 
              <div className="reviews">
-              
+              {reviews.slice(0,visible).map(reviewd=> (
               <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            <div className="eachReview">
-                <div className="top-review">
-                  <h4 className="reviewerName">Murad Hussain</h4>
-                  <div className="ratings"> <i className="fa fa-star" aria-hidden="true"></i> <i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i> </div>
-                </div>
-                <div className="reviewDiscription">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              </div>
-            </div>
-            
-            <button className="viewMore"> View More</button>
-            </div>
+                <div className="top-review"> 
+                  <h4 className="reviewerName">{reviewd.students.firstName}<span></span> {reviewd.students.lastName}</h4>
+                  {new Array(reviewd.ratingStars).fill(null).map(() => (
+                  <i className="fas fa-star icon-c" />
+        ))}
 
+                </div>
+                <div className="reviewDiscription">
+                <p>{reviewd.reviewDesc}</p>
+              </div>
+            </div>
+           ))}
+            
+           
+            </div>
+            <button className="viewMore" onClick={showMoreReviews}> View More</button>
+            <button className="viewLess" onClick={showLessReviews}> View Less</button>
 
       </div>
    
