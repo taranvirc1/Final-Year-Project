@@ -12,12 +12,12 @@ public class DonatorDTO {
     
     public DonatorDTO(String donatorTitle, String firstName, String lastName, String phone, String email, String howHear, String motivate) {
         super();
-        this.donatorTitle - donatorTitle;
+        this.donatorTitle = donatorTitle;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
-        this.howHear = howHear
+        this.howHear = howHear;
         this.motivate = motivate;
     }
 
@@ -31,7 +31,7 @@ public class DonatorDTO {
     
     
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
     
     public void setFirstName(String firstName) {
@@ -43,7 +43,7 @@ public class DonatorDTO {
     }
     
     public void setLastName(String lastName) {
-        this.amount = lastName;
+        this.lastName = lastName;
     }
     
     public String getPhone() {
