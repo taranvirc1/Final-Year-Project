@@ -58,7 +58,7 @@ function Account() {
         alert("PROBLEM WITH LOGIN!!!");
         setLoggedinUser("");
       });
-
+console.log("this is " +loggedInUser)
     // if (validLoginAttempts >= 2) {
     //   setLoginErrorMessages(
     //     "Maximum login attempts reached. Please try again later!"
