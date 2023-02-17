@@ -6,6 +6,7 @@ import "../../Styles/RegisterLoginStyles/Account.css";
 import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Account() {
   const { handleChange, values, handleSubmit, errors } =
@@ -18,6 +19,11 @@ function Account() {
   const [loginSuccess, setLoginSuccess] = useState("");
   const baseUrl = "http://localhost:8080/login";
   const [loggedInUser, setLoggedinUser] = useOutletContext();
+  const navigate = useNavigate();
+
+  const login = () => {
+    navigate("/");
+  };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +39,7 @@ function Account() {
             sessionStorage.setItem("jwt", token);
             setLoginSuccess("You have logged in successfully!!!");
             setLoggedinUser(email);
+            login();
           } else {
             alert("Failed token!!!");
             setLoggedinUser("");
