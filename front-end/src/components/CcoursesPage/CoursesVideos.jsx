@@ -1,9 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
+import { useOutletContext } from "react-router-dom";
 
 function CoursesVideos () {
+
+
+
   //const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState({
@@ -14,6 +18,74 @@ function CoursesVideos () {
   
 
   });
+
+
+
+
+
+
+
+  const [loggedInUser, setLoggedinUser] = useOutletContext();
+  console.log("this"+loggedInUser);
+  const [userdata, setUserdata] = useState("");
+
+  useEffect(()=>{
+     
+          const jwt = sessionStorage.getItem('jwt');
+          console.log(jwt);
+          axios({
+              method: 'get',
+              url: 'http://localhost:8080/user/findByEmail',
+              params: {email: "murad8@gmail.com"},
+              headers: {"Authorization" : `Bearer ${jwt}`}
+          }).then((response) => {
+              if (response.status === 201){
+                alert("got students");
+
+                  //console.log(response.data);
+                  console.log(response.data);
+                  setUserdata(response.data);
+              }
+          }).catch(err => {
+              console.log(err.response);
+              setUserdata("Data failure");
+              
+          })
+      
+  },[]);
+
+
+
+
+
+  const [currentStudentID, setCurrentStudentID] = useState("");
+
+
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/user/findByEmail",{  params: {email:loggedInUser },headers: {"Authorization" : `Bearer ${jwt}`} })
+      .then(response => {
+       // setReviews(response.data);
+      console.log(response.data)
+      setCurrentStudentID(response.data.studentId)
+ 
+      })
+      .catch(error=>{
+         console.error(error)
+         alert("cant get reviews")
+      });
+    },[]);
+
+    console.log("current student" + currentStudentID)
+
+
+
+
+
+
+
+
+
 
   const{courseID,ratingStars,reviewDesc,studentId}=review
   const onInputChange=(e)=>{
@@ -60,10 +132,11 @@ function CoursesVideos () {
   const [reviews, setReviews] = useState([]);
   const [average, setAverage] = useState(0);
 
-  
+  const jwt = sessionStorage.getItem('jwt');
+  console.log(jwt);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXJhZDdAZ21haWwuY29tIiwiZXhwIjoxNjc2NTg3OTIxfQ.KKbg_HlpuNC6mRB6PXu3IeliXqZ81SogHJQ9Fnt84e49nmq4nebu-ewXbgsU4PK9d18NLuGOiFtRYl-3EPnmow"}`} })
+    axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${jwt}`} })
       .then(response => {
         setReviews(response.data);
     
