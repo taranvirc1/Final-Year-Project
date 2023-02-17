@@ -35,8 +35,8 @@ public class Rate_ReviewController {
       Rate_ReviewService reviewService;
     @PostMapping("/review")
     public ResponseEntity<Optional<Rate_Review>> addReview(@RequestBody ReviewPostDTO newReviewPostDTO) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-String currentPrincipalName = authentication.getName();
+//         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+// String currentPrincipalName = authentication.getName();
 
          Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
          Student student = studentService.getStudentbyId(newReviewPostDTO.getStudentId());
