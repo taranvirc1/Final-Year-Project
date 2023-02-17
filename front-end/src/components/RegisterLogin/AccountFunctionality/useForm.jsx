@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const useForm = (validateForm) => {
+  const navigate = useNavigate();
   //fields in sign up form
   //values set to empty
   const [values, setValues] = useState({
@@ -22,6 +24,12 @@ const useForm = (validateForm) => {
   //set to false by default
   //set to true when no errors in form when clicking the sign up button
   // const [isRegistered, setIsRegistered] = useState(false);
+
+  //take user to login after registration
+  const goToLogin = () => {
+    window.location.reload(false);
+    navigate("/account");
+  };
 
   const handleChange = (e) => {
     //get the value from user input
@@ -59,7 +67,7 @@ const useForm = (validateForm) => {
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
-          alert("Registered Successfully!!!");
+          // alert("Registered Successfully!!!");
           setValues({
             firstName: "",
             lastName: "",
@@ -70,6 +78,7 @@ const useForm = (validateForm) => {
             password: "",
             confirmPassword: "",
           });
+          goToLogin();
         }
       })
       .catch(async (error) => {
