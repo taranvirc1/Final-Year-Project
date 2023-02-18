@@ -1,6 +1,5 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import CS2001.Group47.ELearning_Platform.model.Rate_Review;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.service.CoursesService;
 import CS2001.Group47.ELearning_Platform.service.Rate_ReviewService;
-import CS2001.Group47.ELearning_Platform.service.StudentService;
 
 import java.security.Principal;
 import java.util.List;
@@ -36,8 +34,6 @@ public class Rate_ReviewController {
       Rate_ReviewService reviewService;
     @PostMapping("/review")
     public ResponseEntity<Optional<Rate_Review>> addReview(@RequestBody ReviewPostDTO newReviewPostDTO, Principal principal) {
-//         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-// String currentPrincipalName = authentication.getName();
          Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
          String email = studentController.currentUserName(principal);
          Student  student = studentController.getByEmail(email);
