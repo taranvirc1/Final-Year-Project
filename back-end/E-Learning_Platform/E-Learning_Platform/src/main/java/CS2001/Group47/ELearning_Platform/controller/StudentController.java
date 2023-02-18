@@ -1,5 +1,6 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import CS2001.Group47.ELearning_Platform.dto.StudentPostDTO;
@@ -85,6 +89,18 @@ public class StudentController {
     	
     	return Optional.ofNullable(studentService.findByEmail(email));
     	
+    }
+
+    @GetMapping("/user/getByEmail")
+    public Student getByEmail(@RequestParam String email) {
+    	
+    	return (studentService.findByEmail(email));
+    	
+    }
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Principal principal) {
+        return principal.getName();
     }
 
 }

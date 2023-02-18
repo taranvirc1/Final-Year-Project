@@ -5,13 +5,26 @@ public class ReviewPostDTO {
     private String reviewDesc;
     private	int courseID;
     private	int studentId;
+    private String email;
 
-    public ReviewPostDTO(int ratingStars, String reviewDesc, int courseID, int studentId) {
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public ReviewPostDTO(int ratingStars, String reviewDesc, int courseID, String email) {
         super();
         this.ratingStars = ratingStars;
         this.reviewDesc = reviewDesc;
         this.courseID = courseID;
-        this.studentId = studentId;
+        this.email = email;
+       // this.studentId = studentId;
     }
 
 
