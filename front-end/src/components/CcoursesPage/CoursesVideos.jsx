@@ -29,7 +29,7 @@ function CoursesVideos () {
   console.log("this"+loggedInUser);
   const [userdata, setUserdata] = useState("");
 
-  useEffect(()=>{
+ /* useEffect(()=>{
      
           const jwt = sessionStorage.getItem('jwt');
           console.log(jwt);
@@ -52,7 +52,7 @@ function CoursesVideos () {
               
           })
       
-  },[]);
+  },[]);*/
 
 
 
@@ -62,7 +62,7 @@ function CoursesVideos () {
 
 
 
-  useEffect(() => {
+ /* useEffect(() => {
     axios.get("http://localhost:8080/user/findByEmail",{  params: {email:loggedInUser },headers: {"Authorization" : `Bearer ${jwt}`} })
       .then(response => {
        // setReviews(response.data);
@@ -76,7 +76,7 @@ function CoursesVideos () {
       });
     },[]);
 
-    console.log("current student" + currentStudentID)
+    console.log("current student" + currentStudentID)*/
 
 
 
@@ -131,6 +131,7 @@ function CoursesVideos () {
 
   const [reviews, setReviews] = useState([]);
   const [average, setAverage] = useState(0);
+  const [totalReviews,setTotalReviews]=useState(null);
 
   const jwt = sessionStorage.getItem('jwt');
   console.log(jwt);
@@ -139,7 +140,8 @@ function CoursesVideos () {
     axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${jwt}`} })
       .then(response => {
         setReviews(response.data);
-    
+        setTotalReviews(response.data.length)
+
  
       })
       .catch(error=>{
@@ -497,7 +499,7 @@ function lightbox_close() {
   
 
        
-       <div className="averageRating"> <i className="star fa fa-star">{average} Course Rating | 1K ratings</i></div>
+       <div className="averageRating"> <i className="star fa fa-star">{average} Course Rating | {totalReviews} ratings</i></div>
        <button className="submitButton" onClick={() => handleForm()}>Review</button>
         
        {showForm && (
