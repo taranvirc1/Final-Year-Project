@@ -3,13 +3,12 @@ package CS2001.Group47.ELearning_Platform.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.management.ServiceNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
+import CS2001.Group47.ELearning_Platform.exception.StudentNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
 
@@ -46,13 +45,13 @@ public class StudentService {
 		return studentRepository.findByEmail(email);
 	}
 
-	public void updateResetPasswordToken(String token, String email) throws ServiceNotFoundException {
+	public void updateResetPasswordToken(String token, String email) throws StudentNotFoundException {
 		Student student = studentRepository.findByEmail(email);
 		if(student != null) {
 			student.setResetPasswordToken(token);
 			studentRepository.save(student);
 		} else {
-			throw new ServiceNotFoundException("Could not find any student with the email" + email);
+			throw new StudentNotFoundException("Could not find any student with the email" + email);
 		}
 	}
 
@@ -61,8 +60,8 @@ public class StudentService {
 	}
 
 	public void updatePassword(Student student, String newPassword) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(newPassword);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(newPassword);
 		student.setPassword(encodedPassword);
 
 		student.setResetPasswordToken(null);
