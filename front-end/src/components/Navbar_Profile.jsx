@@ -74,13 +74,13 @@ function Navbar_Profile() {
             </Link>
           </li>
 
-          <li>
+          {/* <li> */}
             {/* Link for login/signup page */}
-            <Link to="account" className="navLink" href="#log">
+            {/* <Link to="account" className="navLink" href="#log">
               <img img src={Loginlogo} alt="login icon" />
               Login
             </Link>
-          </li>
+          </li> */}
 
           <li>
             {/* Link for profile page */}

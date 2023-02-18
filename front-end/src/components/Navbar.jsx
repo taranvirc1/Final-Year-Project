@@ -89,14 +89,6 @@ function Navbar() {
             </Link>
             
           </li>
-
-          {/* <li> */}
-            {/* Link for profile page */}
-            {/* <Link to="UPM" className="navLink" href="#log">
-              <img img src={Profilelogo} alt="profile icon" />
-              Profile
-            </Link>
-          </li> */}
         </ul>
       </div>
     </>
