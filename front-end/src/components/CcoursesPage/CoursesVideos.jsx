@@ -12,7 +12,7 @@ function CoursesVideos () {
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState({
    courseID:"1",
-   studentId:"1",
+  // studentId:"1",
    ratingStars:"",
    reviewDesc:""
   
@@ -87,7 +87,7 @@ function CoursesVideos () {
 
 
 
-  const{courseID,ratingStars,reviewDesc,studentId}=review
+  const{courseID,ratingStars,reviewDesc}=review
   const onInputChange=(e)=>{
     setReview({...review,[e.target.name]: e.target.value})
   };
@@ -100,9 +100,9 @@ function CoursesVideos () {
   const onSubmit= async (e)=>{
     e.preventDefault();
     setForm(false);
-
+    const jwt = sessionStorage.getItem('jwt');
     await axios
-    .post("http://localhost:8080/review", review,{ headers: {"Authorization" : `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXJhZDdAZ21haWwuY29tIiwiZXhwIjoxNjc2NTg3OTIxfQ.KKbg_HlpuNC6mRB6PXu3IeliXqZ81SogHJQ9Fnt84e49nmq4nebu-ewXbgsU4PK9d18NLuGOiFtRYl-3EPnmow"}`} })
+    .post("http://localhost:8080/review", review,{  headers: {"Authorization" : `Bearer ${jwt}`} })
     .then((response) => {
       console.log(response);
       if (response.status === 201) {
@@ -111,7 +111,7 @@ function CoursesVideos () {
           courseID:"1",
    ratingStars:"",
    reviewDesc:"",
-   studentId:"1"
+
 
         });
       }

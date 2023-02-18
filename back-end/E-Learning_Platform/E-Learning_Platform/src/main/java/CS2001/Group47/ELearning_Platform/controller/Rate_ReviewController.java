@@ -17,6 +17,7 @@ import CS2001.Group47.ELearning_Platform.service.CoursesService;
 import CS2001.Group47.ELearning_Platform.service.Rate_ReviewService;
 import CS2001.Group47.ELearning_Platform.service.StudentService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,15 +31,16 @@ public class Rate_ReviewController {
        @Autowired
        CoursesService coursesService;
        @Autowired
-       StudentService studentService;
+       StudentController studentController;
        @Autowired
       Rate_ReviewService reviewService;
     @PostMapping("/review")
-    public ResponseEntity<Optional<Rate_Review>> addReview(@RequestBody ReviewPostDTO newReviewPostDTO) {
+    public ResponseEntity<Optional<Rate_Review>> addReview(@RequestBody ReviewPostDTO newReviewPostDTO, Principal principal) {
 //         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 // String currentPrincipalName = authentication.getName();
          Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
-         Student student = studentService.getStudentbyId(newReviewPostDTO.getStudentId());
+         String email = studentController.currentUserName(principal);
+         Student  student = studentController.getByEmail(email);
 
          Rate_Review newReview = new Rate_Review(newReviewPostDTO.getRatingStars(),newReviewPostDTO.getReviewDesc(), courses,student);
 
