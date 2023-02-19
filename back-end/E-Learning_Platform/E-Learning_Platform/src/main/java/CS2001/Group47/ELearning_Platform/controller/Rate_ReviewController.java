@@ -38,7 +38,7 @@ public class Rate_ReviewController {
          String email = studentController.currentUserName(principal);
          Student  student = studentController.getByEmail(email);
 
-         Rate_Review newReview = new Rate_Review(newReviewPostDTO.getRatingStars(),newReviewPostDTO.getReviewDesc(), courses,student);
+         Rate_Review newReview = new Rate_Review(newReviewPostDTO.getRatingStars(),newReviewPostDTO.getReviewDesc(), courses,student,newReviewPostDTO.getCreatedAt());
 
          reviewService.addReview(newReview);
 

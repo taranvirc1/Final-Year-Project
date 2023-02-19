@@ -449,18 +449,48 @@ top:-13px;
   justify-content: space-between;
 }
 .reviews .eachReview .top-review .reviewerName {
-  font-size: 15px;
-  color: rgb(180, 129, 33);
-
-
+  font-size: 18px;
+  color: rgb(25, 179, 107);
+ 
+margin-top: 20px;
   margin-right: 15px;
 }
+
+
+
+
+.reviews .eachReview .top-review .reviewerName:first-letter  {
+  text-transform: uppercase;
+
+}
+
+
+
+
+
+
 .reviewDiscription{
 
-  display: block;
-  margin-bottom: 8px;
+
 color: #f1f1f1;
 }
+.reviewDiscription>p{
+
+margin-bottom: 5px;
+  color: #f8f3f3;
+  text-transform: capitalize;
+
+  }
+  
+  .reviewDiscription>p2{
+    font-style: oblique;
+
+
+    
+      }
+
+
+
 
 .reviews .eachReview{
   width: 45%;

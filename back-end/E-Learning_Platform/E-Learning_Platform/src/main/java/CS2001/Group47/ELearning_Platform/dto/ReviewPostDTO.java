@@ -1,11 +1,24 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
+import java.util.Date;
+
 public class ReviewPostDTO {
     private	int ratingStars;
     private String reviewDesc;
     private	int courseID;
     private	int studentId;
     private String email;
+    private String createdAt;
+
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
 
     public String getEmail() {
@@ -18,12 +31,13 @@ public class ReviewPostDTO {
     }
 
 
-    public ReviewPostDTO(int ratingStars, String reviewDesc, int courseID, String email) {
+    public ReviewPostDTO(int ratingStars, String reviewDesc, int courseID, String email,String createdAt) {
         super();
         this.ratingStars = ratingStars;
         this.reviewDesc = reviewDesc;
         this.courseID = courseID;
         this.email = email;
+        this.createdAt = createdAt;
        // this.studentId = studentId;
     }
 
