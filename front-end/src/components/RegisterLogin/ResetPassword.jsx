@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
 import forgotPassword from "../../images/login-register-icons/forgot_password.svg";
 import "../../Styles/RegisterLoginStyles/ResetPassword.css";
 import axios from "axios";
