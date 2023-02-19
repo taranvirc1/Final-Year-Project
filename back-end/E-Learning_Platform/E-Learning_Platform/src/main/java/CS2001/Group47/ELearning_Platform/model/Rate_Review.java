@@ -1,6 +1,7 @@
 package CS2001.Group47.ELearning_Platform.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +42,15 @@ public class Rate_Review implements Serializable {
 	@Column(name="review_desc")
 	String reviewDesc;
 
+	@Column(name="createdAt")
+	String createdAt;
+
+
+
+
+
+
+
 
 	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name = "course")
@@ -60,12 +70,13 @@ public class Rate_Review implements Serializable {
 	}
 
 
-	public Rate_Review(@NotBlank int ratingStars,@NotBlank String reviewDesc, Courses courses, Student students) {
+	public Rate_Review(@NotBlank int ratingStars,@NotBlank String reviewDesc, Courses courses, Student students, String createdAt) {
 		super();
 		this.ratingStars = ratingStars;
 		this.reviewDesc = reviewDesc;
 		this.courses= courses;
 		this.students = students;
+		this.createdAt = createdAt;
 
 	}
 
@@ -116,6 +127,15 @@ public class Rate_Review implements Serializable {
 	}
 
 	
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
   
 
 

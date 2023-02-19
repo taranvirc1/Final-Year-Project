@@ -3,8 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 import { useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 function CoursesVideos () {
+  const current = new Date();
+  const getCurrentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
 
 
@@ -14,8 +18,9 @@ function CoursesVideos () {
    courseID:"1",
   // studentId:"1",
    ratingStars:"",
-   reviewDesc:""
-  
+   reviewDesc:"",
+   createdAt: getCurrentDate
+   
 
   });
 
@@ -87,7 +92,7 @@ function CoursesVideos () {
 
 
 
-  const{courseID,ratingStars,reviewDesc}=review
+  const{courseID,ratingStars,reviewDesc,createdAt}=review
   const onInputChange=(e)=>{
     setReview({...review,[e.target.name]: e.target.value})
   };
@@ -111,7 +116,7 @@ function CoursesVideos () {
           courseID:"1",
    ratingStars:"",
    reviewDesc:"",
-
+createdAt:getCurrentDate,
 
         });
       }
@@ -156,13 +161,13 @@ function CoursesVideos () {
    
 },[]);
 
-const [visible, setVisible] = useState(2);
+const [visible, setVisible] = useState(10);
 
 const showMoreReviews =()=>{
-setVisible((prevValue)=> prevValue+2)
+setVisible((prevValue)=> prevValue+10)
 };
 const showLessReviews =()=>{
-  setVisible(2)  };
+  setVisible((prevValue)=> prevValue-5)  };
 
 
 console.log(reviews);
@@ -544,10 +549,12 @@ function lightbox_close() {
                   value={reviewDesc}
                   onChange={(e) => onInputChange(e)}
                   placeholder="Reivew Here..."></textarea>
-
-      <button className="submitButton"
+ <Link to="/coursesvideos">
+ <button className="submitButton"
       
       onClick={onSubmit}> Submit </button>
+            </Link>
+      
    
       </div>
       )}
@@ -565,6 +572,8 @@ function lightbox_close() {
                 </div>
                 <div className="reviewDiscription">
                 <p>{reviewd.reviewDesc}</p>
+                <p2>{reviewd.createdAt}</p2>
+
               </div>
             </div>
            ))}
