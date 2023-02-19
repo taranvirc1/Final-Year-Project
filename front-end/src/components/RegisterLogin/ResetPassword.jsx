@@ -8,7 +8,7 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
-  const baseUrl = "http://localhost:8080/user/forgot_password";
+  const baseUrl = "http://localhost:8080/forgot_password";
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
@@ -46,7 +46,7 @@ function ResetPassword() {
           console.log(error);
           alert("Email does not exist!!!");
           setEmailErrorMessage(
-            "The email address you entered is invalid. Please, try again!"
+            "The email address you entered does not exist. Please, try again!"
           );
         });
     }

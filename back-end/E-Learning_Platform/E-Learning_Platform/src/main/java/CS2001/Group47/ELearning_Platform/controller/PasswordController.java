@@ -1,31 +1,29 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
 import java.io.UnsupportedEncodingException;
-// import java.util.UUID;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-// import javax.management.ServiceNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-// import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-// import org.springframework.web.servlet.ModelAndView;
 
 import CS2001.Group47.ELearning_Platform.Utility.Utility;
+import CS2001.Group47.ELearning_Platform.dto.ResetPasswordDTO;
 import CS2001.Group47.ELearning_Platform.exception.StudentNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Student;
-// import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
-// import CS2001.Group47.ELearning_Platform.service.EmailService;
 import CS2001.Group47.ELearning_Platform.service.StudentService;
 import net.bytebuddy.utility.RandomString;
 
@@ -38,12 +36,6 @@ private StudentService studentService;
 @Autowired
 private JavaMailSender mailSender;
 
-// @Autowired
-// private StudentRepository studentRepository;
-
-// @Autowired
-// private EmailService emailService;
-
 @GetMapping("/forgot_password")
 public String showForgotPassword(Model model) {
     model.addAttribute("pageTitle", "Reset Password");
@@ -51,11 +43,11 @@ public String showForgotPassword(Model model) {
 }
 
 @PostMapping("/forgot_password")
-public String showForgotPasswordForm(HttpServletRequest request, Model model) throws UnsupportedEncodingException, MessagingException {
-    String email = request.getParameter("email");
+public ResponseEntity forgotPasswordProcess(HttpServletRequest request, @RequestParam("email") String email) throws UnsupportedEncodingException, MessagingException {
+    Student student = studentService.findByEmail(email); 
     String token = RandomString.make(30);
 
-    System.out.println("Email: " + email);
+    System.out.println("Email: " + student);
     System.out.println("Token: " + token);
 
     try {
@@ -63,16 +55,16 @@ public String showForgotPasswordForm(HttpServletRequest request, Model model) th
         String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
         System.out.println("reset password link: " + resetPasswordLink);
         sendEmail(email, resetPasswordLink);
-        model.addAttribute("message", "We have sent a reset password link to your email.");
     } catch (StudentNotFoundException ex) {
-        model.addAttribute("error", ex.getMessage());
+        System.out.println(ex + " no student exists with this email!");
+        return new ResponseEntity<>(Optional.ofNullable(email), HttpStatus.BAD_REQUEST);
     } catch (UnsupportedEncodingException | MessagingException e) {
-        model.addAttribute("error", "Error while sending email.");
+        e.printStackTrace();
+        System.out.println(e);
     }
 
-    model.addAttribute("pageTitle", "New Password");
-
-    return "ForgotPasswordForm";
+    //Return response entity with new user and CREATED status
+    return new ResponseEntity<>(Optional.ofNullable(email), HttpStatus.CREATED);
 }
 
 public void sendEmail(String recepientEmail, String link) throws UnsupportedEncodingException, MessagingException {
@@ -121,22 +113,22 @@ public String showResetPasswordForm(@Param(value="token") String token, Model mo
 }
 
 @PostMapping("/reset_password")
-public String resetPassword(HttpServletRequest request, Model model) {
+public String resetPassword(HttpServletRequest request, @RequestBody ResetPasswordDTO resetDTO) {
 
-    String token = request.getParameter("token");
-    String password = request.getParameter("password");
+    String token = resetDTO.getToken();
+    String userPass = resetDTO.getNewPassword();
 
     Student student = studentService.getResetPasswordToken(token);
 
     if(student == null) {
-        model.addAttribute("title", "Reset password");
-        model.addAttribute("message", "Invalid Token");
+        System.out.println("Invalid token");
+        System.out.println("your password cannot be reset!");
     } else {
-        studentService.updatePassword(student, password);
-        model.addAttribute("message", "You have successfully changed your password.");
+        studentService.updatePassword(student, userPass);
+        System.out.println("You have successfully changed your password");
     }
 
-    return "message";
+    return "success";
 }
 
 // @PostMapping("/forgot_password")
