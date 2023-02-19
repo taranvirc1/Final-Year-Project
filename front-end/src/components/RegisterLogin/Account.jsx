@@ -28,55 +28,50 @@ function Account() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post(baseUrl, { email, password })
-      .then((res) => {
-        if (res.status === 200) {
-          const token = res.headers.authorization.split(" ")[1];
-          if (token !== null) {
-            console.log(res);
-            console.log(token);
-            sessionStorage.setItem("jwt", token);
-            setLoginSuccess("You have logged in successfully!!!");
-            setLoggedinUser(email);
-            login();
+    if (validLoginAttempts >= 2) {
+      setLoginErrorMessages(
+        "Maximum login attempts reached. Please try again later!"
+      );
+    } else {
+      axios
+        .post(baseUrl, { email, password })
+        .then((res) => {
+          if (res.status === 200) {
+            const token = res.headers.authorization.split(" ")[1];
+            if (token !== null) {
+              console.log(res);
+              console.log(token);
+              sessionStorage.setItem("jwt", token);
+              setValidLoginAttempts(0);
+              setLoginErrorMessages("");
+              setLoginSuccess("You have logged in successfully!!!");
+              setLoggedinUser(email);
+              login();
+            } else {
+              setValidLoginAttempts(validLoginAttempts + 1);
+              alert("Failed token!!!");
+              setLoggedinUser("");
+            }
           } else {
-            alert("Failed token!!!");
+            setValidLoginAttempts(validLoginAttempts + 1);
+            alert("Login unsuccessful!!!");
             setLoggedinUser("");
           }
-        } else {
-          alert("Login unsuccessful!!!");
+        })
+        .then(() => {
+          setValidLoginAttempts(0);
+          setLoginErrorMessages("");
+          setEmail("");
+          setPassword("");
+        })
+        .catch((err) => {
+          console.log(err);
+          setValidLoginAttempts(validLoginAttempts + 1);
+          alert("PROBLEM WITH LOGIN!!!");
           setLoggedinUser("");
-        }
-      })
-      .then(() => {
-        setEmail("");
-        setPassword("");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("PROBLEM WITH LOGIN!!!");
-        setLoggedinUser("");
-      });
-console.log("this is " +loggedInUser)
-    // if (validLoginAttempts >= 2) {
-    //   setLoginErrorMessages(
-    //     "Maximum login attempts reached. Please try again later!"
-    //   );
-    //   return;
-    // }
-
-    // if (
-    //   validEmail === "2007048@brunel.ac.uk" &&
-    //   validPassword === "PassWorD20.2*2."
-    // ) {
-    //   setLoginSuccess("You have logged in successfully!!!");
-    //   setLoginErrorMessages("");
-    //   setValidLoginAttempts(0);
-    // } else {
-    //   setLoginErrorMessages("Incorrect email address or password!");
-    //   setValidLoginAttempts(validLoginAttempts + 1);
-    // }
+        });
+      console.log("this is " + loggedInUser);
+    }
   };
 
   const panelAnimation = () => {

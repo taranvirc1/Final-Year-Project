@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import newPassword from "../../images/login-register-icons/reset_email.svg";
+import new_password from "../../images/login-register-icons/reset_email.svg";
 // import { Link } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/NewPassword.css";
 import axios from "axios";
@@ -14,36 +14,34 @@ function NewPassword() {
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post(baseUrl, newPassword)
-      .then((res) => {
-        console.log(res);
-        console.log(newPassword);
-        if (res.status === 200) {
-          alert("Password has been updated!!!");
-          setUpdateSuccess(`Password has been reset successfully!!!`);
-          setNewPassword("");
-          setConfirmPassword("");
-        }
-      })
-      .catch((error) => {
-        console.log(newPassword);
-        console.log(error);
-        alert("Password could not be updated!!!");
-        setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
-      });
-
-    // if (validConfirmPassword === validPassword) {
+    // if (confirmPassword === newPassword) {
     //   setUpdateSuccess("Password has been reset successfully!");
     //   setErrorMessage("");
     // }
-    // if (validPassword === "") {
-    //   setErrorMessage("Password required!");
-    // } else if (validConfirmPassword === "") {
-    //   setErrorMessage("Password confirmation required!");
-    // } else if (validConfirmPassword !== validPassword) {
-    //   setErrorMessage("Passwords do not match!");
-    // }
+    if (newPassword === "" || confirmPassword === "") {
+      setErrorMessage("Password and confirm password required!");
+    } else if (confirmPassword !== newPassword) {
+      setErrorMessage("Passwords do not match!");
+    } else {
+      axios
+        .post(baseUrl, newPassword)
+        .then((res) => {
+          console.log(res);
+          console.log(newPassword);
+          if (res.status === 200) {
+            alert("Password has been updated!!!");
+            setUpdateSuccess(`Password has been reset successfully!!!`);
+            setNewPassword("");
+            setConfirmPassword("");
+          }
+        })
+        .catch((error) => {
+          console.log(newPassword);
+          console.log(error);
+          alert("Password could not be updated!!!");
+          setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
+        });
+    }
   };
 
   const indicator = document.querySelector(".pass-indicator");
@@ -141,8 +139,11 @@ function NewPassword() {
               onSubmit={handleUpdateSubmit}
             >
               <h2 className="form-title">New Password</h2>
-              {updateSuccess && <p className="emailSuccess">{updateSuccess}</p>}
-              {errorMessage && <p>{errorMessage}</p>}
+              {updateSuccess ? (
+                <p className="emailSuccess">{updateSuccess}</p>
+              ) : (
+                errorMessage && <p>{errorMessage}</p>
+              )}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
@@ -187,7 +188,7 @@ function NewPassword() {
                 account once again!
               </p>
             </div>
-            <img src={newPassword} className="image" alt="sign in logo" />
+            <img src={new_password} className="image" alt="sign in logo" />
           </div>
         </div>
       </div>
