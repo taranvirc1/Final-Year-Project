@@ -15,41 +15,41 @@ function ResetPassword() {
   const handleEmailSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post(baseUrl, email)
-      .then((res) => {
-        console.log(res);
-        console.log(email);
-        if (res.status === 200) {
-          alert(`Found email address. We have sent an email to ${email}`);
-          setEmailSuccess(
-            `An email has been sent to ${email} with instructions to reset password!!!`
+    if (email === "2007048@brunel.ac.uk") {
+      setEmailSuccess(
+        `An email has been sent to ${email} with instructions to reset password!!!`
+      );
+      setEmailErrorMessage("");
+    }
+    if (email === "") {
+      setEmailErrorMessage("Email Address required!");
+    } else if (!email.match(regexEmail)) {
+      setEmailErrorMessage(
+        "The email address you entered is invalid. Please, try again!"
+      );
+    } else {
+      axios
+        .post(baseUrl, email)
+        .then((res) => {
+          console.log(res);
+          console.log(email);
+          if (res.status === 200) {
+            alert(`Found email address. We have sent an email to ${email}`);
+            setEmailSuccess(
+              `An email has been sent to ${email} with instructions to reset password!!!`
+            );
+            setEmail("");
+          }
+        })
+        .catch((error) => {
+          console.log(email);
+          console.log(error);
+          alert("Email does not exist!!!");
+          setEmailErrorMessage(
+            "The email address you entered is invalid. Please, try again!"
           );
-          setEmail("");
-        }
-      })
-      .catch((error) => {
-        console.log(email);
-        console.log(error);
-        alert("Email does not exist!!!");
-        setEmailErrorMessage(
-          "The email address you entered is invalid. Please, try again!"
-        );
-      });
-
-    // if (validEmail === "2007048@brunel.ac.uk") {
-    //   setEmailSuccess(
-    //     `An email has been sent to ${validEmail} with instructions to reset password!!!`
-    //   );
-    //   setEmailErrorMessage("");
-    // }
-    // if (validEmail === "") {
-    //   setEmailErrorMessage("Email Address required!");
-    // } else if (!validEmail.match(regexEmail)) {
-    //   setEmailErrorMessage(
-    //     "The email address you entered is invalid. Please, try again!"
-    //   );
-    // }
+        });
+    }
   };
 
   return (
