@@ -21,8 +21,7 @@ import UPM from "./components/UPM/UPM";
 import Quizzes from "./components/Quizzes/Quizz";
 import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
 import Avatar from "./components/Section Avatar/Avatar";
-import AccountTest from "./components/RegisterLogin/AccountTest";
-// import Signup from "./components/RegisterLogin/AccountFunctionality/Signup";
+
 function AppRoute() {
   return (
     <div>
@@ -30,11 +29,13 @@ function AppRoute() {
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<LandingPage />} />
-            {/* route for login */}
-            {/* <Route path="/account" element={<Signup />} /> */}
+            {/* route for account */}
             <Route path="/account" element={<Account />} />
-            {/* <Route path="/account" element={<AccountTest />} /> */}
             <Route path="/resetPassword" element={<ResetPassword />} />
+            {/* <Route
+              path="/resetPassword/:id/:token"
+              element={<ResetPassword />}
+            /> */}
             <Route path="/newPassword" element={<NewPassword />} />
             <Route path="/confirmAccount" element={<ConfirmAccount />} />
             {/* route for donations */}

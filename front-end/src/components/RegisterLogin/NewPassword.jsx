@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import new_password from "../../images/login-register-icons/reset_email.svg";
-// import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/NewPassword.css";
 import axios from "axios";
 
@@ -9,15 +9,30 @@ function NewPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [updateSuccess, setUpdateSuccess] = useState("");
+  const navigate = useNavigate();
+  const { id, token } = useParams();
   const baseUrl = "http://localhost:8080/reset_password";
+
+  const userValid = async () => {
+    const res = await fetch(`/forgot_password/${id}/${token}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const userData = await res.json();
+
+    if (userData.status === 201) {
+      console.log("user valid");
+    } else {
+      navigate("/");
+    }
+  };
 
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
 
-    // if (confirmPassword === newPassword) {
-    //   setUpdateSuccess("Password has been reset successfully!");
-    //   setErrorMessage("");
-    // }
     if (newPassword === "" || confirmPassword === "") {
       setErrorMessage("Password and confirm password required!");
     } else if (confirmPassword !== newPassword) {
@@ -43,6 +58,38 @@ function NewPassword() {
         });
     }
   };
+
+  const passwordSubmit = async (e) => {
+    e.preventDefault();
+
+    if (newPassword === "" || confirmPassword === "") {
+      setErrorMessage("Password and confirm password required!");
+    } else if (confirmPassword !== newPassword) {
+      setErrorMessage("Passwords do not match!");
+    } else {
+      const res = await fetch(`/${id}/${token}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ newPassword }),
+      });
+
+      const userData = await res.json();
+
+      if (userData.status === 201) {
+        alert("Password has been updated!!!");
+        setUpdateSuccess(`Password has been reset successfully!!!`);
+      } else {
+        alert("Password could not be updated!!!");
+        setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
+      }
+    }
+  };
+
+  useEffect(() => {
+    userValid();
+  }, []);
 
   const indicator = document.querySelector(".pass-indicator");
   const input = document.querySelector(".pass");
