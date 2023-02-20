@@ -44,6 +44,19 @@ function UPM() {
       });
   }, []);
 
+  //Upload users profile
+  const [dataImage, setImage] = useState(null);
+  function AvatarChange(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target.result;
+      // do something with the dataUrl, such as store it in your component state
+      setImage(dataUrl)
+    };
+    reader.readAsDataURL(file);
+  }
+
   return (
     <>
       <div className="upm-container">
@@ -90,6 +103,8 @@ function UPM() {
             </li>
             <li>
               <div className="upm-avatar">
+                <input type="file" onChange={AvatarChange} />
+                <img src={dataImage} alt="Avatar" />
                 <button>
                   <MdOutlineModeEdit size={25} />
                 </button>
