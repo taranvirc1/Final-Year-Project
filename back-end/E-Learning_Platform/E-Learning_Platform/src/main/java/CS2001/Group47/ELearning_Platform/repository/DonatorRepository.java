@@ -9,13 +9,11 @@ import org.springframework.stereotype.Repository;
 
 
 
-import CS2001.Group47.ELearning_Platform.model.Payment;
+import CS2001.Group47.ELearning_Platform.model.Donator;
 
 
 
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Integer> {
+public interface DonatorRepository extends JpaRepository<Donator, Integer> {
 }
-
-
