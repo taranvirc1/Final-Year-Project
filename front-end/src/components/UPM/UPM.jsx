@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../Styles/UPM/UPM.css";
 import { BsPerson } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -15,15 +15,34 @@ import { FcAbout } from "react-icons/fc";
 import { TiTickOutline } from "react-icons/ti";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { useEffect } from "react";
+import axios from 'axios'
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
-
+  const [user, setUser] = useState([]);
   const logoutUser = () => {
     setLoggedinUser("");
     sessionStorage.setItem("jwt", "");
     logout("/");
   };
+  const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMTE5OTIxQGJydW5lbC5hYy51ayIsImV4cCI6MTY3NjkxNTc2MH0.Io-KjLuXVENqj10Yc4V-NwcyozGJAPWZZGKQyC-0KUJJJj2nObSXuIScRljUeKT3BzL7hTziQT9TpYjm6m0PKg';
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+  const Api = 'http://localhost:8080/user/findByEmail';
+  const params = {
+    email: loggedInUser,
+  };
+  useEffect(() => {
+    axios.get(Api, { headers, params })
+      .then(response => {
+        setUser(response.data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -103,6 +122,7 @@ function UPM() {
                           type="text"
                           name="username"
                           placeholder="John Doe#4545"
+                          value={user.firstName}
                         />
                       </div>
                       <button className="upm-edit-button">
@@ -122,6 +142,7 @@ function UPM() {
                           type="email"
                           name="email"
                           placeholder="2119921@brunel.ac.uk"
+                          value={user.email}
                         />
                       </div>
                       <button className="upm-edit-button">
@@ -141,6 +162,7 @@ function UPM() {
                           type="password"
                           name="password"
                           placeholder="*************************"
+                          value={user.password}
                         />
                       </div>
                       <button className="upm-edit-button">
@@ -160,6 +182,7 @@ function UPM() {
                           type="text"
                           name="phone"
                           placeholder="12345678910"
+                          value={user.phone}
                         />
                       </div>
                       <button className="upm-edit-button">
@@ -198,6 +221,7 @@ function UPM() {
                           type="text"
                           name="firstname"
                           placeholder="John Doe#4545"
+                          value={user.firstName}
                         />
                       </div>
                       <button className="upm-edit-button">
@@ -216,7 +240,8 @@ function UPM() {
                         <input
                           type="text"
                           name="lastname"
-                          placeholder="2119921@brunel.ac.uk"
+                          placeholder=""
+                          value={user.lastName}
                         />
                       </div>
                       <button className="upm-edit-button">
@@ -233,9 +258,30 @@ function UPM() {
                           ></MdDateRange>
                         </span>
                         <input
-                          type="date"
+                          type="text"
                           name="DOB"
                           placeholder="*************************"
+                          value={user.dateOfBirth}
+                        />
+                      </div>
+                      <button className="upm-edit-button">
+                        <MdOutlineModeEdit className="upm-icon" size={40} />
+                      </button>
+                    </form>
+
+                    <label>Country</label>
+                    <form class="upm-form">
+                      <div class="upm-form-input-holder">
+                        <span class="icon">
+                          <MdDateRange
+                            class="fa fa-envelope"
+                            aria-hidden="true"
+                          ></MdDateRange>
+                        </span>
+                        <input
+                          type="text"
+                          name="DOB"
+                          value={user.country}
                         />
                       </div>
                       <button className="upm-edit-button">
