@@ -90,18 +90,28 @@ function CoursesVideos () {
 
 
 
+    const [checkrating, setCheckRating] = useState("");
+    const [checkReview, setCheckReview] = useState("");
 
 
   const{courseID,ratingStars,reviewDesc,createdAt}=review
   const onInputChange=(e)=>{
     setReview({...review,[e.target.name]: e.target.value})
+    setCheckReview(e.target.value)
   };
   
   const onStarsClick=(rating)=> {
   setReview({...review,ratingStars:rating,courseID: courseID})
+  setCheckRating(rating)
+
   };
 
 
+  const enabled =
+  checkrating.length > 0 &&
+  checkReview.length > 0;
+
+console.log(checkReview.length);
   const onSubmit= async (e)=>{
     e.preventDefault();
     setForm(false);
@@ -118,6 +128,7 @@ function CoursesVideos () {
    reviewDesc:"",
 createdAt:getCurrentDate,
 
+
         });
       }
     })
@@ -127,8 +138,9 @@ createdAt:getCurrentDate,
       alert("Registration not sent!!!");
     });
  
-
-
+   // setForm(false); 
+  
+   //setHover(0)
   };
 
 
@@ -550,9 +562,15 @@ function lightbox_close() {
                   onChange={(e) => onInputChange(e)}
                   placeholder="Reivew Here..."></textarea>
  <Link to="/coursesvideos">
- <button className="submitButton"
+ <button className="submitButton" type = "button"
+      disabled={!(checkReview&&checkrating)}
+      onClick={onSubmit}
       
-      onClick={onSubmit}> Submit </button>
+      
+      
+      
+      
+      > Submit </button>
             </Link>
       
    

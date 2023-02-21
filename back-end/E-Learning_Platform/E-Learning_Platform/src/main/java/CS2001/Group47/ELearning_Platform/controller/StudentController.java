@@ -97,10 +97,5 @@ public class StudentController {
     	return (studentService.findByEmail(email));
     	
     }
-    @RequestMapping(value = "/username", method = RequestMethod.GET)
-    @ResponseBody
-    public String currentUserName(Principal principal) {
-        return principal.getName();
-    }
-
+  
 }
