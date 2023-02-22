@@ -117,10 +117,10 @@ public class Payment implements Serializable {
   public void setId(Integer id) {
       this.id = id;
   }
-  public int getDAmount() {
+  public int getdAmount() {
       return dAmount;
   }
-  public void setDAmount(int dAmount) {
+  public void setdAmount(int dAmount) {
       this.dAmount = dAmount;
   }
 

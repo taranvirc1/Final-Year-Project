@@ -42,7 +42,7 @@ public class SecurityConfiguration {
 
         http
             .authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/user")
+            .antMatchers(HttpMethod.POST, "/user", "/donators", "/payments")
             .permitAll()
             .and()
             .authorizeRequests()
