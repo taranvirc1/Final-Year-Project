@@ -42,7 +42,7 @@ public class PaymentDTO {
 
 
   public PaymentDTO(Payment payment) {
-      this.dAmount = payment.getDAmount();
+      this.dAmount = payment.getdAmount();
       this.billingFirstName = payment.getBillingFirstName();
       this.billingLastName = payment.getBillingLastName();
       this.cardNo = payment.getCardNo();
@@ -59,14 +59,14 @@ public class PaymentDTO {
 
 
 
-  public int getDAmount() {
+  public int getdAmount() {
       return dAmount;
   }
 
 
 
 
-  public void setDAmount(int dAmount) {
+  public void setdAmount(int dAmount) {
       this.dAmount = dAmount;
   }
 
@@ -225,7 +225,7 @@ public class PaymentDTO {
 
   public Payment toPayment() {
       Payment payment = new Payment();
-      payment.setDAmount(dAmount);
+      payment.setdAmount(dAmount);
       payment.setBillingFirstName(billingFirstName);
       payment.setBillingLastName(billingLastName);
       payment.setCardNo(cardNo);
