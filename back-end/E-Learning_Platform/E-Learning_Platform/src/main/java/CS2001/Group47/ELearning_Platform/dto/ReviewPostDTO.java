@@ -3,6 +3,8 @@ package CS2001.Group47.ELearning_Platform.dto;
 import java.util.Date;
 
 public class ReviewPostDTO {
+    private int ratingID;
+  
     private	int ratingStars;
     private String reviewDesc;
     private	int courseID;
@@ -39,6 +41,15 @@ public class ReviewPostDTO {
         this.email = email;
         this.createdAt = createdAt;
        // this.studentId = studentId;
+    }
+
+    public int getRatingID() {
+        return ratingID;
+    }
+
+
+    public void setRatingID(int ratingID) {
+        this.ratingID = ratingID;
     }
 
 
