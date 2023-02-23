@@ -94,7 +94,7 @@ function CoursesVideos () {
 
 
 
-    const [checkrating, setCheckRating] = useState("");
+    const [checkrating, setCheckRating] = useState(0);
     const [checkReview, setCheckReview] = useState("");
 
 
@@ -111,6 +111,24 @@ function CoursesVideos () {
   };
 
 
+  
+function handleEdit(ratingID){
+  const i =reviews.findIndex((review)=>review.ratingID===ratingID);
+  setReview(reviews[i]);
+  
+  const reviewCopy = {
+    ratingID: reviews[i].ratingID,
+    courseID:"1",
+    // studentId:"1",
+     ratingStars: reviews[i].ratingStars,
+     reviewDesc: reviews[i].reviewDesc,
+     createdAt: getCurrentDate
+     
+  }
+  setReview(reviewCopy);
+  }
+
+
   const enabled =
   checkrating.length > 0 &&
   checkReview.length > 0;
@@ -119,7 +137,38 @@ console.log(checkReview.length);
   const onSubmit= async (e)=>{
     e.preventDefault();
     setForm(false);
+
     const jwt = sessionStorage.getItem('jwt');
+    
+    if (review.ratingID){
+
+     axios
+      .put(`http://localhost:8080/update/${review.ratingID}`, review,{  headers: {"Authorization" : `Bearer ${jwt}`} }).then(
+        (d) => {
+          const reviewsCopy = [...reviews];
+          const i = reviewsCopy.findIndex((review) => review.ratingID === d.id);
+          reviewsCopy[i] = d;
+          setReviews(reviewsCopy)
+
+          setReview({
+            courseID:"1",
+            ratingStars:"",
+                 reviewDesc:"",
+           createdAt:getCurrentDate,
+  
+  
+          });
+        }
+        )//;
+        .catch(async (error) => {
+          console.log(error);
+        
+         // alert("Registration not sent!!!");
+        });
+
+        
+    }else{
+
     await axios
     .post("http://localhost:8080/review", review,{  headers: {"Authorization" : `Bearer ${jwt}`} })
     .then((response) => {
@@ -135,22 +184,24 @@ createdAt:getCurrentDate,
 
         });
       }
-      if (response.status(500)) {
+      if (response.status===400) {
         alert("you already have a review");
       }
 
     })
+    
     .catch(async (error) => {
       console.log(review);
       console.log(error);
     
      // alert("Registration not sent!!!");
     });
- 
+    setCheckReview("");
    // setForm(false); 
-  
-   //setHover(0)
-  };
+  // onStarsClick(0);
+   //setHover(0);
+   
+  }};
 
 
 
@@ -205,6 +256,12 @@ const getAverage=(reviews)=>{
  // console.log(averagee)
   return averagee;
 }
+
+
+
+
+
+
 
 /*
 
@@ -526,7 +583,8 @@ function lightbox_close() {
 
        
        <div className="averageRating"> <i className="star fa fa-star">{average} Course Rating | {totalReviews} ratings</i></div>
-       <button className="submitButton" onClick={() => handleForm()}>Review</button>
+       <button className="submitButton" onClick={() => handleForm()
+      }>Review</button>
         
        {showForm && (
 
@@ -552,9 +610,9 @@ function lightbox_close() {
               className={index <= (hover || ratingStars) ? "on" : "off"}
               onClick={() => onStarsClick(index)}
               onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(ratingStars)}
+             // onMouseLeave={() => setHover(ratingStars)}
               name = "ratingStars"
-              value = {index}
+                  value = {review.ratingStars}
              // onChange={(e) =>  onInputChange(e.target.value)}
 
 
@@ -567,8 +625,9 @@ function lightbox_close() {
       </div>
       <textarea Classname="textReview"  type="review"
                   name = "reviewDesc"
-                  value={reviewDesc}
+                 
                   onChange={(e) => onInputChange(e)}
+                  value={review.reviewDesc}
                   placeholder="Reivew Here..."></textarea>
  <Link to="/coursesvideos">
  <button className="submitButton" type = "button"
@@ -611,7 +670,9 @@ function lightbox_close() {
               </div>
               {loggedInUser === reviewd.students.email && (
  
- <button onClick={() => handleForm()}>Edit Review</button>
+ <button onClick={() =>{
+        handleEdit(reviewd.ratingID)
+  handleForm()}}>Edit Review</button>
 )}
             </div>
            ))}
