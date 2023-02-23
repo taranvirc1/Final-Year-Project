@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface Rate_ReviewRepository extends JpaRepository<Rate_Review, Integer> {
     List<Rate_Review> findAllByOrderByRatingStarsAsc();
-
+    Rate_Review findByStudents_Email(String email);
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,8 @@ import CS2001.Group47.ELearning_Platform.service.Rate_ReviewService;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+
+import javax.management.RuntimeErrorException;
 
 @RestController
 public class Rate_ReviewController {
@@ -37,8 +40,14 @@ public class Rate_ReviewController {
       Rate_ReviewService reviewService;
     @PostMapping("/review")
     public ResponseEntity<Optional<Rate_Review>> addReview(@RequestBody ReviewPostDTO newReviewPostDTO, Principal principal) {
+        String email = currentUserName(principal);
+        
+        if (reviewService.findByEmail(email)!=null) {
+            return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
+        };
+  
          Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
-         String email = currentUserName(principal);
+        
          Student  student = studentController.getByEmail(email);
 
          Rate_Review newReview = new Rate_Review(newReviewPostDTO.getRatingStars(),newReviewPostDTO.getReviewDesc(), courses,student,newReviewPostDTO.getCreatedAt());
@@ -63,6 +72,13 @@ public class Rate_ReviewController {
     @ResponseBody
     public String currentUserName(Principal principal) {
         return principal.getName();
+    }
+
+    @GetMapping("/review/getByEmail")
+    public Rate_Review getByEmail(@RequestParam String email) {
+    	
+    	return (reviewService.findByEmail(email));
+    	
     }
 
 }
