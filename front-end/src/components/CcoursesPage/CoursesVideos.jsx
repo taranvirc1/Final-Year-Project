@@ -142,7 +142,7 @@ console.log(checkReview.length);
     
     if (review.ratingID){
 
-     axios
+    await axios
       .put(`http://localhost:8080/update/${review.ratingID}`, review,{  headers: {"Authorization" : `Bearer ${jwt}`} }).then(
         (d) => {
           const reviewsCopy = [...reviews];
@@ -166,7 +166,7 @@ console.log(checkReview.length);
          // alert("Registration not sent!!!");
         });
 
-        
+
     }else{
 
     await axios
@@ -197,11 +197,15 @@ createdAt:getCurrentDate,
      // alert("Registration not sent!!!");
     });
     setCheckReview("");
+
    // setForm(false); 
   // onStarsClick(0);
    //setHover(0);
-   
-  }};
+
+  }
+  retrieveReviews();
+
+};
 
 
 
@@ -215,8 +219,8 @@ createdAt:getCurrentDate,
   const jwt = sessionStorage.getItem('jwt');
   console.log(jwt);
 
-  useEffect(() => {
-    axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${jwt}`} })
+  const retrieveReviews = async() => {
+    await axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${jwt}`} })
       .then(response => {
         setReviews(response.data);
         setTotalReviews(response.data.length)
@@ -227,11 +231,11 @@ createdAt:getCurrentDate,
          console.error(error)
          alert("cant get reviews")
       });
-    },[]);
+    };
 
   useEffect(()=>{
    // getReviews();
-
+   retrieveReviews();
    
 },[]);
 
@@ -274,6 +278,7 @@ const deleteReview=(ratingID)=>{
   .catch(error=>{
      console.error(error)
   });
+  retrieveReviews();
 }
 
 
