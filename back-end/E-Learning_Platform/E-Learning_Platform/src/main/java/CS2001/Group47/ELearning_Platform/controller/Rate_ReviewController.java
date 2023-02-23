@@ -3,6 +3,7 @@ package CS2001.Group47.ELearning_Platform.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,6 +80,8 @@ public class Rate_ReviewController {
         return principal.getName();
     }
 
+    
+
     @GetMapping("/review/getByEmail")
     public Rate_Review getByEmail(@RequestParam String email) {
     	
@@ -117,4 +120,17 @@ public class Rate_ReviewController {
 
 
 }
+
+@DeleteMapping("delete/{ratingID}")
+
+public String deleteStudent(@PathVariable Integer ratingID) {
+
+    //Delete student by using their ID
+    reviewService.deleteReview(ratingID);
+    return "Student Deleted";
+
+}
+
+
+
 }

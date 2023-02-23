@@ -205,6 +205,8 @@ createdAt:getCurrentDate,
 
 
 
+  
+
 
   const [reviews, setReviews] = useState([]);
   const [average, setAverage] = useState(0);
@@ -256,6 +258,35 @@ const getAverage=(reviews)=>{
  // console.log(averagee)
   return averagee;
 }
+
+
+const deleteReview=(ratingID)=>{
+
+  axios
+  .delete(`http://localhost:8080/delete/${ratingID}`,{  headers: {"Authorization" : `Bearer ${jwt}`} })
+  .then(response => {
+    if (response.data!=null){
+      alert("deleted successfully ")
+    }
+
+
+  })
+  .catch(error=>{
+     console.error(error)
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -681,7 +712,7 @@ function lightbox_close() {
 
 {loggedInUser === reviewd.students.email && (
  
- <button className="deleteReview" >Delete</button>
+ <button className="deleteReview"  onClick={() => deleteReview(reviewd.ratingID)}>Delete</button>
 
   
 )}
