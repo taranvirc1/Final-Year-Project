@@ -512,3 +512,40 @@ margin-bottom: 5px;
   color: yellow;
   margin-bottom: 5px;
 }
+
+.editReview{
+  border: 2px solid #555555;
+  background: none;
+  padding: 4px 8px;
+  text-align: center;
+
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white;
+
+}
+.editReview:hover {
+  background-color: #4CAF50;
+  color: black;
+}
+.deleteReview{
+  background:none;
+  border: 2px solid #555555;
+   padding: 4px 8px;
+  text-align: center;
+
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white;
+
+}
+.deleteReview:hover {
+  background-color: #a53e4f;
+  color: black;
+}

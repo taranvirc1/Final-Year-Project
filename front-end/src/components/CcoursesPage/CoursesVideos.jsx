@@ -670,10 +670,22 @@ function lightbox_close() {
               </div>
               {loggedInUser === reviewd.students.email && (
  
- <button onClick={() =>{
+ <button className="editReview" onClick={() =>{
         handleEdit(reviewd.ratingID)
-  handleForm()}}>Edit Review</button>
+  handleForm()}}>Edit</button>
+
+  
 )}
+
+
+
+{loggedInUser === reviewd.students.email && (
+ 
+ <button className="deleteReview" >Delete</button>
+
+  
+)}
+
             </div>
            ))}
             
