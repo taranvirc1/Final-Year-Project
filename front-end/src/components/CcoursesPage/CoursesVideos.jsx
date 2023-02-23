@@ -10,8 +10,8 @@ function CoursesVideos () {
   const current = new Date();
   const getCurrentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
-
-
+ 
+  
   //const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState({
@@ -31,7 +31,11 @@ function CoursesVideos () {
 
 
   const [loggedInUser, setLoggedinUser] = useOutletContext();
-  console.log("this"+loggedInUser);
+  const [currentUser, setCurrentUser] = useState({
+    email: loggedInUser
+  });
+//console.log("ff"+currentUser.email)
+  console.log("this");
   const [userdata, setUserdata] = useState("");
 
  /* useEffect(()=>{
@@ -131,11 +135,16 @@ createdAt:getCurrentDate,
 
         });
       }
+      if (response.status(500)) {
+        alert("you already have a review");
+      }
+
     })
     .catch(async (error) => {
       console.log(review);
       console.log(error);
-      alert("Registration not sent!!!");
+    
+     // alert("Registration not sent!!!");
     });
  
    // setForm(false); 
@@ -581,8 +590,15 @@ function lightbox_close() {
              <div className="reviews">
               {reviews.slice(0,visible).map(reviewd=> (
               <div className="eachReview">
+
+
+
+
+
+
+
                 <div className="top-review"> 
-                  <h4 className="reviewerName">{reviewd.students.firstName}<span></span> {reviewd.students.lastName}</h4>
+                  <h4 className="reviewerName">{reviewd.students.firstName}<span></span> {reviewd.students.email}</h4>
                   {new Array(reviewd.ratingStars).fill(null).map(() => (
                   <i className="fas fa-star icon-c" />
         ))}
@@ -593,6 +609,10 @@ function lightbox_close() {
                 <p2>{reviewd.createdAt}</p2>
 
               </div>
+              {loggedInUser === reviewd.students.email && (
+ 
+ <button onClick={() => handleForm()}>Edit Review</button>
+)}
             </div>
            ))}
             

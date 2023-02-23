@@ -25,4 +25,8 @@ public class Rate_ReviewService {
   
 	}
 
+	public Rate_Review findByEmail(String email) {
+		return reviewRepository.findByStudents_Email(email);
+	}
+
 }
