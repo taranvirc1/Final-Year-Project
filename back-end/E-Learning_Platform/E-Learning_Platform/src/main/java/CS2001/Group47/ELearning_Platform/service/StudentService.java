@@ -46,7 +46,7 @@ public class StudentService {
 
 	public void deleteStudent(Integer id) {
 		Student student = studentRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Student"));
+				.orElseThrow(() -> new ResourceNotFoundException("Student", "id", id));
 		studentRepository.delete(student);
 	}
 
