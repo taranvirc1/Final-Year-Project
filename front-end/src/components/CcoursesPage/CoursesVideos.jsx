@@ -272,21 +272,25 @@ const deleteReview=(ratingID)=>{
     if (response.data!=null){
       alert("deleted successfully ")
     }
+    retrieveReviews();
 
 
   })
   .catch(error=>{
      console.error(error)
   });
-  retrieveReviews();
 }
 
 
 
 
+const [totalSum,setTotalSum]=useState(0);
 
+useEffect(() => {
+  const total = reviews.reduce((acc, row) => acc + parseFloat(row.ratingStars), 0);
 
-
+  setTotalSum((total/totalReviews).toFixed(1))
+}, [reviews]);
 
 
 
@@ -483,7 +487,7 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://www.youtube.com/watch?v=eIrMbAQSU34')}
+        < a href="#!"onClick={() => handleClick('https://youtu.be/ddlCWZxwB24')}
 
 >        
          
@@ -618,7 +622,7 @@ function lightbox_close() {
   
 
        
-       <div className="averageRating"> <i className="star fa fa-star">{average} Course Rating | {totalReviews} ratings</i></div>
+       <div className="averageRating"> <i className="star fa fa-star">{totalSum} Course Rating | {totalReviews} ratings</i></div>
        <button className="submitButton" onClick={() => handleForm()
       }>Review</button>
         
@@ -740,7 +744,7 @@ function lightbox_close() {
             {/* Wrapper for slides */}
             
             <div className="sponsor-header">
-y
+
                         <h2 >Sponsored By</h2>
                        
                 <div className="row">
