@@ -176,7 +176,7 @@ function UPM() {
   }
 
   function updateBio() {
-    axios.put(`http://localhost:8080/bio/${userId}`, bio, config)
+    axios.put(`http://localhost:8080/user/bio/${userId}`, bio, config)
       .then(response => {
         console.log("User updated:", response.data);
       })
@@ -226,9 +226,10 @@ function UPM() {
     fileInput.current.click();
   }
 
+
   return (
     <>
-      <div className="upm-container">
+      <div className="upmcontainer">
         <div className="upm-left-side">
           <nav className="upm-navigation">
             <li>
@@ -552,6 +553,7 @@ function UPM() {
                           type="radio"
                           name="firstname"
                           placeholder="John Doe#4545"
+
                         />
                         <label>Dark</label>
                       </div>

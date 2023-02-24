@@ -154,19 +154,26 @@ public class StudentController {
         }
     }
 
-    @PostMapping("/bio/{userId}")
-    public void Postbio(@PathVariable Integer userId, @RequestBody String bio) {
-        studentService.saveBio(userId, bio);
-    }
-
-    @PutMapping("/bio/{userId}")
-    public void savebIO(@PathVariable Integer userId, @RequestBody String bio) {
-        studentService.saveBio(userId, bio);
-    }
 
     @GetMapping("/bio/{userId}")
-    public String getFirstName(@PathVariable Integer bio) {
+    public String getBio(@PathVariable Integer bio) {
         return studentService.getBio(bio);
+    }
+
+    @PutMapping("/user/bio/{id}")
+    public Student updateUserBio(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            // Update the fields that the user changes
+            if (studentPostDTO.getBio() != null) {
+                student.setBio(studentPostDTO.getBio());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
     }
 
     // Profile Controller place
@@ -196,6 +203,22 @@ public class StudentController {
     // student.setPhone(studentPostDTO.getPhone());
     // }
 
+
+    @PutMapping("/user/option/{id}")
+    public Student updateOption(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            // Update the fields that the user changes
+            if (studentPostDTO.getOptionValue() != null) {
+                student.setOptionValue(studentPostDTO.getOptionValue());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
     @PostMapping("/user")
     public ResponseEntity<Optional<Student>> addUser(@RequestBody StudentPostDTO newStudentDTO) {
         // StudentDTO has null attributes
@@ -221,8 +244,8 @@ public class StudentController {
         Student newStudent = new Student(
                 newStudentDTO.getFirstName(),
                 newStudentDTO.getLastName(),
-                newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
-                newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()));
+                null, newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
+                newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()), null, null, null);
         // Add student through StudentService
         studentService.addStudent(newStudent);
 
@@ -265,7 +288,7 @@ public class StudentController {
     // @RequestMapping(value = "/username", method = RequestMethod.GET)
     // @ResponseBody
     // public String currentUserName(Principal principal) {
-    //     return principal.getName();
+    // return principal.getName();
     // }
 
 }
