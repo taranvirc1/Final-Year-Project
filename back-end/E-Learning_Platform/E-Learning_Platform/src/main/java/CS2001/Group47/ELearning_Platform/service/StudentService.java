@@ -127,4 +127,28 @@ public class StudentService {
             throw new RuntimeException("User not found");
         }
     }
+
+
+	public void saveOption(Integer userId, String bio) {
+        Optional<Student> userOptional = studentRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            Student user = userOptional.get();
+            user.setOptionValue(bio);
+            studentRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+    
+    public String getOption(Integer userId) {
+        Optional<Student> userOptional = studentRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            Student user = userOptional.get();
+            return user.getOptionValue();
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+    
+
 }

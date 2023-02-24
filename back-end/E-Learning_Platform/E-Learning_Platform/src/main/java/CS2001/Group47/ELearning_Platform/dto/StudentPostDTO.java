@@ -12,12 +12,15 @@ public class StudentPostDTO {
     String url;
     byte[] avatar;
     String bio;
+    String optionValue;
 
-    public StudentPostDTO(String bio, String url, byte[] avatar, String firstName, String lastName, String dateOfBirth,
+    public StudentPostDTO(String optionValue, String bio, String url, byte[] avatar, String firstName, String lastName,
+            String dateOfBirth,
             String country,
             String phone, String email,
             String password) {
         super();
+        this.optionValue = optionValue;
         this.bio = bio;
         this.url = url;
         this.avatar = avatar;
@@ -28,6 +31,14 @@ public class StudentPostDTO {
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    public String getOptionValue() {
+        return optionValue;
+    }
+
+    public void setOptionValue(String optionValue) {
+        this.optionValue = optionValue;
     }
 
     public String getBio() {
@@ -112,7 +123,8 @@ public class StudentPostDTO {
 
     @Override
     public String toString() {
-        return "StudentPostDTO [firstName=" + firstName + "profile" + url + "bio=" + bio + "profile=" + avatar
+        return "StudentPostDTO [firstName=" + firstName + "profile" + "optionValue=" + optionValue + url + "bio=" + bio
+                + "profile=" + avatar
                 + ", lastName="
                 + lastName + ", dateoOfBirth=" + dateOfBirth
                 + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password=" + password + "]";

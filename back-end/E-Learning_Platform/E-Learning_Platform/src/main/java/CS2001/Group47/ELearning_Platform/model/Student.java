@@ -72,7 +72,8 @@ public class Student implements Serializable {
 	@Lob
 	@Column(name = "url", length = Integer.MAX_VALUE, nullable = true)
 	private String url;
-
+	@Column(name = "option_value")
+	private String optionValue;
 	@Lob
 	@Column(name = "image")
 	private byte[] avatar;
@@ -93,7 +94,7 @@ public class Student implements Serializable {
 
 	}
 
-	public Student(String firstName, String lastName, String dateOfBirth,
+	public Student(String optionValue, String firstName, String lastName, String dateOfBirth,
 			String country, String phone, String email,
 			String password) {
 
@@ -108,11 +109,13 @@ public class Student implements Serializable {
 
 	}
 
-	public Student(String bio, byte[] avatar, String url, String firstName, String lastName, String dateOfBirth,
+	public Student(String optionValue, String bio, byte[] avatar, String url, String firstName, String lastName,
+			String dateOfBirth,
 			String country, String phone, String email,
 			String password) {
 
 		super();
+		this.optionValue = optionValue;
 		this.bio = bio;
 		this.avatar = avatar;
 		this.url = url;
@@ -124,6 +127,14 @@ public class Student implements Serializable {
 		this.email = email;
 		this.password = password;
 
+	}
+
+	public String getOptionValue() {
+		return optionValue;
+	}
+
+	public void setOptionValue(String optionValue) {
+		this.optionValue = optionValue;
 	}
 
 	public String getBio() {
@@ -248,7 +259,8 @@ public class Student implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + studentId + url + "profile=" + avatar + "bio=" + bio + ", firstName=" + firstName
+		return "Student [id=" + studentId + url + "profile=" + avatar + "bio=" + bio + "optionValue=" + optionValue
+				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
 				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + "]";
