@@ -12,6 +12,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,65 +34,73 @@ public class Student implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer studentId;
-	
+
 	@NotBlank
 	String firstName;
-	
+
 	@NotBlank
 	String lastName;
-	
+
 	@NotBlank
 	String dateOfBirth;
-	
+
 	@NotBlank
 	String country;
-	
+
 	@NotBlank
 	String phone;
-	
+
 	@NotBlank
 	@Column(unique = true)
 	String email;
-	
+
 	@NotBlank
 	String password;
 
 	String resetPasswordToken;
-	
+	@Column(name = "Biog")
+	private String bio;
+
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date createdAtDate;
-	
+	@Lob
+	@Column(name = "url", length = Integer.MAX_VALUE, nullable = true)
+	private String url;
+
+	@Lob
+	@Column(name = "image")
+	private byte[] avatar;
+
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date updatedAt;
 
+	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
+	@JsonIgnore
 
-	@OneToMany(mappedBy = "students"
-	, cascade = CascadeType.ALL
-	  )
-	  @JsonIgnore
-
-   private List <Rate_Review> rate_Reviews = new ArrayList<>() ;
-	
-
-   
+	private List<Rate_Review> rate_Reviews = new ArrayList<>();
 
 	public Student() {
-		
+
 		super();
-	
+
 	}
-	
-	public Student(String firstName, String lastName, String dateOfBirth, String country, String phone, String email, String password) {
-		
+
+	public Student(String bio, byte[] avatar, String url, String firstName, String lastName, String dateOfBirth,
+			String country, String phone, String email,
+			String password) {
+
 		super();
+		this.bio = bio;
+		this.avatar = avatar;
+		this.url = url;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
@@ -99,8 +108,31 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
-		
-		
+
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String imageUrl) {
+		this.url = imageUrl;
 	}
 
 	public Integer getStudentId() {
@@ -199,14 +231,12 @@ public class Student implements Serializable {
 		this.rate_Reviews = rate_Reviews;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Student [id=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
+		return "Student [id=" + studentId + url + "profile=" + avatar + "bio=" + bio + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
 				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + "]";
 	}
 
-	
-	
 }

@@ -1,7 +1,7 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
 public class StudentPostDTO {
-	
+
     String firstName;
     String lastName;
     String dateOfBirth;
@@ -9,17 +9,41 @@ public class StudentPostDTO {
     String phone;
     String email;
     String password;
-    
-    public StudentPostDTO(String firstName, String lastName, String dateoOfBirth, String country, String phone,
-            String email, String password) {
+    String url;
+    byte[] avatar;
+    String bio;
+
+    public StudentPostDTO(String bio, String url, byte[] avatar, String firstName, String lastName, String dateOfBirth,
+            String country,
+            String phone, String email,
+            String password) {
         super();
+        this.bio = bio;
+        this.url = url;
+        this.avatar = avatar;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateoOfBirth;
+        this.dateOfBirth = dateOfBirth;
         this.country = country;
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public byte[] getAvatarByte() {
+        return avatar;
+    }
+
+    public void setAvatarByte(byte[] avatar) {
+        this.avatar = avatar;
     }
 
     public String getFirstName() {
@@ -78,12 +102,20 @@ public class StudentPostDTO {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "StudentPostDTO [firstName=" + firstName + ", lastName=" + lastName + ", dateoOfBirth=" + dateOfBirth
-                + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password=" + password + "]";
+    public String getUrl() {
+        return url;
     }
 
-    
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentPostDTO [firstName=" + firstName + "profile" + url + "bio=" + bio + "profile=" + avatar
+                + ", lastName="
+                + lastName + ", dateoOfBirth=" + dateOfBirth
+                + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password=" + password + "]";
+    }
 
 }
