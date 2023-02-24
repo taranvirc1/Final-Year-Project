@@ -16,6 +16,7 @@ import { TiTickOutline } from "react-icons/ti";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
+import { useRef } from "react";
 import axios from 'axios'
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
@@ -26,7 +27,8 @@ function UPM() {
     sessionStorage.setItem("jwt", "");
     logout("/");
   };
-  const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMTE5OTIxQGJydW5lbC5hYy51ayIsImV4cCI6MTY3NjkxNTc2MH0.Io-KjLuXVENqj10Yc4V-NwcyozGJAPWZZGKQyC-0KUJJJj2nObSXuIScRljUeKT3BzL7hTziQT9TpYjm6m0PKg';
+  const jwt = sessionStorage.getItem('jwt')
+  const token = jwt;
   const headers = {
     Authorization: `Bearer ${token}`
   };
@@ -44,17 +46,184 @@ function UPM() {
       });
   }, []);
 
-  //Upload users profile
-  const [dataImage, setImage] = useState(null);
-  function AvatarChange(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const dataUrl = event.target.result;
-      // do something with the dataUrl, such as store it in your component state
-      setImage(dataUrl)
-    };
-    reader.readAsDataURL(file);
+
+  // [Profile Avatar]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const userId = user.studentId // replace with the user ID you want to update
+  const newFirstName = "John"; // replace with the new first name you want to set
+
+  const config = {
+    headers: {
+      "Authorization": `Bearer ${token}`, // replace with your bearer token
+      "Content-Type": "application/json"
+    },
+  };
+
+
+  const [firstname, setName] = useState('');
+  const [userName, setUsername] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [Email, setEmail] = useState('');
+  const [number, setNumber] = useState('');
+  const [Country, setCountry] = useState('');
+  const [DOB, setDOB] = useState('');
+  const [Password, setPassword] = useState('');
+  const [Bio, setBio] = useState('');
+  const firstName = {
+    firstName: firstname,
+  };
+  const lastName = {
+    lastName: lastname,
+  };
+
+  const email = {
+    email: Email
+  };
+  const country = {
+    country: Country
+  };
+
+  const phone = {
+    phone: number
+  };
+  const dateOfBirth = {
+    dateOfBirth: DOB
+  };
+  const bio = {
+    bio: Bio
+  };
+
+
+  function updateFirstName() {
+    axios.put(`http://localhost:8080/user/firstName/${userId}`, firstName, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateLastName() {
+    axios.put(`http://localhost:8080/user/lastName/${userId}`, lastName, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateEmail() {
+    axios.put(`http://localhost:8080/user/email/${userId}`, email, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateCountry() {
+    axios.put(`http://localhost:8080/user/country/${userId}`, country, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updatePhone() {
+    axios.put(`http://localhost:8080/user/phone/${userId}`, phone, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateDOB() {
+    axios.put(`http://localhost:8080/user/DOB/${userId}`, dateOfBirth, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateBio() {
+    axios.put(`http://localhost:8080/bio/${userId}`, bio, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+
+  //---
+  const [image, setImage] = useState(null);
+  const fileInput = useRef(null);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/${userId}/image`, {
+      responseType: 'arraybuffer',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        const blob = new Blob([response.data], { type: 'image/jpeg' });
+        const url = URL.createObjectURL(blob);
+        setImage(url);
+      })
+      .catch(error => console.log(error));
+  }, [userId, token]);
+
+  const [file, setFile] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    axios.post(`http://localhost:8080/${userId}/image`, formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error));
+  };
+
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    fileInput.current.click();
   }
 
   return (
@@ -92,23 +261,11 @@ function UPM() {
         </div>
         <div className="upm-right-side">
           <div className="upm-card-container-1">
+            <li><div className='upm-box-1'><span className='upm-sp'><h3>Status:</h3><label className='upm-ver'>Verified</label></span></div></li>
+            <li><div className='upm-avatar'>{image && <img src={image} alt="User image" />}<button onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button></div></li>
             <li>
-              <div className="upm-box-1">
-                <h2>Johndoe#5656</h2>
-                <span className="upm-sp">
-                  <h3>Status:</h3>
-                  <label className="upm-ver">Verified</label>
-                </span>
-              </div>
-            </li>
-            <li>
-              <div className="upm-avatar">
-                <input type="file" onChange={AvatarChange} />
-                <img src={dataImage} alt="Avatar" />
-                <button>
-                  <MdOutlineModeEdit size={25} />
-                </button>
-              </div>
+              <input type="file" onChange={e => setFile(e.target.files[0])} ref={fileInput} style={{ display: "none" }} />
+              <button className="upm-saver" type="submit" onClick={handleSubmit}>Save Changes</button>
             </li>
           </div>
           <div className="upm-card-container-2">
@@ -125,7 +282,7 @@ function UPM() {
                 <div class="upm-outer-form">
                   <div class="upm-form-container">
                     <label>Username</label>
-                    <form class="upm-form">
+                    <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <AiOutlineUser
@@ -136,16 +293,19 @@ function UPM() {
                         <input
                           type="text"
                           name="username"
-                          placeholder="John Doe#4545"
-                          value={user.firstName}
-                        />
+                          placeholder={user.firstName}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setName(newValue);
+                          }}
+                        ></input>
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updateFirstName} >
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                     <label>Email</label>
-                    <form class="upm-form">
+                    <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <HiOutlineMail
@@ -156,16 +316,21 @@ function UPM() {
                         <input
                           type="email"
                           name="email"
-                          placeholder="2119921@brunel.ac.uk"
-                          value={user.email}
+                          placeholder={user.email}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setEmail(newValue);
+
+                          }}
+
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updateEmail}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                     <label>Password</label>
-                    <form class="upm-form">
+                    <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <RiLockPasswordLine
@@ -176,16 +341,19 @@ function UPM() {
                         <input
                           type="password"
                           name="password"
-                          placeholder="*************************"
-                          value={user.password}
+                          placeholder={user.password}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setPassword(newValue)
+                          }}
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" >
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                     <label>Phone-number</label>
-                    <form class="upm-form-1">
+                    <div class="upm-form-1">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <AiOutlinePhone
@@ -196,14 +364,19 @@ function UPM() {
                         <input
                           type="text"
                           name="phone"
-                          placeholder="12345678910"
-                          value={user.phone}
+                          placeholder={user.phone}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setNumber(newValue);
+
+                          }}
+
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updatePhone}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -224,7 +397,7 @@ function UPM() {
                 <div class="upm-outer-form">
                   <div class="upm-form-container">
                     <label>Firstname</label>
-                    <form class="upm-form">
+                    <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <AiOutlineUser
@@ -235,16 +408,21 @@ function UPM() {
                         <input
                           type="text"
                           name="firstname"
-                          placeholder="John Doe#4545"
-                          value={user.firstName}
+                          placeholder={user.firstName}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setName(newValue);
+
+                          }}
+
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updateFirstName}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                     <label>Lastname</label>
-                    <form class="upm-form">
+                    <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <AiOutlineUser
@@ -255,16 +433,21 @@ function UPM() {
                         <input
                           type="text"
                           name="lastname"
-                          placeholder=""
-                          value={user.lastName}
+                          placeholder={user.lastName}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setLastName(newValue);
+
+                          }}
+
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updateLastName}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                     <label>DOB</label>
-                    <form class="upm-form">
+                    <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <MdDateRange
@@ -275,17 +458,21 @@ function UPM() {
                         <input
                           type="text"
                           name="DOB"
-                          placeholder="*************************"
-                          value={user.dateOfBirth}
+                          placeholder={user.dateOfBirth}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setDOB(newValue);
+                          }}
+
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updateDOB}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
 
                     <label>Country</label>
-                    <form class="upm-form">
+                    <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <MdDateRange
@@ -296,15 +483,20 @@ function UPM() {
                         <input
                           type="text"
                           name="DOB"
-                          value={user.country}
+                          placeholder={user.country}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setCountry(newValue);
+                          }}
+
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updateCountry}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                     <label>Bio</label>
-                    <form class="upm-form-1">
+                    <div class="upm-form-1">
                       <div class="upm-form-input-holder">
                         <span class="icon">
                           <FcAbout
@@ -316,13 +508,17 @@ function UPM() {
                           className="in"
                           type="text"
                           name="BIO"
-                          placeholder="About me..."
+                          placeholder={user.bio}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setBio(newValue);
+                          }}
                         />
                       </div>
-                      <button className="upm-edit-button">
+                      <button className="upm-edit-button" onClick={updateBio}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -371,7 +567,7 @@ function UPM() {
               <li>
                 <div class="upm-outer-form">
                   <div class="upm-form-container">
-                    <form class="upm-form-2">
+                    <div class="upm-form-2">
                       <div class="upm-form-button-holder-2">
                         <button className="upm-close">
                           <IoMdCloseCircleOutline
@@ -379,11 +575,11 @@ function UPM() {
                             size={30}
                           />
                         </button>
-                        <button className="upm-sub">
+                        <button className="upm-sub"  >
                           <TiTickOutline className="upm-icon-del" size={30} />
                         </button>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </li>

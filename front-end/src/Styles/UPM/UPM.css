@@ -102,7 +102,7 @@
     width: 80%;
     height: fit-content;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-evenly;
     list-style: none;
     flex-direction: row;
@@ -116,10 +116,7 @@
 }
 
 
-.upm-avatar {
-    
- 
-}
+.upm-avatar {}
 
 .upm-avatar img {
     width: 150px;
@@ -132,10 +129,10 @@
 }
 
 .upm-avatar button {
-    background-color: blueviolet;
+    background-color: #24202C;
     position: relative;
     top: 70%;
-    left:-4%;
+    left: -10%;
     border-radius: 100px;
     width: 35px;
     height: 35px;
@@ -368,6 +365,10 @@
     color: rgb(44, 216, 159);
 }
 
+.upm-format {
+    background-color: #4b00ff;
+}
+
 .upm-card-container-4 {
     max-width: 1000px;
     margin: 0 auto;
@@ -383,4 +384,13 @@
 .upm-edit-button {
     background-color: transparent;
     cursor: pointer;
+}
+
+.upm-saver {
+    background-color: #24202C;
+    padding: 20px;
+    color: white;
+    font-weight: 1000px;
+    font-size: 20px;
+    border-radius: 11px;
 }
