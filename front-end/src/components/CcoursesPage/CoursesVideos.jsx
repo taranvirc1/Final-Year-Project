@@ -622,7 +622,7 @@ function lightbox_close() {
   
 
        
-       <div className="averageRating"> <i className="star fa fa-star">{totalSum} Course Rating | {totalReviews} ratings</i></div>
+       <div className="averageRating">{totalSum}  <i className="star fa fa-star"> Course Rating | {totalReviews} ratings</i></div>
        <button className="submitButton" onClick={() => handleForm()
       }>Review</button>
         

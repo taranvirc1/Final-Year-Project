@@ -301,7 +301,6 @@ font-style: italic;
   position: relative;
   padding-top: 20px;
   padding-left: 20px;
-  border-radius: 25px;
 
   margin: auto;
   margin-top: 5%;
@@ -309,12 +308,15 @@ font-style: italic;
    height:auto;
     justify-content: center;
     align-items: center;
-background: #4d1771;
 
+
+   
+    background: rgb(69, 69, 78);
+ 
  
 }
 .averageRating{
-  color: rgb(73, 179, 12);
+  color: white;
   border-bottom: 3px solid black;
   padding-bottom: 8px;
   margin-right: 20px;
@@ -447,7 +449,7 @@ top:-13px;
 }
 .reviews .eachReview .top-review .reviewerName {
   font-size: 18px;
-  color: rgb(25, 179, 107);
+  color: rgb(180, 207, 214);
  
 margin-top: 20px;
   margin-right: 15px;
@@ -480,7 +482,8 @@ margin-bottom: 5px;
   }
   
   .reviewDiscription>p2{
-    font-style: oblique;
+   
+    font-size: 13px;
 
 
     
@@ -496,6 +499,7 @@ margin-bottom: 5px;
 }
 
 .viewMore{
+  margin-top: 10px;
   margin-bottom: 10px;
   background: none;
 }
