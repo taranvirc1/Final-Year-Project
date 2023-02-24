@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "quizCategory")
 @EntityListeners(AuditingEntityListener.class)
-public class Student implements Serializable {
+public class QuizCategory implements Serializable {
 
 	/**
 	 * 
