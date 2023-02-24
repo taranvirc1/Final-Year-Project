@@ -218,7 +218,7 @@ public class StudentController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         // Else create a student with DTO
-        Student newStudent = new Student(newStudentDTO.getAvatarByte(), newStudentDTO.getUrl(),
+        Student newStudent = new Student(
                 newStudentDTO.getFirstName(),
                 newStudentDTO.getLastName(),
                 newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
@@ -261,9 +261,6 @@ public class StudentController {
         return (studentService.findByEmail(email));
 
     }
-<<<<<<< Updated upstream
-  
-=======
 
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
@@ -271,5 +268,4 @@ public class StudentController {
         return principal.getName();
     }
 
->>>>>>> Stashed changes
 }

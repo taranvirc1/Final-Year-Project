@@ -93,6 +93,21 @@ public class Student implements Serializable {
 
 	}
 
+	public Student(String firstName, String lastName, String dateOfBirth,
+			String country, String phone, String email,
+			String password) {
+
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.country = country;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+
+	}
+
 	public Student(String bio, byte[] avatar, String url, String firstName, String lastName, String dateOfBirth,
 			String country, String phone, String email,
 			String password) {
