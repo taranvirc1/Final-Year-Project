@@ -43,6 +43,7 @@ function UPM() {
   useEffect(() => {
     axios.get(Api, { headers, params })
       .then(response => {
+        console.log(response.data)
         setUser(response.data);
       })
       .catch(error => {
@@ -112,7 +113,9 @@ function UPM() {
   const linkedIn = {
     linkedIn: LinkedIn
   };
-
+  const username = {
+    username: userName
+  };
   function updateFirstName() {
     axios.put(`http://localhost:8080/user/firstName/${userId}`, firstName, config)
       .then(response => {
@@ -222,7 +225,15 @@ function UPM() {
         console.error("Failed to update user:", error);
       });
   }
-
+  function updateUsername() {
+    axios.put(`http://localhost:8080/user/username/${userId}`, username, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
 
 
   //---
@@ -326,14 +337,14 @@ function UPM() {
                         <input
                           type="text"
                           name="username"
-                          placeholder={user.firstName}
+                          placeholder={user.username}
                           onChange={(event) => {
                             const newValue = event.target.value;
-                            setName(newValue);
+                            setUsername(newValue);
                           }}
                         ></input>
                       </div>
-                      <button className="upm-edit-button" onClick={updateFirstName} >
+                      <button className="upm-edit-button" onClick={updateUsername} >
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
                     </div>

@@ -235,4 +235,26 @@ public class StudentService {
 		}
 	}
 
+	
+	public void saveUsername(Integer userId, String userName) {
+		Optional<Student> userOptional = studentRepository.findById(userId);
+		if (userOptional.isPresent()) {
+			Student user = userOptional.get();
+			user.setUsername(userName);
+			studentRepository.save(user);
+		} else {
+			throw new RuntimeException("User not found");
+		}
+	}
+
+	public String getUsername(Integer userId) {
+		Optional<Student> userOptional = studentRepository.findById(userId);
+		if (userOptional.isPresent()) {
+			Student user = userOptional.get();
+			return user.getUsername();
+		} else {
+			throw new RuntimeException("User not found");
+		}
+	}
+
 }
