@@ -65,6 +65,21 @@ public class Student implements Serializable {
 	@Column(name = "Biog")
 	private String bio;
 
+	@Column(name = "role")
+	private String role;
+
+	
+	@Column(name = "twitter")
+	private String twitter;
+
+	
+	@Column(name = "LinkedIn")
+	private String linkedIn;
+
+	
+	@Column(name = "instagram")
+	private String instagram;
+
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
@@ -109,12 +124,16 @@ public class Student implements Serializable {
 
 	}
 
-	public Student(String optionValue, String bio, byte[] avatar, String url, String firstName, String lastName,
+	public Student(String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String url, String firstName, String lastName,
 			String dateOfBirth,
 			String country, String phone, String email,
 			String password) {
 
 		super();
+		this.twitter = twitter;
+		this.linkedIn = linkedIn;
+		this.instagram = instagram;
+		this.role = role;
 		this.optionValue = optionValue;
 		this.bio = bio;
 		this.avatar = avatar;
@@ -127,6 +146,41 @@ public class Student implements Serializable {
 		this.email = email;
 		this.password = password;
 
+	}
+
+	
+	
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	public String getLinkedIn() {
+		return linkedIn;
+	}
+
+	public void setLinkedIn(String linkedIn) {
+		this.linkedIn = linkedIn;
+	}
+
+	public String getInstagram() {
+		return instagram;
+	}
+
+	public void setInstagram(String instagram) {
+		this.instagram = instagram;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getOptionValue() {
@@ -259,7 +313,7 @@ public class Student implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + studentId + url + "profile=" + avatar + "bio=" + bio + "optionValue=" + optionValue
+		return "Student [id=" + studentId + url + "profile=" + avatar + "twitter=" +twitter + "linkedIn=" +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
 				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
