@@ -17,6 +17,10 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { CiTwitter } from 'react-icons/ci';
+import { AiOutlineInstagram } from 'react-icons/ai'
+import { CiLinkedin } from 'react-icons/ci'
+import { RiMapPin2Line } from 'react-icons/ri'
 import axios from 'axios'
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
@@ -39,7 +43,7 @@ function UPM() {
   useEffect(() => {
     axios.get(Api, { headers, params })
       .then(response => {
-        setUser(response.data)
+        setUser(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -48,30 +52,7 @@ function UPM() {
 
 
   // [Profile Avatar]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const userId = user.studentId // replace with the user ID you want to update
-  const newFirstName = "John"; // replace with the new first name you want to set
 
   const config = {
     headers: {
@@ -90,6 +71,10 @@ function UPM() {
   const [DOB, setDOB] = useState('');
   const [Password, setPassword] = useState('');
   const [Bio, setBio] = useState('');
+  const [Role, setRole] = useState('');
+  const [LinkedIn, setLink] = useState('');
+  const [Instagram, setInsta] = useState('');
+  const [Twitter, setTwit] = useState('');
   const firstName = {
     firstName: firstname,
   };
@@ -114,11 +99,25 @@ function UPM() {
     bio: Bio
   };
 
+  const role = {
+    role: Role
+  };
+
+  const twitter = {
+    twitter: Twitter
+  };
+  const instagram = {
+    instagram: Instagram
+  };
+  const linkedIn = {
+    linkedIn: LinkedIn
+  };
 
   function updateFirstName() {
     axios.put(`http://localhost:8080/user/firstName/${userId}`, firstName, config)
       .then(response => {
         console.log("User updated:", response.data);
+
       })
       .catch(error => {
         console.error("Failed to update user:", error);
@@ -185,6 +184,46 @@ function UPM() {
       });
   }
 
+  function updateRole() {
+    axios.put(`http://localhost:8080/user/role/${userId}`, role, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateTwit() {
+    axios.put(`http://localhost:8080/user/twitter/${userId}`, twitter, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+  function updateLink() {
+    axios.put(`http://localhost:8080/user/linked/${userId}`, linkedIn, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateInstagram() {
+    axios.put(`http://localhost:8080/user/instagram/${userId}`, instagram, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+
 
   //---
   const [image, setImage] = useState(null);
@@ -227,6 +266,7 @@ function UPM() {
   }
 
 
+
   return (
     <>
       <div className="upmcontainer">
@@ -236,13 +276,6 @@ function UPM() {
               <div className="upm-item-1">
                 <a href="/">
                   <BsPerson size={45} />
-                </a>
-              </div>
-            </li>
-            <li className="li-1">
-              <div className="upm-item-1">
-                <a href="/">
-                  <IoMdNotificationsOutline className="upm-ic" size={45} />
                 </a>
               </div>
             </li>
@@ -262,7 +295,6 @@ function UPM() {
         </div>
         <div className="upm-right-side">
           <div className="upm-card-container-1">
-            <li><div className='upm-box-1'><span className='upm-sp'><h3>Status:</h3><label className='upm-ver'>Verified</label></span></div></li>
             <li><div className='upm-avatar'>{image && <img src={image} alt="User image" />}<button onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button></div></li>
             <li>
               <input type="file" onChange={e => setFile(e.target.files[0])} ref={fileInput} style={{ display: "none" }} />
@@ -476,10 +508,10 @@ function UPM() {
                     <div class="upm-form">
                       <div class="upm-form-input-holder">
                         <span class="icon">
-                          <MdDateRange
+                          <RiMapPin2Line
                             class="fa fa-envelope"
                             aria-hidden="true"
-                          ></MdDateRange>
+                          ></RiMapPin2Line>
                         </span>
                         <input
                           type="text"
@@ -529,7 +561,7 @@ function UPM() {
           <div className="upm-card-container-2">
             <div className="upm-card">
               <li>
-                <h2>Themes</h2>
+                <h2>Experience</h2>
               </li>
               <li>
                 <p>
@@ -539,30 +571,126 @@ function UPM() {
               <li>
                 <div class="upm-outer-form">
                   <div class="upm-form-container">
-                    <form class="upm-form-rad">
+                    <div class="upm-form-rad">
                       <div class="upm-form-input-holder-rad">
-                        <input
-                          type="radio"
-                          name="firstname"
-                          placeholder="John Doe#4545"
-                        />
-                        <label>Light</label>
+                        <button className="upm-saver" id="basic" type="submit" onClick={() => {
+                          setRole("Basic");
+                          updateRole();
+                        }}>Basic</button>
                       </div>
                       <div class="upm-form-input-holder-rad">
-                        <input
-                          type="radio"
-                          name="firstname"
-                          placeholder="John Doe#4545"
+                        <button className="upm-saver" id="beginner" type="submit" onClick={() => {
+                          setRole("Beginner");
+                          updateRole();
+                        }}>Beginner</button>
+                      </div>
 
-                        />
-                        <label>Dark</label>
+                      <div class="upm-form-input-holder-rad">
+                        <button className="upm-saver" type="Advanced" onClick={() => {
+                          setRole("Advanced");
+                          updateRole();
+                        }}>Advanced</button>
                       </div>
-                    </form>
+                      <div class="upm-form-input-holder-rad">
+                        <button className="upm-saver" type="submit" id="Master" onClick={() => {
+                          setRole("Master");
+                          updateRole();
+                        }}>Master</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </li>
             </div>
           </div>
+
+
+          <div className="upm-card-container-2">
+            <div className="upm-card">
+              <li>
+                <h2>Social Media</h2>
+              </li>
+              <li>
+                <p>
+                  Add social media links<a href="/">Find more</a>
+                </p>
+              </li>
+              <li>
+                <div class="upm-outer-form">
+                  <div class="upm-form-container">
+                    <label>Twitter</label>
+                    <div class="upm-form">
+                      <div class="upm-form-input-holder">
+                        <span class="icon">
+                          <CiTwitter
+                            class="fa fa-envelope"
+                            aria-hidden="true"
+                          ></CiTwitter>
+                        </span>
+                        <input
+                          type="text"
+                          placeholder={user.twitter}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setTwit(newValue);
+                          }}
+                        ></input>
+                      </div>
+                      <button className="upm-edit-button" onClick={updateTwit} >
+                        <MdOutlineModeEdit className="upm-icon" size={40} />
+                      </button>
+                    </div>
+                    <label>LinkedIn</label>
+                    <div class="upm-form">
+                      <div class="upm-form-input-holder">
+                        <span class="icon">
+                          <CiLinkedin
+                            class="fa fa-envelope"
+                            aria-hidden="true"
+                          ></CiLinkedin>
+                        </span>
+                        <input
+                          type="text"
+                          placeholder={user.linkedIn}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setLink(newValue);
+                          }}
+
+                        />
+                      </div>
+                      <button className="upm-edit-button" onClick={updateLink}>
+                        <MdOutlineModeEdit className="upm-icon" size={40} />
+                      </button>
+                    </div>
+                    <label>Instagram</label>
+                    <div class="upm-form">
+                      <div class="upm-form-input-holder">
+                        <span class="icon">
+                          <AiOutlineInstagram
+                            class="fa fa-envelope"
+                            aria-hidden="true"
+                          ></AiOutlineInstagram>
+                        </span>
+                        <input
+                          type="text"
+                          placeholder={user.instagram}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setInsta(newValue)
+                          }}
+                        />
+                      </div>
+                      <button className="upm-edit-button" onClick={updateInstagram} >
+                        <MdOutlineModeEdit className="upm-icon" size={40} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+
 
           <div className="upm-card-container-4">
             <div className="upm-card">
@@ -571,15 +699,6 @@ function UPM() {
                   <div class="upm-form-container">
                     <div class="upm-form-2">
                       <div class="upm-form-button-holder-2">
-                        <button className="upm-close">
-                          <IoMdCloseCircleOutline
-                            className="upm-icon-sub"
-                            size={30}
-                          />
-                        </button>
-                        <button className="upm-sub"  >
-                          <TiTickOutline className="upm-icon-del" size={30} />
-                        </button>
                       </div>
                     </div>
                   </div>

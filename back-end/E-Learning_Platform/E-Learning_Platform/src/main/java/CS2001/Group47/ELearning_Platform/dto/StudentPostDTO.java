@@ -13,13 +13,21 @@ public class StudentPostDTO {
     byte[] avatar;
     String bio;
     String optionValue;
-
-    public StudentPostDTO(String optionValue, String bio, String url, byte[] avatar, String firstName, String lastName,
+    String role;
+String twitter;
+String instagram;
+String linkedIn;
+    public StudentPostDTO(String twitter, String instagram,String linkedIn,String role, String optionValue, String bio, String url, byte[] avatar, String firstName,
+            String lastName,
             String dateOfBirth,
             String country,
             String phone, String email,
             String password) {
         super();
+        this.twitter = twitter;
+		this.linkedIn = linkedIn;
+		this.instagram = instagram;
+        this.role = role;
         this.optionValue = optionValue;
         this.bio = bio;
         this.url = url;
@@ -31,6 +39,52 @@ public class StudentPostDTO {
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+
+
+    public String getLinkedIn() {
+        return linkedIn;
+    }
+
+
+
+    public void setLinkedIn(String linkedIn) {
+        this.linkedIn = linkedIn;
+    }
+
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getOptionValue() {
@@ -123,7 +177,8 @@ public class StudentPostDTO {
 
     @Override
     public String toString() {
-        return "StudentPostDTO [firstName=" + firstName + "profile" + "optionValue=" + optionValue + url + "bio=" + bio
+        return "StudentPostDTO [firstName=" + "role=" + role + firstName + "twitter=" +twitter + "linkedIn=" +linkedIn+ "instagram=" +instagram + "profile" + "optionValue=" + optionValue
+                + url + "bio=" + bio
                 + "profile=" + avatar
                 + ", lastName="
                 + lastName + ", dateoOfBirth=" + dateOfBirth

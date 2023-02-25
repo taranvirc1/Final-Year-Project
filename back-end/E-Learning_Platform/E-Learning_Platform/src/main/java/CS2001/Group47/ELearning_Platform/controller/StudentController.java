@@ -154,7 +154,6 @@ public class StudentController {
         }
     }
 
-
     @GetMapping("/bio/{userId}")
     public String getBio(@PathVariable Integer bio) {
         return studentService.getBio(bio);
@@ -203,7 +202,6 @@ public class StudentController {
     // student.setPhone(studentPostDTO.getPhone());
     // }
 
-
     @PutMapping("/user/option/{id}")
     public Student updateOption(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
         Optional<Student> studentOptional = studentRepository.findById(id);
@@ -219,6 +217,69 @@ public class StudentController {
             throw new RuntimeException("Student not found with ID: " + id);
         }
     }
+
+    @PutMapping("/user/role/{id}")
+    public Student updateRole(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            // Update the fields that the user changes
+            if (studentPostDTO.getRole() != null) {
+                student.setRole(studentPostDTO.getRole());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
+    @PutMapping("/user/twitter/{id}")
+    public Student updateTwitter(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            // Update the fields that the user changes
+            if (studentPostDTO.getTwitter() != null) {
+                student.setTwitter(studentPostDTO.getTwitter());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
+    @PutMapping("/user/linked/{id}")
+    public Student updateLinked(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (studentPostDTO.getLinkedIn() != null) {
+                student.setLinkedIn(studentPostDTO.getLinkedIn());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
+    @PutMapping("/user/instagram/{id}")
+    public Student updateInstagram(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (studentPostDTO.getInstagram() != null) {
+                student.setInstagram(studentPostDTO.getInstagram());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
     @PostMapping("/user")
     public ResponseEntity<Optional<Student>> addUser(@RequestBody StudentPostDTO newStudentDTO) {
         // StudentDTO has null attributes
@@ -245,7 +306,7 @@ public class StudentController {
                 newStudentDTO.getFirstName(),
                 newStudentDTO.getLastName(),
                 null, newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
-                newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()), null, null, null);
+                newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()));
         // Add student through StudentService
         studentService.addStudent(newStudent);
 
