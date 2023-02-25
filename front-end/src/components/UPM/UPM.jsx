@@ -43,7 +43,6 @@ function UPM() {
   useEffect(() => {
     axios.get(Api, { headers, params })
       .then(response => {
-        console.log(response.data)
         setUser(response.data);
       })
       .catch(error => {
@@ -51,13 +50,11 @@ function UPM() {
       });
   }, []);
 
-
-  // [Profile Avatar]
-  const userId = user.studentId // replace with the user ID you want to update
+  const userId = user.studentId
 
   const config = {
     headers: {
-      "Authorization": `Bearer ${token}`, // replace with your bearer token
+      "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json"
     },
   };
