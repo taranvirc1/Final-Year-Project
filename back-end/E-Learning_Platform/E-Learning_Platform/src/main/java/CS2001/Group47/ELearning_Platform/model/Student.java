@@ -76,6 +76,9 @@ public class Student implements Serializable {
 	@Column(name = "LinkedIn")
 	private String linkedIn;
 
+	@Column(name = "userName")
+	private String username;
+
 	
 	@Column(name = "instagram")
 	private String instagram;
@@ -84,9 +87,7 @@ public class Student implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date createdAtDate;
-	@Lob
-	@Column(name = "url", length = Integer.MAX_VALUE, nullable = true)
-	private String url;
+
 	@Column(name = "option_value")
 	private String optionValue;
 	@Lob
@@ -124,12 +125,13 @@ public class Student implements Serializable {
 
 	}
 
-	public Student(String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String url, String firstName, String lastName,
+	public Student(String username,String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String firstName, String lastName,
 			String dateOfBirth,
 			String country, String phone, String email,
 			String password) {
 
 		super();
+		this.username = username;
 		this.twitter = twitter;
 		this.linkedIn = linkedIn;
 		this.instagram = instagram;
@@ -137,7 +139,6 @@ public class Student implements Serializable {
 		this.optionValue = optionValue;
 		this.bio = bio;
 		this.avatar = avatar;
-		this.url = url;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
@@ -150,6 +151,14 @@ public class Student implements Serializable {
 
 	
 	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public String getTwitter() {
 		return twitter;
@@ -207,13 +216,6 @@ public class Student implements Serializable {
 		this.avatar = avatar;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String imageUrl) {
-		this.url = imageUrl;
-	}
 
 	public Integer getStudentId() {
 		return studentId;
@@ -313,7 +315,7 @@ public class Student implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + studentId + url + "profile=" + avatar + "twitter=" +twitter + "linkedIn=" +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
+		return "Student [id=" + studentId  + "profile=" + avatar + "twitter=" +twitter + "linkedIn="+ "username=" + username +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
 				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="

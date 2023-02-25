@@ -280,6 +280,21 @@ public class StudentController {
         }
     }
 
+    @PutMapping("/user/username/{id}")
+    public Student updateUsername(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (studentPostDTO.getUsername() != null) {
+                student.setUsername(studentPostDTO.getUsername());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
     @PostMapping("/user")
     public ResponseEntity<Optional<Student>> addUser(@RequestBody StudentPostDTO newStudentDTO) {
         // StudentDTO has null attributes
