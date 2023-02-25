@@ -25,6 +25,7 @@ import CS2001.Group47.ELearning_Platform.dto.ResetPasswordDTO;
 import CS2001.Group47.ELearning_Platform.dto.StudentPostDTO;
 import CS2001.Group47.ELearning_Platform.exception.StudentNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Student;
+import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
 import CS2001.Group47.ELearning_Platform.service.StudentService;
 import net.bytebuddy.utility.RandomString;
 
@@ -37,37 +38,59 @@ private StudentService studentService;
 @Autowired
 private JavaMailSender mailSender;
 
-@GetMapping("/forgot_password")
-public String showForgotPassword(Model model) {
-    model.addAttribute("pageTitle", "Reset Password");
-    return "forgotPasswordForm";
-}
+@Autowired 
+private StudentRepository studentRepository;
+
+// @GetMapping("/forgot_password")
+// public String showForgotPassword(Model model) {
+//     model.addAttribute("pageTitle", "Reset Password");
+//     return "forgotPasswordForm";
+// }
+
+// @PostMapping("/forgot_password")
+// public ResponseEntity forgotPasswordProcess(HttpServletRequest request, @RequestBody StudentPostDTO studentPostDTO) throws UnsupportedEncodingException, MessagingException {
+//     Student student = studentService.findByEmail(studentPostDTO.getEmail()); 
+//     String token = RandomString.make(30);
+
+//     System.out.println("Email: " + student);
+//     System.out.println("Token: " + token);
+
+//     String baseURL = "http://locahost:3000";
+
+//     try {
+//         studentService.updateResetPasswordToken(token, student.getEmail());
+//         String resetPasswordLink = baseURL + "/reset_password?token=" + token;
+//         System.out.println("reset password link: " + resetPasswordLink);
+//         sendEmail(student.getEmail(), resetPasswordLink);
+//     } catch (StudentNotFoundException ex) {
+//         System.out.println(ex + " no student exists with this email!");
+//         return new ResponseEntity<>(Optional.ofNullable(student.getEmail()), HttpStatus.BAD_REQUEST);
+//     } catch (UnsupportedEncodingException | MessagingException e) {
+//         e.printStackTrace();
+//         System.out.println(e);
+//     }
+
+//     //Return response entity with email accepted
+//     return new ResponseEntity<>(Optional.ofNullable(student.getEmail()), HttpStatus.ACCEPTED);
+// }
 
 @PostMapping("/forgot_password")
-public ResponseEntity forgotPasswordProcess(HttpServletRequest request, @RequestBody StudentPostDTO studentPostDTO) throws UnsupportedEncodingException, MessagingException {
-    Student student = studentService.findByEmail(studentPostDTO.getEmail()); 
-    String token = RandomString.make(30);
+public void forgotPassword(@RequestBody String email) {
 
-    System.out.println("Email: " + student);
-    System.out.println("Token: " + token);
+    Student student = studentService.findByEmail(email);
 
-    String baseURL = "http://locahost:3000";
-
-    try {
-        studentService.updateResetPasswordToken(token, student.getEmail());
-        String resetPasswordLink = baseURL + "/reset_password?token=" + token;
-        System.out.println("reset password link: " + resetPasswordLink);
-        sendEmail(student.getEmail(), resetPasswordLink);
-    } catch (StudentNotFoundException ex) {
-        System.out.println(ex + " no student exists with this email!");
-        return new ResponseEntity<>(Optional.ofNullable(student.getEmail()), HttpStatus.BAD_REQUEST);
-    } catch (UnsupportedEncodingException | MessagingException e) {
-        e.printStackTrace();
-        System.out.println(e);
+    if(student == null) {
+        throw new RuntimeException("Student not found with email: " + email);
+    }
+    else {
+        // generate random token of 64 characters
+        String reset_token = RandomString.make(64);
+        System.out.println(reset_token);
+        student.setResetPasswordToken(reset_token);
+        studentRepository.save(student);
+        // sendEmail(student.getEmail(), reset_token);
     }
 
-    //Return response entity with email accepted
-    return new ResponseEntity<>(Optional.ofNullable(student.getEmail()), HttpStatus.ACCEPTED);
 }
 
 public void sendEmail(String recepientEmail, String link) throws UnsupportedEncodingException, MessagingException {
@@ -98,22 +121,22 @@ public void sendEmail(String recepientEmail, String link) throws UnsupportedEnco
 
 }
 
-@GetMapping("/reset_password")
-public String showResetPasswordForm(@Param(value="token") String token, Model model) {
-    Student student = studentService.getResetPasswordToken(token);
+// @GetMapping("/reset_password")
+// public String showResetPasswordForm(@Param(value="token") String token, Model model) {
+//     Student student = studentService.getResetPasswordToken(token);
 
-    if(student == null) {
-        model.addAttribute("title", "Reset Password");
-        model.addAttribute("message", "Invalid token");
-        return "message";
-    }
+//     if(student == null) {
+//         model.addAttribute("title", "Reset Password");
+//         model.addAttribute("message", "Invalid token");
+//         return "message";
+//     }
 
-    model.addAttribute("token", token);
+//     model.addAttribute("token", token);
 
-    model.addAttribute("pageTitle", "New Password");
+//     model.addAttribute("pageTitle", "New Password");
 
-    return "reset_password_form";
-}
+//     return "reset_password_form";
+// }
 
 @PostMapping("/reset_password")
 public String resetPassword(HttpServletRequest request, @RequestBody ResetPasswordDTO resetDTO) {

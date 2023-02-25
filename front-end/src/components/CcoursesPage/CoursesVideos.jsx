@@ -5,40 +5,31 @@ import "../../Styles/CoursesStyles/CoursesVideos.css";
 import { useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
-function CoursesVideos () {
+function CoursesVideos() {
   const current = new Date();
-  const getCurrentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+  const getCurrentDate = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
 
- 
-  
   //const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState({
-   courseID:"1",
-  // studentId:"1",
-   ratingStars:"",
-   reviewDesc:"",
-   createdAt: getCurrentDate
-   
-
+    courseID: "1",
+    // studentId:"1",
+    ratingStars: "",
+    reviewDesc: "",
+    createdAt: getCurrentDate,
   });
-
-
-
-
-
-
 
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const [currentUser, setCurrentUser] = useState({
-    email: loggedInUser
+    email: loggedInUser,
   });
-//console.log("ff"+currentUser.email)
+  //console.log("ff"+currentUser.email)
   console.log("this");
   const [userdata, setUserdata] = useState("");
 
- /* useEffect(()=>{
+  /* useEffect(()=>{
      
           const jwt = sessionStorage.getItem('jwt');
           console.log(jwt);
@@ -63,15 +54,9 @@ function CoursesVideos () {
       
   },[]);*/
 
-
-
-
-
   const [currentStudentID, setCurrentStudentID] = useState("");
 
-
-
- /* useEffect(() => {
+  /* useEffect(() => {
     axios.get("http://localhost:8080/user/findByEmail",{  params: {email:loggedInUser },headers: {"Authorization" : `Bearer ${jwt}`} })
       .then(response => {
        // setReviews(response.data);
@@ -87,223 +72,182 @@ function CoursesVideos () {
 
     console.log("current student" + currentStudentID)*/
 
+  const [checkrating, setCheckRating] = useState(0);
+  const [checkReview, setCheckReview] = useState("");
 
-
-
-
-
-
-
-    const [checkrating, setCheckRating] = useState(0);
-    const [checkReview, setCheckReview] = useState("");
-
-
-  const{courseID,ratingStars,reviewDesc,createdAt}=review
-  const onInputChange=(e)=>{
-    setReview({...review,[e.target.name]: e.target.value})
-    setCheckReview(e.target.value)
-  };
-  
-  const onStarsClick=(rating)=> {
-  setReview({...review,ratingStars:rating,courseID: courseID})
-  setCheckRating(rating)
-
+  const { courseID, ratingStars, reviewDesc, createdAt } = review;
+  const onInputChange = (e) => {
+    setReview({ ...review, [e.target.name]: e.target.value });
+    setCheckReview(e.target.value);
   };
 
+  const onStarsClick = (rating) => {
+    setReview({ ...review, ratingStars: rating, courseID: courseID });
+    setCheckRating(rating);
+  };
 
-  
-function handleEdit(ratingID){
-  const i =reviews.findIndex((review)=>review.ratingID===ratingID);
-  setReview(reviews[i]);
-  
-  const reviewCopy = {
-    ratingID: reviews[i].ratingID,
-    courseID:"1",
-    // studentId:"1",
-     ratingStars: reviews[i].ratingStars,
-     reviewDesc: reviews[i].reviewDesc,
-     createdAt: getCurrentDate
-     
+  function handleEdit(ratingID) {
+    const i = reviews.findIndex((review) => review.ratingID === ratingID);
+    setReview(reviews[i]);
+
+    const reviewCopy = {
+      ratingID: reviews[i].ratingID,
+      courseID: "1",
+      // studentId:"1",
+      ratingStars: reviews[i].ratingStars,
+      reviewDesc: reviews[i].reviewDesc,
+      createdAt: getCurrentDate,
+    };
+    setReview(reviewCopy);
   }
-  setReview(reviewCopy);
-  }
 
+  const enabled = checkrating.length > 0 && checkReview.length > 0;
 
-  const enabled =
-  checkrating.length > 0 &&
-  checkReview.length > 0;
-
-console.log(checkReview.length);
-  const onSubmit= async (e)=>{
+  console.log(checkReview.length);
+  const onSubmit = async (e) => {
     e.preventDefault();
     setForm(false);
 
-    const jwt = sessionStorage.getItem('jwt');
-    
-    if (review.ratingID){
+    const jwt = sessionStorage.getItem("jwt");
 
-    await axios
-      .put(`http://localhost:8080/update/${review.ratingID}`, review,{  headers: {"Authorization" : `Bearer ${jwt}`} }).then(
-        (d) => {
+    if (review.ratingID) {
+      await axios
+        .put(`http://localhost:8080/update/${review.ratingID}`, review, {
+          headers: { Authorization: `Bearer ${jwt}` },
+        })
+        .then((d) => {
           const reviewsCopy = [...reviews];
           const i = reviewsCopy.findIndex((review) => review.ratingID === d.id);
           reviewsCopy[i] = d;
-          setReviews(reviewsCopy)
+          setReviews(reviewsCopy);
 
           setReview({
-            courseID:"1",
-            ratingStars:"",
-                 reviewDesc:"",
-           createdAt:getCurrentDate,
-  
-  
+            courseID: "1",
+            ratingStars: "",
+            reviewDesc: "",
+            createdAt: getCurrentDate,
           });
-        }
-        )//;
+        }) //;
         .catch(async (error) => {
           console.log(error);
-        
-         // alert("Registration not sent!!!");
+
+          // alert("Registration not sent!!!");
         });
+    } else {
+      await axios
+        .post("http://localhost:8080/review", review, {
+          headers: { Authorization: `Bearer ${jwt}` },
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status === 201) {
+            alert("Registered Successfully!!!");
+            setReview({
+              courseID: "1",
+              ratingStars: "",
+              reviewDesc: "",
+              createdAt: getCurrentDate,
+            });
+          }
+          if (response.status === 400) {
+            alert("you already have a review");
+          }
+        })
 
+        .catch(async (error) => {
+          console.log(review);
+          console.log(error);
 
-    }else{
-
-    await axios
-    .post("http://localhost:8080/review", review,{  headers: {"Authorization" : `Bearer ${jwt}`} })
-    .then((response) => {
-      console.log(response);
-      if (response.status === 201) {
-        alert("Registered Successfully!!!");
-        setReview({
-          courseID:"1",
-   ratingStars:"",
-   reviewDesc:"",
-createdAt:getCurrentDate,
-
-
+          // alert("Registration not sent!!!");
         });
-      }
-      if (response.status===400) {
-        alert("you already have a review");
-      }
+      setCheckReview("");
 
-    })
-    
-    .catch(async (error) => {
-      console.log(review);
-      console.log(error);
-    
-     // alert("Registration not sent!!!");
-    });
-    setCheckReview("");
-
-   // setForm(false); 
-  // onStarsClick(0);
-   //setHover(0);
-
-  }
-  retrieveReviews();
-
-};
-
-
-
-  
-
+      // setForm(false);
+      // onStarsClick(0);
+      //setHover(0);
+    }
+    retrieveReviews();
+  };
 
   const [reviews, setReviews] = useState([]);
   const [average, setAverage] = useState(0);
-  const [totalReviews,setTotalReviews]=useState(null);
+  const [totalReviews, setTotalReviews] = useState(null);
 
-  const jwt = sessionStorage.getItem('jwt');
+  const jwt = sessionStorage.getItem("jwt");
   console.log(jwt);
 
-  const retrieveReviews = async() => {
-    await axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${jwt}`} })
-      .then(response => {
-        setReviews(response.data);
-        setTotalReviews(response.data.length)
-
- 
+  const retrieveReviews = async () => {
+    await axios
+      .get("http://localhost:8080/getReviews", {
+        headers: { Authorization: `Bearer ${jwt}` },
       })
-      .catch(error=>{
-         console.error(error)
-         alert("cant get reviews")
+      .then((response) => {
+        setReviews(response.data);
+        setTotalReviews(response.data.length);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("cant get reviews");
       });
-    };
+  };
 
-  useEffect(()=>{
-   // getReviews();
-   retrieveReviews();
-   
-},[]);
-
-const [visible, setVisible] = useState(10);
-
-const showMoreReviews =()=>{
-setVisible((prevValue)=> prevValue+10)
-};
-const showLessReviews =()=>{
-  setVisible((prevValue)=> prevValue-5)  };
-
-
-console.log(reviews);
-
-const getAverage=(reviews)=>{
-  if (reviews.length==null){
-    return ;
-  }
-  const sum = 0;
-  for (let i = 0; i < reviews.length; i++) {
-    sum += parseInt (reviews[i].ratingStars);
-  }
-  const averagee = sum / reviews.length;
- // console.log(averagee)
-  return averagee;
-}
-
-
-const deleteReview=(ratingID)=>{
-
-  axios
-  .delete(`http://localhost:8080/delete/${ratingID}`,{  headers: {"Authorization" : `Bearer ${jwt}`} })
-  .then(response => {
-    if (response.data!=null){
-      alert("deleted successfully ")
-    }
+  useEffect(() => {
+    // getReviews();
     retrieveReviews();
+  }, []);
 
+  const [visible, setVisible] = useState(10);
 
-  })
-  .catch(error=>{
-     console.error(error)
-  });
-}
+  const showMoreReviews = () => {
+    setVisible((prevValue) => prevValue + 10);
+  };
+  const showLessReviews = () => {
+    setVisible((prevValue) => prevValue - 5);
+  };
 
+  console.log(reviews);
 
+  const getAverage = (reviews) => {
+    if (reviews.length == null) {
+      return;
+    }
+    const sum = 0;
+    for (let i = 0; i < reviews.length; i++) {
+      sum += parseInt(reviews[i].ratingStars);
+    }
+    const averagee = sum / reviews.length;
+    // console.log(averagee)
+    return averagee;
+  };
 
+  const deleteReview = (ratingID) => {
+    axios
+      .delete(`http://localhost:8080/delete/${ratingID}`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then((response) => {
+        if (response.data != null) {
+          alert("deleted successfully ");
+        }
+        retrieveReviews();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-const [totalSum,setTotalSum]=useState(0);
+  const [totalSum, setTotalSum] = useState(0);
 
-useEffect(() => {
-  const total = reviews.reduce((acc, row) => acc + parseFloat(row.ratingStars), 0);
+  useEffect(() => {
+    const total = reviews.reduce(
+      (acc, row) => acc + parseFloat(row.ratingStars),
+      0
+    );
 
-  setTotalSum((total/totalReviews).toFixed(1))
-}, [reviews]);
+    setTotalSum((total / totalReviews).toFixed(1));
+  }, [reviews]);
 
-
-
-
-
-
-
-
-
-
-
-
-/*
+  /*
 
   useEffect(() => {
     axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXJhZDdAZ21haWwuY29tIiwiZXhwIjoxNjc2NTg3OTIxfQ.KKbg_HlpuNC6mRB6PXu3IeliXqZ81SogHJQ9Fnt84e49nmq4nebu-ewXbgsU4PK9d18NLuGOiFtRYl-3EPnmow"}`} })
@@ -333,83 +277,67 @@ const getAverage=(reviews)=>{
 
 */
 
-
- 
-
   const [showPlayer, setShowPlayer] = useState(false);
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState("");
 
   function handleClick(url) {
     setVideoUrl(url);
     setShowPlayer(true);
   }
 
-
   const [showForm, setForm] = useState(false);
-  function handleForm(){
+  function handleForm() {
     setForm(true);
   }
 
-
-
-
-
- 
-
-
-
   const [play, setPlay] = useState(true);
 
-  const videoref = useRef()
-  function dropdown(){
+  const videoref = useRef();
+  function dropdown() {
     var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
+    var i;
 
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
     }
-  });
-}}
-
-const styleObj = {
-  height:'145px',
-  width :'150px'
-}
-
-
-window.document.onkeydown = function (event,e) {
-  if (!e) {
-    e = event;
   }
-  if (e.keyCode == 27) {
-    lightbox_close();
+
+  const styleObj = {
+    height: "145px",
+    width: "150px",
+  };
+
+  window.document.onkeydown = function (event, e) {
+    if (!e) {
+      e = event;
+    }
+    if (e.keyCode === 27) {
+      lightbox_close();
+    }
+  };
+
+  function lightbox_open() {
+    var lightBoxVideo = document.getElementById("light");
+
+    document.getElementById("light").style.display = "block";
+    document.getElementById("fade").style.display = "block";
+    setPlay(true);
   }
-};
 
-function lightbox_open() {
-  var lightBoxVideo = document.getElementById("light");
-  
-  document.getElementById("light").style.display = "block";
-  document.getElementById("fade").style.display = "block";
-  setPlay(true);
-}
-
-function lightbox_close() {
-  var lightBoxVideo = document.getElementById("light");
-  document.getElementById("light").style.display = "none";
-  document.getElementById("fade").style.display = "none";
-  setPlay(false);
-}
-
-
-
-
+  function lightbox_close() {
+    var lightBoxVideo = document.getElementById("light");
+    document.getElementById("light").style.display = "none";
+    document.getElementById("fade").style.display = "none";
+    setPlay(false);
+  }
 
   const shoot = (a) => {
     a.magnificPopup({
@@ -422,29 +350,21 @@ function lightbox_close() {
     });
   };
   return (
-
-
-
-
-    
-    <div className= "couresesVideos">
-
- 
-{showPlayer && (
+    <div className="couresesVideos">
+      {showPlayer && (
         <div className="video-player-popup">
-          <button className="closeIcon" onClick={() => setShowPlayer(false)}><i class="fa-sharp fa-solid fa-xmark fa-2x" size ={"10px"}></i></button>
-          <ReactPlayer className="videoPlayer"
-                         url={videoUrl}
-                         controls={true}
-                      
-                         width='120%'
-                         height='100%'
-                     
-                    /> 
+          <button className="closeIcon" onClick={() => setShowPlayer(false)}>
+            <i class="fa-sharp fa-solid fa-xmark fa-2x" size={"10px"}></i>
+          </button>
+          <ReactPlayer
+            className="videoPlayer"
+            url={videoUrl}
+            controls={true}
+            width="120%"
+            height="100%"
+          />
         </div>
       )}
-
-
 
       <div className="curved-background-videos">
         <div className="curved-background__curved"></div>
@@ -472,126 +392,115 @@ function lightbox_close() {
           </div>
         </div>
       </div>
-      <div className= "Space"> </div>
-     <div className = "courseContent"> 
-     <h1 className="courseContenttitle"> Course Content </h1>
-     <div id="fade" onClick={() => lightbox_close()}></div>
+      <div className="Space"> </div>
+      <div className="courseContent">
+        <h1 className="courseContenttitle"> Course Content </h1>
+        <div id="fade" onClick={() => lightbox_close()}></div>
 
-      <div className="sidenava">
-        <button
-          className="dropdown-btn"
-          onClick={() => dropdown()}
-        >
-          <span className="line-1">Fundamentals of Programming</span>
-          <span className="line-2">5 Lectures- 50min</span>
-          <i className="fa fa-caret-down"></i>
-        </button>
-        <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://youtu.be/ddlCWZxwB24')}
+        <div className="sidenava">
+          <button className="dropdown-btn" onClick={() => dropdown()}>
+            <span className="line-1">Fundamentals of Programming</span>
+            <span className="line-2">5 Lectures- 50min</span>
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-container">
+            <a
+              href="#!"
+              onClick={() => handleClick("https://youtu.be/ddlCWZxwB24")}
+            >
+              Link 1<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a
+              href="#"
+              onClick={() =>
+                handleClick("https://www.youtube.com/watch?v=9kfScGV6W1Y")
+              }
+            >
+              Link 2<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 3<i className="fa-regular fa-circle-play"></i>
+            </a>
+          </div>
+          <button className="dropdown-btn" onClick={() => dropdown()}>
+            <span className="line-1">Fundamentals of data structures </span>
+            <span className="line-2">5 Lectures- 50min</span>
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-container">
+            <a href="#">
+              Link 1<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 2<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 3<i className="fa-regular fa-circle-play"></i>
+            </a>
+          </div>
+          <button className="dropdown-btn" onClick={() => dropdown()}>
+            <span className="line-1">Fundamentals of algorithms </span>
+            <span className="line-2">5 Lectures- 50min</span>
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-container">
+            <a href="#">
+              Link 2<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 2<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 3<i className="fa-regular fa-circle-play"></i>
+            </a>
+          </div>
+          <button className="dropdown-btn" onClick={() => dropdown()}>
+            <span className="line-1">Theory of computation </span>
+            <span className="line-2">5 Lectures- 50min</span>
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-container">
+            <a
+              className="popup-vimeo"
+              href="https://vimeo.com/67341671"
+              onClick={() => shoot(".popup-vimeo")}
+            >
+              Link 1<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 2<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 3<i className="fa-regular fa-circle-play"></i>
+            </a>
+          </div>
+          <button className="dropdown-btn" onClick={() => dropdown()}>
+            <span className="line-1">Fundamentals of computer systems</span>
+            <span className="line-2">5 Lectures- 50min</span>
+            <i className="fa fa-caret-down"></i>
+          </button>
 
->        
-         
-
-         
-          Link 1<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
-            Link 2<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 3<i className="fa-regular fa-circle-play"></i>
-          </a>
+          <div className="dropdown-container">
+            <a href="#!" className="lightbox" onClick={() => lightbox_open()}>
+              {/*<div id="light">*/}
+              <ReactPlayer
+                id="light"
+                className="reactplayer"
+                url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
+                width="60%"
+                height="50%"
+              />
+              {/*</div>*/}
+              Link 1 k<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 2<i className="fa-regular fa-circle-play"></i>
+            </a>
+            <a href="#">
+              Link 3<i className="fa-regular fa-circle-play"></i>
+            </a>
+          </div>
         </div>
-        <button className="dropdown-btn"
-          onClick={() => dropdown()} >
-          <span className="line-1">Fundamentals of data structures </span>
-          <span className="line-2">5 Lectures- 50min</span>
-          <i className="fa fa-caret-down"></i>
-        </button>
-        <div className="dropdown-container">
-          <a href="#"
-            
-          >
-            Link 1<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 2<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 3<i className="fa-regular fa-circle-play"></i>
-          </a>
-        </div>
-        <button className="dropdown-btn" onClick={() => dropdown()} >
-          <span className="line-1">Fundamentals of algorithms </span>
-          <span className="line-2">5 Lectures- 50min</span>
-          <i className="fa fa-caret-down"></i>
-        </button>
-        <div className="dropdown-container">
-          
-           
-          <a href="#">
-            Link 2<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 2<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 3<i className="fa-regular fa-circle-play"></i>
-          </a>
-        </div>
-        <button className="dropdown-btn" onClick={() => dropdown()} >
-          <span className="line-1">Theory of computation </span>
-          <span className="line-2">5 Lectures- 50min</span>
-          <i className="fa fa-caret-down"></i>
-        </button>
-        <div className="dropdown-container">
-          <a
-            className="popup-vimeo"
-            href="https://vimeo.com/67341671"
-            onClick={() => shoot(".popup-vimeo")}
-          >
-            Link 1<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 2<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 3<i className="fa-regular fa-circle-play"></i>
-          </a>
-        </div>
-        <button className="dropdown-btn" onClick={() => dropdown()} >
-          <span className="line-1">Fundamentals of computer systems</span>
-          <span className="line-2">5 Lectures- 50min</span>
-          <i className="fa fa-caret-down"></i>
-        </button>
-        
-        <div className="dropdown-container">
-          < a href="#!" className="lightbox" onClick={() => lightbox_open()}
-
-          >        
-                   
-
-                   {/*<div id="light">*/}
-                   <ReactPlayer id="light"className="reactplayer"
-                         url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
-               
-                      
-                         width='60%'
-                         height='50%'
-                     
-                    /> 
-                  {/*</div>*/}
-
-            Link 1 k<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 2<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
-            Link 3<i className="fa-regular fa-circle-play"></i>
-          </a>
-        </div>
-      </div>
       </div>
 
       <div className="Coursediscription">
@@ -617,166 +526,167 @@ function lightbox_close() {
           programming knowledge and skills.
         </div>
       </div>
-        
+
       <div className="reviewsContainer">
-  
+        <div className="averageRating">
+          {totalSum}{" "}
+          <i className="star fa fa-star">
+            {" "}
+            Course Rating | {totalReviews} ratings
+          </i>
+        </div>
+        <button className="submitButton" onClick={() => handleForm()}>
+          Review
+        </button>
 
-       
-       <div className="averageRating">{totalSum}  <i className="star fa fa-star"> Course Rating | {totalReviews} ratings</i></div>
-       <button className="submitButton" onClick={() => handleForm()
-      }>Review</button>
-        
-       {showForm && (
-
-
-        
-        <div className="ratingContainer">
-                <button className="ratingcloseIcon"
-                 onClick={()=>{  setForm(false); 
-                  onStarsClick(0)
-                 setHover(0)
-                
-                  }}
-                 
-                 ><i class="fa-sharp fa-solid fa-xmark fa-1x" size ={"1px"}></i></button>
-        <h1> How was the Course?</h1>
-        <div className="star-rating">
-        {[...Array(5)].map((star, index) => {
-          index += 1;
-          return (
+        {showForm && (
+          <div className="ratingContainer">
             <button
-              type="button"
-              key={index}
-              className={index <= (hover || ratingStars) ? "on" : "off"}
-              onClick={() => onStarsClick(index)}
-              onMouseEnter={() => setHover(index)}
-             // onMouseLeave={() => setHover(ratingStars)}
-              name = "ratingStars"
-                  value = {review.ratingStars}
-             // onChange={(e) =>  onInputChange(e.target.value)}
-
-
+              className="ratingcloseIcon"
+              onClick={() => {
+                setForm(false);
+                onStarsClick(0);
+                setHover(0);
+              }}
             >
-              <span className="fa fa-star"></span>
+              <i class="fa-sharp fa-solid fa-xmark fa-1x" size={"1px"}></i>
             </button>
-            
-          );
-        })}
-      </div>
-      <textarea Classname="textReview"  type="review"
-                  name = "reviewDesc"
-                 
-                  onChange={(e) => onInputChange(e)}
-                  value={review.reviewDesc}
-                  placeholder="Reivew Here..."></textarea>
- <Link to="/coursesvideos">
- <button className="submitButton" type = "button"
-      disabled={!(checkReview&&checkrating)}
-      onClick={onSubmit}
-      
-      
-      
-      
-      
-      > Submit </button>
+            <h1> How was the Course?</h1>
+            <div className="star-rating">
+              {[...Array(5)].map((star, index) => {
+                index += 1;
+                return (
+                  <button
+                    type="button"
+                    key={index}
+                    className={index <= (hover || ratingStars) ? "on" : "off"}
+                    onClick={() => onStarsClick(index)}
+                    onMouseEnter={() => setHover(index)}
+                    // onMouseLeave={() => setHover(ratingStars)}
+                    name="ratingStars"
+                    value={review.ratingStars}
+                    // onChange={(e) =>  onInputChange(e.target.value)}
+                  >
+                    <span className="fa fa-star"></span>
+                  </button>
+                );
+              })}
+            </div>
+            <textarea
+              Classname="textReview"
+              type="review"
+              name="reviewDesc"
+              onChange={(e) => onInputChange(e)}
+              value={review.reviewDesc}
+              placeholder="Reivew Here..."
+            ></textarea>
+            <Link to="/coursesvideos">
+              <button
+                className="submitButton"
+                type="button"
+                disabled={!(checkReview && checkrating)}
+                onClick={onSubmit}
+              >
+                {" "}
+                Submit{" "}
+              </button>
             </Link>
-      
-   
-      </div>
-      )}
+          </div>
+        )}
 
-
-             <div className="reviews">
-              {reviews.slice(0,visible).map(reviewd=> (
-              <div className="eachReview">
-
-
-
-
-
-
-
-                <div className="top-review"> 
-                  <h4 className="reviewerName">{reviewd.students.firstName}<span></span> {reviewd.students.email}</h4>
-                  {new Array(reviewd.ratingStars).fill(null).map(() => (
+        <div className="reviews">
+          {reviews.slice(0, visible).map((reviewd) => (
+            <div className="eachReview">
+              <div className="top-review">
+                <h4 className="reviewerName">
+                  {reviewd.students.firstName}
+                  <span></span> {reviewd.students.email}
+                </h4>
+                {new Array(reviewd.ratingStars).fill(null).map(() => (
                   <i className="fas fa-star icon-c" />
-        ))}
-
-                </div>
-                <div className="reviewDiscription">
+                ))}
+              </div>
+              <div className="reviewDiscription">
                 <p>{reviewd.reviewDesc}</p>
                 <p2>{reviewd.createdAt}</p2>
-
               </div>
               {loggedInUser === reviewd.students.email && (
- 
- <button className="editReview" onClick={() =>{
-        handleEdit(reviewd.ratingID)
-  handleForm()}}>Edit</button>
+                <button
+                  className="editReview"
+                  onClick={() => {
+                    handleEdit(reviewd.ratingID);
+                    handleForm();
+                  }}
+                >
+                  Edit
+                </button>
+              )}
 
-  
-)}
-
-
-
-{loggedInUser === reviewd.students.email && (
- 
- <button className="deleteReview"  onClick={() => deleteReview(reviewd.ratingID)}>Delete</button>
-
-  
-)}
-
+              {loggedInUser === reviewd.students.email && (
+                <button
+                  className="deleteReview"
+                  onClick={() => deleteReview(reviewd.ratingID)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
-           ))}
-            
-           
-            </div>
-            <button className="viewMore" onClick={showMoreReviews}> View More</button>
-            <button className="viewLess" onClick={showLessReviews}> View Less</button>
-
+          ))}
+        </div>
+        <button className="viewMore" onClick={showMoreReviews}>
+          {" "}
+          View More
+        </button>
+        <button className="viewLess" onClick={showLessReviews}>
+          {" "}
+          View Less
+        </button>
       </div>
-   
-      
-        {/* Hello world */}
-      
-            {/* Indicators */}
-            
-            {/* Wrapper for slides */}
-            
-            <div className="sponsor-header">
 
-                        <h2 >Sponsored By</h2>
-                       
-                <div className="row">
-         
-                    <div className="sponsor-feature"><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Logo_of_the_United_Nations.svg/1200px-Logo_of_the_United_Nations.svg.png" style={{width: '200px'}} /></div>
-                
-               
-                    <div className="sponsor-feature"><img alt="" src="https://www.dcs.bbk.ac.uk/site/assets/files/4102/ioc_logo_onwhite_aw.258x0-is-hidpi.png" style={{width: '155px'}} /></div>
-                 
-                 
-                    <div className="sponsor-feature"><img alt="" src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg" style={{width: '155px'}} /></div>
-                  
-                  
-                    <div className="sponsor-feature"><img alt="" src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg" style={{width: '155px'}} /></div>
-         
-                 
-                  
-                </div>
-                </div>
-                
+      {/* Hello world */}
 
+      {/* Indicators */}
 
+      {/* Wrapper for slides */}
 
+      <div className="sponsor-header">
+        <h2>Sponsored By</h2>
 
+        <div className="row">
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Logo_of_the_United_Nations.svg/1200px-Logo_of_the_United_Nations.svg.png"
+              style={{ width: "200px" }}
+            />
+          </div>
 
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src="https://www.dcs.bbk.ac.uk/site/assets/files/4102/ioc_logo_onwhite_aw.258x0-is-hidpi.png"
+              style={{ width: "155px" }}
+            />
+          </div>
 
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg"
+              style={{ width: "155px" }}
+            />
+          </div>
+
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg"
+              style={{ width: "155px" }}
+            />
+          </div>
+        </div>
+      </div>
     </div>
-
-
-
-
-
   );
 }
 
