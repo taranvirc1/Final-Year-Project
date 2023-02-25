@@ -49,12 +49,6 @@ public class StudentController {
 
     }
 
-    // @PutMapping("user/{id}")
-    // public ResponseEntity<Student> updateFirstName(@PathVariable Integer id,
-    // @RequestBody StudentPostDTO newStudentDTO) {
-    // String newFirstName = newStudentDTO.getFirstName();
-
-    // }
 
     // Below here is the profile information
 
@@ -63,7 +57,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getFirstName() != null) {
                 student.setFirstName(studentPostDTO.getFirstName());
             }
@@ -79,7 +72,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getLastName() != null) {
                 student.setLastName(studentPostDTO.getLastName());
             }
@@ -95,7 +87,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getEmail() != null) {
                 student.setEmail(studentPostDTO.getEmail());
             }
@@ -111,7 +102,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getCountry() != null) {
                 student.setCountry(studentPostDTO.getCountry());
             }
@@ -127,7 +117,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getPhone() != null) {
                 student.setPhone(studentPostDTO.getPhone());
             }
@@ -143,7 +132,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getDateOfBirth() != null) {
                 student.setDateOfBirth(studentPostDTO.getDateOfBirth());
             }
@@ -175,7 +163,6 @@ public class StudentController {
         }
     }
 
-    // Profile Controller place
     @PostMapping("/{id}/image")
     public ResponseEntity<String> uploadUserImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file)
             throws IOException {
@@ -188,19 +175,6 @@ public class StudentController {
         byte[] image = studentService.getUserImage(id);
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
-
-    // if (studentPostDTO.getLastName() != null) {
-    // student.setLastName(studentPostDTO.getLastName());
-    // }
-    // if (studentPostDTO.getDateOfBirth() != null) {
-    // student.setDateOfBirth(studentPostDTO.getDateOfBirth());
-    // }
-    // if (studentPostDTO.getCountry() != null) {
-    // student.setCountry(studentPostDTO.getCountry());
-    // }
-    // if (studentPostDTO.getPhone() != null) {
-    // student.setPhone(studentPostDTO.getPhone());
-    // }
 
     @PutMapping("/user/option/{id}")
     public Student updateOption(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
