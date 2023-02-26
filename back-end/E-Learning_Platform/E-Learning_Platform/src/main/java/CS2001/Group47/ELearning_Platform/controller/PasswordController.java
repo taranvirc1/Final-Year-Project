@@ -1,29 +1,29 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Optional;
+// import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
+// import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+// import org.springframework.data.repository.query.Param;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.ui.Model;
+// import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import CS2001.Group47.ELearning_Platform.Utility.Utility;
+// import CS2001.Group47.ELearning_Platform.Utility.Utility;
 import CS2001.Group47.ELearning_Platform.dto.ResetPasswordDTO;
-import CS2001.Group47.ELearning_Platform.dto.StudentPostDTO;
-import CS2001.Group47.ELearning_Platform.exception.StudentNotFoundException;
+// import CS2001.Group47.ELearning_Platform.dto.StudentPostDTO;
+// import CS2001.Group47.ELearning_Platform.exception.StudentNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
 import CS2001.Group47.ELearning_Platform.service.StudentService;
@@ -88,7 +88,18 @@ public void forgotPassword(@RequestBody String email) {
         System.out.println(reset_token);
         student.setResetPasswordToken(reset_token);
         studentRepository.save(student);
-        // sendEmail(student.getEmail(), reset_token);
+
+        String reset_link = "http://localhost:3000/newPassword?token=" + reset_token;
+
+        try {
+            sendEmail(student.getEmail(), reset_link);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
@@ -98,7 +109,7 @@ public void sendEmail(String recepientEmail, String link) throws UnsupportedEnco
     MimeMessage eMailMessage = mailSender.createMimeMessage();
     MimeMessageHelper emailHelper = new MimeMessageHelper(eMailMessage); 
 
-    emailHelper.setFrom("support@code4ALL.com", "Code4ALL Support");
+    emailHelper.setFrom("group47Code4All@gmail.com", "Code4ALL Support");
     emailHelper.setTo(recepientEmail);
     
     String subject = "Here's the  link to reset your password";
@@ -138,23 +149,42 @@ public void sendEmail(String recepientEmail, String link) throws UnsupportedEnco
 //     return "reset_password_form";
 // }
 
-@PostMapping("/reset_password")
-public String resetPassword(HttpServletRequest request, @RequestBody ResetPasswordDTO resetDTO) {
+@PostMapping("reset_password")
+public void resetPassword(@RequestBody String email, @RequestBody ResetPasswordDTO passwordDTO) {
 
-    String token = resetDTO.getToken();
-    String userPass = resetDTO.getNewPassword();
-
-    Student student = studentService.getResetPasswordToken(token);
+    Student student = studentService.findByEmail(email);
 
     if(student == null) {
-        System.out.println("Invalid token");
-        System.out.println("your password cannot be reset!");
-    } else {
-        studentService.updatePassword(student, userPass);
-        System.out.println("You have successfully changed your password");
+        throw new RuntimeException("Student not found");
     }
 
-    return "success";
+    if(!student.getResetPasswordToken().equals(passwordDTO.getToken())) {
+        throw new RuntimeException("Invalid token");
+    }
+
+    student.setPassword(passwordDTO.getNewPassword());
+    student.setResetPasswordToken(null);
+    studentRepository.save(student);
+
 }
+
+// @PostMapping("/reset_password")
+// public String resetPassword(HttpServletRequest request, @RequestBody ResetPasswordDTO resetDTO) {
+
+//     String token = resetDTO.getToken();
+//     String userPass = resetDTO.getNewPassword();
+
+//     Student student = studentService.getResetPasswordToken(token);
+
+//     if(student == null) {
+//         System.out.println("Invalid token");
+//         System.out.println("your password cannot be reset!");
+//     } else {
+//         studentService.updatePassword(student, userPass);
+//         System.out.println("You have successfully changed your password");
+//     }
+
+//     return "success";
+// }
 
 }
