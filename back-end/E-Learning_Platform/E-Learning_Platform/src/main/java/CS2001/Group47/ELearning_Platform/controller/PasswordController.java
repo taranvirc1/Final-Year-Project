@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // import org.springframework.ui.Model;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -162,7 +163,9 @@ public void resetPassword(@RequestBody String email, @RequestBody ResetPasswordD
         throw new RuntimeException("Invalid token");
     }
 
-    student.setPassword(passwordDTO.getNewPassword());
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    student.setPassword(encoder.encode(passwordDTO.getNewPassword()));
     student.setResetPasswordToken(null);
     studentRepository.save(student);
 
