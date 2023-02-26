@@ -1,15 +1,15 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
 import java.io.IOException;
-import java.net.URL;
-import java.security.Principal;
-import java.util.Base64;
+// import java.net.URL;
+// import java.security.Principal;
+// import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.io.IOUtils;
+// import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+// import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+// import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.vaadin.ui.Image;
+// import com.vaadin.ui.Image;
 
 import CS2001.Group47.ELearning_Platform.dto.StudentPostDTO;
-import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
+// import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
 import CS2001.Group47.ELearning_Platform.service.StudentService;
