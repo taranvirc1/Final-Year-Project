@@ -46,7 +46,6 @@ function Account() {
               setLoginErrorMessages("");
               setLoginSuccess("You have logged in successfully!!!");
               setLoggedinUser(email);
-              localStorage.setItem("CURRENT_USER", JSON.stringify(email));
               login();
             } else {
               setValidLoginAttempts(validLoginAttempts + 1);
