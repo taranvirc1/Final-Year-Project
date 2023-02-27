@@ -293,8 +293,7 @@ public class StudentController {
         // Else create a student with DTO
         Student newStudent = new Student(
                 newStudentDTO.getFirstName(),
-                newStudentDTO.getLastName(),
-                null, newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
+                newStudentDTO.getLastName(), newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
                 newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()));
         // Add student through StudentService
         studentService.addStudent(newStudent);
