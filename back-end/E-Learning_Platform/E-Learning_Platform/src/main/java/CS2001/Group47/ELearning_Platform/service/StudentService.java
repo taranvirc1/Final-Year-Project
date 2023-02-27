@@ -108,153 +108,47 @@ public class StudentService {
 	}
 
 	public void saveBio(Integer userId, String bio) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			user.setBio(bio);
-			studentRepository.save(user);
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
+        Optional<Student> userOptional = studentRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            Student user = userOptional.get();
+            user.setBio(bio);
+            studentRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+    
+    public String getBio(Integer userId) {
+        Optional<Student> userOptional = studentRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            Student user = userOptional.get();
+            return user.getBio();
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
 
-	public String getBio(Integer userId) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			return user.getBio();
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
 
 	public void saveOption(Integer userId, String bio) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			user.setOptionValue(bio);
-			studentRepository.save(user);
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public String getOption(Integer userId) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			return user.getOptionValue();
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public void saveRole(Integer userId, String role) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			user.setRole(role);
-			studentRepository.save(user);
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public String getRole(Integer userId) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			return user.getRole();
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-
-	public void saveTwitter(Integer userId, String twitter) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			user.setTwitter(twitter);
-			studentRepository.save(user);
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public String getTwitter(Integer userId) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			return user.getTwitter();
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public void saveLinked(Integer userId, String linkedIn) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			user.setLinkedIn(linkedIn);
-			studentRepository.save(user);
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public String getLinkedr(Integer userId) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			return user.getLinkedIn();
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-
-	public void saveInstagram(Integer userId, String instagram) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			user.setLinkedIn(instagram);
-			studentRepository.save(user);
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public String getInstagram(Integer userId) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			return user.getInstagram();
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	
-	public void saveUsername(Integer userId, String userName) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			user.setUsername(userName);
-			studentRepository.save(user);
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
-
-	public String getUsername(Integer userId) {
-		Optional<Student> userOptional = studentRepository.findById(userId);
-		if (userOptional.isPresent()) {
-			Student user = userOptional.get();
-			return user.getUsername();
-		} else {
-			throw new RuntimeException("User not found");
-		}
-	}
+        Optional<Student> userOptional = studentRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            Student user = userOptional.get();
+            user.setOptionValue(bio);
+            studentRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+    
+    public String getOption(Integer userId) {
+        Optional<Student> userOptional = studentRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            Student user = userOptional.get();
+            return user.getOptionValue();
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+    
 
 }

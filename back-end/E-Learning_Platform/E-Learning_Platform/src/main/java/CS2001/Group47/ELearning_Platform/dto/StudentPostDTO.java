@@ -9,30 +9,20 @@ public class StudentPostDTO {
     String phone;
     String email;
     String password;
+    String url;
     byte[] avatar;
     String bio;
     String optionValue;
-    String role;
-    String twitter;
-    String instagram;
-    String linkedIn;
-    String username;
 
-    public StudentPostDTO(String username, String twitter, String instagram, String linkedIn, String role,
-            String optionValue, String bio, byte[] avatar, String firstName,
-            String lastName,
+    public StudentPostDTO(String optionValue, String bio, String url, byte[] avatar, String firstName, String lastName,
             String dateOfBirth,
             String country,
             String phone, String email,
             String password) {
         super();
-        this.username = username;
-        this.twitter = twitter;
-        this.linkedIn = linkedIn;
-        this.instagram = instagram;
-        this.role = role;
         this.optionValue = optionValue;
         this.bio = bio;
+        this.url = url;
         this.avatar = avatar;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,46 +31,6 @@ public class StudentPostDTO {
         this.phone = phone;
         this.email = email;
         this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getTwitter() {
-        return twitter;
-    }
-
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
-    }
-
-    public String getInstagram() {
-        return instagram;
-    }
-
-    public void setInstagram(String instagram) {
-        this.instagram = instagram;
-    }
-
-    public String getLinkedIn() {
-        return linkedIn;
-    }
-
-    public void setLinkedIn(String linkedIn) {
-        this.linkedIn = linkedIn;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getOptionValue() {
@@ -163,11 +113,17 @@ public class StudentPostDTO {
         this.password = password;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
-        return "StudentPostDTO [firstName=" + "username=" + username + "role=" + role + firstName + "twitter=" + twitter
-                + "linkedIn=" + linkedIn + "instagram=" + instagram + "profile" + "optionValue=" + optionValue
-                + "bio=" + bio
+        return "StudentPostDTO [firstName=" + firstName + "profile" + "optionValue=" + optionValue + url + "bio=" + bio
                 + "profile=" + avatar
                 + ", lastName="
                 + lastName + ", dateoOfBirth=" + dateOfBirth
