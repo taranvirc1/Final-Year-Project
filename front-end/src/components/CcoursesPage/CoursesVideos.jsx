@@ -325,22 +325,91 @@ useEffect(() => {
 
 console.log(reviews);
 
-const getAverage=(reviews)=>{
-  const total = reviews.reduce((acc, review) => acc + review.ratingStars, 0);
-  return total / reviews.length;
-};
-
 
 */
+
+
+
+
+
+
+
+
+const [videos, setVideos] = useState([]);
+
+ 
+
+
+
+
+/*const handleButtonClick = async (videoName, courseID)  => {
+ await axios.get(`http://localhost:8080/videos/${videoName}/${courseID}`)
+   .then(response => {
+     console.log(response.data);
+
+     setVideos(response.data);
+   })
+   .catch(error => {
+     console.error(error);
+   });
+};*/
+ 
+
+
+
+
+useEffect(() => {
+ axios.get(`http://localhost:8080/videos`,{  headers: {"Authorization" : `Bearer ${jwt}`} })
+   .then(response => {
+     console.log(response.data);
+
+     setVideos(response.data);
+   })
+   .catch(error => {
+     console.error(error);
+   });
+
+  }, []);
+
+
+console.log(videos)
+
+
+const [videoUrl, setVideoUrl] = useState('');
+
+const retrieveUrl = (videoName,courseID) => {
+ 
+
+  const i =videos.find((video)=>video.videoName===videoName && video.course.courseID === courseID);
+ const url= i.url;
+
+
+  setVideoUrl(url);
+
+}
+console.log("vid"+ videoUrl)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  
 
   const [showPlayer, setShowPlayer] = useState(false);
-  const [videoUrl, setVideoUrl] = useState('');
+  //const [videoUrl, setVideoUrl] = useState('');
 
   function handleClick(url) {
-    setVideoUrl(url);
+   // setVideoUrl(url);
     setShowPlayer(true);
   }
 
@@ -408,7 +477,7 @@ function lightbox_close() {
 }
 
 
-
+//const handlePlayerReady = () =>
 
 
   const shoot = (a) => {
@@ -434,9 +503,10 @@ function lightbox_close() {
         <div className="video-player-popup">
           <button className="closeIcon" onClick={() => setShowPlayer(false)}><i class="fa-sharp fa-solid fa-xmark fa-2x" size ={"10px"}></i></button>
           <ReactPlayer className="videoPlayer"
-                         url={videoUrl}
+                       // url={`https://www.youtube.com/embed/'${videoUrll}`}
+                        url={videoUrl}
                          controls={true}
-                      
+         
                          width='120%'
                          height='100%'
                      
@@ -486,16 +556,17 @@ function lightbox_close() {
           <span className="line-2">5 Lectures- 50min</span>
           <i className="fa fa-caret-down"></i>
         </button>
+
+
+
+
         <div className="dropdown-container">
-        < a href="#!"onClick={() => handleClick('https://youtu.be/ddlCWZxwB24')}
-
->        
-         
-
-         
-          Link 1<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#" onClick={() => handleClick('https://www.youtube.com/watch?v=9kfScGV6W1Y')}>
+ 
+          <a href="#!" onClick={() => {
+            
+            
+            retrieveUrl('test',11)
+            handleClick()}}>
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
           <a href="#">
@@ -509,15 +580,15 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-          <a href="#"
+          <a href="#!"
             
           >
             Link 1<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#!">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#!">
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
@@ -529,13 +600,13 @@ function lightbox_close() {
         <div className="dropdown-container">
           
            
-          <a href="#">
+          <a href="#!">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#!">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#!">
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
@@ -545,17 +616,11 @@ function lightbox_close() {
           <i className="fa fa-caret-down"></i>
         </button>
         <div className="dropdown-container">
-          <a
-            className="popup-vimeo"
-            href="https://vimeo.com/67341671"
-            onClick={() => shoot(".popup-vimeo")}
-          >
-            Link 1<i className="fa-regular fa-circle-play"></i>
-          </a>
-          <a href="#">
+        
+          <a href="#!">
             Link 2<i className="fa-regular fa-circle-play"></i>
           </a>
-          <a href="#">
+          <a href="#!">
             Link 3<i className="fa-regular fa-circle-play"></i>
           </a>
         </div>
@@ -571,16 +636,7 @@ function lightbox_close() {
           >        
                    
 
-                   {/*<div id="light">*/}
-                   <ReactPlayer id="light"className="reactplayer"
-                         url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
                
-                      
-                         width='60%'
-                         height='50%'
-                     
-                    /> 
-                  {/*</div>*/}
 
             Link 1 k<i className="fa-regular fa-circle-play"></i>
           </a>
@@ -735,14 +791,9 @@ function lightbox_close() {
             <button className="viewLess" onClick={showLessReviews}> View Less</button>
 
       </div>
-   
-      
-        {/* Hello world */}
-      
-            {/* Indicators */}
-            
-            {/* Wrapper for slides */}
-            
+      <button onClick={() => retrieveUrl('test',11)}>
+   {videoUrl}fefsf  </button>
+        
             <div className="sponsor-header">
 
                         <h2 >Sponsored By</h2>
