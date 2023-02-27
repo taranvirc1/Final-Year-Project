@@ -110,7 +110,7 @@ public class Student implements Serializable {
 
 	}
 
-	public Student(String optionValue, String firstName, String lastName, String dateOfBirth,
+	public Student(String firstName, String lastName, String dateOfBirth,
 			String country, String phone, String email,
 			String password) {
 
