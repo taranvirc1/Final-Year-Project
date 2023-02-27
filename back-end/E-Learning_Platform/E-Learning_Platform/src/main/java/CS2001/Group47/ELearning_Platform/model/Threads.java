@@ -1,6 +1,7 @@
 package CS2001.Group47.ELearning_Platform.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -33,21 +34,24 @@ public class Threads implements Serializable {
 	
 	@NotBlank
 	String threadName;
+
+	@NotBlank
+	String[] fTags;
 	
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-	private Date tDateCreated;
+	private Date fDateCreated;
 
 	public Threads() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Threads(String threadName, Date tDateCreated) {
+	public Threads(String threadName, String[] fTags) {
 		super();
 		this.threadName = threadName;
-		this.tDateCreated = tDateCreated;
+		this.fTags = fTags;
 	}
 
 	public Integer getId() {
@@ -66,17 +70,27 @@ public class Threads implements Serializable {
 		this.threadName = threadName;
 	}
 
-	public Date gettDateCreated() {
-		return tDateCreated;
+
+	public String[] getfTags() {
+		return fTags;
 	}
 
-	public void settDateCreated(Date tDateCreated) {
-		this.tDateCreated = tDateCreated;
+	public void setfTags(String[] fTags) {
+		this.fTags = fTags;
+	}
+
+	public Date getfDateCreated() {
+		return fDateCreated;
+	}
+
+	public void setDateCreated(Date fDateCreated) {
+		this.fDateCreated = fDateCreated;
 	}
 
 	@Override
 	public String toString() {
-		return "Threads [id=" + id + ", threadName=" + threadName + ", tDateCreated=" + tDateCreated + "]";
+		return "Threads [id=" + id + ", threadName=" + threadName + ", fTags=" + Arrays.toString(fTags)
+				+ ", fDateCreated=" + fDateCreated + "]";
 	}
 	
 }
