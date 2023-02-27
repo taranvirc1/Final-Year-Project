@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
+import axios from "axios";
 import DonationsBilling from "./components/Donations/DonationsBilling";
 import DonationsConfirmation from "./components/Donations/DonationsConfirmation";
 import DonationsPage from "./components/Donations/DonationsPage";
@@ -18,14 +19,32 @@ import CreateForum from "./components/Forum/CreateForum";
 import FAQ from "./components/FAQ/FAQ";
 import Contact from "./components/FAQ/Contact";
 import UPM from "./components/UPM/UPM";
-import Quizzes from "./components/Quizzes/Quizz";
 import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
 import Avatar from "./components/Section Avatar/Avatar";
 
+import Header from './components/Quizzes/components/Header/Header';
+import Footer from './components/Quizzes/components/Footer/Footer';
+import Home from './components/Quizzes/Pages/Home/Home';
+import Quiz from "./components/Quizzes/Pages/Quiz/Quiz";
+import Result from "./components/Quizzes/Pages/Result/Result";
+import { useState } from "react";
+
 function AppRoute() {
+  const [questions, setQuestions] = useState();
+  const [name, setName] = useState();
+  const [score, setScore] = useState(0);
+
+  const fetchQuestions = async (category = "", difficulty = "") => {
+    const { data } = await axios.get(
+       `https://opentdb.com/api.php?amount=10${category &&`&category=${category}`}${difficulty && `&difficulty=${difficulty}`}&type=multiple`
+    );
+
+    setQuestions(data.results);
+  };
   return (
     <div>
       <BrowserRouter>
+      
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<LandingPage />} />
@@ -57,8 +76,21 @@ function AppRoute() {
             />
             <Route path="/Forum_page" element={<ForumPage />} />
             <Route path="/Create_forum" element={<CreateForum />} />
-            {/* route for quizzes */}
-            <Route path="/Quizzes" element={<Quizzes />} />
+
+            {/* ======route for quizzes====== */}            
+            <Route path="/Quizzes" element={<Home
+           name={name}
+           setName={setName}
+           fetchQuestions={fetchQuestions} />} />
+          <Route path="/quiz" element={<Quiz 
+          name={name}
+          questions={questions}
+          score={score}
+          setScore={setScore}
+          setQuestions={setQuestions}/>} />
+          <Route path="/result" element={<Result
+           name={name} score={score} />} />
+           
             {/* route for FAQ */}
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/Contact" element={<Contact />} />
@@ -68,6 +100,7 @@ function AppRoute() {
             <Route path="/UPM" element={<UPM />} />
           </Route>
         </Routes>
+       
       </BrowserRouter>
     </div>
   );
