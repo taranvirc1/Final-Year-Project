@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Categories from "../../Data/Categories";
 import "./Home.css";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const Home = ({ name, setName, fetchQuestions }) => {
   const [category, setCategory] = useState("");
@@ -24,6 +26,8 @@ const Home = ({ name, setName, fetchQuestions }) => {
   };
 
   return (
+    <>
+    <Header />
     <div className="content">
       <div className="settings">
         <span style={{ fontSize: 30 }}>Quiz Settings</span>
@@ -79,6 +83,8 @@ const Home = ({ name, setName, fetchQuestions }) => {
       </div>
       <img src="/quiz.svg" className="banner" alt="quiz app" />
     </div>
+    <Footer />
+    </>
   );
 };
 

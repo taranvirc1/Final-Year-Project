@@ -77,7 +77,7 @@ function AppRoute() {
             <Route path="/Forum_page" element={<ForumPage />} />
             <Route path="/Create_forum" element={<CreateForum />} />
 
-            {/* ======route for quizzes====== */}            
+            {/* ======route for quizzes====== */}           
             <Route path="/Quizzes" element={<Home
            name={name}
            setName={setName}
