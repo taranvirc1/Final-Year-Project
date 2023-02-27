@@ -69,7 +69,7 @@ public class Threads implements Serializable {
 	public void setThreadName(String threadName) {
 		this.threadName = threadName;
 	}
-
+	
 
 	public String[] getfTags() {
 		return fTags;
@@ -83,7 +83,7 @@ public class Threads implements Serializable {
 		return fDateCreated;
 	}
 
-	public void setDateCreated(Date fDateCreated) {
+	public void settDateCreated(Date fDateCreated) {
 		this.fDateCreated = fDateCreated;
 	}
 
@@ -92,5 +92,7 @@ public class Threads implements Serializable {
 		return "Threads [id=" + id + ", threadName=" + threadName + ", fTags=" + Arrays.toString(fTags)
 				+ ", fDateCreated=" + fDateCreated + "]";
 	}
+
+
 	
 }

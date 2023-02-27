@@ -1,12 +1,12 @@
 package CS2001.Group47.ELearning_Platform.repository;
 
+import org.springframework.stereotype.Repository;
+
 import CS2001.Group47.ELearning_Platform.model.Threads;
 
 import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ThreadsRepository extends JpaRepository<Threads, Integer> {
@@ -18,3 +18,4 @@ public interface ThreadsRepository extends JpaRepository<Threads, Integer> {
     Threads findByfDateCreated(Date fDateCreated); 
 
 }
+

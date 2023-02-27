@@ -11,7 +11,6 @@ import CS2001.Group47.ELearning_Platform.repository.ThreadsRepository;
 
 @Service
 public class ThreadService {
-    
     @Autowired
 	ThreadsRepository threadsRepository;
 

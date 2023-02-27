@@ -1,15 +1,15 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
 import java.io.IOException;
-import java.net.URL;
-import java.security.Principal;
-import java.util.Base64;
+// import java.net.URL;
+// import java.security.Principal;
+// import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.io.IOUtils;
+// import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+// import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+// import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.vaadin.ui.Image;
+// import com.vaadin.ui.Image;
 
 import CS2001.Group47.ELearning_Platform.dto.StudentPostDTO;
-import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
+// import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
 import CS2001.Group47.ELearning_Platform.service.StudentService;
@@ -49,12 +49,6 @@ public class StudentController {
 
     }
 
-    // @PutMapping("user/{id}")
-    // public ResponseEntity<Student> updateFirstName(@PathVariable Integer id,
-    // @RequestBody StudentPostDTO newStudentDTO) {
-    // String newFirstName = newStudentDTO.getFirstName();
-
-    // }
 
     // Below here is the profile information
 
@@ -63,7 +57,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getFirstName() != null) {
                 student.setFirstName(studentPostDTO.getFirstName());
             }
@@ -79,7 +72,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getLastName() != null) {
                 student.setLastName(studentPostDTO.getLastName());
             }
@@ -95,7 +87,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getEmail() != null) {
                 student.setEmail(studentPostDTO.getEmail());
             }
@@ -111,7 +102,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getCountry() != null) {
                 student.setCountry(studentPostDTO.getCountry());
             }
@@ -127,7 +117,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getPhone() != null) {
                 student.setPhone(studentPostDTO.getPhone());
             }
@@ -143,7 +132,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getDateOfBirth() != null) {
                 student.setDateOfBirth(studentPostDTO.getDateOfBirth());
             }
@@ -153,7 +141,6 @@ public class StudentController {
             throw new RuntimeException("Student not found with ID: " + id);
         }
     }
-
 
     @GetMapping("/bio/{userId}")
     public String getBio(@PathVariable Integer bio) {
@@ -176,7 +163,6 @@ public class StudentController {
         }
     }
 
-    // Profile Controller place
     @PostMapping("/{id}/image")
     public ResponseEntity<String> uploadUserImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file)
             throws IOException {
@@ -189,20 +175,6 @@ public class StudentController {
         byte[] image = studentService.getUserImage(id);
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
-
-    // if (studentPostDTO.getLastName() != null) {
-    // student.setLastName(studentPostDTO.getLastName());
-    // }
-    // if (studentPostDTO.getDateOfBirth() != null) {
-    // student.setDateOfBirth(studentPostDTO.getDateOfBirth());
-    // }
-    // if (studentPostDTO.getCountry() != null) {
-    // student.setCountry(studentPostDTO.getCountry());
-    // }
-    // if (studentPostDTO.getPhone() != null) {
-    // student.setPhone(studentPostDTO.getPhone());
-    // }
-
 
     @PutMapping("/user/option/{id}")
     public Student updateOption(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
@@ -219,6 +191,84 @@ public class StudentController {
             throw new RuntimeException("Student not found with ID: " + id);
         }
     }
+
+    @PutMapping("/user/role/{id}")
+    public Student updateRole(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            // Update the fields that the user changes
+            if (studentPostDTO.getRole() != null) {
+                student.setRole(studentPostDTO.getRole());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
+    @PutMapping("/user/twitter/{id}")
+    public Student updateTwitter(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            // Update the fields that the user changes
+            if (studentPostDTO.getTwitter() != null) {
+                student.setTwitter(studentPostDTO.getTwitter());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
+    @PutMapping("/user/linked/{id}")
+    public Student updateLinked(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (studentPostDTO.getLinkedIn() != null) {
+                student.setLinkedIn(studentPostDTO.getLinkedIn());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
+    @PutMapping("/user/instagram/{id}")
+    public Student updateInstagram(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (studentPostDTO.getInstagram() != null) {
+                student.setInstagram(studentPostDTO.getInstagram());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
+    @PutMapping("/user/username/{id}")
+    public Student updateUsername(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (studentPostDTO.getUsername() != null) {
+                student.setUsername(studentPostDTO.getUsername());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
+
     @PostMapping("/user")
     public ResponseEntity<Optional<Student>> addUser(@RequestBody StudentPostDTO newStudentDTO) {
         // StudentDTO has null attributes
@@ -245,7 +295,7 @@ public class StudentController {
                 newStudentDTO.getFirstName(),
                 newStudentDTO.getLastName(),
                 null, newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
-                newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()), null, null, null);
+                newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()));
         // Add student through StudentService
         studentService.addStudent(newStudent);
 
