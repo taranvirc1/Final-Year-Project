@@ -10,6 +10,7 @@ public class StudentPostDTO {
     String email;
     String password;
     byte[] avatar;
+    byte[] backavatar;
     String bio;
     String optionValue;
     String role;
@@ -19,13 +20,14 @@ public class StudentPostDTO {
     String username;
 
     public StudentPostDTO(String username, String twitter, String instagram, String linkedIn, String role,
-            String optionValue, String bio, byte[] avatar, String firstName,
+            String optionValue, String bio, byte[] avatar,byte[] backavatar, String firstName,
             String lastName,
             String dateOfBirth,
             String country,
             String phone, String email,
             String password) {
         super();
+        this.backavatar = backavatar;
         this.username = username;
         this.twitter = twitter;
         this.linkedIn = linkedIn;
@@ -41,6 +43,14 @@ public class StudentPostDTO {
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    public byte[] getBackavatar() {
+        return backavatar;
+    }
+
+    public void setBackavatar(byte[] backavatar) {
+        this.backavatar = backavatar;
     }
 
     public String getUsername() {
@@ -165,7 +175,7 @@ public class StudentPostDTO {
 
     @Override
     public String toString() {
-        return "StudentPostDTO [firstName=" + "username=" + username + "role=" + role + firstName + "twitter=" + twitter
+        return "StudentPostDTO [firstName=" + "username=" + username + "backavatar=" + backavatar + "role=" + role + firstName + "twitter=" + twitter
                 + "linkedIn=" + linkedIn + "instagram=" + instagram + "profile" + "optionValue=" + optionValue
                 + "bio=" + bio
                 + "profile=" + avatar

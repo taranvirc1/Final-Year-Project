@@ -107,6 +107,20 @@ public class StudentService {
 		return user.getAvatar();
 	}
 
+	public void saveUserBackImage(Integer id, MultipartFile file) throws IOException {
+		Student user = studentRepository.findById(id)
+				.orElseThrow();
+
+		user.setBackavatar(file.getBytes());
+		studentRepository.save(user);
+	}
+
+	public byte[] getUserBackImage(Integer id) {
+		Student user = studentRepository.findById(id)
+				.orElseThrow();
+
+		return user.getBackavatar();
+	}
 	public void saveBio(Integer userId, String bio) {
 		Optional<Student> userOptional = studentRepository.findById(userId);
 		if (userOptional.isPresent()) {

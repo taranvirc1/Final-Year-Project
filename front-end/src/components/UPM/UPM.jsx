@@ -21,7 +21,9 @@ import { CiTwitter } from 'react-icons/ci';
 import { AiOutlineInstagram } from 'react-icons/ai'
 import { CiLinkedin } from 'react-icons/ci'
 import { RiMapPin2Line } from 'react-icons/ri'
+import { FaUpload } from 'react-icons/fa'
 import axios from 'axios'
+import defaultImage from '../../images/UPM/assets/default.jpg'
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
@@ -273,6 +275,47 @@ function UPM() {
     fileInput.current.click();
   }
 
+  //------
+
+  const [image2, setImage2] = useState(null);
+  const fileInput2 = useRef(null);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/${userId}/backimage`, {
+      responseType: 'arraybuffer',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        const blob = new Blob([response.data], { type: 'image/jpeg' });
+        const url = URL.createObjectURL(blob);
+        setImage2(url);
+      })
+      .catch(error => console.log(error));
+  }, [userId, token]);
+
+  const [file2, setFile2] = useState(null);
+
+  const handleSubmit2 = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    axios.post(`http://localhost:8080/${userId}/backimage`, formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error));
+  };
+
+  const handleButtonClick2 = (e) => {
+    e.preventDefault();
+    fileInput.current.click();
+  }
+
 
 
   return (
@@ -280,13 +323,6 @@ function UPM() {
       <div className="upmcontainer">
         <div className="upm-left-side">
           <nav className="upm-navigation">
-            <li>
-              <div className="upm-item-1">
-                <a href="/">
-                  <BsPerson size={45} />
-                </a>
-              </div>
-            </li>
             <li className="upm-log">
               <div className="upm-item-1 upm-logout">
                 {/* <a href="#"> */}
@@ -303,11 +339,20 @@ function UPM() {
         </div>
         <div className="upm-right-side">
           <div className="upm-card-container-1">
-            <li><div className='upm-avatar'>{image && <img src={image} alt="User image" />}<button onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button></div></li>
+            <li>
+              <div className="upm-back-upload">
+                <img onClick={handleButtonClick2} className="upm-img-black" src={image2} alt="back image"></img>
+                <button  type="submit" onClick={handleSubmit2}><FaUpload className="upm-icons-s" /></button>
+              </div>
+            </li>
+            <li>
+              <div className='upm-avatar'>{image && <img src={image} alt="User image" />}<button onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button></div>
+              <button className="upm-saver-1" type="submit" onClick={handleSubmit}><FaUpload className="upm-icons-s" /></button>
+            </li>
             <li>
               <input type="file" onChange={e => setFile(e.target.files[0])} ref={fileInput} style={{ display: "none" }} />
-              <button className="upm-saver" type="submit" onClick={handleSubmit}>Save Changes</button>
             </li>
+            <input type="file" onChange={e => setFile2(e.target.files[0])} ref={fileInput2} style={{ display: "none" }} />
           </div>
           <div className="upm-card-container-2">
             <div className="upm-card">
@@ -581,26 +626,26 @@ function UPM() {
                   <div class="upm-form-container">
                     <div class="upm-form-rad">
                       <div class="upm-form-input-holder-rad">
-                        <button className="upm-saver" id="basic" type="submit" onClick={() => {
+                        <button className="upm-roles" id="basic" type="submit" onClick={() => {
                           setRole("Basic");
                           updateRole();
                         }}>Basic</button>
                       </div>
                       <div class="upm-form-input-holder-rad">
-                        <button className="upm-saver" id="beginner" type="submit" onClick={() => {
+                        <button className="upm-roles" id="beginner" type="submit" onClick={() => {
                           setRole("Beginner");
                           updateRole();
                         }}>Beginner</button>
                       </div>
 
                       <div class="upm-form-input-holder-rad">
-                        <button className="upm-saver" type="Advanced" onClick={() => {
+                        <button className="upm-roles" type="Advanced" onClick={() => {
                           setRole("Advanced");
                           updateRole();
                         }}>Advanced</button>
                       </div>
                       <div class="upm-form-input-holder-rad">
-                        <button className="upm-saver" type="submit" id="Master" onClick={() => {
+                        <button className="upm-roles" type="submit" id="Master" onClick={() => {
                           setRole("Master");
                           updateRole();
                         }}>Master</button>

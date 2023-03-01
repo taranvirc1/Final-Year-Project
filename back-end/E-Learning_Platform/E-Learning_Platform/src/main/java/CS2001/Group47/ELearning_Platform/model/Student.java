@@ -93,6 +93,9 @@ public class Student implements Serializable {
 	@Lob
 	@Column(name = "image")
 	private byte[] avatar;
+	@Lob
+	@Column(name = "backAvatar")
+	private byte[] backavatar;
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -125,12 +128,13 @@ public class Student implements Serializable {
 
 	}
 
-	public Student(String username,String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String firstName, String lastName,
+	public Student(byte [] backavatar,String username,String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String firstName, String lastName,
 			String dateOfBirth,
 			String country, String phone, String email,
 			String password) {
 
 		super();
+		this.avatar = avatar;
 		this.username = username;
 		this.twitter = twitter;
 		this.linkedIn = linkedIn;
@@ -151,6 +155,14 @@ public class Student implements Serializable {
 
 	
 	
+
+	public byte[] getBackavatar() {
+		return backavatar;
+	}
+
+	public void setBackavatar(byte[] backavatar) {
+		this.backavatar = backavatar;
+	}
 
 	public String getUsername() {
 		return username;
@@ -315,7 +327,7 @@ public class Student implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + studentId  + "profile=" + avatar + "twitter=" +twitter + "linkedIn="+ "username=" + username +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
+		return "Student [id=" + studentId  + "profile=" + avatar+ "backavatar" + backavatar+ "twitter=" +twitter + "linkedIn="+ "username=" + username +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
 				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
