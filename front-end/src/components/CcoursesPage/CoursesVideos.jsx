@@ -1,11 +1,19 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,useCallback } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 import { useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import Background from "./background/Background";
+
+
+
 function CoursesVideos() {
+
+
+
+
   const current = new Date();
   const getCurrentDate = `${current.getDate()}/${
     current.getMonth() + 1
@@ -310,6 +318,20 @@ const getAverage=(reviews)=>{
     }
   }
 
+
+  const accordion = document.querySelectorAll(".dropdown-btn");
+
+  for (let i = 0; i < accordion.length; i++) {
+    accordion[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+    });
+  }
+  
+
+
+
+
+
   const styleObj = {
     height: "145px",
     width: "150px",
@@ -338,6 +360,7 @@ const getAverage=(reviews)=>{
     document.getElementById("fade").style.display = "none";
     setPlay(false);
   }
+  const [count, setCount] = useState(50)
 
   const shoot = (a) => {
     a.magnificPopup({
@@ -351,6 +374,8 @@ const getAverage=(reviews)=>{
   };
   return (
     <div className="couresesVideos">
+
+      <Background/>
       {showPlayer && (
         <div className="video-player-popup">
           <button className="closeIcon" onClick={() => setShowPlayer(false)}>
@@ -365,10 +390,8 @@ const getAverage=(reviews)=>{
           />
         </div>
       )}
-
-      <div className="curved-background-videos">
-        <div className="curved-background__curved"></div>
-      </div>
+    
+      
       <div className="discription">
         <h1 className="header">Learn C# Programming (In Ten Easy Steps) </h1>
         <h2 className="sub-header">
@@ -398,7 +421,7 @@ const getAverage=(reviews)=>{
         <div id="fade" onClick={() => lightbox_close()}></div>
 
         <div className="sidenava">
-          <button className="dropdown-btn" onClick={() => dropdown()}>
+          <button className="dropdown-btn five" onClick={() => dropdown()}>
             <span className="line-1">Fundamentals of Programming</span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
@@ -411,7 +434,7 @@ const getAverage=(reviews)=>{
               Link 1<i className="fa-regular fa-circle-play"></i>
             </a>
             <a
-              href="#"
+              href="#!"
               onClick={() =>
                 handleClick("https://www.youtube.com/watch?v=9kfScGV6W1Y")
               }
@@ -422,7 +445,7 @@ const getAverage=(reviews)=>{
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn" onClick={() => dropdown()}>
+          <button className="dropdown-btn one" onClick={() => dropdown()}>
             <span className="line-1">Fundamentals of data structures </span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
@@ -438,7 +461,7 @@ const getAverage=(reviews)=>{
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn" onClick={() => dropdown()}>
+          <button className="dropdown-btn two" onClick={() => dropdown()}>
             <span className="line-1">Fundamentals of algorithms </span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
@@ -454,7 +477,7 @@ const getAverage=(reviews)=>{
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn" onClick={() => dropdown()}>
+          <button className="dropdown-btn three" onClick={() => dropdown()}>
             <span className="line-1">Theory of computation </span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
@@ -474,7 +497,7 @@ const getAverage=(reviews)=>{
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn" onClick={() => dropdown()}>
+          <button className="dropdown-btn four" onClick={() => dropdown()}>
             <span className="line-1">Fundamentals of computer systems</span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
@@ -686,6 +709,23 @@ const getAverage=(reviews)=>{
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     </div>
   );
 }
