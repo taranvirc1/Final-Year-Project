@@ -50,22 +50,25 @@ color: aquamarine;
   .objectVideos {  
   
     position: relative;
-    
+    padding: 20px;
+    padding-top: 40px;
     max-width: 800px;
-    min-height: 200px;
+    min-height: 300px;
     margin:auto;    
     color: aliceblue;
-    outline:1px solid rgb(238, 219, 219);
-   
+
+    background: rgba(0, 0, 0, 0.4);
    
   }
   .Space {
 padding: 30px;  }
 
   .objectVideos .wyl{
-    font-size: 16px;
+    margin-bottom: 20px;
+    font-size: 18px;
     font-weight: bold;
     padding-left: 3%;
+
 
     
     
@@ -78,7 +81,7 @@ padding: 30px;  }
     padding-top:10px;
     float:right;
     vertical-align: top;
-    font-size: 14px;
+    font-size: 16px;
    
     /* You can also add some margins here to make it look prettier */
 }
@@ -103,8 +106,8 @@ padding: 30px;  }
 .discription .header{
     position: relative;
    text-align: center;
-   font-size: 20px;
-    color: rgb(224, 210, 210);
+   font-size: 28px;
+    color: rgb(255, 255, 255);
     
    padding-top: 8%;
 }
@@ -123,8 +126,9 @@ padding: 30px;  }
 
 
   .couresesVideos{
-    background: #2d2c41;
-
+    position: relative;
+    background:rgb(46, 93, 107)	;
+padding-bottom: 10%;
   }
 
 
@@ -145,16 +149,15 @@ color: aquamarine;
 
 
   .sidenava {
-    
+    position: relative;
     max-width: 800px;
    
     z-index: 1;
-    margin-top: 10%;
+
     margin: 0 auto;
-    margin-bottom: 5%;
-    background-color: #111;
+
+
     overflow-x: hidden;
-    padding-top: 10px;
     -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -162,13 +165,13 @@ color: aquamarine;
   }
   
   /* Style the sidenav links and the dropdown button */
-  .sidenava a, .dropdown-btn {
+  .sidenava a {
     border-bottom:1px solid#f1f1f1;
 
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 15px;
-    color: #818181;
+    color: #080808;
     display:block;
     border: none;
     background: none;
@@ -180,32 +183,59 @@ color: aquamarine;
   button.dropdown-btn{
     padding-left: 10px;
 }
-  .dropdown-container.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  transition: max-height 350ms ease-in-out;
-  }
-  .dropdown-container.inactive {
-    opacity: 1;
-    visibility: hidden;
-    transform: translateY(-20px);
-  }
+  
+  
   .line-2  {
     padding: 6px 8px 6px 16px;
     display:relative;
-    font-size: 10px;
+    font-size: 15px;
    float: right;
   
    
   }
 
-  .dropdown-btn { border-bottom: 1px solid #4b4a5e; }
+  .dropdown-btn {
+    
+    border-radius: 6px 6px 6px 6px;
+    padding: 28px;
+    color: #444;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    margin: 10px 0 0;
+    font-family: "Inconsolata", monospace;
+    font-size: 20px;
+    border: 3px solid black;
+  }
   /* On mouse-over */
   .sidenava a:hover, .dropdown-btn:hover {
-    color: #f1f1f1;
+    color: #20dd07;
+  }
+
+  .dropdown-btn.one {
+    background: #ffe587;
   }
   
+  .dropdown-btn.two {
+    background: #a1db73;
+  }
+  
+  .dropdown-btn.three {
+    background: #f0afe9;
+  }
+
+  
+  .dropdown-btn.four {
+    background: #a0acea;
+  }
+
+  .dropdown-btn.five {
+    background: #fe9687;
+  }
   /* Main content */
   
   
@@ -218,8 +248,12 @@ color: aquamarine;
   /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
   .dropdown-container {
     display: none;
-  background-color: rgb(9, 9, 9);
+  background-color: rgb(224, 219, 219);
   padding-left: 8px;
+  border: 3px solid black;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+ 
+  border-radius: 6px 6px 6px 6px;
   }
 
 
@@ -230,12 +264,17 @@ color: aquamarine;
     float: left;
     padding: 6px 8px 6px 16px;
     padding-left: 30px;
+
+
   }
   /* Optional: Style the caret down icon */
   .fa-caret-down {
-    padding-top: 6px;
+    margin-top: 5px;
     float: left;
     margin-right: 10px;
+    -moz-transition:all .2s linear 0s;
+  -webkit-transition:all .2s linear 0s;
+  transition:all .2s linear 0s;
   }
   .active>i{
     transform: rotate(180deg);
@@ -243,19 +282,24 @@ color: aquamarine;
    
   }
   .Coursediscription{
+    position: relative;
     min-block-size: 25ch;
     inline-size: 100%;
     max-inline-size: 800px;
-    background: rgb(178, 133, 203);
+    background: rgba(86, 212, 138, 0.959);
     padding: 2rem;
     box-sizing: border-box;
     margin: auto;
+    color: #000;
+    margin-top: 100px;
+    border: 3px solid black;
+
   }
   .Coursediscription .DescriptionHeader{
-    font-size: 15px;
+    font-size: 18px;
   }
   .Coursediscription .DescriptionText{
-    font-size: 10px;
+    font-size: 13px;
   }
 
 
@@ -280,6 +324,7 @@ font-style: italic;
 
 }
 .sponsor-feature{
+  position: relative;
   background-color: #f1f1f1;
   margin: 10px;
   padding: 25px;
@@ -308,15 +353,17 @@ font-style: italic;
    height:auto;
     justify-content: center;
     align-items: center;
+    border: 3px solid rgb(6, 65, 133);
+
 
 
    
-    background: rgb(69, 69, 78);
+    background: rgb(150, 150, 209);
  
  
 }
 .averageRating{
-  color: white;
+  color: rgb(0, 0, 0);
   border-bottom: 3px solid black;
   padding-bottom: 8px;
   margin-right: 20px;
@@ -325,15 +372,16 @@ font-style: italic;
 .reviewsContainer .submitButton{
   float:right;
   position: absolute;
-  margin-top: 15px;
+  margin-top: 12px;
   margin-right: 25px;
+  padding: 3px;
   top:0%;
   right: 0%;
   max-width: 6rem;
 	border-radius: 10px;
-	border: 3px solid #0a9739;
+	border: 3px solid #0e110f;
 	background: none;
-	color: #1ad02f;
+	color: #1f10aa;
 	overflow: hidden;
 	transition: color 800ms ease, transform 500ms ease;
 
