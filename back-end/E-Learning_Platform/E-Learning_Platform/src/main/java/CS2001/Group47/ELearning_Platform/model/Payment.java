@@ -52,11 +52,7 @@ public class Payment implements Serializable {
    @NotBlank
   String cardNo;
    @NotBlank
-  String cvv;
-   @NotBlank
   String cardType;
-   @NotBlank
-  String expiryDate;
    @NotBlank
   String billingFirstName;
    @NotBlank
@@ -87,15 +83,13 @@ public class Payment implements Serializable {
 
 
 
-  public Payment( @NotNull int dAmount, @NotBlank String cardNo, @NotBlank String cvv, @NotBlank String cardType, @NotBlank String expiryDate,
+  public Payment( @NotNull int dAmount, @NotBlank String cardNo, @NotBlank String cardType,
           @NotBlank String billingFirstName, @NotBlank String billingLastName, @NotBlank String country,
           @NotBlank String city, @NotBlank String address, @NotBlank String address2, @NotBlank String postCode) {
       super();
       this.dAmount = dAmount;
       this.cardNo = cardNo;
-      this.cvv = cvv;
       this.cardType = cardType;
-      this.expiryDate = expiryDate;
       this.billingFirstName = billingFirstName;
       this.billingLastName = billingLastName;
       this.country = country;
@@ -139,22 +133,6 @@ public class Payment implements Serializable {
   }
 
 
-
-
-  public String getCvv() {
-      return cvv;
-  }
-
-
-
-
-  public void setCvv(String cvv) {
-      this.cvv = cvv;
-  }
-
-
-
-
   public String getCardType() {
       return cardType;
   }
@@ -165,22 +143,6 @@ public class Payment implements Serializable {
   public void setCardType(String cardType) {
       this.cardType = cardType;
   }
-
-
-
-
-  public String getExpiryDate() {
-      return expiryDate;
-  }
-
-
-
-
-  public void setExpiryDate(String expiryDate) {
-      this.expiryDate = expiryDate;
-  }
-
-
 
 
   public String getBillingFirstName() {
@@ -297,8 +259,8 @@ public class Payment implements Serializable {
 
   @Override
   public String toString() {
-      return "Payment [id=" + id + ", dAmount=" + dAmount + ", cardNo=" + cardNo + ", cvv=" + cvv + ", cardType=" + cardType + ", expiryDate="
-              + expiryDate + ", billingFirstName=" + billingFirstName + ", billingLastName=" + billingLastName
+      return "Payment [id=" + id + ", dAmount=" + dAmount + ", cardNo=" + cardNo + ", cardType=" + cardType 
+              + ", billingFirstName=" + billingFirstName + ", billingLastName=" + billingLastName
               + ", country=" + country + ", city=" + city + ", address=" + address + ", address2=" + address2
               + ", postCode=" + postCode + ", createdAtDate=" + createdAtDate + "]";
   }
