@@ -23,9 +23,7 @@ public class PaymentDTO {
   String billingFirstName;
   String billingLastName;
   String cardNo;
-  String cvv;
   String cardType;
-  String expiryDate;
   String country;
   String city;
   String address;
@@ -46,9 +44,7 @@ public class PaymentDTO {
       this.billingFirstName = payment.getBillingFirstName();
       this.billingLastName = payment.getBillingLastName();
       this.cardNo = payment.getCardNo();
-      this.cvv = payment.getCvv();
       this.cardType = payment.getCardType();
-      this.expiryDate = payment.getExpiryDate();
       this.country = payment.getCountry();
       this.city = payment.getCity();
       this.address = payment.getAddress();
@@ -114,21 +110,6 @@ public class PaymentDTO {
 
 
 
-
-  public String getCvv() {
-      return cvv;
-  }
-
-
-
-
-  public void setCvv(String cvv) {
-      this.cvv = cvv;
-  }
-
-
-
-
   public String getCardType() {
       return cardType;
   }
@@ -139,22 +120,6 @@ public class PaymentDTO {
   public void setCardType(String cardType) {
       this.cardType = cardType;
   }
-
-
-
-
-  public String getExpiryDate() {
-      return expiryDate;
-  }
-
-
-
-
-  public void setExpiryDate(String expiryDate) {
-      this.expiryDate = expiryDate;
-  }
-
-
 
 
   public String getCountry() {
@@ -229,9 +194,7 @@ public class PaymentDTO {
       payment.setBillingFirstName(billingFirstName);
       payment.setBillingLastName(billingLastName);
       payment.setCardNo(cardNo);
-      payment.setCvv(cvv);
       payment.setCardType(cardType);
-      payment.setExpiryDate(expiryDate);
       payment.setCountry(country);
       payment.setCity(city);
       payment.setAddress(address);
@@ -246,8 +209,8 @@ public class PaymentDTO {
   @Override
 public String toString() {
   return "PaymentDTO [dAmount=" + dAmount + ", billingFirstName=" + billingFirstName + ", billingLastName="
-          + billingLastName + ", cardNo=" + cardNo + ", cvv=" + cvv + ", cardType=" + cardType + ", expiryDate="
-          + expiryDate + ", country=" + country + ", city=" + city + ", address=" + address + ", address2=" + address2 + "postCode=" + postCode
+          + billingLastName + ", cardNo=" + cardNo + ", cardType=" + cardType + ", country=" + country + ", city=" + city 
+          + ", address=" + address + ", address2=" + address2 + "postCode=" + postCode
           + "]";
 }
 
