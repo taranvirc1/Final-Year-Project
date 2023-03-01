@@ -176,6 +176,20 @@ public class StudentController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
 
+    @PostMapping("/{id}/backimage")
+    public ResponseEntity<String> uploadUserBackImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file)
+            throws IOException {
+        studentService.saveUserBackImage(id, file);
+        return ResponseEntity.ok("Image uploaded successfully");
+    }
+
+    @GetMapping("/{id}/backimage")
+    public ResponseEntity<byte[]> getUserbackImage(@PathVariable Integer id) {
+        byte[] image = studentService.getUserBackImage(id);
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+    }
+
+
     @PutMapping("/user/option/{id}")
     public Student updateOption(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
         Optional<Student> studentOptional = studentRepository.findById(id);
