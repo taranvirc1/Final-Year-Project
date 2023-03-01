@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import "../../Styles/DonationsStyles/DonationsBilling.css"
-import {Link} from "react-router-dom"
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -166,22 +165,22 @@ const navigate = useNavigate();
    <label for="Donation-Amount">Donation Amount: <input type="text" name="DAmount" value={dAmount} onChange={e => setdAmount(e.target.value)} />{errors.dAmount && <p>{errors.dAmount}</p>}</label>
 
 
-   <label for="billing-fname">First Name: <input type="text" name="bfname" value={billingFirstName} onChange={e => setBillingFirstName(e.target.value)} />{errors.billingFirstName && <p>{errors.billingsFirstName}</p>}</label>
+   <label for="billing-fname">First Name: <input type="text" name="billingFirstName" value={billingFirstName} onChange={e => setBillingFirstName(e.target.value)} />{errors.billingFirstName && <p>{errors.billingFirstName}</p>}</label>
 
 
-   <label for="billing-lname">Last Name: <input type="text" name="blname" value={billingLastName} onChange={e => setBillingLastName(e.target.value)} />{errors.billingLastName && <p>{errors.billingLastName}</p>}</label>
+   <label for="billing-lname">Last Name: <input type="text" name="billingLastName" value={billingLastName} onChange={e => setBillingLastName(e.target.value)} />{errors.billingLastName && <p>{errors.billingLastName}</p>}</label>
 
 
-   <label for="card-number">Card number:<input type="text" id="card-number" name="card-number" maxlength="16" value={cardNo} onChange={e => setCardNo(e.target.value)}/>{errors.cardNo && <p>{errors.cardNo}</p>}</label>
+   <label for="card-number">Card number:<input type="text" id="cardNo" name="cardNo" maxlength="16" value={cardNo} onChange={e => setCardNo(e.target.value)}/>{errors.cardNo && <p>{errors.cardNo}</p>}</label>
 
 
-   <label for="CVV">CVV:<input type="text" id="card-number" name="CVV" maxlength="3" value={cvv} onChange={e => setCvv(e.target.value)}/>{errors.cvv && <p>{errors.cvv}</p>}</label>
+   <label for="CVV">CVV:<input type="text" id="CVV" name="CVV" maxlength="3" value={cvv} onChange={e => setCvv(e.target.value)}/>{errors.cvv && <p>{errors.cvv}</p>}</label>
 
 
-   <label for="card-type">Card type:<input type="text" id="card-type" name="card-number" maxlength="16" value={cardType} onChange={e => setCardType(e.target.value)}/>{errors.cardType && <p>{errors.cardType}</p>}</label>
+   <label for="card-type">Card type:<input type="text" id="cardType" name="cardType" maxlength="16" value={cardType} onChange={e => setCardType(e.target.value)}/>{errors.cardType && <p>{errors.cardType}</p>}</label>
 
 
-   <label for="expiry-date">Expiry date:<input type="text" id="expiry-date" name="card-number" maxlength="16" value={expiryDate} onChange={e => setExpiryDate(e.target.value)}/>{errors.expiryDate && <p>{errors.expiryDate}</p>}</label>
+   <label for="expiry-date">Expiry date:<input type="text" id="expiryDate" name="expiryDate" maxlength="16" value={expiryDate} onChange={e => setExpiryDate(e.target.value)}/>{errors.expiryDate && <p>{errors.expiryDate}</p>}</label>
 
 
    <label for="country">Country: <input type="text" name="country" value={country} onChange={e => setCountry(e.target.value)} />{errors.country && <p>{errors.country}</p>}</label>
@@ -196,7 +195,7 @@ const navigate = useNavigate();
    <label for="city">City: <input type="text" name="city" value={city} onChange={e => setCity(e.target.value)} />{errors.city && <p>{errors.city}</p>}</label>
 
 
-   <label for="postal-code">Postal Code: <input type="text" name="pcode" value={postCode} onChange={e => setPostCode(e.target.value)} />{errors.postCode && <p>{errors.postCode}</p>}</label>
+   <label for="postal-code">Postal Code: <input type="text" name="postCode" value={postCode} onChange={e => setPostCode(e.target.value)} />{errors.postCode && <p>{errors.postCode}</p>}</label>
   
 
 
