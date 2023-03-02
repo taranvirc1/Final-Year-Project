@@ -2,22 +2,29 @@ package CS2001.Group47.ELearning_Platform.controller;
 
 import java.io.UnsupportedEncodingException;
 // import java.util.Optional;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 // import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 // import org.springframework.data.repository.query.Param;
 // import org.springframework.http.HttpStatus;
 // import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 // import org.springframework.ui.Model;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -102,8 +109,9 @@ public void forgotPassword(@RequestBody String email) {
             e.printStackTrace();
         }
     }
-
 }
+
+
 
 public void sendEmail(String recepientEmail, String link) throws UnsupportedEncodingException, MessagingException {
     
@@ -169,6 +177,26 @@ public void resetPassword(@RequestBody String email, @RequestBody ResetPasswordD
     student.setResetPasswordToken(null);
     studentRepository.save(student);
 
+}
+
+@PutMapping("/{userId}/password")
+public ResponseEntity<String> changePasswor2d(@PathVariable Integer userId, @RequestParam String newPassword) {
+boolean passwordChanged = studentService.changePassword(userId, newPassword);
+if (passwordChanged) {
+return ResponseEntity.ok("Password changed successfully");
+} else {
+return ResponseEntity.notFound().build();
+}
+}
+
+@PostMapping("/{userId}/password")
+public ResponseEntity<String> changePassword(@PathVariable Integer userId, @RequestParam String newPassword) {
+boolean passwordChanged = studentService.changePassword(userId, newPassword);
+if (passwordChanged) {
+return ResponseEntity.ok("Password changed successfully");
+} else {
+return ResponseEntity.notFound().build();
+}
 }
 
 // @PostMapping("/reset_password")

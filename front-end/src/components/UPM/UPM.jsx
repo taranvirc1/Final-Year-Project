@@ -69,7 +69,7 @@ function UPM() {
   const [number, setNumber] = useState('');
   const [Country, setCountry] = useState('');
   const [DOB, setDOB] = useState('');
-  const [Password, setPassword] = useState('');
+  const [newPasswords, setNewPasswords] = useState('');
   const [Bio, setBio] = useState('');
   const [Role, setRole] = useState('');
   const [LinkedIn, setLink] = useState('');
@@ -115,6 +115,7 @@ function UPM() {
   const username = {
     username: userName
   };
+
   function updateFirstName() {
     axios.put(`http://localhost:8080/user/firstName/${userId}`, firstName, config)
       .then(response => {
@@ -224,6 +225,7 @@ function UPM() {
         console.error("Failed to update user:", error);
       });
   }
+
   function updateUsername() {
     axios.put(`http://localhost:8080/user/username/${userId}`, username, config)
       .then(response => {
@@ -234,6 +236,26 @@ function UPM() {
       });
   }
 
+  const updatePassword = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/${userId}/password`,
+        {},
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          params: {
+            newPassword: newPasswords
+          }
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   //---
   const [image, setImage] = useState(null);
@@ -342,7 +364,7 @@ function UPM() {
             <li>
               <div className="upm-back-upload">
                 <img onClick={handleButtonClick2} className="upm-img-black" src={image2} alt="back image"></img>
-                <button  type="submit" onClick={handleSubmit2}><FaUpload className="upm-icons-s" /></button>
+                <button type="submit" onClick={handleSubmit2}><FaUpload className="upm-icons-s" /></button>
               </div>
             </li>
             <li>
@@ -427,14 +449,14 @@ function UPM() {
                         <input
                           type="password"
                           name="password"
-                          placeholder={user.password}
+                          placeholder={"*******************************"}
                           onChange={(event) => {
                             const newValue = event.target.value;
-                            setPassword(newValue)
+                            setNewPasswords(newValue)
                           }}
                         />
                       </div>
-                      <button className="upm-edit-button" >
+                      <button className="upm-edit-button" onClick={updatePassword}>
                         <MdOutlineModeEdit className="upm-icon" size={40} />
                       </button>
                     </div>
