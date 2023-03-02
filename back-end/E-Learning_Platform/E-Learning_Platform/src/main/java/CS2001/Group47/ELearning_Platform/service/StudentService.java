@@ -21,11 +21,30 @@ import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
 import CS2001.Group47.ELearning_Platform.exception.StudentNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class StudentService {
 	@Autowired
 	StudentRepository studentRepository;
+
+	private static final Logger log = LoggerFactory.getLogger(StudentService.class);
+
+	public boolean changePassword(Integer userId, String newPassword) {
+		Optional<Student> userOptional = studentRepository.findById(userId);
+		if (userOptional.isPresent()) {
+			Student user = userOptional.get();
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String encodedPassword = encoder.encode(newPassword);
+			user.setPassword(encodedPassword);
+			studentRepository.save(user);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 
 	public StudentService() {
 		super();
@@ -121,6 +140,7 @@ public class StudentService {
 
 		return user.getBackavatar();
 	}
+
 	public void saveBio(Integer userId, String bio) {
 		Optional<Student> userOptional = studentRepository.findById(userId);
 		if (userOptional.isPresent()) {
@@ -184,7 +204,6 @@ public class StudentService {
 		}
 	}
 
-
 	public void saveTwitter(Integer userId, String twitter) {
 		Optional<Student> userOptional = studentRepository.findById(userId);
 		if (userOptional.isPresent()) {
@@ -227,7 +246,6 @@ public class StudentService {
 		}
 	}
 
-
 	public void saveInstagram(Integer userId, String instagram) {
 		Optional<Student> userOptional = studentRepository.findById(userId);
 		if (userOptional.isPresent()) {
@@ -249,7 +267,6 @@ public class StudentService {
 		}
 	}
 
-	
 	public void saveUsername(Integer userId, String userName) {
 		Optional<Student> userOptional = studentRepository.findById(userId);
 		if (userOptional.isPresent()) {
@@ -270,5 +287,6 @@ public class StudentService {
 			throw new RuntimeException("User not found");
 		}
 	}
+
 
 }

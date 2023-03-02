@@ -41,7 +41,6 @@ public class StudentController {
     StudentService studentService;
     @Autowired
     StudentRepository studentRepository;
-
     @GetMapping("/user")
     public List<Student> getAllUsers() {
 
@@ -51,6 +50,7 @@ public class StudentController {
 
 
     // Below here is the profile information
+
 
     @PutMapping("/user/firstName/{id}")
     public Student updateUserField(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
