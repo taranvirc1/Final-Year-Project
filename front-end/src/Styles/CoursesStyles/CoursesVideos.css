@@ -405,7 +405,7 @@ font-style: italic;
 }
 
 .reviewsContainer .submitButton:hover {
-	background: #0a942c;
+	background: #02d802;
 	color:#111;
 }
 
@@ -415,13 +415,17 @@ font-style: italic;
 
 .ratingContainer{
   width: 300px;
-  height: 250px;
-  background-color: #510bc4;
+  height: 330px;
+
+  background-color: #6b6c9e;
   position:absolute;
   left:55%;
   transform: translate(-50%, -50%);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  z-index: 10000;
+  border: 3px solid rgb(0, 0, 0);
+
 }
 
 .star-rating >button{
@@ -442,18 +446,19 @@ font-style: italic;
   position: relative;
   left: 10%;
   width: 80%;
+  height: 150px;
   margin-top: 10%;
 }
 .ratingContainer .submitButton{
   position: relative;
-  background-color: #4d1771;
-  right:25%;
+  background-color: #a08bad;
+  right:30%;
 top:-13px;
-  background-color: #2d2c41;
+ 
 
 }
 .ratingContainer>h1{
-  color:#000;
+  color:#0e0c0c;
   font-size: 17px;
   text-align: center;
   margin-top: 10%;

@@ -9,16 +9,16 @@ import pythonimage from '../../images/Courseimages/python.jpg'
 import reactimage from '../../images/Courseimages/react.jpg'
 import mysqlimage from '../../images/Courseimages/mssql.webp'
 import { Link } from "react-router-dom";
+import Background2 from './background/Background2';
 
 
 function Courses() {
   return (
-    <div>
+    <div className="background">
 
 
-<div className="background"></div>
 
-
+<Background2/>
     <div className="overflow-hidden">
         <h5 className="header-drop-in" data-text="Coding4All">Coding4All</h5>
       
