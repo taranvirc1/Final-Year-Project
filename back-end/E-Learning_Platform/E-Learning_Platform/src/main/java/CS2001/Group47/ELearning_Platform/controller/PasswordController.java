@@ -85,30 +85,35 @@ private StudentRepository studentRepository;
 @PostMapping("/forgot_password")
 public void forgotPassword(@RequestBody String email) {
 
-    Student student = studentService.findByEmail(email);
+    Student uOptional = studentRepository.findByEmail(email);
 
-    if(student == null) {
-        throw new RuntimeException("Student not found with email: " + email);
+    if(uOptional == null) {
+        System.out.println("student does not exist.");
     }
     else {
-        // generate random token of 64 characters
-        String reset_token = RandomString.make(64);
-        System.out.println(reset_token);
-        student.setResetPasswordToken(reset_token);
-        studentRepository.save(student);
-
-        String reset_link = "http://localhost:3000/newPassword?token=" + reset_token;
-
-        try {
-            sendEmail(student.getEmail(), reset_link);
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        System.out.println("student exists");
     }
+
+    
+    // else {
+    //     // generate random token of 64 characters
+    //     String reset_token = RandomString.make(64);
+    //     System.out.println(reset_token);
+    //     student.setResetPasswordToken(reset_token);
+    //     studentRepository.save(student);
+
+    //     String reset_link = "http://localhost:3000/reset-password?token=" + reset_token;
+
+    //     try {
+    //         sendEmail(student.getEmail(), reset_link);
+    //     } catch (UnsupportedEncodingException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     } catch (MessagingException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     }
+    // }
 }
 
 
@@ -118,7 +123,7 @@ public void sendEmail(String recepientEmail, String link) throws UnsupportedEnco
     MimeMessage eMailMessage = mailSender.createMimeMessage();
     MimeMessageHelper emailHelper = new MimeMessageHelper(eMailMessage); 
 
-    emailHelper.setFrom("group47Code4All@gmail.com", "Code4ALL Support");
+    emailHelper.setFrom("group47CodeAll@hotmail.com", "Code4ALL Support");
     emailHelper.setTo(recepientEmail);
     
     String subject = "Here's the  link to reset your password";
@@ -126,7 +131,7 @@ public void sendEmail(String recepientEmail, String link) throws UnsupportedEnco
     String content = "<p>Hello,</p>"
     + "<p>You have requested to reset your password.</p>"
     + "<p>Click the link below to change your password:</p>"
-    + "<p><a href=\"" + link + "\">Change my password</a></p>"
+    + "<p><a href=\"" + link + "\">Reset password</a></p>"
     + "<br>"
     + "<p>Ignore this email if you do remember your password, "
     + "or you have not made the request.</p>";

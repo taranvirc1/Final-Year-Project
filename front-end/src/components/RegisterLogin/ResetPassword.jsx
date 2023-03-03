@@ -7,19 +7,19 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
-  const baseUrl = "http://localhost:8080/forgot_password";
+  // const baseUrl = "http://localhost:8080/forgot_password";
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
 
-    if (email === "2007048@brunel.ac.uk") {
-      setEmailSuccess(
-        `An email has been sent to ${email} with instructions to reset password!!!`
-      );
-      setEmailErrorMessage("");
-    }
+    // if (email === "2007048@brunel.ac.uk") {
+    //   setEmailSuccess(
+    //     `An email has been sent to ${email} with instructions to reset password!!!`
+    //   );
+    //   setEmailErrorMessage("");
+    // }
     if (email === "") {
       setEmailErrorMessage("Email Address required!");
     } else if (!email.match(regexEmail)) {
@@ -28,7 +28,7 @@ function ResetPassword() {
       );
     } else {
       axios
-        .post(baseUrl, email)
+        .post("http://localhost:8080/forgot_password", { email })
         .then((res) => {
           console.log(res);
           console.log(email);
