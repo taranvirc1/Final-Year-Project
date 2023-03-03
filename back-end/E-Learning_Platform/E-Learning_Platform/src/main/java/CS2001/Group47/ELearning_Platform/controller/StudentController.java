@@ -1,12 +1,14 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 // import java.net.URL;
 // import java.security.Principal;
 // import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.io.IOUtils;
 // import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.http.HttpHeaders;
@@ -41,6 +43,7 @@ public class StudentController {
     StudentService studentService;
     @Autowired
     StudentRepository studentRepository;
+
     @GetMapping("/user")
     public List<Student> getAllUsers() {
 
@@ -48,9 +51,7 @@ public class StudentController {
 
     }
 
-
     // Below here is the profile information
-
 
     @PutMapping("/user/firstName/{id}")
     public Student updateUserField(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
@@ -152,7 +153,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            // Update the fields that the user changes
             if (studentPostDTO.getBio() != null) {
                 student.setBio(studentPostDTO.getBio());
             }
@@ -173,11 +173,19 @@ public class StudentController {
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getUserImage(@PathVariable Integer id) {
         byte[] image = studentService.getUserImage(id);
+        if (image == null) {
+            InputStream defaultImage = getClass().getResourceAsStream("defalt.jpg");
+            try {
+                image = IOUtils.toByteArray(defaultImage);
+            } catch (IOException e) {
+            }
+        }
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
 
     @PostMapping("/{id}/backimage")
-    public ResponseEntity<String> uploadUserBackImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file)
+    public ResponseEntity<String> uploadUserBackImage(@PathVariable Integer id,
+            @RequestParam("file") MultipartFile file)
             throws IOException {
         studentService.saveUserBackImage(id, file);
         return ResponseEntity.ok("Image uploaded successfully");
@@ -186,9 +194,17 @@ public class StudentController {
     @GetMapping("/{id}/backimage")
     public ResponseEntity<byte[]> getUserbackImage(@PathVariable Integer id) {
         byte[] image = studentService.getUserBackImage(id);
+        if (image == null) {
+            // return the default image
+            InputStream defaultImage = getClass().getResourceAsStream("defalt.jpg");
+            try {
+                image = IOUtils.toByteArray(defaultImage);
+            } catch (IOException e) {
+                // handle the exception, e.g. log it or throw a custom error
+            }
+        }
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
-
 
     @PutMapping("/user/option/{id}")
     public Student updateOption(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
@@ -307,7 +323,8 @@ public class StudentController {
         // Else create a student with DTO
         Student newStudent = new Student(
                 newStudentDTO.getFirstName(),
-                newStudentDTO.getLastName(), newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(), newStudentDTO.getPhone(),
+                newStudentDTO.getLastName(), newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(),
+                newStudentDTO.getPhone(),
                 newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()));
         // Add student through StudentService
         studentService.addStudent(newStudent);

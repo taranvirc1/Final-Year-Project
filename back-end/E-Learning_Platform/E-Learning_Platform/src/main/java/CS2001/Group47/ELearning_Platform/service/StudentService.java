@@ -1,6 +1,7 @@
 package CS2001.Group47.ELearning_Platform.service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,7 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -112,33 +116,65 @@ public class StudentService {
 	// -----
 
 	public void saveUserImage(Integer id, MultipartFile file) throws IOException {
-		Student user = studentRepository.findById(id)
-				.orElseThrow();
-
-		user.setAvatar(file.getBytes());
+		Student user = studentRepository.findById(id).orElseThrow();
+	
+		if (user.getAvatar() != null) {
+			user.setAvatar(file.getBytes());
+		} else {
+			Resource resource = new ClassPathResource("default.jpg");
+			InputStream inputStream = resource.getInputStream();
+			byte[] defaultImageBytes = IOUtils.toByteArray(inputStream);
+			user.setAvatar(defaultImageBytes);
+		}
+	
 		studentRepository.save(user);
 	}
-
+	
 	public byte[] getUserImage(Integer id) {
-		Student user = studentRepository.findById(id)
-				.orElseThrow();
-
-		return user.getAvatar();
+		Student user = studentRepository.findById(id).orElseThrow();
+		byte[] imageBytes = user.getAvatar();
+	
+		if (imageBytes == null) {
+			try {
+				Resource resource = new ClassPathResource("default.jpg");
+				InputStream inputStream = resource.getInputStream();
+				imageBytes = IOUtils.toByteArray(inputStream);
+			} catch (IOException e) {
+			}
+		}
+	
+		return imageBytes;
 	}
-
+	
 	public void saveUserBackImage(Integer id, MultipartFile file) throws IOException {
-		Student user = studentRepository.findById(id)
-				.orElseThrow();
-
-		user.setBackavatar(file.getBytes());
+		Student user = studentRepository.findById(id).orElseThrow();
+	
+		if (user.getBackavatar() != null) {
+			user.setBackavatar(file.getBytes());
+		} else {
+			Resource resource = new ClassPathResource("default.jpg");
+			InputStream inputStream = resource.getInputStream();
+			byte[] defaultImageBytes = IOUtils.toByteArray(inputStream);
+			user.setBackavatar(defaultImageBytes);
+		}
+	
 		studentRepository.save(user);
 	}
 
 	public byte[] getUserBackImage(Integer id) {
-		Student user = studentRepository.findById(id)
-				.orElseThrow();
-
-		return user.getBackavatar();
+		Student user = studentRepository.findById(id).orElseThrow();
+		byte[] imageBytes = user.getBackavatar();
+	
+		if (imageBytes == null) {
+			try {
+				Resource resource = new ClassPathResource("default.jpg");
+				InputStream inputStream = resource.getInputStream();
+				imageBytes = IOUtils.toByteArray(inputStream);
+			} catch (IOException e) {
+			}
+		}
+	
+		return imageBytes;
 	}
 
 	public void saveBio(Integer userId, String bio) {

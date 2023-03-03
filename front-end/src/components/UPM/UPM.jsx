@@ -23,7 +23,7 @@ import { CiLinkedin } from 'react-icons/ci'
 import { RiMapPin2Line } from 'react-icons/ri'
 import { FaUpload } from 'react-icons/fa'
 import axios from 'axios'
-import defaultImage from '../../images/UPM/assets/default.jpg'
+import defaultImage from "../../images/UPM/assets/facebook.png"
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
@@ -255,10 +255,11 @@ function UPM() {
       console.error(error);
     }
   };
-  
+
 
   //---
-  const [image, setImage] = useState(null);
+  const defaultAvatarUrl = defaultImage;
+  const [image, setImage] = useState(defaultAvatarUrl);
   const fileInput = useRef(null);
   useEffect(() => {
     axios.get(`http://localhost:8080/${userId}/image`, {
@@ -313,7 +314,10 @@ function UPM() {
         const url = URL.createObjectURL(blob);
         setImage2(url);
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setImage2(defaultAvatarUrl)
+      });
   }, [userId, token]);
 
   const [file2, setFile2] = useState(null);
@@ -330,7 +334,10 @@ function UPM() {
       }
     })
       .then(response => console.log(response.data))
-      .catch(error => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setImage2(defaultAvatarUrl)
+      });
   };
 
   const handleButtonClick2 = (e) => {
