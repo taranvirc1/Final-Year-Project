@@ -83,40 +83,32 @@ private StudentRepository studentRepository;
 // }
 
 @PostMapping("/forgot_password")
-public void forgotPassword(@RequestBody String email) {
+public ResponseEntity<String> forgotPassword(@RequestBody String email) {
 
-    Student uOptional = studentRepository.findByEmail(email);
+    Student student = studentService.findByEmail(email);
 
-    if(uOptional == null) {
-        System.out.println("student does not exist.");
-    }
-    else {
-        System.out.println("student exists");
-    }
+    if(student == null) {
+        return ResponseEntity.notFound().build();
+    } 
+        // generate random token of 64 characters
+        String reset_token = RandomString.make(64);
+        System.out.println(reset_token);
+        student.setResetPasswordToken(reset_token);
+        studentRepository.save(student);
 
-    
-    // else {
-    //     // generate random token of 64 characters
-    //     String reset_token = RandomString.make(64);
-    //     System.out.println(reset_token);
-    //     student.setResetPasswordToken(reset_token);
-    //     studentRepository.save(student);
+        String reset_link = "http://localhost:3000/reset-password?token=" + reset_token;
 
-    //     String reset_link = "http://localhost:3000/reset-password?token=" + reset_token;
-
-    //     try {
-    //         sendEmail(student.getEmail(), reset_link);
-    //     } catch (UnsupportedEncodingException e) {
-    //         // TODO Auto-generated catch block
-    //         e.printStackTrace();
-    //     } catch (MessagingException e) {
-    //         // TODO Auto-generated catch block
-    //         e.printStackTrace();
-    //     }
-    // }
+        try {
+            sendEmail(student.getEmail(), reset_link);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().build();
 }
-
-
 
 public void sendEmail(String recepientEmail, String link) throws UnsupportedEncodingException, MessagingException {
     
