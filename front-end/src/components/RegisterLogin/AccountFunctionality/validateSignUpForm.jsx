@@ -20,8 +20,8 @@ function validateSignUpForm(values) {
   }
 
   //Error handling for Date of Birth
-  if (!values.dateOfBirth) {
-    errors.dateOfBirth = "Date of Birth required!";
+  if (!values.dob) {
+    errors.dob = "Date of Birth required!";
   }
 
   //Error handling for Country

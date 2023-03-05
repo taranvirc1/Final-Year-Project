@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import registerLogo from "../../images/login-register-icons/undraw_launching_re_tomg.svg";
 import loginLogo from "../../images/login-register-icons/undraw_secure_login_pdn4.svg";
 import { Link, useOutletContext } from "react-router-dom";
@@ -12,14 +12,45 @@ function Account() {
   const { handleChange, values, handleSubmit, errors } =
     useForm(validateSignUpForm);
 
+  const today = new Date().toISOString().slice(0, 10);
+  const minDate = new Date(new Date().getFullYear() - 100, 0, 1)
+    .toISOString()
+    .slice(0, 10);
+  // const [timeRemaining, setTimeRemaining] = useState(0);
+  // const [timerActive, setTimerActive] = useState(false);
+  const [invalidAttempts, setInvalidAttempts] = useState(0);
+  const [timeRemaining, setTimeRemaining] = useState(0);
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginErrorMessages, setLoginErrorMessages] = useState("");
   const [loginSuccess, setLoginSuccess] = useState("");
+  const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
   const baseUrl = "http://localhost:8080/login";
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   let interval;
+  //   if (timerActive) {
+  //     interval = setInterval(() => {
+  //       setTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 1);
+  //     }, 1000);
+  //   }
+  //   return () => clearInterval(interval);
+  // }, [timerActive]);
+
+  useEffect(() => {
+    // interval to decrement the timeRemaining state variable every second
+    const interval = setInterval(() => {
+      if (timeRemaining > 0) {
+        setTimeRemaining(timeRemaining - 1);
+      }
+    }, 1000);
+
+    // clear the interval when the component is unmounted
+    return () => clearInterval(interval);
+  }, [timeRemaining]);
 
   const login = () => {
     navigate("/");
@@ -28,10 +59,22 @@ function Account() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    if (validLoginAttempts >= 2) {
-      setLoginErrorMessages(
-        "Maximum login attempts reached. Please try again later!"
-      );
+    // if (validLoginAttempts >= 2) {
+    //   setLoginErrorMessages(
+    //     "Maximum login attempts reached. Please try again later!"
+    //   );
+    // if (invalidAttempts >= 2) {
+    //   setTimeRemaining(30);
+    // }
+    // setTimeRemaining(30);
+    // setTimerActive(true);
+    // else {
+    if (email === "" || password === "") {
+      setLoginErrorMessages("Email address and password required!!!");
+    } else if (!email.match(regexEmail)) {
+      setLoginErrorMessages("Invalid email address!!!");
+    } else if (password.length < 8) {
+      setLoginErrorMessages("Invalid password!!!");
     } else {
       axios
         .post(baseUrl, { email, password })
@@ -42,36 +85,47 @@ function Account() {
               console.log(res);
               console.log(token);
               sessionStorage.setItem("jwt", token);
-              setValidLoginAttempts(0);
+              setInvalidAttempts(0);
+              setTimeRemaining(0);
+              // setValidLoginAttempts(0);
               setLoginErrorMessages("");
               setLoginSuccess("You have logged in successfully!!!");
+              console.log("this is " + loggedInUser);
               setLoggedinUser(email);
               login();
             } else {
-              setValidLoginAttempts(validLoginAttempts + 1);
+              // setValidLoginAttempts(validLoginAttempts + 1);
+              setInvalidAttempts(invalidAttempts + 1);
               alert("Failed token!!!");
               setLoggedinUser("");
             }
           } else {
-            setValidLoginAttempts(validLoginAttempts + 1);
+            // setValidLoginAttempts(validLoginAttempts + 1);
+            setInvalidAttempts(invalidAttempts + 1);
             alert("Login unsuccessful!!!");
             setLoggedinUser("");
           }
         })
         .then(() => {
-          setValidLoginAttempts(0);
+          // setValidLoginAttempts(0);
+          setInvalidAttempts(0);
           setLoginErrorMessages("");
           setEmail("");
           setPassword("");
         })
         .catch((err) => {
           console.log(err);
-          setValidLoginAttempts(validLoginAttempts + 1);
+          // setValidLoginAttempts(validLoginAttempts + 1);
+          setInvalidAttempts(invalidAttempts + 1);
           alert("PROBLEM WITH LOGIN!!!");
           setLoggedinUser("");
         });
-      console.log("this is " + loggedInUser);
+      if (invalidAttempts === 2) {
+        setTimeRemaining(30);
+      }
     }
+
+    // }
   };
 
   const panelAnimation = () => {
@@ -183,8 +237,11 @@ function Account() {
               onSubmit={handleLoginSubmit}
             >
               <h2 className="form-title">Sign in</h2>
-              {loginSuccess && <p className="loginSuccess">{loginSuccess}</p>}
-              {loginErrorMessages && <p>{loginErrorMessages}</p>}
+              {loginSuccess ? (
+                <p className="loginSuccess">{loginSuccess}</p>
+              ) : (
+                loginErrorMessages && <p>{loginErrorMessages}</p>
+              )}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
@@ -210,6 +267,14 @@ function Account() {
                 value="Login"
                 className="account-btn solid"
               />
+              {timeRemaining > 0 && (
+                <p>Please wait {timeRemaining} seconds before trying again.</p>
+              )}
+              {/* <p>
+                {timerActive
+                  ? `Time remaining: ${timeRemaining}`
+                  : "Timer not started"}
+              </p> */}
               {/* </Link> */}
               {/* Link to reset password form when user forgets password */}
               <Link to="/resetPassword" className="forgot">
@@ -253,14 +318,16 @@ function Account() {
                 <i className="fas fa-calendar-alt"></i>
                 <input
                   className="date"
-                  type="text"
-                  name="dateOfBirth"
-                  value={values.dateOfBirth}
+                  type="date"
+                  name="dob"
+                  min={minDate}
+                  max={today}
+                  value={values.dob}
                   onChange={handleChange}
                   placeholder="Date of Birth*"
                 />
               </div>
-              {errors.dateOfBirth && <p>{errors.dateOfBirth}</p>}
+              {errors.dob && <p>{errors.dob}</p>}
               <div className="input-field">
                 <i className="fas fa-globe-americas"></i>
                 <input

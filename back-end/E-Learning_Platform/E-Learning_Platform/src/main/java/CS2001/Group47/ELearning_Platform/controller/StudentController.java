@@ -2,6 +2,10 @@ package CS2001.Group47.ELearning_Platform.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 // import java.net.URL;
 // import java.security.Principal;
 // import java.util.Base64;
@@ -304,7 +308,7 @@ public class StudentController {
         // StudentDTO has null attributes
         if (newStudentDTO.getFirstName() == null ||
                 newStudentDTO.getLastName() == null ||
-                newStudentDTO.getDateOfBirth() == null ||
+                newStudentDTO.getDob() == null ||
                 newStudentDTO.getCountry() == null ||
                 newStudentDTO.getPhone() == null ||
                 newStudentDTO.getEmail() == null ||
@@ -320,10 +324,21 @@ public class StudentController {
         // Create password encoder object
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+        // Convert Date to String for DOB
+        // Date date = newStudentDTO.getDateOfBirth();
+        // DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+        // String dob = dateFormat.format(date);
+
+        Date date = newStudentDTO.getDob();  
+        System.out.println(date);
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");  
+        String strDate = dateFormat.format(date);  
+        System.out.println("Converted String: " + strDate); 
+
         // Else create a student with DTO
         Student newStudent = new Student(
                 newStudentDTO.getFirstName(),
-                newStudentDTO.getLastName(), newStudentDTO.getDateOfBirth(), newStudentDTO.getCountry(),
+                newStudentDTO.getLastName(), strDate, newStudentDTO.getCountry(),
                 newStudentDTO.getPhone(),
                 newStudentDTO.getEmail(), encoder.encode(newStudentDTO.getPassword()));
         // Add student through StudentService
