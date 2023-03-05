@@ -1,31 +1,27 @@
-import React, { useState } from 'react'
-import donationsPicture from "../../images/donations image 3.jpeg"
-import "../../Styles/DonationsStyles/DonationsPage.css"
-import {Link} from "react-router-dom"
-import axios from 'axios';
+import React, { useState } from "react";
+import donationsPicture from "../../images/donations image 3.jpeg";
+import "../../Styles/DonationsStyles/DonationsPage.css";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 function DonationsPage() {
-  const [donatorTitle, setDonatorTitle] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [howHear, setHowHear] = useState('');
-  const [motivate, setMotivate] = useState('');
+  const [donatorTitle, setDonatorTitle] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [howHear, setHowHear] = useState("");
+  const [motivate, setMotivate] = useState("");
   const [errors, setErrors] = useState({
-    donatorTitle: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+    donatorTitle: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
   });
 
   const navigate = useNavigate();
-  const Next= () => {
+  const Next = () => {
     navigate("/donationsBilling");
   };
 
@@ -36,23 +32,23 @@ function DonationsPage() {
 
     const validateForm = () => {
       if (!donatorTitle) {
-        newErrors.donatorTitle = 'Title is required';
+        newErrors.donatorTitle = "Title is required";
       }
       if (!firstName) {
-        newErrors.firstName = 'First name is required';
+        newErrors.firstName = "First name is required";
       }
       if (!lastName) {
-        newErrors.lastName = 'Last name is required';
+        newErrors.lastName = "Last name is required";
       }
       if (!email) {
-        newErrors.email = 'Email is required';
+        newErrors.email = "Email is required";
       } else if (!/\S+@\S+\.\S+/.test(email)) {
-        newErrors.email = 'Email is invalid';
+        newErrors.email = "Email is invalid";
       }
       if (!phone) {
-        newErrors.phone = 'Phone number is required';
+        newErrors.phone = "Phone number is required";
       } else if (!/^\d{11}$/.test(phone)) {
-        newErrors.phone = 'Phone number is invalid';
+        newErrors.phone = "Phone number is invalid";
       }
       setErrors(newErrors);
       return newErrors;
@@ -74,117 +70,149 @@ function DonationsPage() {
       motivate,
     };
 
-    await axios.post("http://localhost:8080/donators", donator) 
-       
+    await axios
+      .post("http://localhost:8080/donators", donator)
+
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
           console.log(response);
-          setDonatorTitle('');
-          setFirstName('');
-          setLastName('');
-          setEmail('');
-          setPhone('');
-          setHowHear('');
-          setMotivate('');
+          setDonatorTitle("");
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPhone("");
+          setHowHear("");
+          setMotivate("");
         }
         Next();
       })
-    .catch(async(error) => {
-      console.log(error);
-      alert('Error submitting donation form');
-    });
+      .catch(async (error) => {
+        console.log(error);
+        alert("Error submitting donation form");
+      });
 
-    // try {
-    //   const response = await axios.post('http://localhost:8080/donators', {
-    //     donatorTitle,
-    //     firstName,
-    //     lastName,
-    //     phone,
-    //     email,
-    //     howHear,
-    //     motivate,
-    //   });
-    //   console.log(response);
-    //   if (response.status === 201) {
-    //     setFirstName('');
-    //     setLastName('');
-    //     setEmail('');
-    //     setPhone('');
-    //     setHowHear('');
-    //     setMotivate('');
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   alert('Error submitting donation');
-    // }
   };
 
-return (
+  return (
+    <div className="donations-container">
+      <h1 className="donationstitle">Donations</h1>
 
+      <h2 className="p">
+        Every child should have the opportunity to study computer science.
+      </h2>
+      <img className="img" src={donationsPicture} alt="Trulli" />
+      <h3 className="par">Why Donate?</h3>
+      <div className="section">
+        <p>
+          Children accross the world are suffering from a lack of quality
+          education.
+          <br /> By donating to Coding4all you are contributing to the goal of
+          solving
+          <br />
+          this issue and providing children with the opportunity to learn about
+          computer science!
+          <br />
+        </p>
+      </div>
 
-  <div className='donations-container'>
+      <div className="formcontainer">
+        <form className="donationsform" noValidate onSubmit={handleSubmit}>
+          <h2 className="formtitle">Your Information</h2>
 
-  <h1 className='donationstitle'>Donations</h1>
+          <label for="title">
+            Title:
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={donatorTitle}
+              onChange={(e) => setDonatorTitle(e.target.value)}
+            />
+            {errors.donatorTitle && <p>{errors.donatorTitle}</p>}
+          </label>
 
-  <h2 className='p'>Every child should have the opportunity to study computer science.</h2>
-  <img className= "img" src={donationsPicture} alt="Trulli"/>
-  <h3 className='par'>Why Donate?</h3>
-  <div className='section'>
-  <p>
-      Children accross the world are suffering from a lack of quality education.
-      <br/> By donating to Coding4all you are contributing to the goal of solving<br/>
-      this issue and providing children with the opportunity to learn about computer science!<br/>
-   </p>
-   </div>
+          <label for="fname">
+            First name:
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            {errors.firstName && <p>{errors.firstName}</p>}
+          </label>
 
+          <label for="lname">
+            Last name:
+            <input
+              type="text"
+              id="lname"
+              name="lname"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            {errors.lastName && <p>{errors.lastName}</p>}
+          </label>
 
+          <label for="Pnumber">
+            Phone number:
+            <input
+              type="text"
+              id="Pnumber"
+              name="Pnumber"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            {errors.phone && <p>{errors.phone}</p>}
+          </label>
 
+          <label for="Eaddress">
+            Email Adress:
+            <input
+              type="text"
+              id="Eaddress"
+              name="Eaddress"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <p>{errors.email}</p>}
+          </label>
 
-  <div className='formcontainer'>
-  <form className='donationsform' noValidate onSubmit={handleSubmit}>
-      <h2 className='formtitle'>Your Information</h2>
+          <label for="">
+            How did you hear about us?
+            <input
+              type="text"
+              id="HowHear"
+              name="hear"
+              value={howHear}
+              onChange={(e) => setHowHear(e.target.value)}
+            />
+            {errors.howHear && <p>{errors.howHear}</p>}
+          </label>
 
+          <label for="">
+            What motivated you to donate today?
+            <input
+              type="text"
+              id="Motivate"
+              name="Motivate"
+              value={motivate}
+              onChange={(e) => setMotivate(e.target.value)}
+            />
+            {errors.motivate && <p>{errors.motivate}</p>}
+          </label>
 
-      <label for="title">Title:<input type="text" id="title" name="title" value={donatorTitle} onChange={e => setDonatorTitle(e.target.value)} />{errors.donatorTitle && <p>{errors.donatorTitle}</p>}</label>
+          {/* <Link to ="/donationsBilling"> */}
 
+          <input className="btn-next" type="submit" value="Next" />
 
-      <label for="fname">First name:<input type="text" id="fname" name="fname" value={firstName} onChange={e => setFirstName(e.target.value)}/>{errors.firstName && <p>{errors.firstName}</p>}</label>
-
-
-      <label for="lname">Last name:<input type="text" id="lname" name="lname" value={lastName} onChange={e => setLastName(e.target.value)}/>{errors.lastName && <p>{errors.lastName}</p>}</label>
-
-      
-      <label for="Pnumber">Phone number:<input type="text" id="Pnumber" name="Pnumber" value={phone} onChange={e => setPhone(e.target.value)}/>{errors.phone && <p>{errors.phone}</p>}</label>
-
-
-      <label for="Eaddress">Email Adress:<input type="text" id="Eaddress" name="Eaddress" value={email} onChange={e => setEmail(e.target.value)}/>{errors.email && <p>{errors.email}</p>}</label>
-
-
-      <label for="">How did you hear about us?<input type="text" id="HowHear" name="hear" value={howHear} onChange={e => setHowHear(e.target.value)}/>{errors.howHear && <p>{errors.howHear}</p>}</label>
-
-
-      <label for="">What motivated you to donate today?<input type="text" id="Motivate" name="Motivate" value={motivate} onChange={e => setMotivate(e.target.value)}/>{errors.motivate && <p>{errors.motivate}</p>}</label>
-
-
-      {/* <Link to ="/donationsBilling"> */}
-
-
-      <input className="btn-next" type="submit" value="Next"/>
-
-
-      {/* </Link> */}
-      </form>
-  </div>
-
-
-
-
-  </div>
-)
+          {/* </Link> */}
+        </form>
+      </div>
+    </div>
+  );
 }
 
-
-
-
-export default DonationsPage
+export default DonationsPage;

@@ -1,3 +1,6 @@
+.billingcontainer {
+  margin-bottom: 200px;
+}
 
 .billingtitle {
     text-align: center;
@@ -39,6 +42,7 @@
     background-color: #f7f7f7;
     border-radius: 5px;
     box-shadow: 0 0 10px #ccc;
+    margin-bottom: 70px;
   }
   .billing-form p {
     color: #000;
