@@ -1,6 +1,5 @@
 .footer {
-
-   position: relative;
+  position: relative;
   background: #05b3a4;
   min-height: 100px;
   padding: 20px 50px;
@@ -68,7 +67,7 @@
 
  .footer-container-right a:hover {
     text-decoration: underline;
-    color:blue;
+    color:rgb(255, 255, 255);
  }
 
  .h-box {
