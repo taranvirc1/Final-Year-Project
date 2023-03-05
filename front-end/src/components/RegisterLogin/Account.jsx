@@ -14,6 +14,9 @@ function Account() {
 
   const [date, setDate] = useState(null);
   const today = new Date().toISOString().slice(0, 10);
+  const minDate = new Date(new Date().getFullYear() - 100, 0, 1)
+    .toISOString()
+    .slice(0, 10);
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -257,6 +260,7 @@ function Account() {
                   className="date"
                   type="date"
                   name="dob"
+                  min={minDate}
                   max={today}
                   value={values.dob}
                   onChange={handleChange}
