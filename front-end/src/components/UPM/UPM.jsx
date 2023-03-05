@@ -22,8 +22,11 @@ import { AiOutlineInstagram } from 'react-icons/ai'
 import { CiLinkedin } from 'react-icons/ci'
 import { RiMapPin2Line } from 'react-icons/ri'
 import { FaUpload } from 'react-icons/fa'
+import { CiLogout } from 'react-icons/ci'
 import axios from 'axios'
 import defaultImage from "../../images/UPM/assets/facebook.png"
+import { BiBookBookmark } from 'react-icons/bi'
+import { AiOutlineTwitter } from 'react-icons/ai'
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
@@ -61,74 +64,56 @@ function UPM() {
     },
   };
 
-
-  const [firstname, setName] = useState('');
-  const [userName, setUsername] = useState('');
-  const [lastname, setLastName] = useState('');
-  const [Email, setEmail] = useState('');
-  const [number, setNumber] = useState('');
-  const [Country, setCountry] = useState('');
-  const [DOB, setDOB] = useState('');
-  const [newPasswords, setNewPasswords] = useState('');
-  const [Bio, setBio] = useState('');
-  const [Role, setRole] = useState('');
-  const [LinkedIn, setLink] = useState('');
-  const [Instagram, setInsta] = useState('');
-  const [Twitter, setTwit] = useState('');
-  const firstName = {
+const FN = user.firstName;
+const LN = user.lastName;
+const UN = user.username;
+const CT = user.country;
+const D0B = user.dateOfBirth;
+const BI = user.bio;
+const NU = user.phone;
+  const [firstname, setName] = useState(FN);
+  const [userName, setUsername] = useState(UN);
+  const [lastname, setLastName] = useState(LN);
+  const [Email, setEmail] = useState('default');
+  const [number, setNumber] = useState(NU);
+  const [Country, setCountry] = useState(CT);
+  const [DOB, setDOB] = useState(D0B);
+  const [newPasswords, setNewPasswords] = useState('default');
+  const [Bio, setBio] = useState(BI);
+  const [Role, setRole] = useState('Basic');
+  const [LinkedIn, setLink] = useState('LinkedIn URL :)');
+  const [Instagram, setInsta] = useState('Instagram URL :)');
+  const [Twitter, setTwit] = useState('Twitter URL :)');
+  const box = {
     firstName: firstname,
-  };
-  const lastName = {
     lastName: lastname,
-  };
-
-  const email = {
-    email: Email
-  };
-  const country = {
-    country: Country
-  };
-
-  const phone = {
+    email: Email,
+    country: Country,
     phone: number
   };
-  const dateOfBirth = {
-    dateOfBirth: DOB
+
+  const box2 = {
+    username: userName,
+    country: Country,
+    dateOfBirth: DOB,
+    bio: Bio,
   };
-  const bio = {
-    bio: Bio
+
+  const box3 = {
+    twitter: Twitter,
+    instagram: Instagram,
+    linkedIn: LinkedIn
   };
 
   const role = {
     role: Role
   };
 
-  const twitter = {
-    twitter: Twitter
-  };
-  const instagram = {
-    instagram: Instagram
-  };
-  const linkedIn = {
-    linkedIn: LinkedIn
-  };
-  const username = {
-    username: userName
-  };
 
-  function updateFirstName() {
-    axios.put(`http://localhost:8080/user/firstName/${userId}`, firstName, config)
-      .then(response => {
-        console.log("User updated:", response.data);
 
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateLastName() {
-    axios.put(`http://localhost:8080/user/lastName/${userId}`, lastName, config)
+  function updateInfo1() {
+    updatePassword();
+    axios.put(`http://localhost:8080/user/input/${userId}`, box, config)
       .then(response => {
         console.log("User updated:", response.data);
       })
@@ -136,106 +121,6 @@ function UPM() {
         console.error("Failed to update user:", error);
       });
   }
-
-  function updateEmail() {
-    axios.put(`http://localhost:8080/user/email/${userId}`, email, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateCountry() {
-    axios.put(`http://localhost:8080/user/country/${userId}`, country, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updatePhone() {
-    axios.put(`http://localhost:8080/user/phone/${userId}`, phone, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateDOB() {
-    axios.put(`http://localhost:8080/user/DOB/${userId}`, dateOfBirth, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateBio() {
-    axios.put(`http://localhost:8080/user/bio/${userId}`, bio, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateRole() {
-    axios.put(`http://localhost:8080/user/role/${userId}`, role, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateTwit() {
-    axios.put(`http://localhost:8080/user/twitter/${userId}`, twitter, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-  function updateLink() {
-    axios.put(`http://localhost:8080/user/linked/${userId}`, linkedIn, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateInstagram() {
-    axios.put(`http://localhost:8080/user/instagram/${userId}`, instagram, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
-  function updateUsername() {
-    axios.put(`http://localhost:8080/user/username/${userId}`, username, config)
-      .then(response => {
-        console.log("User updated:", response.data);
-      })
-      .catch(error => {
-        console.error("Failed to update user:", error);
-      });
-  }
-
   const updatePassword = async () => {
     try {
       const response = await axios.put(
@@ -251,10 +136,44 @@ function UPM() {
         }
       );
       console.log(response.data);
+      console.log(newPasswords)
     } catch (error) {
       console.error(error);
     }
   };
+
+  function updateInfo2() {
+    axios.put(`http://localhost:8080/user/input2/${userId}`, box2, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+  function updateInfo3() {
+    axios.put(`http://localhost:8080/user/input3/${userId}`, box3, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+
+  function updateRole() {
+    axios.put(`http://localhost:8080/user/role/${userId}`, role, config)
+      .then(response => {
+        console.log("User updated:", response.data);
+      })
+      .catch(error => {
+        console.error("Failed to update user:", error);
+      });
+  }
+
+
 
 
   //---
@@ -300,50 +219,50 @@ function UPM() {
 
   //------
 
-  const [image2, setImage2] = useState(null);
-  const fileInput2 = useRef(null);
-  useEffect(() => {
-    axios.get(`http://localhost:8080/${userId}/backimage`, {
-      responseType: 'arraybuffer',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        const blob = new Blob([response.data], { type: 'image/jpeg' });
-        const url = URL.createObjectURL(blob);
-        setImage2(url);
-      })
-      .catch((error) => {
-        console.log(error);
-        setImage2(defaultAvatarUrl)
-      });
-  }, [userId, token]);
+  // const [image2, setImage2] = useState(null);
+  // const fileInput2 = useRef(null);
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8080/${userId}/backimage`, {
+  //     responseType: 'arraybuffer',
+  //     headers: {
+  //       'Authorization': `Bearer ${token}`
+  //     }
+  //   })
+  //     .then(response => {
+  //       const blob = new Blob([response.data], { type: 'image/jpeg' });
+  //       const url = URL.createObjectURL(blob);
+  //       setImage2(url);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setImage2(defaultAvatarUrl)
+  //     });
+  // }, [userId, token]);
 
-  const [file2, setFile2] = useState(null);
+  // const [file2, setFile2] = useState(null);
 
-  const handleSubmit2 = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('file', file);
+  // const handleSubmit2 = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('file', file);
 
-    axios.post(`http://localhost:8080/${userId}/backimage`, formData, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-      .then(response => console.log(response.data))
-      .catch((error) => {
-        console.log(error);
-        setImage2(defaultAvatarUrl)
-      });
-  };
+  //   axios.post(`http://localhost:8080/${userId}/backimage`, formData, {
+  //     headers: {
+  //       'Authorization': `Bearer ${token}`,
+  //       'Content-Type': 'multipart/form-data'
+  //     }
+  //   })
+  //     .then(response => console.log(response.data))
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setImage2(defaultAvatarUrl)
+  //     });
+  // };
 
-  const handleButtonClick2 = (e) => {
-    e.preventDefault();
-    fileInput.current.click();
-  }
+  // const handleButtonClick2 = (e) => {
+  //   e.preventDefault();
+  //   fileInput.current.click();
+  // }
 
 
 
@@ -368,22 +287,275 @@ function UPM() {
         </div>
         <div className="upm-right-side">
           <div className="upm-card-container-1">
-            <li>
-              <div className="upm-back-upload">
-                <img onClick={handleButtonClick2} className="upm-img-black" src={image2} alt="back image"></img>
-                <button type="submit" onClick={handleSubmit2}><FaUpload className="upm-icons-s" /></button>
+
+
+            <div className='upm-container'>
+              <div className='upm-mini-container'>
+                <div class="upm-card-container">
+                  <li><span class="upm-logout"><CiLogout size={30} onClick={logoutUser} /></span></li>
+                  <li>
+                    {image && <img class="upm-round" src={image} alt="avatar" />}
+                    <button className="upm-click" onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button>
+                    <button className="upm-saver-1" type="submit" onClick={handleSubmit}><FaUpload className="upm-icons-s" /></button>
+                    <input type="file" onChange={e => setFile(e.target.files[0])} ref={fileInput} style={{ display: "none" }} />
+                  </li>
+                  <li><h3>{user.username}</h3></li>
+                  <li><p>{user.bio} <br /> Hi, weclome to my profile settings i am {user.firstName}</p></li>
+                  <li>
+                    <div class="upm-buttons">
+                      <a href='/' className="upm-primary">
+                        <AiOutlineTwitter size={30} />
+                      </a>
+                      <a href='/' className="upm-primary ghost">
+                        <CiLinkedin size={30} />
+                      </a>
+                      <a href='/' className="upm-primary ghost">
+                        <AiOutlineInstagram size={30} />
+                      </a>
+                    </div>
+                  </li>
+
+                </div>
+                <div class="upm-card-container-1">
+                  <div className="upm-skills">
+                    <ul>
+                      <li>
+                        <h6>Basic</h6>
+                        <div className='upm-info'>
+                          <div className='upm-split'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" placeholder="a"
+                                defaultValue={user.firstName}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setName(newValue);
+
+                                }} name="Firstname" id='name' required />
+                              <label for="name" class="upm-label">Firstname</label>
+                            </div>
+                            <div className="upm-form field">
+                              <input type="input" class="upm-field"
+                                defaultValue={user.lastName}
+                                onChange={(event) => {
+                                  event.target.value = "asd"
+                                  const newValue = event.target.value;
+                                  setLastName(newValue);
+                                }} name="Lastname" id='name' required />
+                              <label for="name" class="upm-label">Lastname</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" placeholder={user.lastName}
+                                defaultValue={user.email}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setEmail(newValue);
+                                }} name="Email" id='Email' required />
+                              <label for="name" class="upm-label">Email</label>
+                            </div>
+                          </div>
+
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <input type="password" class="upm-field" placeholder={"*******************************"}
+                                defaultValue={"*****************"}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setNewPasswords(newValue)
+                                }} name="Password" id='Password' required />
+                              <label for="name" class="upm-label">Password</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" placeholder={user.lastName}
+                                defaultValue={user.phone}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setNumber(newValue);
+                                }} name="Phone-number" id='number' required />
+                              <label for="name" class="upm-label">Phone-number</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" placeholder={user.lastName}
+                                defaultValue={user.country}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setCountry(newValue);
+                                }} name="Language" id='language' required />
+                              <label for="name" class="upm-label">Language</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-3'>
+                            <button className="upm-edit-button" onClick={() => {
+                              updateInfo1();
+                            }}>
+                              <MdOutlineModeEdit className="upm-icon" size={40} />
+                            </button>
+                          </div>
+
+                        </div>
+                      </li>
+
+                      <li>
+                        <h6>General</h6>
+                        <div className='upm-info'>
+                          <div className='upm-split'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" defaultValue={user.studentId} placeholder="ID" name="ID" id='ID' required />
+                              <label for="name" class="upm-label">ID</label>
+                            </div>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" placeholder="Username" defaultValue={user.username} onChange={(event) => {
+                                const newValue = event.target.value;
+                                setUsername(newValue)
+                              }} name="Username" id='name' required />
+                              <label for="name" class="upm-label">Username</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <input type="date" class="upm-field" placeholder="DOB" defaultValue={user.dateOfBirth} onChange={(event) => {
+                                const newValue = event.target.value;
+                                setDOB(newValue)
+                              }} name="DOB" id='DOB' required />
+                              <label for="name" class="upm-label">DOB</label>
+                            </div>
+                          </div>
+
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" placeholder="Country" defaultValue={user.country} onChange={(event) => {
+                                const newValue = event.target.value;
+                                setCountry(newValue)
+                              }} name="Country" id='country' required />
+                              <label for="name" class="upm-label">Country</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <textarea type="input" class="upm-field" placeholder="About" defaultValue={user.bio} onChange={(event) => {
+                                const newValue = event.target.value;
+                                setBio(newValue)
+                              }} name="About" id='upm-about' required />
+                              <label for="name" class="upm-label">About</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-3'>
+                            <button className="upm-edit-button" onClick={() => {
+                              updateInfo2();
+                            }}>
+                              <MdOutlineModeEdit className="upm-icon" size={40} />
+                            </button>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li>
+                        <h6>Experiences</h6>
+                        <div className='upm-info'>
+                          <div className='upm-split'>
+                            <div class="upm-form upm-field2">
+                              <div class="upm-row1-container">
+                                <div class="upm-box upm-cyan">
+                                  <span className="upm-split-4">
+                                    <h2>Beginner</h2>
+                                    <p>By clicking this you're basically saying that you don't know much about coding</p>
+                                  </span>
+                                  <span className="upm-split-5">
+                                    <button className="upm-book" type="submit" onClick={() => {
+                                      setRole("Basic");
+                                      updateRole();
+                                    }}><BiBookBookmark size={50} /></button>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="upm-row1-container">
+                                <div class="upm-box upm-box-down upm-cyan">
+                                  <span className="upm-split-4">
+                                    <h2>Intermediate</h2>
+                                    <p>By clicking this you're basically saying that you know some stuff about coding</p>
+                                  </span>
+                                  <span className="upm-split-5">
+                                    <button className="upm-book" type="submit" onClick={() => {
+                                      setRole("Intermediate");
+                                      updateRole();
+                                    }}><BiBookBookmark size={50} /></button>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="upm-row1-container">
+                                <div class="upm-box upm-box-down upm-cyan">
+                                  <span className="upm-split-4">
+                                    <h2>Advanced</h2>
+                                    <p>By clicking this you're basically saying that you you're a professional at code</p>
+                                  </span>
+                                  <span className="upm-split-5">
+                                    <button className="upm-book" type="submit" onClick={() => {
+                                      setRole("Advanced");
+                                      updateRole();
+                                    }}><BiBookBookmark size={50} /></button>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+
+
+                      <li>
+                        <h6>Socials</h6>
+                        <div className='upm-info'>
+                          <div className='upm-split'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" defaultValue={user.twitter} placeholder={user.firstName}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setTwit(newValue);
+                                }} name="Firstname" id='name' required />
+                              <label for="name" class="upm-label">Twitter</label>
+                            </div>
+                            <div className="upm-form field">
+                              <input type="input" class="upm-field" defaultValue={user.linkedIn} placeholder={user.lastName}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setLink(newValue);
+                                }} name="Lastname" id='name' required />
+                              <label for="name" class="upm-label">LinkedIn</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-2'>
+                            <div class="upm-form field">
+                              <input type="input" class="upm-field" defaultValue={user.instagram} placeholder="sad"
+                                value={"ada"}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setInsta(newValue);
+                                }} name="Email" id='Email' required />
+                              <label for="name" class="upm-label">Instagram</label>
+                            </div>
+                          </div>
+                          <div className='upm-split-3'>
+                            <button className="upm-edit-button" onClick={() => {
+                              updateInfo3();
+                            }}>
+                              <MdOutlineModeEdit className="upm-icon" size={40} />
+                            </button>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </li>
-            <li>
-              <div className='upm-avatar'>{image && <img src={image} alt="User image" />}<button onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button></div>
-              <button className="upm-saver-1" type="submit" onClick={handleSubmit}><FaUpload className="upm-icons-s" /></button>
-            </li>
-            <li>
-              <input type="file" onChange={e => setFile(e.target.files[0])} ref={fileInput} style={{ display: "none" }} />
-            </li>
-            <input type="file" onChange={e => setFile2(e.target.files[0])} ref={fileInput2} style={{ display: "none" }} />
+            </div>
+            {/* <input type="file" onChange={e => setFile2(e.target.files[0])} ref={fileInput2} style={{ display: "none" }} /> */}
           </div>
-          <div className="upm-card-container-2">
+          {/* <div className="upm-card-container-2">
             <div className="upm-card">
               <li>
                 <h2>General</h2>
@@ -787,7 +959,7 @@ function UPM() {
                 </div>
               </li>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
