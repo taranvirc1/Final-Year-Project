@@ -253,14 +253,14 @@ function Account() {
                 <i className="fas fa-calendar-alt"></i>
                 <input
                   className="date"
-                  type="text"
-                  name="dateOfBirth"
-                  value={values.dateOfBirth}
+                  type="date"
+                  name="dob"
+                  value={values.dob}
                   onChange={handleChange}
                   placeholder="Date of Birth*"
                 />
               </div>
-              {errors.dateOfBirth && <p>{errors.dateOfBirth}</p>}
+              {errors.dob && <p>{errors.dob}</p>}
               <div className="input-field">
                 <i className="fas fa-globe-americas"></i>
                 <input

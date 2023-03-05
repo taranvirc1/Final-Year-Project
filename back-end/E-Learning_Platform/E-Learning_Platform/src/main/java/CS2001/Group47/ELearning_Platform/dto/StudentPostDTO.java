@@ -1,9 +1,12 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
+import java.util.Date;
+
 public class StudentPostDTO {
 
     String firstName;
     String lastName;
+    Date dob;
     String dateOfBirth;
     String country;
     String phone;
@@ -22,6 +25,7 @@ public class StudentPostDTO {
     public StudentPostDTO(String username, String twitter, String instagram, String linkedIn, String role,
             String optionValue, String bio, byte[] avatar,byte[] backavatar, String firstName,
             String lastName,
+            Date dob,
             String dateOfBirth,
             String country,
             String phone, String email,
@@ -38,6 +42,7 @@ public class StudentPostDTO {
         this.avatar = avatar;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.dob = dob;
         this.dateOfBirth = dateOfBirth;
         this.country = country;
         this.phone = phone;
@@ -131,6 +136,14 @@ public class StudentPostDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public String getDateOfBirth() {

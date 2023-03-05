@@ -9,7 +9,7 @@ const useForm = (validateForm) => {
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
-    dateOfBirth: "",
+    dob: "",
     country: "",
     phone: "",
     email: "",
@@ -47,7 +47,7 @@ const useForm = (validateForm) => {
     const {
       firstName,
       lastName,
-      dateOfBirth,
+      dob,
       country,
       phone,
       email,
@@ -56,7 +56,7 @@ const useForm = (validateForm) => {
     const user = {
       firstName,
       lastName,
-      dateOfBirth,
+      dob,
       country,
       phone,
       email,
@@ -71,7 +71,7 @@ const useForm = (validateForm) => {
           setValues({
             firstName: "",
             lastName: "",
-            dateOfBirth: "",
+            dob: "",
             country: "",
             phone: "",
             email: "",
