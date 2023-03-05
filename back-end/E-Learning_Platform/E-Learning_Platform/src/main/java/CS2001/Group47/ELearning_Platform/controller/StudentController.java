@@ -57,7 +57,7 @@ public class StudentController {
 
     // Below here is the profile information
 
-    @PutMapping("/user/firstName/{id}")
+    @PutMapping("/user/input/{id}")
     public Student updateUserField(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
@@ -65,13 +65,47 @@ public class StudentController {
             if (studentPostDTO.getFirstName() != null) {
                 student.setFirstName(studentPostDTO.getFirstName());
             }
+            if (studentPostDTO.getLastName() != null) {
+                student.setLastName(studentPostDTO.getLastName());
+            }
+            if (studentPostDTO.getEmail() != null) {
+                student.setEmail(studentPostDTO.getEmail());
+            }
+            if (studentPostDTO.getPhone() != null) {
+                student.setPhone(studentPostDTO.getPhone());
+            }
+            if (studentPostDTO.getCountry() != null) {
+                student.setCountry(studentPostDTO.getCountry());
+            }
             studentRepository.save(student);
             return student;
         } else {
             throw new RuntimeException("Student not found with ID: " + id);
         }
     }
-
+    @PutMapping("/user/input2/{id}")
+    public Student updateUserField2(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (studentPostDTO.getUsername() != null) {
+                student.setUsername(studentPostDTO.getUsername());
+            }
+            if (studentPostDTO.getDateOfBirth() != null) {
+                student.setDateOfBirth(studentPostDTO.getDateOfBirth());
+            }
+            if (studentPostDTO.getBio() != null) {
+                student.setBio(studentPostDTO.getBio());
+            }
+            if (studentPostDTO.getCountry() != null) {
+                student.setCountry(studentPostDTO.getCountry());
+            }
+            studentRepository.save(student);
+            return student;
+        } else {
+            throw new RuntimeException("Student not found with ID: " + id);
+        }
+    }
     @PutMapping("/user/lastName/{id}")
     public Student updateUserLastName(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
         Optional<Student> studentOptional = studentRepository.findById(id);
@@ -187,28 +221,28 @@ public class StudentController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
 
-    @PostMapping("/{id}/backimage")
-    public ResponseEntity<String> uploadUserBackImage(@PathVariable Integer id,
-            @RequestParam("file") MultipartFile file)
-            throws IOException {
-        studentService.saveUserBackImage(id, file);
-        return ResponseEntity.ok("Image uploaded successfully");
-    }
+    // @PostMapping("/{id}/backimage")
+    // public ResponseEntity<String> uploadUserBackImage(@PathVariable Integer id,
+    //         @RequestParam("file") MultipartFile file)
+    //         throws IOException {
+    //     studentService.saveUserBackImage(id, file);
+    //     return ResponseEntity.ok("Image uploaded successfully");
+    // }
 
-    @GetMapping("/{id}/backimage")
-    public ResponseEntity<byte[]> getUserbackImage(@PathVariable Integer id) {
-        byte[] image = studentService.getUserBackImage(id);
-        if (image == null) {
-            // return the default image
-            InputStream defaultImage = getClass().getResourceAsStream("defalt.jpg");
-            try {
-                image = IOUtils.toByteArray(defaultImage);
-            } catch (IOException e) {
-                // handle the exception, e.g. log it or throw a custom error
-            }
-        }
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
-    }
+    // @GetMapping("/{id}/backimage")
+    // public ResponseEntity<byte[]> getUserbackImage(@PathVariable Integer id) {
+    //     byte[] image = studentService.getUserBackImage(id);
+    //     if (image == null) {
+    //         // return the default image
+    //         InputStream defaultImage = getClass().getResourceAsStream("defalt.jpg");
+    //         try {
+    //             image = IOUtils.toByteArray(defaultImage);
+    //         } catch (IOException e) {
+    //             // handle the exception, e.g. log it or throw a custom error
+    //         }
+    //     }
+    //     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+    // }
 
     @PutMapping("/user/option/{id}")
     public Student updateOption(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
@@ -258,11 +292,17 @@ public class StudentController {
         }
     }
 
-    @PutMapping("/user/linked/{id}")
-    public Student updateLinked(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+    @PutMapping("/user/input3/{id}")
+    public Student updateUserField3(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
         Optional<Student> studentOptional = studentRepository.findById(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
+            if (studentPostDTO.getTwitter() != null) {
+                student.setTwitter(studentPostDTO.getTwitter());
+            }
+            if (studentPostDTO.getInstagram() != null) {
+                student.setInstagram(studentPostDTO.getInstagram());
+            }
             if (studentPostDTO.getLinkedIn() != null) {
                 student.setLinkedIn(studentPostDTO.getLinkedIn());
             }
@@ -273,20 +313,35 @@ public class StudentController {
         }
     }
 
-    @PutMapping("/user/instagram/{id}")
-    public Student updateInstagram(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
-        Optional<Student> studentOptional = studentRepository.findById(id);
-        if (studentOptional.isPresent()) {
-            Student student = studentOptional.get();
-            if (studentPostDTO.getInstagram() != null) {
-                student.setInstagram(studentPostDTO.getInstagram());
-            }
-            studentRepository.save(student);
-            return student;
-        } else {
-            throw new RuntimeException("Student not found with ID: " + id);
-        }
-    }
+    // @PutMapping("/user/linked/{id}")
+    // public Student updateLinked(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+    //     Optional<Student> studentOptional = studentRepository.findById(id);
+    //     if (studentOptional.isPresent()) {
+    //         Student student = studentOptional.get();
+    //         if (studentPostDTO.getLinkedIn() != null) {
+    //             student.setLinkedIn(studentPostDTO.getLinkedIn());
+    //         }
+    //         studentRepository.save(student);
+    //         return student;
+    //     } else {
+    //         throw new RuntimeException("Student not found with ID: " + id);
+    //     }
+    // }
+
+    // @PutMapping("/user/instagram/{id}")
+    // public Student updateInstagram(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
+    //     Optional<Student> studentOptional = studentRepository.findById(id);
+    //     if (studentOptional.isPresent()) {
+    //         Student student = studentOptional.get();
+    //         if (studentPostDTO.getInstagram() != null) {
+    //             student.setInstagram(studentPostDTO.getInstagram());
+    //         }
+    //         studentRepository.save(student);
+    //         return student;
+    //     } else {
+    //         throw new RuntimeException("Student not found with ID: " + id);
+    //     }
+    // }
 
     @PutMapping("/user/username/{id}")
     public Student updateUsername(@PathVariable Integer id, @RequestBody StudentPostDTO studentPostDTO) {
