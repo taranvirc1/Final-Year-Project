@@ -12,6 +12,7 @@
     background-color: #fff;
     min-height: 100vh;
     overflow: hidden;
+    margin-bottom: 70px;
   }
 
   /* Stylinf for both forms in the account file - signup and signin */
