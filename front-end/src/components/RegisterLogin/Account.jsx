@@ -12,6 +12,8 @@ function Account() {
   const { handleChange, values, handleSubmit, errors } =
     useForm(validateSignUpForm);
 
+  const [date, setDate] = useState(null);
+  const today = new Date().toISOString().slice(0, 10);
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -255,6 +257,7 @@ function Account() {
                   className="date"
                   type="date"
                   name="dob"
+                  max={today}
                   value={values.dob}
                   onChange={handleChange}
                   placeholder="Date of Birth*"
