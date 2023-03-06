@@ -1,38 +1,36 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState,useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
 import { useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { getReviews } from "./APIs/RetrieveReviews";
 import Background from "./background/Background";
-
-
-
+import Accordion from "./Accordion";
 function CoursesVideos() {
-
-
-
-
+  //getting the current date using this function
   const current = new Date();
   const getCurrentDate = `${current.getDate()}/${
     current.getMonth() + 1
   }/${current.getFullYear()}`;
 
+  //review body for the post mapping
   //const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState({
     courseID: "1",
-    // studentId:"1",
+    // studentId:"1",// current user is got from the backend
     ratingStars: "",
     reviewDesc: "",
     createdAt: getCurrentDate,
   });
 
+  // used to get the current user
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const [currentUser, setCurrentUser] = useState({
     email: loggedInUser,
   });
+
   //console.log("ff"+currentUser.email)
   console.log("this");
   const [userdata, setUserdata] = useState("");
@@ -83,17 +81,21 @@ function CoursesVideos() {
   const [checkrating, setCheckRating] = useState(0);
   const [checkReview, setCheckReview] = useState("");
 
+  // getting the review text and store in the review object of posting purposes
+
   const { courseID, ratingStars, reviewDesc, createdAt } = review;
   const onInputChange = (e) => {
     setReview({ ...review, [e.target.name]: e.target.value });
     setCheckReview(e.target.value);
   };
 
+  // getting the selected star and store in the review object of posting purposes
   const onStarsClick = (rating) => {
     setReview({ ...review, ratingStars: rating, courseID: courseID });
     setCheckRating(rating);
   };
 
+  //function used to deal with the edited review copy
   function handleEdit(ratingID) {
     const i = reviews.findIndex((review) => review.ratingID === ratingID);
     setReview(reviews[i]);
@@ -112,6 +114,9 @@ function CoursesVideos() {
   const enabled = checkrating.length > 0 && checkReview.length > 0;
 
   console.log(checkReview.length);
+
+  // method used to post and edit review--
+  // if statement checks if review has an id to call the edit mapping else if null calls the post mapping
   const onSubmit = async (e) => {
     e.preventDefault();
     setForm(false);
@@ -177,14 +182,17 @@ function CoursesVideos() {
     retrieveReviews();
   };
 
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([]); // retrieved reveiws is stored in this array
   const [average, setAverage] = useState(0);
   const [totalReviews, setTotalReviews] = useState(null);
 
   const jwt = sessionStorage.getItem("jwt");
   console.log(jwt);
+  const retrieveReviews = () =>
+    getReviews({ setTotalReviews, average, setReviews, jwt });
 
-  const retrieveReviews = async () => {
+  // method used to get the data from database
+  /*const retrieveReviews = async () => {
     await axios
       .get("http://localhost:8080/getReviews", {
         headers: { Authorization: `Bearer ${jwt}` },
@@ -198,6 +206,8 @@ function CoursesVideos() {
         alert("cant get reviews");
       });
   };
+
+*/
 
   useEffect(() => {
     // getReviews();
@@ -255,38 +265,41 @@ function CoursesVideos() {
     setTotalSum((total / totalReviews).toFixed(1));
   }, [reviews]);
 
-  /*
+  const params = {
+    email: loggedInUser,
+  };
+
+  const [quiz, setQuiz] = useState([]);
+  const [quizLength, setQuizLength] = useState(0);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/getReviews",{ headers: {"Authorization" : `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXJhZDdAZ21haWwuY29tIiwiZXhwIjoxNjc2NTg3OTIxfQ.KKbg_HlpuNC6mRB6PXu3IeliXqZ81SogHJQ9Fnt84e49nmq4nebu-ewXbgsU4PK9d18NLuGOiFtRYl-3EPnmow"}`} })
-      .then(response => {
-        setReviews(response.data.reviews);
-   setAverage(getAverage(response.data.reviews));
- 
+    axios
+      .get("http://localhost:8080/quiz/murad8@gmail.com", {
+        headers: { Authorization: `Bearer ${jwt}` },
       })
-      .catch(error=>{
-         console.error(error)
-         alert("cant get reviews")
+      .then((response) => {
+        setQuiz(response.data);
+        setQuizLength(response.data.length);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("cant get quiz");
       });
-  
-    }, []);
+  }, []);
+  console.log("quiz", quiz);
 
+  const [widthValue, setWidthValue] = useState(0);
 
+  useEffect(() => {
+    const passedQuiz = quiz.filter((item) => item.result === "pass");
+    const numberOfActiveItems = passedQuiz.length;
 
-
-
-console.log(reviews);
-
-const getAverage=(reviews)=>{
-  const total = reviews.reduce((acc, review) => acc + review.ratingStars, 0);
-  return total / reviews.length;
-};
-
-
-*/
+    const progressBarWidth =
+      quizLength > 1 ? ((numberOfActiveItems - 1) / (quizLength - 1)) * 100 : 0;
+    setWidthValue(progressBarWidth);
+  }, [quiz]);
 
   const [showPlayer, setShowPlayer] = useState(false);
-  const [videoUrl, setVideoUrl] = useState("");
 
   function handleClick(url) {
     setVideoUrl(url);
@@ -298,36 +311,78 @@ const getAverage=(reviews)=>{
     setForm(true);
   }
 
-  const [play, setPlay] = useState(true);
-
-  const videoref = useRef();
   function dropdown() {
-    var dropdown = document.getElementsByClassName("dropdown-btn");
+    const dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
 
     for (i = 0; i < dropdown.length; i++) {
       dropdown[i].addEventListener("click", function () {
         this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-          dropdownContent.style.display = "none";
-        } else {
-          dropdownContent.style.display = "block";
-        }
+      
       });
     }
   }
 
 
-  const accordion = document.querySelectorAll(".dropdown-btn");
 
-  for (let i = 0; i < accordion.length; i++) {
-    accordion[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-    });
+
+
+  const [videoUrl, setVideoUrl] = useState("");
+
+
+
+  const [videos, setVideos] = useState([]);
+
+
+
+
+
+
+  /*const handleButtonClick = async (videoName, courseID)  => {
+   await axios.get(`http://localhost:8080/videos/${videoName}/${courseID}`)
+     .then(response => {
+       console.log(response.data);
+       setVideos(response.data);
+     })
+     .catch(error => {
+       console.error(error);
+     });
+  };*/
+  
+  
+  
+  
+  
+  useEffect(() => {
+   axios.get(`http://localhost:8080/videos`,{  headers: {"Authorization" : `Bearer ${jwt}`} })
+     .then(response => {
+       console.log(response.data);
+  
+       setVideos(response.data);
+     })
+     .catch(error => {
+       console.error(error);
+     });
+  
+    }, []);
+  
+  
+  console.log(videos)
+  
+  
+  
+  const retrieveUrl = (videoName,courseID) => {
+  
+  
+    const i =videos.find((video)=>video.videoName===videoName && video.course.courseID === courseID);
+   const url= i.url;
+  
+  
+    setVideoUrl(url);
+  
   }
   
-
+  
 
 
 
@@ -337,61 +392,10 @@ const getAverage=(reviews)=>{
     width: "150px",
   };
 
-  window.document.onkeydown = function (event, e) {
-    if (!e) {
-      e = event;
-    }
-    if (e.keyCode === 27) {
-      lightbox_close();
-    }
-  };
-
-  function lightbox_open() {
-    var lightBoxVideo = document.getElementById("light");
-
-    document.getElementById("light").style.display = "block";
-    document.getElementById("fade").style.display = "block";
-    setPlay(true);
-  }
-
-  function lightbox_close() {
-    var lightBoxVideo = document.getElementById("light");
-    document.getElementById("light").style.display = "none";
-    document.getElementById("fade").style.display = "none";
-    setPlay(false);
-  }
-  const [count, setCount] = useState(50)
-
-  const shoot = (a) => {
-    a.magnificPopup({
-      disableOn: 700,
-      type: "iframe",
-      mainClass: "mfp-fade",
-      removalDelay: 160,
-      preloader: false,
-      fixedContentPos: false,
-    });
-  };
   return (
     <div className="couresesVideos">
+      <Background />
 
-      <Background/>
-      {showPlayer && (
-        <div className="video-player-popup">
-          <button className="closeIcon" onClick={() => setShowPlayer(false)}>
-            <i class="fa-sharp fa-solid fa-xmark fa-2x" size={"10px"}></i>
-          </button>
-          <ReactPlayer
-            className="videoPlayer"
-            url={videoUrl}
-            controls={true}
-            width="120%"
-            height="100%"
-          />
-        </div>
-      )}
-    
-      
       <div className="discription">
         <h1 className="header">Learn C# Programming (In Ten Easy Steps) </h1>
         <h2 className="sub-header">
@@ -416,12 +420,11 @@ const getAverage=(reviews)=>{
         </div>
       </div>
       <div className="Space"> </div>
-      <div className="courseContent">
+      {/*  <div className="courseContent">
         <h1 className="courseContenttitle"> Course Content </h1>
-        <div id="fade" onClick={() => lightbox_close()}></div>
 
-        <div className="sidenava">
-          <button className="dropdown-btn five" onClick={() => dropdown()}>
+    <div className="sidenava">
+          <button className="dropdown-btn five">
             <span className="line-1">Fundamentals of Programming</span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
@@ -441,87 +444,93 @@ const getAverage=(reviews)=>{
             >
               Link 2<i className="fa-regular fa-circle-play"></i>
             </a>
-            <a href="#">
+            <a href="#!">
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn one" onClick={() => dropdown()}>
+          <button className="dropdown-btn one">
             <span className="line-1">Fundamentals of data structures </span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
           </button>
           <div className="dropdown-container">
-            <a href="#">
+            <a href="#!">
               Link 1<i className="fa-regular fa-circle-play"></i>
             </a>
-            <a href="#">
+            <a href="#!">
               Link 2<i className="fa-regular fa-circle-play"></i>
             </a>
-            <a href="#">
+            <a href="#!">
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn two" onClick={() => dropdown()}>
+          <button className="dropdown-btn two">
             <span className="line-1">Fundamentals of algorithms </span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
           </button>
           <div className="dropdown-container">
-            <a href="#">
+            <a href="#!">
               Link 2<i className="fa-regular fa-circle-play"></i>
             </a>
-            <a href="#">
+            <a href="#!">
               Link 2<i className="fa-regular fa-circle-play"></i>
             </a>
-            <a href="#">
+            <a href="#!">
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn three" onClick={() => dropdown()}>
+          <button className="dropdown-btn three">
             <span className="line-1">Theory of computation </span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
           </button>
           <div className="dropdown-container">
-            <a
-              className="popup-vimeo"
-              href="https://vimeo.com/67341671"
-              onClick={() => shoot(".popup-vimeo")}
-            >
-              Link 1<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#">
+            <a href="#!">
               Link 2<i className="fa-regular fa-circle-play"></i>
             </a>
-            <a href="#">
+            <a href="#!">
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
           </div>
-          <button className="dropdown-btn four" onClick={() => dropdown()}>
+          <button className="dropdown-btn four">
             <span className="line-1">Fundamentals of computer systems</span>
             <span className="line-2">5 Lectures- 50min</span>
             <i className="fa fa-caret-down"></i>
           </button>
 
           <div className="dropdown-container">
-            <a href="#!" className="lightbox" onClick={() => lightbox_open()}>
-              {/*<div id="light">*/}
-              <ReactPlayer
-                id="light"
-                className="reactplayer"
-                url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
-                width="60%"
-                height="50%"
-              />
-              {/*</div>*/}
-              Link 1 k<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#">
+            <a href="#!">
               Link 2<i className="fa-regular fa-circle-play"></i>
             </a>
-            <a href="#">
+            <a href="#!">
               Link 3<i className="fa-regular fa-circle-play"></i>
             </a>
+          </div>
+        </div>
+            </div>*/}
+
+<Accordion/>
+
+
+      <div className="trackerContainer">
+        Quiz Progress For this Course
+        <div className="tracker">
+          <div
+            className="tracker-progress"
+            style={{ width: `${widthValue}%` }}
+          ></div>
+          <div className="tracker-items">
+            {quiz.map((quizzes, i) => (
+              <div
+                key={i}
+                className={
+                  "tracker-item" + (quizzes.result === "pass" ? " active" : "")
+                }
+              >
+                <div className="tracker-name">{quizzes.quizType} Quiz</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -539,14 +548,13 @@ const getAverage=(reviews)=>{
           and updated second version of this course. C# is one of the most
           widely used an important of all modern programming languages. If you
           need to learn C# quickly and painlessly, this is the perfect course.
-          You will begin by learning the core features of programming –
-          variables, constants, functions and data types. You will move on
-          rapidly to learn about Object Orientation and the more advanced
-          features of C# and the .NET framework such as file-handling,
-          data-streaming, dealing with exceptions (errors) and overriding
-          methods. Even if you start out as a complete beginner, by the end of
-          this course you will have built a really solid foundation of
-          programming knowledge and skills.
+          You will begin by learning the core features of programming variables,
+          constants, functions and data types. You will move on rapidly to learn
+          about Object Orientation and the more advanced features of C# and the
+          .NET framework such as file-handling, data-streaming, dealing with
+          exceptions (errors) and overriding methods. Even if you start out as a
+          complete beginner, by the end of this course you will have built a
+          really solid foundation of programming knowledge and skills.
         </div>
       </div>
 
@@ -610,8 +618,7 @@ const getAverage=(reviews)=>{
                 disabled={!(checkReview && checkrating)}
                 onClick={onSubmit}
               >
-                {" "}
-                Submit{" "}
+                Submit
               </button>
             </Link>
           </div>
@@ -623,7 +630,7 @@ const getAverage=(reviews)=>{
               <div className="top-review">
                 <h4 className="reviewerName">
                   {reviewd.students.firstName}
-                  <span></span> {reviewd.students.email}
+                  <span></span> {reviewd.students.lastName}
                 </h4>
                 {new Array(reviewd.ratingStars).fill(null).map(() => (
                   <i className="fas fa-star icon-c" />
@@ -666,12 +673,6 @@ const getAverage=(reviews)=>{
         </button>
       </div>
 
-      {/* Hello world */}
-
-      {/* Indicators */}
-
-      {/* Wrapper for slides */}
-
       <div className="sponsor-header">
         <h2>Sponsored By</h2>
 
@@ -709,6 +710,17 @@ const getAverage=(reviews)=>{
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
