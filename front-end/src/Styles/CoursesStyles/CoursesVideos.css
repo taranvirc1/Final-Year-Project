@@ -77,7 +77,7 @@ padding: 30px;  }
 .objectVideos .wyl-list{
     list-style-type: circle;
     
-    width:50%;
+    max-width:45%;
     padding-top:10px;
     float:right;
     vertical-align: top;
@@ -87,9 +87,9 @@ padding: 30px;  }
 }
 .objectVideos .b{
  font-size: 14px;
-  width:45%;
+  max-width:40%;
   padding-top:10px;
-  padding-left: 20px;
+  padding-left: 10px;
   list-style-type: circle;
   
   }
@@ -97,23 +97,29 @@ padding: 30px;  }
 .objectVideos .c{
 
  
-  width:100%;
+  max-width:100%;
   padding-top:10px;
   
 }
 
 
+.discription{
+  position: relative;
+  text-align: center;
+padding-top:100px;
+max-width: 700px;
+margin:auto;
+}
+
+
+
 .discription .header{
-    position: relative;
-   text-align: center;
+   
    font-size: 28px;
     color: rgb(255, 255, 255);
     
-   padding-top: 8%;
 }
 .discription .sub-header{
-  position: relative;
-  text-align: center;
   
  font-size: 16px;
   color: rgb(237, 232, 232);
@@ -128,7 +134,9 @@ padding: 30px;  }
   .couresesVideos{
     position: relative;
     background:rgb(46, 93, 107)	;
+padding-top: 5%;
 padding-bottom: 10%;
+
   }
 
 
@@ -166,7 +174,7 @@ color: aquamarine;
   
   /* Style the sidenav links and the dropdown button */
   .sidenava a {
-    border-bottom:1px solid#f1f1f1;
+    border-bottom:1px solid#ac0f0f;
 
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -197,14 +205,16 @@ color: aquamarine;
   .dropdown-btn {
     
     border-radius: 6px 6px 6px 6px;
-    padding: 28px;
+    margin: auto;
     color: #444;
+    height:100px;
+    line-height: 100px;
+    text-align: center;
     cursor: pointer;
     width: 100%;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
     transition: 0.4s;
     margin: 10px 0 0;
     font-family: "Inconsolata", monospace;
@@ -212,9 +222,7 @@ color: aquamarine;
     border: 3px solid black;
   }
   /* On mouse-over */
-  .sidenava a:hover, .dropdown-btn:hover {
-    color: #20dd07;
-  }
+  
 
   .dropdown-btn.one {
     background: #ffe587;
@@ -247,39 +255,43 @@ color: aquamarine;
   
   /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
   .dropdown-container {
-    display: none;
   background-color: rgb(224, 219, 219);
   padding-left: 8px;
   border: 3px solid black;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
- 
   border-radius: 6px 6px 6px 6px;
+
   }
-
-
+ 
 
 
 
   .dropdown-container i {
     float: left;
-    padding: 6px 8px 6px 16px;
     padding-left: 30px;
-
+    padding-left: 6px;
+    margin-right: 7px;
+    margin-top: 3px;
 
   }
   /* Optional: Style the caret down icon */
-  .fa-caret-down {
-    margin-top: 5px;
+   .dropdown-btn .fa {
     float: left;
+    line-height: 100px;
+    text-align: center;
     margin-right: 10px;
+    margin-left: 10px;
+
     -moz-transition:all .2s linear 0s;
   -webkit-transition:all .2s linear 0s;
-  transition:all .2s linear 0s;
+  transition:transform 0.3s linear; 
   }
-  .active>i{
-    transform: rotate(180deg);
+  .dropdown-btn.active .fa{
     
-   
+    
+ 
+    transform: rotate(180deg);
+
   }
   .Coursediscription{
     position: relative;
@@ -335,7 +347,8 @@ font-style: italic;
   display:flex;
   align-items: center;
   justify-content: center;
-  
+  border: 3px solid rgb(0, 0, 0);
+
 
 }
 
@@ -374,7 +387,7 @@ font-style: italic;
   position: absolute;
   margin-top: 12px;
   margin-right: 25px;
-  padding: 3px;
+  padding: 2px;
   top:0%;
   right: 0%;
   max-width: 6rem;
@@ -499,10 +512,11 @@ top:-13px;
   flex-flow: row wrap;
   align-content: space-between;
   justify-content: space-between;
+  margin-left: 50px;
 }
 .reviews .eachReview .top-review .reviewerName {
   font-size: 18px;
-  color: rgb(180, 207, 214);
+  color: rgb(1, 2, 2);
  
 margin-top: 20px;
   margin-right: 15px;
@@ -521,15 +535,9 @@ margin-top: 20px;
 
 
 
-.reviewDiscription{
-
-
-color: #f1f1f1;
-}
 .reviewDiscription>p{
-
 margin-bottom: 5px;
-  color: #f8f3f3;
+  color: #090808;
   text-transform: capitalize;
 
   }
@@ -546,6 +554,7 @@ margin-bottom: 5px;
 
 
 .reviews .eachReview{
+  word-break: break-word;
   width: 45%;
   margin-right: 10px;
   margin-left:20px;
@@ -555,12 +564,15 @@ margin-bottom: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
   background: none;
+  margin-top:20px;
+
 }
 .viewLess{
   margin-bottom: 10px;
   background: none;
   float:right;
   margin-right: 15px;
+  margin-top:20px;
 }
 .icon-c {
   color: yellow;
@@ -578,7 +590,7 @@ margin-bottom: 5px;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white;
+  color: rgb(0, 0, 0);
 
 }
 .editReview:hover {
@@ -596,10 +608,120 @@ margin-bottom: 5px;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white;
+  color: rgb(0, 0, 0);
 
 }
 .deleteReview:hover {
   background-color: #a53e4f;
   color: black;
 }
+
+
+
+
+
+
+.trackerContainer{
+  border: 3px solid rgb(245, 242, 242);
+position: relative;
+ height:180px;
+ max-width:800px;
+ background-color: #4c4d47c9;;
+ color: white;
+ font-size: large;
+ text-align: center;
+ margin: 5% auto ;
+ padding: 10px;
+}
+
+
+.tracker {
+  margin: 50px 90px;
+  height: 4px;
+  background-color: #ccc;
+  
+}
+
+.tracker-progress {
+	width: 0;
+	height: 100%;
+	background-color: orange;
+}
+
+.tracker-items {
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-top: -12px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.tracker-item {
+	position: relative;
+  
+  
+}
+
+.tracker-item::before {
+	content: '';
+	width: 20px;
+	height: 20px;
+	background-color: #ccc;
+	display: block;
+	border-radius: 100%;
+  font-family: "Font Awesome 5 Free"; 
+  color: #000;
+  font-weight: 800;                     
+  content: "\2716";
+  padding-right: 0.8px;
+  padding-bottom: 2px;
+
+}
+
+.tracker-name {
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #ddd;
+  color: #000;
+
+	width: 140px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.tracker-name::before {
+	content: '';
+	max-width: 10px;
+	height: 10px;
+	background-color: #ddd;
+	display: block;
+	position: absolute;
+	top: -8px;
+	margin-left: -2px;
+	left: 50%;
+	transform: rotate(-45deg) translateX(-50%);
+}
+
+.tracker-item.active::before {
+	background-color: orange;
+  font-family: "Font Awesome 5 Free"; 
+  color: #000;
+  font-weight: 900;                     
+  content: "\f00c";
+  padding-left: 1.5px;
+  padding-bottom: 4px;
+}
+
+.tracker-item.active .tracker-name {
+	color: #030303;
+	background-color: orange;
+  
+}
+
+.tracker-item.active .tracker-name::before {
+	background-color: orange;
+}
+

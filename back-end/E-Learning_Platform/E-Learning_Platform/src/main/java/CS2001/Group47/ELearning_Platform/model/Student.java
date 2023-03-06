@@ -107,6 +107,12 @@ public class Student implements Serializable {
 
 	private List<Rate_Review> rate_Reviews = new ArrayList<>();
 
+	
+	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
+	@JsonIgnore
+
+	private List<QuizCategory> QuizCategory = new ArrayList<>();
+
 	public Student() {
 
 		super();

@@ -124,7 +124,7 @@ const Background = () => {
   }, []);
 
   return (
-    <div className="Backgroundcsfsfsdesc" style={{position:'relative',zIndex:0}}>
+    <div className="Background" style={{position:'relative',zIndex:0}}>
       <Particles options={options} init={particlesInit}   />
     </div>
   );

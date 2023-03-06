@@ -40,25 +40,30 @@ public class Videos implements Serializable{
 
 	
 	
-    @ManyToOne( fetch = FetchType.EAGER)
+    @ManyToOne( )
 	@JoinColumn(name = "course")
-	@JsonIgnore
 
     private Courses courses;
 
+	    
+    @ManyToOne()
+	@JoinColumn(name = "category")
+@JsonIgnore
+    private VideoCategory videoCategory;
 	
-	
+
 
 	public Videos() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Videos(@NotBlank String Url, @NotBlank String videoName, Courses courses ) {
+	public Videos(@NotBlank String Url, @NotBlank String videoName, Courses courses, VideoCategory videoCategory) {
 		super();
 		this.Url = Url;
 		this.videoName = videoName;
 		this.courses = courses; 
+		this.videoCategory=videoCategory;
 	}
 
 
@@ -98,11 +103,20 @@ public class Videos implements Serializable{
 		this.videoName = videoName;
 	}
 
+	public VideoCategory getVideoCategory() {
+		return videoCategory;
+	}
+
+
+	public void setVideoCategory(VideoCategory videoCategory) {
+		this.videoCategory = videoCategory;
+	}
+
 	
 
 	@Override
 	public String toString() {
-		return "Videos [videoID=" + id + ", Url=" + Url + ", videoName=" + videoName +", course="+ courses+"]";
+		return "Videos [videoID=" + id + ", Url=" + Url + ", videoName=" + videoName +", course="+ courses+",vidCAt"+ videoCategory+ "]";
 	}
 	
       

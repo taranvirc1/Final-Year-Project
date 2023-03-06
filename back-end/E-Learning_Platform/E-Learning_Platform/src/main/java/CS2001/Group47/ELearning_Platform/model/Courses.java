@@ -52,6 +52,7 @@ public class Courses implements Serializable {
    private List <Rate_Review> rate_Reviews = new ArrayList<>() ;
 
 
+  
 
 
 
@@ -97,7 +98,8 @@ public class Courses implements Serializable {
 	public void setRate_Reviews(List<Rate_Review> rate_Reviews) {
 		this.rate_Reviews = rate_Reviews;
 	}
-
+	
+	
 	
 	@Override
 	public String toString() {
