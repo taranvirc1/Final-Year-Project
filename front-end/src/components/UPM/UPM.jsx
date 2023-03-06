@@ -27,6 +27,15 @@ import axios from 'axios'
 import defaultImage from "../../images/UPM/assets/facebook.png"
 import { BiBookBookmark } from 'react-icons/bi'
 import { AiOutlineTwitter } from 'react-icons/ai'
+import {AiFillLock} from 'react-icons/ai'
+import basic from "../../images/UPM/assets/basic.png"
+import intermediate from "../../images/UPM/assets/intermediate.png"
+import advanced from "../../images/UPM/assets/advanced.png"
+import rare from "../../images/UPM/assets/rare.png"
+import rare2 from "../../images/UPM/assets/rare2_low.png"
+import nft from '../../images/UPM/assets/nft_low.png'
+import nft1 from '../../images/UPM/assets/nft1_low.png'
+import nft2 from '../../images/UPM/assets/nft2_low.png'
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
@@ -64,13 +73,13 @@ function UPM() {
     },
   };
 
-const FN = user.firstName;
-const LN = user.lastName;
-const UN = user.username;
-const CT = user.country;
-const D0B = user.dateOfBirth;
-const BI = user.bio;
-const NU = user.phone;
+  const FN = user.firstName;
+  const LN = user.lastName;
+  const UN = user.username;
+  const CT = user.country;
+  const D0B = user.dateOfBirth;
+  const BI = user.bio;
+  const NU = user.phone;
   const [firstname, setName] = useState(FN);
   const [userName, setUsername] = useState(UN);
   const [lastname, setLastName] = useState(LN);
@@ -506,6 +515,49 @@ const NU = user.phone;
                         </div>
                       </li>
 
+                      <li>
+                        <h6>Achievments</h6>
+                        <div className='upm-info'>
+                          <div className='upm-split'>
+                            <div class="upm-form2 upm-field2">
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={basic} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50}/>
+                              </div>
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={intermediate} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50}/>
+                              </div>
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={advanced} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50}/>
+                              </div><div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={rare} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50}/>
+                              </div><div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={rare2} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50}/>
+                              </div><div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={nft} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50}/>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </li>
 
                       <li>
                         <h6>Socials</h6>
