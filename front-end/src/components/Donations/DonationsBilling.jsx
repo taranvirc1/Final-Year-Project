@@ -70,8 +70,6 @@ function DonationsBilling() {
       }
       if (!expiryDate) {
         newErrors.expiryDate = "Expiry date is required";
-      } else if (!/^\d{2}\/\d{2}$/.test(expiryDate)) {
-        newErrors.expiryDate = "Invalid expiry date. Please use MM/YY format.";
       }
       if (!cardType) {
         newErrors.cardType = "Card type is required";
