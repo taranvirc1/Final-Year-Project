@@ -239,7 +239,7 @@ function DonationsBilling() {
         <label for="expiry-date">
           Expiry date:
           <input
-            type="text"
+            type="month"
             id="expiryDate"
             name="expiryDate"
             maxlength="16"
