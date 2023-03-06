@@ -583,7 +583,6 @@ function UPM() {
                           <div className='upm-split-2'>
                             <div class="upm-form field">
                               <input type="input" class="upm-field" defaultValue={user.instagram} placeholder="sad"
-                                value={"ada"}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setInsta(newValue);
