@@ -22,12 +22,13 @@ import UPM from "./components/UPM/UPM";
 import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
 import Avatar from "./components/Section Avatar/Avatar";
 
-import Header from './components/Quizzes/components/Header/Header';
-import Footer from './components/Quizzes/components/Footer/Footer';
-import Home from './components/Quizzes/Pages/Home/Home';
+import Header from "./components/Quizzes/components/Header/Header";
+import Footer from "./components/Quizzes/components/Footer/Footer";
+import Home from "./components/Quizzes/Pages/Home/Home";
 import Quiz from "./components/Quizzes/Pages/Quiz/Quiz";
 import Result from "./components/Quizzes/Pages/Result/Result";
 import { useState } from "react";
+import UpdatePassword from "./components/RegisterLogin/UpdatePassword";
 
 function AppRoute() {
   const [questions, setQuestions] = useState();
@@ -36,7 +37,9 @@ function AppRoute() {
 
   const fetchQuestions = async (category = "", difficulty = "") => {
     const { data } = await axios.get(
-       `https://opentdb.com/api.php?amount=10${category &&`&category=${category}`}${difficulty && `&difficulty=${difficulty}`}&type=multiple`
+      `https://opentdb.com/api.php?amount=10${
+        category && `&category=${category}`
+      }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
     );
 
     setQuestions(data.results);
@@ -44,7 +47,6 @@ function AppRoute() {
   return (
     <div>
       <BrowserRouter>
-      
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<LandingPage />} />
@@ -56,6 +58,7 @@ function AppRoute() {
               element={<ResetPassword />}
             /> */}
             <Route path="/newPassword" element={<NewPassword />} />
+            <Route path="/updatePassword" element={<UpdatePassword />} />
             <Route path="/confirmAccount" element={<ConfirmAccount />} />
             {/* route for donations */}
             <Route path="/donations" element={<DonationsPage />} />
@@ -77,20 +80,34 @@ function AppRoute() {
             <Route path="/Forum_page" element={<ForumPage />} />
             <Route path="/Create_forum" element={<CreateForum />} />
 
-            {/* ======route for quizzes====== */}           
-            <Route path="/Quizzes" element={<Home
-           name={name}
-           setName={setName}
-           fetchQuestions={fetchQuestions} />} />
-          <Route path="/quiz" element={<Quiz 
-          name={name}
-          questions={questions}
-          score={score}
-          setScore={setScore}
-          setQuestions={setQuestions}/>} />
-          <Route path="/result" element={<Result
-           name={name} score={score} />} />
-           
+            {/* ======route for quizzes====== */}
+            <Route
+              path="/Quizzes"
+              element={
+                <Home
+                  name={name}
+                  setName={setName}
+                  fetchQuestions={fetchQuestions}
+                />
+              }
+            />
+            <Route
+              path="/quiz"
+              element={
+                <Quiz
+                  name={name}
+                  questions={questions}
+                  score={score}
+                  setScore={setScore}
+                  setQuestions={setQuestions}
+                />
+              }
+            />
+            <Route
+              path="/result"
+              element={<Result name={name} score={score} />}
+            />
+
             {/* route for FAQ */}
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/Contact" element={<Contact />} />
@@ -100,7 +117,6 @@ function AppRoute() {
             <Route path="/UPM" element={<UPM />} />
           </Route>
         </Routes>
-       
       </BrowserRouter>
     </div>
   );
