@@ -20,11 +20,6 @@ const useForm = (validateForm) => {
   //this is used to check errors for the sign up form
   const [errors, setErrors] = useState({});
 
-  //check if the student has registered or not
-  //set to false by default
-  //set to true when no errors in form when clicking the sign up button
-  // const [isRegistered, setIsRegistered] = useState(false);
-
   //take user to login after registration
   const goToLogin = () => {
     navigate("/confirmAccount");
@@ -59,7 +54,6 @@ const useForm = (validateForm) => {
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
-          // alert("Registered Successfully!!!");
           setValues({
             firstName: "",
             lastName: "",
@@ -78,15 +72,7 @@ const useForm = (validateForm) => {
         console.log(error);
         alert("Registration not sent!!!");
       });
-    //change the value to true
-    // setIsRegistered(true);
   };
-
-  // useEffect(() => {
-  //   if (Object.keys(errors).length === 0 && isRegistered) {
-  //     // callback();
-  //   }
-  // }, [errors]);
 
   return { handleChange, values, handleSubmit, errors };
 };

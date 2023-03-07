@@ -3,7 +3,6 @@ package CS2001.Group47.ELearning_Platform.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -42,6 +41,7 @@ public class SecurityConfiguration {
 
         http
             .authorizeRequests()
+            // these are the url paths in the controllers that are allowed by the backend without a authorizations
             .antMatchers( "/user", "/donators", "/payments", "/forgot_password","/getReviews","/categories")
             .permitAll()
             .and()
@@ -56,23 +56,5 @@ public class SecurityConfiguration {
         return http.build();
 
     }
-
-    /*
-	//If you want to configure an InMemory User for testing
-	@Bean
-	public UserDetailsService userDetailsService() {
-		UserDetails user = User
-				.withUsername("user")
-				.password(passwordEncoder().encode("password"))
-				.roles("USER")
-				.build();
-		return new InMemoryUserDetailsManager(user);
-	}
-
-	@Bean
-	   public PasswordEncoder passwordEncoder() {
-	       return new BCryptPasswordEncoder();
-	   } 
-	   */
 
 }

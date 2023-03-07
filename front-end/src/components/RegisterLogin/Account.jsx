@@ -59,16 +59,6 @@ function Account() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    // if (validLoginAttempts >= 2) {
-    //   setLoginErrorMessages(
-    //     "Maximum login attempts reached. Please try again later!"
-    //   );
-    // if (invalidAttempts >= 2) {
-    //   setTimeRemaining(30);
-    // }
-    // setTimeRemaining(30);
-    // setTimerActive(true);
-    // else {
     if (email === "" || password === "") {
       setLoginErrorMessages("Email address and password required!!!");
     } else if (!email.match(regexEmail)) {
