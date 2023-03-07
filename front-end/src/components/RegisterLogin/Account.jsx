@@ -128,18 +128,28 @@ function Account() {
     // }
   };
 
-  const panelAnimation = () => {
-    const sign_in_btn = document.querySelector("#sign-in-btn");
-    const sign_up_btn = document.querySelector("#sign-up-btn");
-    const container = document.querySelector(".account-container");
+  // const panelAnimation = () => {
+  //   const sign_in_btn = document.querySelector("#sign-in-btn");
+  //   const sign_up_btn = document.querySelector("#sign-up-btn");
+  //   const container = document.querySelector(".account-container");
 
-    sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
-    });
+  //   sign_up_btn.addEventListener("click", () => {
+  //     container.classList.add("sign-up-mode");
+  //   });
 
-    sign_in_btn.addEventListener("click", () => {
-      container.classList.remove("sign-up-mode");
-    });
+  //   sign_in_btn.addEventListener("click", () => {
+  //     container.classList.remove("sign-up-mode");
+  //   });
+  // };
+
+  const [isSignUpClick, setIsSignUpClick] = useState(false);
+
+  const signUpBtn = () => {
+    setIsSignUpClick(true);
+  };
+
+  const signInBtn = () => {
+    setIsSignUpClick(false);
   };
 
   const indicator = document.querySelector(".pass-indicator");
@@ -227,7 +237,9 @@ function Account() {
 
   return (
     <div className="body">
-      <div className="account-container">
+      <div
+        className={`account-container ${isSignUpClick ? "sign-up-mode" : ""}`}
+      >
         <div className="forms-container">
           <div className="signin-signup">
             {/* Signin/login form which contains email and password */}
@@ -412,7 +424,7 @@ function Account() {
               <button
                 className="account-btn transparent"
                 id="sign-up-btn"
-                onClick={panelAnimation}
+                onClick={signUpBtn}
               >
                 Sign up
               </button>
@@ -431,7 +443,7 @@ function Account() {
               <button
                 className="account-btn transparent"
                 id="sign-in-btn"
-                onClick={panelAnimation}
+                onClick={signInBtn}
               >
                 Sign in
               </button>
