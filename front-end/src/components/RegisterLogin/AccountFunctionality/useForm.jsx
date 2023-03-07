@@ -27,8 +27,7 @@ const useForm = (validateForm) => {
 
   //take user to login after registration
   const goToLogin = () => {
-    window.location.reload(false);
-    navigate("/account");
+    navigate("/confirmAccount");
   };
 
   const handleChange = (e) => {
@@ -44,15 +43,8 @@ const useForm = (validateForm) => {
     e.preventDefault();
     //check the values in the signup form
     setErrors(validateForm(values));
-    const {
-      firstName,
-      lastName,
-      dob,
-      country,
-      phone,
-      email,
-      password,
-    } = values;
+    const { firstName, lastName, dob, country, phone, email, password } =
+      values;
     const user = {
       firstName,
       lastName,

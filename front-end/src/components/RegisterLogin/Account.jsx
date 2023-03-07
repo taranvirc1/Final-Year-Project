@@ -41,14 +41,14 @@ function Account() {
   // }, [timerActive]);
 
   useEffect(() => {
-    // interval to decrement the timeRemaining state variable every second
+    // decrement value of interval every second (from 30 sec until it reaches zero)
     const interval = setInterval(() => {
       if (timeRemaining > 0) {
         setTimeRemaining(timeRemaining - 1);
       }
     }, 1000);
 
-    // clear the interval when the component is unmounted
+    // clear the interval value when reaching zero
     return () => clearInterval(interval);
   }, [timeRemaining]);
 
@@ -279,8 +279,12 @@ function Account() {
                 value="Login"
                 className="account-btn solid"
               />
+              {/* show reset timer unless it reaches zero */}
               {timeRemaining > 0 && (
-                <p>Please wait {timeRemaining} seconds before trying again.</p>
+                <p>
+                  Please wait {timeRemaining} seconds before trying to sign in
+                  again.
+                </p>
               )}
               {/* <p>
                 {timerActive
