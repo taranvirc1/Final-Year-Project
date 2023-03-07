@@ -42,6 +42,7 @@ public class Videos implements Serializable{
 	
     @ManyToOne( )
 	@JoinColumn(name = "course")
+	@JsonIgnore
 
     private Courses courses;
 

@@ -1,9 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
 import axios from "axios";
+import { useOutletContext } from "react-router-dom";
 
 import ReactPlayer from "react-player";
 
 const Accordion = () => {
+
+
+    const [loggedInUser, setLoggedinUser] = useOutletContext();
+
   const jwt = sessionStorage.getItem("jwt");
 
   const [videoUrl, setVideoUrl] = useState("");
@@ -43,6 +48,7 @@ const Accordion = () => {
     setVideoUrl(url);
     setShowPlayer(true);
   }
+  const [disableBtn, setDisableBtn] = useState(false);
 
   const [activeIndex, setActiveIndex] = useState(null);
   const [rotate, setRotate] = useState(null);
@@ -51,8 +57,24 @@ const Accordion = () => {
 
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
-    setRotate(index === activeIndex ? "rotate(0)" : "rotate(180deg)");
   };
+
+
+
+
+  const  checkIfloggedIn =(link)=> { 
+   if (loggedInUser){
+    playVideo(link.url) 
+   }else{
+    alert("please log in");
+   }
+ } 
+
+
+
+
+
+
 
   console.log(videoUrl);
 
@@ -63,12 +85,12 @@ const Accordion = () => {
           <button className="closeIcon" onClick={() => setShowPlayer(false)}>
             <i class="fa-sharp fa-solid fa-xmark fa-2x" size={"10px"}></i>
           </button>
-          <ReactPlayer
+          <ReactPlayer 
             className="videoPlayer"
             url={videoUrl}
             controls={true}
-            width="120%"
-            height="100%"
+            width = "100%"
+            height = "100%"
           />
         </div>
       )}
@@ -80,26 +102,38 @@ const Accordion = () => {
               className="dropdown-btn"
               key={index}
               style={{ backgroundColor: colors[index] }}
-              onClick={() => handleClick(index)}
+              onClick={() =>{ handleClick(index) }} 
+
             >
               <span className="line-2"></span>
               <span className="line-1">{item.categoryName}</span>
-              <i className="fa fa-caret-down"></i>
+              <i className="fa fa-angle-up" 
+              style={{
+                transform: `rotate(${activeIndex===index? 180 : 0}deg)`,
+                transition: "all 0.25s",
+              }}></i>
+
             </div>
             <div>
-              {activeIndex === index && (
-                <div className="dropdown-container">
+              {activeIndex ===index && (
+                <div className="dropdown-container"   >
                   {item.videos.map((link, i) => (
-                    <a
+                  
+
+                    <button className="videoLinks"
                       href="#!"
                       key={i}
+                      id ="check"
+                     
+ 
                       onClick={() => {
-                        playVideo(link.url);
+                       checkIfloggedIn(link.url);
                       }}
+
                     >
                       {link.videoName}
                       <i className="fa-regular fa-circle-play"></i>
-                    </a>
+                    </button>
                   ))}
                 </div>
               )}
