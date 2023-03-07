@@ -318,13 +318,25 @@ function CoursesVideos() {
     for (i = 0; i < dropdown.length; i++) {
       dropdown[i].addEventListener("click", function () {
         this.classList.toggle("active");
+      
       });
     }
   }
 
+
+
+
+
   const [videoUrl, setVideoUrl] = useState("");
 
+
+
   const [videos, setVideos] = useState([]);
+
+
+
+
+
 
   /*const handleButtonClick = async (videoName, courseID)  => {
    await axios.get(`http://localhost:8080/videos/${videoName}/${courseID}`)
@@ -336,33 +348,44 @@ function CoursesVideos() {
        console.error(error);
      });
   };*/
-
+  
+  
+  
+  
+  
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/videos`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
-      .then((response) => {
-        console.log(response.data);
-
-        setVideos(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  console.log(videos);
-
-  const retrieveUrl = (videoName, courseID) => {
-    const i = videos.find(
-      (video) =>
-        video.videoName === videoName && video.course.courseID === courseID
-    );
-    const url = i.url;
-
+   axios.get(`http://localhost:8080/videos`,{  headers: {"Authorization" : `Bearer ${jwt}`} })
+     .then(response => {
+       console.log(response.data);
+  
+       setVideos(response.data);
+     })
+     .catch(error => {
+       console.error(error);
+     });
+  
+    }, []);
+  
+  
+  console.log(videos)
+  
+  
+  
+  const retrieveUrl = (videoName,courseID) => {
+  
+  
+    const i =videos.find((video)=>video.videoName===videoName && video.course.courseID === courseID);
+   const url= i.url;
+  
+  
     setVideoUrl(url);
-  };
+  
+  }
+  
+  
+
+
+
 
   const styleObj = {
     height: "145px",
@@ -487,7 +510,8 @@ function CoursesVideos() {
         </div>
             </div>*/}
 
-      <Accordion />
+<Accordion/>
+
 
       <div className="trackerContainer">
         Quiz Progress For this Course
@@ -686,6 +710,34 @@ function CoursesVideos() {
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     </div>
   );
 }

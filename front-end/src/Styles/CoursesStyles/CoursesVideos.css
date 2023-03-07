@@ -5,7 +5,13 @@
   color: #ccc;
 }
 
+.videoPlayer{
+position: relative;
+max-width: 100%;
+  max-height: 100%;
 
+
+}
 
 .video-player-popup,videoPlayer {
   margin-top: 3%;
@@ -156,7 +162,7 @@ color: aquamarine;
   
 
 
-  .sidenava {
+  .sidenava   {
     position: relative;
     max-width: 800px;
    
@@ -173,7 +179,7 @@ color: aquamarine;
   }
   
   /* Style the sidenav links and the dropdown button */
-  .sidenava a {
+  .sidenava .videoLinks  {
     border-bottom:1px solid#ac0f0f;
 
     padding: 6px 8px 6px 16px;
@@ -183,7 +189,7 @@ color: aquamarine;
     display:block;
     border: none;
     background: none;
-    width: 100%;
+    max-width: 100%;
     text-align: left;
     cursor: pointer;
     outline: none;
@@ -207,11 +213,10 @@ color: aquamarine;
     border-radius: 6px 6px 6px 6px;
     margin: auto;
     color: #444;
-    height:100px;
-    line-height: 100px;
+    max-height:100px;
     text-align: center;
     cursor: pointer;
-    width: 100%;
+    max-width: 100%;
     border: none;
     text-align: left;
     outline: none;
@@ -220,6 +225,8 @@ color: aquamarine;
     font-family: "Inconsolata", monospace;
     font-size: 20px;
     border: 3px solid black;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
   /* On mouse-over */
   
@@ -277,22 +284,15 @@ color: aquamarine;
   /* Optional: Style the caret down icon */
    .dropdown-btn .fa {
     float: left;
-    line-height: 100px;
     text-align: center;
     margin-right: 10px;
     margin-left: 10px;
-
+    margin-top: 5px;
     -moz-transition:all .2s linear 0s;
   -webkit-transition:all .2s linear 0s;
   transition:transform 0.3s linear; 
   }
-  .dropdown-btn.active .fa{
-    
-    
- 
-    transform: rotate(180deg);
 
-  }
   .Coursediscription{
     position: relative;
     min-block-size: 25ch;
