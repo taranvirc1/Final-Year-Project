@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import axios from "axios";
 import image1 from "../../images/Avatar section/Badges/Solid_red.png";
 import profileImage from "../../images/Avatar section/Profile section/Profile picture/defaultProfilePic.png";
 import otherProfileImage from "../../images/Avatar section/Profile section/Profile picture/defaultProfilePic.png";
@@ -8,6 +10,43 @@ import chosenBadge3 from "../../images/Avatar section/Profile section/Chosen bad
 import rankImg from "../../images/Avatar section/Profile section/Rank img/global-elite.png";
 import "../../Styles/Avatar Style/Main page.css";
 export default function Avatar() {
+
+const [student, setStudent] = useState([]);
+
+const jwt = sessionStorage.getItem("jwt");
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/user",{  headers: {"Authorization" : `Bearer ${jwt}`} })
+      .then(response => {
+       // setReviews(response.data);
+     
+      const blob = new Blob([response.data.image], { type: 'image/jpeg' });
+      const url = URL.createObjectURL(blob);     
+      console.log(response.data);
+      setStudent(response.data)
+      })
+      .catch(error=>{
+         console.error(error)
+         alert("cant get reviews")
+      });
+    },[]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
       <div class="topPart">
@@ -151,100 +190,20 @@ export default function Avatar() {
           </tr>
         </thead>
         <tbody>
+          {student.map((students,index)=> (
           <tr>
-            <td>1</td>
+            <td>{index}</td>
             <td>
-              <img src={otherProfileImage} height="90" width="90" />
+              <img src={students.image} height="90" width="90" alt="" />
             </td>
-            <td>10</td>
-            <td>3</td>
+            <td>{students.role}</td>
+            <td>{students.lastName}</td>
             <td>4</td>
             <td>400</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
+                  ))};
 
-          <tr>
-            <td>3</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
-
-          <tr>
-            <td>4</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
-
-          <tr>
-            <td>5</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
-
-          <tr>
-            <td>6</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>
-              <img src={otherProfileImage} height="90" width="90" />
-            </td>
-            <td>10</td>
-            <td>3</td>
-            <td>4</td>
-            <td>400</td>
-          </tr>
+         
         </tbody>
       </table>
     </div>
