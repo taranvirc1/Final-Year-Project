@@ -41,14 +41,14 @@ function Account() {
   // }, [timerActive]);
 
   useEffect(() => {
-    // interval to decrement the timeRemaining state variable every second
+    // decrement value of interval every second (from 30 sec until it reaches zero)
     const interval = setInterval(() => {
       if (timeRemaining > 0) {
         setTimeRemaining(timeRemaining - 1);
       }
     }, 1000);
 
-    // clear the interval when the component is unmounted
+    // clear the interval value when reaching zero
     return () => clearInterval(interval);
   }, [timeRemaining]);
 
@@ -128,18 +128,28 @@ function Account() {
     // }
   };
 
-  const panelAnimation = () => {
-    const sign_in_btn = document.querySelector("#sign-in-btn");
-    const sign_up_btn = document.querySelector("#sign-up-btn");
-    const container = document.querySelector(".account-container");
+  // const panelAnimation = () => {
+  //   const sign_in_btn = document.querySelector("#sign-in-btn");
+  //   const sign_up_btn = document.querySelector("#sign-up-btn");
+  //   const container = document.querySelector(".account-container");
 
-    sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
-    });
+  //   sign_up_btn.addEventListener("click", () => {
+  //     container.classList.add("sign-up-mode");
+  //   });
 
-    sign_in_btn.addEventListener("click", () => {
-      container.classList.remove("sign-up-mode");
-    });
+  //   sign_in_btn.addEventListener("click", () => {
+  //     container.classList.remove("sign-up-mode");
+  //   });
+  // };
+
+  const [isSignUpClick, setIsSignUpClick] = useState(false);
+
+  const signUpBtn = () => {
+    setIsSignUpClick(true);
+  };
+
+  const signInBtn = () => {
+    setIsSignUpClick(false);
   };
 
   const indicator = document.querySelector(".pass-indicator");
@@ -227,7 +237,9 @@ function Account() {
 
   return (
     <div className="body">
-      <div className="account-container">
+      <div
+        className={`account-container ${isSignUpClick ? "sign-up-mode" : ""}`}
+      >
         <div className="forms-container">
           <div className="signin-signup">
             {/* Signin/login form which contains email and password */}
@@ -267,8 +279,12 @@ function Account() {
                 value="Login"
                 className="account-btn solid"
               />
+              {/* show reset timer unless it reaches zero */}
               {timeRemaining > 0 && (
-                <p>Please wait {timeRemaining} seconds before trying again.</p>
+                <p>
+                  Please wait {timeRemaining} seconds before trying to sign in
+                  again.
+                </p>
               )}
               {/* <p>
                 {timerActive
@@ -412,7 +428,7 @@ function Account() {
               <button
                 className="account-btn transparent"
                 id="sign-up-btn"
-                onClick={panelAnimation}
+                onClick={signUpBtn}
               >
                 Sign up
               </button>
@@ -431,7 +447,7 @@ function Account() {
               <button
                 className="account-btn transparent"
                 id="sign-in-btn"
-                onClick={panelAnimation}
+                onClick={signInBtn}
               >
                 Sign in
               </button>
