@@ -35,48 +35,7 @@ function CoursesVideos() {
   console.log("this");
   const [userdata, setUserdata] = useState("");
 
-  /* useEffect(()=>{
-     
-          const jwt = sessionStorage.getItem('jwt');
-          console.log(jwt);
-          axios({
-              method: 'get',
-              url: 'http://localhost:8080/user/findByEmail',
-              params: {email: "murad8@gmail.com"},
-              headers: {"Authorization" : `Bearer ${jwt}`}
-          }).then((response) => {
-              if (response.status === 201){
-                alert("got students");
-
-                  //console.log(response.data);
-                  console.log(response.data);
-                  setUserdata(response.data);
-              }
-          }).catch(err => {
-              console.log(err.response);
-              setUserdata("Data failure");
-              
-          })
-      
-  },[]);*/
-
   const [currentStudentID, setCurrentStudentID] = useState("");
-
-  /* useEffect(() => {
-    axios.get("http://localhost:8080/user/findByEmail",{  params: {email:loggedInUser },headers: {"Authorization" : `Bearer ${jwt}`} })
-      .then(response => {
-       // setReviews(response.data);
-      console.log(response.data)
-      setCurrentStudentID(response.data.studentId)
- 
-      })
-      .catch(error=>{
-         console.error(error)
-         alert("cant get reviews")
-      });
-    },[]);
-
-    console.log("current student" + currentStudentID)*/
 
   const [checkrating, setCheckRating] = useState(0);
   const [checkReview, setCheckReview] = useState("");
@@ -143,8 +102,6 @@ function CoursesVideos() {
         }) //;
         .catch(async (error) => {
           console.log(error);
-
-          // alert("Registration not sent!!!");
         });
     } else {
       await axios
@@ -170,8 +127,6 @@ function CoursesVideos() {
         .catch(async (error) => {
           console.log(review);
           console.log(error);
-
-          // alert("Registration not sent!!!");
         });
       setCheckReview("");
 
@@ -182,6 +137,8 @@ function CoursesVideos() {
     retrieveReviews();
   };
 
+
+
   const [reviews, setReviews] = useState([]); // retrieved reveiws is stored in this array
   const [average, setAverage] = useState(0);
   const [totalReviews, setTotalReviews] = useState(null);
@@ -190,24 +147,6 @@ function CoursesVideos() {
   console.log(jwt);
   const retrieveReviews = () =>
     getReviews({ setTotalReviews, average, setReviews, jwt });
-
-  // method used to get the data from database
-  /*const retrieveReviews = async () => {
-    await axios
-      .get("http://localhost:8080/getReviews", {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
-      .then((response) => {
-        setReviews(response.data);
-        setTotalReviews(response.data.length);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("cant get reviews");
-      });
-  };
-
-*/
 
   useEffect(() => {
     // getReviews();
@@ -234,9 +173,10 @@ function CoursesVideos() {
       sum += parseInt(reviews[i].ratingStars);
     }
     const averagee = sum / reviews.length;
-    // console.log(averagee)
     return averagee;
   };
+
+
 
   const deleteReview = (ratingID) => {
     axios
@@ -318,80 +258,45 @@ function CoursesVideos() {
     for (i = 0; i < dropdown.length; i++) {
       dropdown[i].addEventListener("click", function () {
         this.classList.toggle("active");
-      
       });
     }
   }
 
-
-
-
-
   const [videoUrl, setVideoUrl] = useState("");
-
-
 
   const [videos, setVideos] = useState([]);
 
-
-
-
-
-
-  /*const handleButtonClick = async (videoName, courseID)  => {
-   await axios.get(`http://localhost:8080/videos/${videoName}/${courseID}`)
-     .then(response => {
-       console.log(response.data);
-       setVideos(response.data);
-     })
-     .catch(error => {
-       console.error(error);
-     });
-  };*/
-  
-  
-  
-  
-  
   useEffect(() => {
-   axios.get(`http://localhost:8080/videos`,{  headers: {"Authorization" : `Bearer ${jwt}`} })
-     .then(response => {
-       console.log(response.data);
-  
-       setVideos(response.data);
-     })
-     .catch(error => {
-       console.error(error);
-     });
-  
-    }, []);
-  
-  
-  console.log(videos)
-  
-  
-  
-  const retrieveUrl = (videoName,courseID) => {
-  
-  
-    const i =videos.find((video)=>video.videoName===videoName && video.course.courseID === courseID);
-   const url= i.url;
-  
-  
+    axios
+      .get(`http://localhost:8080/videos`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        setVideos(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  console.log(videos);
+
+
+
+  const retrieveUrl = (videoName, courseID) => {
+    const i = videos.find(
+      (video) =>
+        video.videoName === videoName && video.course.courseID === courseID
+    );
+    const url = i.url;
+
     setVideoUrl(url);
-  
-  }
-  
-  
-
-
-
-
-  const styleObj = {
-    height: "145px",
-    width: "150px",
   };
 
+
+  
   return (
     <div className="couresesVideos">
       <Background />
@@ -420,98 +325,8 @@ function CoursesVideos() {
         </div>
       </div>
       <div className="Space"> </div>
-      {/*  <div className="courseContent">
-        <h1 className="courseContenttitle"> Course Content </h1>
 
-    <div className="sidenava">
-          <button className="dropdown-btn five">
-            <span className="line-1">Fundamentals of Programming</span>
-            <span className="line-2">5 Lectures- 50min</span>
-            <i className="fa fa-caret-down"></i>
-          </button>
-          <div className="dropdown-container">
-            <a
-              href="#!"
-              onClick={() => handleClick("https://youtu.be/ddlCWZxwB24")}
-            >
-              Link 1<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a
-              href="#!"
-              onClick={() =>
-                handleClick("https://www.youtube.com/watch?v=9kfScGV6W1Y")
-              }
-            >
-              Link 2<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#!">
-              Link 3<i className="fa-regular fa-circle-play"></i>
-            </a>
-          </div>
-          <button className="dropdown-btn one">
-            <span className="line-1">Fundamentals of data structures </span>
-            <span className="line-2">5 Lectures- 50min</span>
-            <i className="fa fa-caret-down"></i>
-          </button>
-          <div className="dropdown-container">
-            <a href="#!">
-              Link 1<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#!">
-              Link 2<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#!">
-              Link 3<i className="fa-regular fa-circle-play"></i>
-            </a>
-          </div>
-          <button className="dropdown-btn two">
-            <span className="line-1">Fundamentals of algorithms </span>
-            <span className="line-2">5 Lectures- 50min</span>
-            <i className="fa fa-caret-down"></i>
-          </button>
-          <div className="dropdown-container">
-            <a href="#!">
-              Link 2<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#!">
-              Link 2<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#!">
-              Link 3<i className="fa-regular fa-circle-play"></i>
-            </a>
-          </div>
-          <button className="dropdown-btn three">
-            <span className="line-1">Theory of computation </span>
-            <span className="line-2">5 Lectures- 50min</span>
-            <i className="fa fa-caret-down"></i>
-          </button>
-          <div className="dropdown-container">
-            <a href="#!">
-              Link 2<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#!">
-              Link 3<i className="fa-regular fa-circle-play"></i>
-            </a>
-          </div>
-          <button className="dropdown-btn four">
-            <span className="line-1">Fundamentals of computer systems</span>
-            <span className="line-2">5 Lectures- 50min</span>
-            <i className="fa fa-caret-down"></i>
-          </button>
-
-          <div className="dropdown-container">
-            <a href="#!">
-              Link 2<i className="fa-regular fa-circle-play"></i>
-            </a>
-            <a href="#!">
-              Link 3<i className="fa-regular fa-circle-play"></i>
-            </a>
-          </div>
-        </div>
-            </div>*/}
-
-<Accordion/>
-
+      <Accordion />
 
       <div className="trackerContainer">
         Quiz Progress For this Course
@@ -560,9 +375,8 @@ function CoursesVideos() {
 
       <div className="reviewsContainer">
         <div className="averageRating">
-          {totalSum}{" "}
+          {totalSum}
           <i className="star fa fa-star">
-            {" "}
             Course Rating | {totalReviews} ratings
           </i>
         </div>
@@ -632,7 +446,7 @@ function CoursesVideos() {
                   {reviewd.students.firstName}
                   <span></span> {reviewd.students.lastName}
                 </h4>
-                {new Array(reviewd.ratingStars).fill(null).map(() => (
+                {new Array(reviewd.ratingStars).fill().map(() => (
                   <i className="fas fa-star icon-c" />
                 ))}
               </div>
@@ -664,11 +478,9 @@ function CoursesVideos() {
           ))}
         </div>
         <button className="viewMore" onClick={showMoreReviews}>
-          {" "}
           View More
         </button>
         <button className="viewLess" onClick={showLessReviews}>
-          {" "}
           View Less
         </button>
       </div>
@@ -710,34 +522,6 @@ function CoursesVideos() {
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
     </div>
   );
 }
