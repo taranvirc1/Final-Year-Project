@@ -79,6 +79,7 @@ function Account() {
               setTimeRemaining(0);
               // setValidLoginAttempts(0);
               setLoginErrorMessages("");
+              alert("You have logged in successfully!!!");
               setLoginSuccess("You have logged in successfully!!!");
               console.log("this is " + loggedInUser);
               setLoggedinUser(email);

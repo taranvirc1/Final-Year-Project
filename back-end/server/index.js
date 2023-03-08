@@ -34,6 +34,7 @@ app.post("/api/student/update-password", async (req, res) => {
   try {
     // Retrieve user from database
     const user = await getUserByEmail(email);
+    console.log(user);
 
     if (!user) {
       return res.status(401).send("Invalid email or password");
@@ -47,8 +48,11 @@ app.post("/api/student/update-password", async (req, res) => {
     // }
 
     // Hash and update new password in database
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const enteredPassword = newPassword;
+    const hashedPassword = await bcrypt.hash(enteredPassword, 10);
+    console.log(hashedPassword);
     await updatePasswordByEmail(email, hashedPassword);
+    console.log(updatePasswordByEmail);
 
     // Send confirmation email
     const mailOptions = {
