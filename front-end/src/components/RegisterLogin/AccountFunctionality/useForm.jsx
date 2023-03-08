@@ -54,6 +54,8 @@ const useForm = (validateForm) => {
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
+          alert("Registered successfully!!!");
+          console.log(user);
           setValues({
             firstName: "",
             lastName: "",
