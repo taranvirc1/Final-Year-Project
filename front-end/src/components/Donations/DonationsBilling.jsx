@@ -163,7 +163,7 @@ function DonationsBilling() {
 
       <form class="billing-form" novalidate onSubmit={handleSubmit}>
         <label for="Donation-Amount">
-          Donation Amount:{" "}
+          Donation Amount (£):{" "}
           <input
             type="text"
             name="DAmount"
