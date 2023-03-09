@@ -27,7 +27,7 @@ import axios from 'axios'
 import defaultImage from "../../images/UPM/assets/facebook.png"
 import { BiBookBookmark } from 'react-icons/bi'
 import { AiOutlineTwitter } from 'react-icons/ai'
-import {AiFillLock} from 'react-icons/ai'
+import { AiFillLock } from 'react-icons/ai'
 import basic from "../../images/UPM/assets/basic.png"
 import intermediate from "../../images/UPM/assets/intermediate.png"
 import advanced from "../../images/UPM/assets/advanced.png"
@@ -80,10 +80,11 @@ function UPM() {
   const D0B = user.dateOfBirth;
   const BI = user.bio;
   const NU = user.phone;
+  const EM = user.email;
   const [firstname, setName] = useState(FN);
   const [userName, setUsername] = useState(UN);
   const [lastname, setLastName] = useState(LN);
-  const [Email, setEmail] = useState('default');
+  const [Email, setEmail] = useState(EM);
   const [number, setNumber] = useState(NU);
   const [Country, setCountry] = useState(CT);
   const [DOB, setDOB] = useState(D0B);
@@ -206,6 +207,12 @@ function UPM() {
 
   const [file, setFile] = useState(null);
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    const url = URL.createObjectURL(e.target.files[0]);
+    setImage(url);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -220,6 +227,9 @@ function UPM() {
       .then(response => console.log(response.data))
       .catch(error => console.log(error));
   };
+
+
+
 
   const handleButtonClick = (e) => {
     e.preventDefault();
@@ -306,7 +316,7 @@ function UPM() {
                     {image && <img class="upm-round" src={image} alt="avatar" />}
                     <button className="upm-click" onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button>
                     <button className="upm-saver-1" type="submit" onClick={handleSubmit}><FaUpload className="upm-icons-s" /></button>
-                    <input type="file" onChange={e => setFile(e.target.files[0])} ref={fileInput} style={{ display: "none" }} />
+                    <input type="file" onChange={handleFileChange} ref={fileInput} style={{ display: "none" }} />
                   </li>
                   <li><h3>{user.username}</h3></li>
                   <li><p>{user.bio} <br /> Hi, weclome to my profile settings i am {user.firstName}</p></li>
@@ -524,37 +534,37 @@ function UPM() {
                                 <div class="upm-avatar">
                                   <img src={basic} />
                                 </div>
-                                <AiFillLock className="upm-ic-lock" size={50}/>
+                                <AiFillLock className="upm-ic-lock" size={50} />
                               </div>
                               <div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={intermediate} />
                                 </div>
-                                <AiFillLock className="upm-ic-lock" size={50}/>
+                                <AiFillLock className="upm-ic-lock" size={50} />
                               </div>
                               <div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={advanced} />
                                 </div>
-                                <AiFillLock className="upm-ic-lock" size={50}/>
+                                <AiFillLock className="upm-ic-lock" size={50} />
                               </div><div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={rare} />
                                 </div>
-                                <AiFillLock className="upm-ic-lock" size={50}/>
+                                <AiFillLock className="upm-ic-lock" size={50} />
                               </div><div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={rare2} />
                                 </div>
-                                <AiFillLock className="upm-ic-lock" size={50}/>
+                                <AiFillLock className="upm-ic-lock" size={50} />
                               </div><div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={nft} />
                                 </div>
-                                <AiFillLock className="upm-ic-lock" size={50}/>
+                                <AiFillLock className="upm-ic-lock" size={50} />
                               </div>
                             </div>
-                            
+
                           </div>
                         </div>
                       </li>
