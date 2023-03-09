@@ -64,7 +64,7 @@ function UPM() {
       });
   }, []);
 
-  const userId = user.studentId
+  const userId = user && user.studentId; // Add null check before accessing studentId 
 
   const config = {
     headers: {
@@ -73,14 +73,14 @@ function UPM() {
     },
   };
 
-  const FN = user.firstName;
-  const LN = user.lastName;
-  const UN = user.username;
-  const CT = user.country;
-  const D0B = user.dateOfBirth;
-  const BI = user.bio;
-  const NU = user.phone;
-  const EM = user.email;
+  const FN = user && user.firstName;
+  const LN = user && user.lastName;
+  const UN = user && user.username;
+  const CT = user && user.country;
+  const D0B = user && user.dateOfBirth;
+  const BI = user && user.bio;
+  const NU = user && user.phone;
+  const EM = user && user.email;
   const [firstname, setName] = useState(FN);
   const [userName, setUsername] = useState(UN);
   const [lastname, setLastName] = useState(LN);
@@ -318,8 +318,8 @@ function UPM() {
                     <button className="upm-saver-1" type="submit" onClick={handleSubmit}><FaUpload className="upm-icons-s" /></button>
                     <input type="file" onChange={handleFileChange} ref={fileInput} style={{ display: "none" }} />
                   </li>
-                  <li><h3>{user.username}</h3></li>
-                  <li><p>{user.bio} <br /> Hi, weclome to my profile settings i am {user.firstName}</p></li>
+                  <li><h3>{user && user.username}</h3></li>
+                  <li><p>{user && user.bio} <br /> Hi, weclome to my profile settings i am {user && user.firstName}</p></li>
                   <li>
                     <div class="upm-buttons">
                       <a href='/' className="upm-primary">
@@ -344,7 +344,7 @@ function UPM() {
                           <div className='upm-split'>
                             <div class="upm-form field">
                               <input type="input" class="upm-field" placeholder="a"
-                                defaultValue={user.firstName}
+                                defaultValue={user && user.firstName}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setName(newValue);
@@ -354,7 +354,7 @@ function UPM() {
                             </div>
                             <div className="upm-form field">
                               <input type="input" class="upm-field"
-                                defaultValue={user.lastName}
+                                defaultValue={user && user.lastName}
                                 onChange={(event) => {
                                   event.target.value = "asd"
                                   const newValue = event.target.value;
@@ -365,8 +365,8 @@ function UPM() {
                           </div>
                           <div className='upm-split-2'>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder={user.lastName}
-                                defaultValue={user.email}
+                              <input type="input" class="upm-field" placeholder={user && user.lastName}
+                                defaultValue={user && user.email}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setEmail(newValue);
@@ -388,8 +388,8 @@ function UPM() {
                           </div>
                           <div className='upm-split-2'>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder={user.lastName}
-                                defaultValue={user.phone}
+                              <input type="input" class="upm-field" placeholder={user && user.lastName}
+                                defaultValue={user && user.phone}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setNumber(newValue);
@@ -399,8 +399,8 @@ function UPM() {
                           </div>
                           <div className='upm-split-2'>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder={user.lastName}
-                                defaultValue={user.country}
+                              <input type="input" class="upm-field" placeholder={user && user.lastName}
+                                defaultValue={user && user.country}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setCountry(newValue);
@@ -424,11 +424,11 @@ function UPM() {
                         <div className='upm-info'>
                           <div className='upm-split'>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user.studentId} placeholder="ID" name="ID" id='ID' required />
+                              <input type="input" class="upm-field" defaultValue={user && user.studentId} placeholder="ID" name="ID" id='ID' required />
                               <label for="name" class="upm-label">ID</label>
                             </div>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder="Username" defaultValue={user.username} onChange={(event) => {
+                              <input type="input" class="upm-field" placeholder="Username" defaultValue={user && user.username} onChange={(event) => {
                                 const newValue = event.target.value;
                                 setUsername(newValue)
                               }} name="Username" id='name' required />
@@ -437,7 +437,7 @@ function UPM() {
                           </div>
                           <div className='upm-split-2'>
                             <div class="upm-form field">
-                              <input type="date" class="upm-field" placeholder="DOB" defaultValue={user.dateOfBirth} onChange={(event) => {
+                              <input type="date" class="upm-field" placeholder="DOB" defaultValue={user && user.dateOfBirth} onChange={(event) => {
                                 const newValue = event.target.value;
                                 setDOB(newValue)
                               }} name="DOB" id='DOB' required />
@@ -447,7 +447,7 @@ function UPM() {
 
                           <div className='upm-split-2'>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder="Country" defaultValue={user.country} onChange={(event) => {
+                              <input type="input" class="upm-field" placeholder="Country" defaultValue={user && user.country} onChange={(event) => {
                                 const newValue = event.target.value;
                                 setCountry(newValue)
                               }} name="Country" id='country' required />
@@ -456,7 +456,7 @@ function UPM() {
                           </div>
                           <div className='upm-split-2'>
                             <div class="upm-form field">
-                              <textarea type="input" class="upm-field" placeholder="About" defaultValue={user.bio} onChange={(event) => {
+                              <textarea type="input" class="upm-field" placeholder="About" defaultValue={user && user.bio} onChange={(event) => {
                                 const newValue = event.target.value;
                                 setBio(newValue)
                               }} name="About" id='upm-about' required />
@@ -574,7 +574,7 @@ function UPM() {
                         <div className='upm-info'>
                           <div className='upm-split'>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user.twitter} placeholder={user.firstName}
+                              <input type="input" class="upm-field" defaultValue={user && user.twitter} placeholder={user && user.firstName}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setTwit(newValue);
@@ -582,7 +582,7 @@ function UPM() {
                               <label for="name" class="upm-label">Twitter</label>
                             </div>
                             <div className="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user.linkedIn} placeholder={user.lastName}
+                              <input type="input" class="upm-field" defaultValue={user && user.linkedIn} placeholder={user && user.lastName}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setLink(newValue);
@@ -592,7 +592,7 @@ function UPM() {
                           </div>
                           <div className='upm-split-2'>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user.instagram} placeholder="sad"
+                              <input type="input" class="upm-field" defaultValue={user && user.instagram} placeholder="sad"
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setInsta(newValue);
