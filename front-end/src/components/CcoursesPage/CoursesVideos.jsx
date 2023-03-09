@@ -80,7 +80,7 @@ function CoursesVideos() {
     e.preventDefault();
     setForm(false);
 
-    const jwt = sessionStorage.getItem("jwt");
+    const jwt = localStorage.getItem("jwt");
 
     if (review.ratingID) {
       await axios
@@ -137,13 +137,11 @@ function CoursesVideos() {
     retrieveReviews();
   };
 
-
-
   const [reviews, setReviews] = useState([]); // retrieved reveiws is stored in this array
   const [average, setAverage] = useState(0);
   const [totalReviews, setTotalReviews] = useState(null);
 
-  const jwt = sessionStorage.getItem("jwt");
+  const jwt = localStorage.getItem("jwt");
   console.log(jwt);
   const retrieveReviews = () =>
     getReviews({ setTotalReviews, average, setReviews, jwt });
@@ -175,8 +173,6 @@ function CoursesVideos() {
     const averagee = sum / reviews.length;
     return averagee;
   };
-
-
 
   const deleteReview = (ratingID) => {
     axios
@@ -283,8 +279,6 @@ function CoursesVideos() {
 
   console.log(videos);
 
-
-
   const retrieveUrl = (videoName, courseID) => {
     const i = videos.find(
       (video) =>
@@ -295,8 +289,6 @@ function CoursesVideos() {
     setVideoUrl(url);
   };
 
-
-  
   return (
     <div className="couresesVideos">
       <Background />

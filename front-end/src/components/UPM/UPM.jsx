@@ -17,59 +17,60 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { CiTwitter } from 'react-icons/ci';
-import { AiOutlineInstagram } from 'react-icons/ai'
-import { CiLinkedin } from 'react-icons/ci'
-import { RiMapPin2Line } from 'react-icons/ri'
-import { FaUpload } from 'react-icons/fa'
-import { CiLogout } from 'react-icons/ci'
-import axios from 'axios'
-import defaultImage from "../../images/UPM/assets/facebook.png"
-import { BiBookBookmark } from 'react-icons/bi'
-import { AiOutlineTwitter } from 'react-icons/ai'
-import { AiFillLock } from 'react-icons/ai'
-import basic from "../../images/UPM/assets/basic.png"
-import intermediate from "../../images/UPM/assets/intermediate.png"
-import advanced from "../../images/UPM/assets/advanced.png"
-import rare from "../../images/UPM/assets/rare.png"
-import rare2 from "../../images/UPM/assets/rare2_low.png"
-import nft from '../../images/UPM/assets/nft_low.png'
-import nft1 from '../../images/UPM/assets/nft1_low.png'
-import nft2 from '../../images/UPM/assets/nft2_low.png'
+import { CiTwitter } from "react-icons/ci";
+import { AiOutlineInstagram } from "react-icons/ai";
+import { CiLinkedin } from "react-icons/ci";
+import { RiMapPin2Line } from "react-icons/ri";
+import { FaUpload } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+import axios from "axios";
+import defaultImage from "../../images/UPM/assets/facebook.png";
+import { BiBookBookmark } from "react-icons/bi";
+import { AiOutlineTwitter } from "react-icons/ai";
+import { AiFillLock } from "react-icons/ai";
+import basic from "../../images/UPM/assets/basic.png";
+import intermediate from "../../images/UPM/assets/intermediate.png";
+import advanced from "../../images/UPM/assets/advanced.png";
+import rare from "../../images/UPM/assets/rare.png";
+import rare2 from "../../images/UPM/assets/rare2_low.png";
+import nft from "../../images/UPM/assets/nft_low.png";
+import nft1 from "../../images/UPM/assets/nft1_low.png";
+import nft2 from "../../images/UPM/assets/nft2_low.png";
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
   const [user, setUser] = useState([]);
   const logoutUser = () => {
     setLoggedinUser("");
-    sessionStorage.setItem("jwt", "");
+    localStorage.setItem("jwt", "");
     logout("/");
   };
-  const jwt = sessionStorage.getItem('jwt')
+  const jwt = localStorage.getItem("jwt");
   const token = jwt;
   const headers = {
-    Authorization: `Bearer ${token}`
+    Authorization: `Bearer ${token}`,
   };
-  const Api = 'http://localhost:8080/user/findByEmail';
+  const Api = "http://localhost:8080/user/findByEmail";
   const params = {
     email: loggedInUser,
   };
   useEffect(() => {
-    axios.get(Api, { headers, params })
-      .then(response => {
+    axios
+      .get(Api, { headers, params })
+      .then((response) => {
         setUser(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const userId = user && user.studentId; // Add null check before accessing studentId 
+  const userId = user && user.studentId; // Add null check before accessing studentId
 
   const config = {
     headers: {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json"
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
   };
 
@@ -88,18 +89,18 @@ function UPM() {
   const [number, setNumber] = useState(NU);
   const [Country, setCountry] = useState(CT);
   const [DOB, setDOB] = useState(D0B);
-  const [newPasswords, setNewPasswords] = useState('default');
+  const [newPasswords, setNewPasswords] = useState("default");
   const [Bio, setBio] = useState(BI);
-  const [Role, setRole] = useState('Basic');
-  const [LinkedIn, setLink] = useState('LinkedIn URL :)');
-  const [Instagram, setInsta] = useState('Instagram URL :)');
-  const [Twitter, setTwit] = useState('Twitter URL :)');
+  const [Role, setRole] = useState("Basic");
+  const [LinkedIn, setLink] = useState("LinkedIn URL :)");
+  const [Instagram, setInsta] = useState("Instagram URL :)");
+  const [Twitter, setTwit] = useState("Twitter URL :)");
   const box = {
     firstName: firstname,
     lastName: lastname,
     email: Email,
     country: Country,
-    phone: number
+    phone: number,
   };
 
   const box2 = {
@@ -112,22 +113,21 @@ function UPM() {
   const box3 = {
     twitter: Twitter,
     instagram: Instagram,
-    linkedIn: LinkedIn
+    linkedIn: LinkedIn,
   };
 
   const role = {
-    role: Role
+    role: Role,
   };
-
-
 
   function updateInfo1() {
     updatePassword();
-    axios.put(`http://localhost:8080/user/input/${userId}`, box, config)
-      .then(response => {
+    axios
+      .put(`http://localhost:8080/user/input/${userId}`, box, config)
+      .then((response) => {
         console.log("User updated:", response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to update user:", error);
       });
   }
@@ -138,71 +138,71 @@ function UPM() {
         {},
         {
           headers: {
-            'Authorization': `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           params: {
-            newPassword: newPasswords
-          }
+            newPassword: newPasswords,
+          },
         }
       );
       console.log(response.data);
-      console.log(newPasswords)
+      console.log(newPasswords);
     } catch (error) {
       console.error(error);
     }
   };
 
   function updateInfo2() {
-    axios.put(`http://localhost:8080/user/input2/${userId}`, box2, config)
-      .then(response => {
+    axios
+      .put(`http://localhost:8080/user/input2/${userId}`, box2, config)
+      .then((response) => {
         console.log("User updated:", response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to update user:", error);
       });
   }
 
   function updateInfo3() {
-    axios.put(`http://localhost:8080/user/input3/${userId}`, box3, config)
-      .then(response => {
+    axios
+      .put(`http://localhost:8080/user/input3/${userId}`, box3, config)
+      .then((response) => {
         console.log("User updated:", response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to update user:", error);
       });
   }
-
 
   function updateRole() {
-    axios.put(`http://localhost:8080/user/role/${userId}`, role, config)
-      .then(response => {
+    axios
+      .put(`http://localhost:8080/user/role/${userId}`, role, config)
+      .then((response) => {
         console.log("User updated:", response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to update user:", error);
       });
   }
-
-
-
 
   //---
   const defaultAvatarUrl = defaultImage;
   const [image, setImage] = useState(defaultAvatarUrl);
   const fileInput = useRef(null);
   useEffect(() => {
-    axios.get(`http://localhost:8080/${userId}/image`, {
-      responseType: 'arraybuffer',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        const blob = new Blob([response.data], { type: 'image/jpeg' });
+    axios
+      .get(`http://localhost:8080/${userId}/image`, {
+        responseType: "arraybuffer",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const blob = new Blob([response.data], { type: "image/jpeg" });
         const url = URL.createObjectURL(blob);
         setImage(url);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, [userId, token]);
 
   const [file, setFile] = useState(null);
@@ -216,25 +216,23 @@ function UPM() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
-    axios.post(`http://localhost:8080/${userId}/image`, formData, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-      .then(response => console.log(response.data))
-      .catch(error => console.log(error));
+    axios
+      .post(`http://localhost:8080/${userId}/image`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
   };
-
-
-
 
   const handleButtonClick = (e) => {
     e.preventDefault();
     fileInput.current.click();
-  }
+  };
 
   //------
 
@@ -283,8 +281,6 @@ function UPM() {
   //   fileInput.current.click();
   // }
 
-
-
   return (
     <>
       <div className="upmcontainer">
@@ -306,168 +302,308 @@ function UPM() {
         </div>
         <div className="upm-right-side">
           <div className="upm-card-container-1">
-
-
-            <div className='upm-container'>
-              <div className='upm-mini-container'>
+            <div className="upm-container">
+              <div className="upm-mini-container">
                 <div class="upm-card-container">
-                  <li><span class="upm-logout"><CiLogout size={30} onClick={logoutUser} /></span></li>
                   <li>
-                    {image && <img class="upm-round" src={image} alt="avatar" />}
-                    <button className="upm-click" onClick={handleButtonClick}><MdOutlineModeEdit size={25} /></button>
-                    <button className="upm-saver-1" type="submit" onClick={handleSubmit}><FaUpload className="upm-icons-s" /></button>
-                    <input type="file" onChange={handleFileChange} ref={fileInput} style={{ display: "none" }} />
+                    <span class="upm-logout">
+                      <CiLogout size={30} onClick={logoutUser} />
+                    </span>
                   </li>
-                  <li><h3>{user && user.username}</h3></li>
-                  <li><p>{user && user.bio} <br /> Hi, weclome to my profile settings i am {user && user.firstName}</p></li>
+                  <li>
+                    {image && (
+                      <img class="upm-round" src={image} alt="avatar" />
+                    )}
+                    <button className="upm-click" onClick={handleButtonClick}>
+                      <MdOutlineModeEdit size={25} />
+                    </button>
+                    <button
+                      className="upm-saver-1"
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
+                      <FaUpload className="upm-icons-s" />
+                    </button>
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      ref={fileInput}
+                      style={{ display: "none" }}
+                    />
+                  </li>
+                  <li>
+                    <h3>{user && user.username}</h3>
+                  </li>
+                  <li>
+                    <p>
+                      {user && user.bio} <br /> Hi, weclome to my profile
+                      settings i am {user && user.firstName}
+                    </p>
+                  </li>
                   <li>
                     <div class="upm-buttons">
-                      <a href='/' className="upm-primary">
+                      <a href="/" className="upm-primary">
                         <AiOutlineTwitter size={30} />
                       </a>
-                      <a href='/' className="upm-primary ghost">
+                      <a href="/" className="upm-primary ghost">
                         <CiLinkedin size={30} />
                       </a>
-                      <a href='/' className="upm-primary ghost">
+                      <a href="/" className="upm-primary ghost">
                         <AiOutlineInstagram size={30} />
                       </a>
                     </div>
                   </li>
-
                 </div>
                 <div class="upm-card-container-1">
                   <div className="upm-skills">
                     <ul>
                       <li>
                         <h6>Basic</h6>
-                        <div className='upm-info'>
-                          <div className='upm-split'>
+                        <div className="upm-info">
+                          <div className="upm-split">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder="a"
+                              <input
+                                type="input"
+                                class="upm-field"
+                                placeholder="a"
                                 defaultValue={user && user.firstName}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setName(newValue);
-
-                                }} name="Firstname" id='name' required />
-                              <label for="name" class="upm-label">Firstname</label>
+                                }}
+                                name="Firstname"
+                                id="name"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Firstname
+                              </label>
                             </div>
                             <div className="upm-form field">
-                              <input type="input" class="upm-field"
+                              <input
+                                type="input"
+                                class="upm-field"
                                 defaultValue={user && user.lastName}
                                 onChange={(event) => {
-                                  event.target.value = "asd"
+                                  event.target.value = "asd";
                                   const newValue = event.target.value;
                                   setLastName(newValue);
-                                }} name="Lastname" id='name' required />
-                              <label for="name" class="upm-label">Lastname</label>
+                                }}
+                                name="Lastname"
+                                id="name"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Lastname
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder={user && user.lastName}
+                              <input
+                                type="input"
+                                class="upm-field"
+                                placeholder={user && user.lastName}
                                 defaultValue={user && user.email}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setEmail(newValue);
-                                }} name="Email" id='Email' required />
-                              <label for="name" class="upm-label">Email</label>
+                                }}
+                                name="Email"
+                                id="Email"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Email
+                              </label>
                             </div>
                           </div>
 
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input type="password" class="upm-field" placeholder={"*******************************"}
+                              <input
+                                type="password"
+                                class="upm-field"
+                                placeholder={"*******************************"}
                                 defaultValue={"*****************"}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
-                                  setNewPasswords(newValue)
-                                }} name="Password" id='Password' required />
-                              <label for="name" class="upm-label">Password</label>
+                                  setNewPasswords(newValue);
+                                }}
+                                name="Password"
+                                id="Password"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Password
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder={user && user.lastName}
+                              <input
+                                type="input"
+                                class="upm-field"
+                                placeholder={user && user.lastName}
                                 defaultValue={user && user.phone}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setNumber(newValue);
-                                }} name="Phone-number" id='number' required />
-                              <label for="name" class="upm-label">Phone-number</label>
+                                }}
+                                name="Phone-number"
+                                id="number"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Phone-number
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder={user && user.lastName}
+                              <input
+                                type="input"
+                                class="upm-field"
+                                placeholder={user && user.lastName}
                                 defaultValue={user && user.country}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setCountry(newValue);
-                                }} name="Language" id='language' required />
-                              <label for="name" class="upm-label">Language</label>
+                                }}
+                                name="Language"
+                                id="language"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Language
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-3'>
-                            <button className="upm-edit-button" onClick={() => {
-                              updateInfo1();
-                            }}>
-                              <MdOutlineModeEdit className="upm-icon" size={40} />
+                          <div className="upm-split-3">
+                            <button
+                              className="upm-edit-button"
+                              onClick={() => {
+                                updateInfo1();
+                              }}
+                            >
+                              <MdOutlineModeEdit
+                                className="upm-icon"
+                                size={40}
+                              />
                             </button>
                           </div>
-
                         </div>
                       </li>
 
                       <li>
                         <h6>General</h6>
-                        <div className='upm-info'>
-                          <div className='upm-split'>
+                        <div className="upm-info">
+                          <div className="upm-split">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user && user.studentId} placeholder="ID" name="ID" id='ID' required />
-                              <label for="name" class="upm-label">ID</label>
+                              <input
+                                type="input"
+                                class="upm-field"
+                                defaultValue={user && user.studentId}
+                                placeholder="ID"
+                                name="ID"
+                                id="ID"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                ID
+                              </label>
                             </div>
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder="Username" defaultValue={user && user.username} onChange={(event) => {
-                                const newValue = event.target.value;
-                                setUsername(newValue)
-                              }} name="Username" id='name' required />
-                              <label for="name" class="upm-label">Username</label>
+                              <input
+                                type="input"
+                                class="upm-field"
+                                placeholder="Username"
+                                defaultValue={user && user.username}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setUsername(newValue);
+                                }}
+                                name="Username"
+                                id="name"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Username
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input type="date" class="upm-field" placeholder="DOB" defaultValue={user && user.dateOfBirth} onChange={(event) => {
-                                const newValue = event.target.value;
-                                setDOB(newValue)
-                              }} name="DOB" id='DOB' required />
-                              <label for="name" class="upm-label">DOB</label>
+                              <input
+                                type="date"
+                                class="upm-field"
+                                placeholder="DOB"
+                                defaultValue={user && user.dateOfBirth}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setDOB(newValue);
+                                }}
+                                name="DOB"
+                                id="DOB"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                DOB
+                              </label>
                             </div>
                           </div>
 
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" placeholder="Country" defaultValue={user && user.country} onChange={(event) => {
-                                const newValue = event.target.value;
-                                setCountry(newValue)
-                              }} name="Country" id='country' required />
-                              <label for="name" class="upm-label">Country</label>
+                              <input
+                                type="input"
+                                class="upm-field"
+                                placeholder="Country"
+                                defaultValue={user && user.country}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setCountry(newValue);
+                                }}
+                                name="Country"
+                                id="country"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Country
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <textarea type="input" class="upm-field" placeholder="About" defaultValue={user && user.bio} onChange={(event) => {
-                                const newValue = event.target.value;
-                                setBio(newValue)
-                              }} name="About" id='upm-about' required />
-                              <label for="name" class="upm-label">About</label>
+                              <textarea
+                                type="input"
+                                class="upm-field"
+                                placeholder="About"
+                                defaultValue={user && user.bio}
+                                onChange={(event) => {
+                                  const newValue = event.target.value;
+                                  setBio(newValue);
+                                }}
+                                name="About"
+                                id="upm-about"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                About
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-3'>
-                            <button className="upm-edit-button" onClick={() => {
-                              updateInfo2();
-                            }}>
-                              <MdOutlineModeEdit className="upm-icon" size={40} />
+                          <div className="upm-split-3">
+                            <button
+                              className="upm-edit-button"
+                              onClick={() => {
+                                updateInfo2();
+                              }}
+                            >
+                              <MdOutlineModeEdit
+                                className="upm-icon"
+                                size={40}
+                              />
                             </button>
                           </div>
                         </div>
@@ -475,20 +611,29 @@ function UPM() {
 
                       <li>
                         <h6>Experiences</h6>
-                        <div className='upm-info'>
-                          <div className='upm-split'>
+                        <div className="upm-info">
+                          <div className="upm-split">
                             <div class="upm-form upm-field2">
                               <div class="upm-row1-container">
                                 <div class="upm-box upm-cyan">
                                   <span className="upm-split-4">
                                     <h2>Beginner</h2>
-                                    <p>By clicking this you're basically saying that you don't know much about coding</p>
+                                    <p>
+                                      By clicking this you're basically saying
+                                      that you don't know much about coding
+                                    </p>
                                   </span>
                                   <span className="upm-split-5">
-                                    <button className="upm-book" type="submit" onClick={() => {
-                                      setRole("Basic");
-                                      updateRole();
-                                    }}><BiBookBookmark size={50} /></button>
+                                    <button
+                                      className="upm-book"
+                                      type="submit"
+                                      onClick={() => {
+                                        setRole("Basic");
+                                        updateRole();
+                                      }}
+                                    >
+                                      <BiBookBookmark size={50} />
+                                    </button>
                                   </span>
                                 </div>
                               </div>
@@ -496,13 +641,22 @@ function UPM() {
                                 <div class="upm-box upm-box-down upm-cyan">
                                   <span className="upm-split-4">
                                     <h2>Intermediate</h2>
-                                    <p>By clicking this you're basically saying that you know some stuff about coding</p>
+                                    <p>
+                                      By clicking this you're basically saying
+                                      that you know some stuff about coding
+                                    </p>
                                   </span>
                                   <span className="upm-split-5">
-                                    <button className="upm-book" type="submit" onClick={() => {
-                                      setRole("Intermediate");
-                                      updateRole();
-                                    }}><BiBookBookmark size={50} /></button>
+                                    <button
+                                      className="upm-book"
+                                      type="submit"
+                                      onClick={() => {
+                                        setRole("Intermediate");
+                                        updateRole();
+                                      }}
+                                    >
+                                      <BiBookBookmark size={50} />
+                                    </button>
                                   </span>
                                 </div>
                               </div>
@@ -510,13 +664,22 @@ function UPM() {
                                 <div class="upm-box upm-box-down upm-cyan">
                                   <span className="upm-split-4">
                                     <h2>Advanced</h2>
-                                    <p>By clicking this you're basically saying that you you're a professional at code</p>
+                                    <p>
+                                      By clicking this you're basically saying
+                                      that you you're a professional at code
+                                    </p>
                                   </span>
                                   <span className="upm-split-5">
-                                    <button className="upm-book" type="submit" onClick={() => {
-                                      setRole("Advanced");
-                                      updateRole();
-                                    }}><BiBookBookmark size={50} /></button>
+                                    <button
+                                      className="upm-book"
+                                      type="submit"
+                                      onClick={() => {
+                                        setRole("Advanced");
+                                        updateRole();
+                                      }}
+                                    >
+                                      <BiBookBookmark size={50} />
+                                    </button>
                                   </span>
                                 </div>
                               </div>
@@ -527,8 +690,8 @@ function UPM() {
 
                       <li>
                         <h6>Achievments</h6>
-                        <div className='upm-info'>
-                          <div className='upm-split'>
+                        <div className="upm-info">
+                          <div className="upm-split">
                             <div class="upm-form2 upm-field2">
                               <div class="upm-avatar-container">
                                 <div class="upm-avatar">
@@ -547,64 +710,102 @@ function UPM() {
                                   <img src={advanced} />
                                 </div>
                                 <AiFillLock className="upm-ic-lock" size={50} />
-                              </div><div class="upm-avatar-container">
+                              </div>
+                              <div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={rare} />
                                 </div>
                                 <AiFillLock className="upm-ic-lock" size={50} />
-                              </div><div class="upm-avatar-container">
+                              </div>
+                              <div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={rare2} />
                                 </div>
                                 <AiFillLock className="upm-ic-lock" size={50} />
-                              </div><div class="upm-avatar-container">
+                              </div>
+                              <div class="upm-avatar-container">
                                 <div class="upm-avatar">
                                   <img src={nft} />
                                 </div>
                                 <AiFillLock className="upm-ic-lock" size={50} />
                               </div>
                             </div>
-
                           </div>
                         </div>
                       </li>
 
                       <li>
                         <h6>Socials</h6>
-                        <div className='upm-info'>
-                          <div className='upm-split'>
+                        <div className="upm-info">
+                          <div className="upm-split">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user && user.twitter} placeholder={user && user.firstName}
+                              <input
+                                type="input"
+                                class="upm-field"
+                                defaultValue={user && user.twitter}
+                                placeholder={user && user.firstName}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setTwit(newValue);
-                                }} name="Firstname" id='name' required />
-                              <label for="name" class="upm-label">Twitter</label>
+                                }}
+                                name="Firstname"
+                                id="name"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Twitter
+                              </label>
                             </div>
                             <div className="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user && user.linkedIn} placeholder={user && user.lastName}
+                              <input
+                                type="input"
+                                class="upm-field"
+                                defaultValue={user && user.linkedIn}
+                                placeholder={user && user.lastName}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setLink(newValue);
-                                }} name="Lastname" id='name' required />
-                              <label for="name" class="upm-label">LinkedIn</label>
+                                }}
+                                name="Lastname"
+                                id="name"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                LinkedIn
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-2'>
+                          <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input type="input" class="upm-field" defaultValue={user && user.instagram} placeholder="sad"
+                              <input
+                                type="input"
+                                class="upm-field"
+                                defaultValue={user && user.instagram}
+                                placeholder="sad"
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setInsta(newValue);
-                                }} name="Email" id='Email' required />
-                              <label for="name" class="upm-label">Instagram</label>
+                                }}
+                                name="Email"
+                                id="Email"
+                                required
+                              />
+                              <label for="name" class="upm-label">
+                                Instagram
+                              </label>
                             </div>
                           </div>
-                          <div className='upm-split-3'>
-                            <button className="upm-edit-button" onClick={() => {
-                              updateInfo3();
-                            }}>
-                              <MdOutlineModeEdit className="upm-icon" size={40} />
+                          <div className="upm-split-3">
+                            <button
+                              className="upm-edit-button"
+                              onClick={() => {
+                                updateInfo3();
+                              }}
+                            >
+                              <MdOutlineModeEdit
+                                className="upm-icon"
+                                size={40}
+                              />
                             </button>
                           </div>
                         </div>

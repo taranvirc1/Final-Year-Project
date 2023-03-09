@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import { Outlet } from "react-router-dom";
@@ -8,6 +8,17 @@ import Footer from "./components/Footer";
 
 function App() {
   const [loggedInUser, setLoggedinUser] = useState("");
+
+  useEffect(() => {
+    const saveLoggedinUser = localStorage.getItem("loggedInUser");
+    if (saveLoggedinUser) {
+      setLoggedinUser(saveLoggedinUser);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("loggedInUser", loggedInUser);
+  }, [loggedInUser]);
 
   return (
     <div className="App">
