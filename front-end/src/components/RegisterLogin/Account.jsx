@@ -133,6 +133,7 @@ function Account() {
   //   });
   // };
 
+  // useState for slide in animation
   const [isSignUpClick, setIsSignUpClick] = useState(false);
 
   const signUpBtn = () => {
@@ -143,88 +144,124 @@ function Account() {
     setIsSignUpClick(false);
   };
 
-  const indicator = document.querySelector(".pass-indicator");
-  const input = document.querySelector(".pass");
-  const weak = document.querySelector(".weak");
-  const medium = document.querySelector(".medium");
-  const strong = document.querySelector(".strong");
-  const text = document.querySelector(".pass-text");
-  const showPass = document.querySelector(".show-pass");
-  var passRegexWeak = /[a-z]/;
-  var passRegexMedium = /\d+/;
-  var passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
-  var no;
+  const [no, setNo] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
-  function passwordIndicator() {
-    if (input.value !== "") {
-      indicator.style.display = "block";
-      indicator.style.display = "flex";
+  const passRegexWeak = /[a-z]/;
+  const passRegexMedium = /\d+/;
+  const passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+
+  function checkPasswordStrength() {
+    if (password !== "") {
       if (
-        input.value.length <= 3 &&
-        (input.value.match(passRegexWeak) ||
-          input.value.match(passRegexMedium) ||
-          input.value.match(passRegexStrong))
+        password.length <= 3 &&
+        (password.match(passRegexWeak) ||
+          password.match(passRegexMedium) ||
+          password.match(passRegexStrong))
       )
-        no = 1;
+        setNo(1);
       if (
-        input.value.length >= 6 &&
-        ((input.value.match(passRegexWeak) &&
-          input.value.match(passRegexMedium)) ||
-          (input.value.match(passRegexMedium) &&
-            input.value.match(passRegexStrong)) ||
-          (input.value.match(passRegexWeak) &&
-            input.value.match(passRegexStrong)))
+        password.length >= 6 &&
+        ((password.match(passRegexWeak) && password.match(passRegexMedium)) ||
+          (password.match(passRegexMedium) &&
+            password.match(passRegexStrong)) ||
+          (password.match(passRegexWeak) && password.match(passRegexStrong)))
       )
-        no = 2;
+        setNo(2);
       if (
-        input.value.length >= 6 &&
-        input.value.match(passRegexWeak) &&
-        input.value.match(passRegexMedium) &&
-        input.value.match(passRegexStrong)
+        password.length >= 6 &&
+        password.match(passRegexWeak) &&
+        password.match(passRegexMedium) &&
+        password.match(passRegexStrong)
       )
-        no = 3;
-      if (no === 1) {
-        weak.classList.add("active");
-        text.style.display = "block";
-        text.textContent = "Your password is too weak";
-        text.classList.add("weak");
-      }
-      if (no === 2) {
-        medium.classList.add("active");
-        text.textContent = "Your password is medium";
-        text.classList.add("medium");
-      } else {
-        medium.classList.remove("active");
-        text.classList.remove("medium");
-      }
-      if (no === 3) {
-        weak.classList.add("active");
-        medium.classList.add("active");
-        strong.classList.add("active");
-        text.textContent = "Your password is strong";
-        text.classList.add("strong");
-      } else {
-        strong.classList.remove("active");
-        text.classList.remove("strong");
-      }
-      showPass.style.display = "block";
-      showPass.onclick = function () {
-        if (input.type === "password") {
-          input.type = "text";
-          showPass.textContent = "HIDE";
-          showPass.style.color = "#acacac";
-        } else {
-          input.type = "password";
-          showPass.textContent = "SHOW";
-          showPass.style.color = "#000";
-        }
-      };
+        setNo(3);
     } else {
-      indicator.style.display = "none";
-      text.style.display = "none";
-      showPass.style.display = "none";
+      setNo(null);
     }
   }
+
+  // const indicator = document.querySelector(".pass-indicator");
+  // const input = document.querySelector(".pass");
+  // const weak = document.querySelector(".weak");
+  // const medium = document.querySelector(".medium");
+  // const strong = document.querySelector(".strong");
+  // const text = document.querySelector(".pass-text");
+  // const showPass = document.querySelector(".show-pass");
+  // var passRegexWeak = /[a-z]/;
+  // var passRegexMedium = /\d+/;
+  // var passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+  // var no;
+
+  // function passwordIndicator() {
+  //   if (input.value !== "") {
+  //     indicator.style.display = "block";
+  //     indicator.style.display = "flex";
+  //     if (
+  //       input.value.length <= 3 &&
+  //       (input.value.match(passRegexWeak) ||
+  //         input.value.match(passRegexMedium) ||
+  //         input.value.match(passRegexStrong))
+  //     )
+  //       no = 1;
+  //     if (
+  //       input.value.length >= 6 &&
+  //       ((input.value.match(passRegexWeak) &&
+  //         input.value.match(passRegexMedium)) ||
+  //         (input.value.match(passRegexMedium) &&
+  //           input.value.match(passRegexStrong)) ||
+  //         (input.value.match(passRegexWeak) &&
+  //           input.value.match(passRegexStrong)))
+  //     )
+  //       no = 2;
+  //     if (
+  //       input.value.length >= 6 &&
+  //       input.value.match(passRegexWeak) &&
+  //       input.value.match(passRegexMedium) &&
+  //       input.value.match(passRegexStrong)
+  //     )
+  //       no = 3;
+  //     if (no === 1) {
+  //       weak.classList.add("active");
+  //       text.style.display = "block";
+  //       text.textContent = "Your password is too weak";
+  //       text.classList.add("weak");
+  //     }
+  //     if (no === 2) {
+  //       medium.classList.add("active");
+  //       text.textContent = "Your password is medium";
+  //       text.classList.add("medium");
+  //     } else {
+  //       medium.classList.remove("active");
+  //       text.classList.remove("medium");
+  //     }
+  //     if (no === 3) {
+  //       weak.classList.add("active");
+  //       medium.classList.add("active");
+  //       strong.classList.add("active");
+  //       text.textContent = "Your password is strong";
+  //       text.classList.add("strong");
+  //     } else {
+  //       strong.classList.remove("active");
+  //       text.classList.remove("strong");
+  //     }
+  //     showPass.style.display = "block";
+  //     showPass.onclick = function () {
+  //       if (input.type === "password") {
+  //         input.type = "text";
+  //         showPass.textContent = "HIDE";
+  //         showPass.style.color = "#acacac";
+  //       } else {
+  //         input.type = "password";
+  //         showPass.textContent = "SHOW";
+  //         showPass.style.color = "#000";
+  //       }
+  //     };
+  //   } else {
+  //     indicator.style.display = "none";
+  //     text.style.display = "none";
+  //     showPass.style.display = "none";
+  //   }
+  // }
 
   return (
     <div className="body">
@@ -370,7 +407,7 @@ function Account() {
               {errors.email && <p>{errors.email}</p>}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
-                <input
+                {/* <input
                   className="pass"
                   type="password"
                   name="password"
@@ -378,15 +415,48 @@ function Account() {
                   onChange={handleChange}
                   onKeyUp={passwordIndicator}
                   placeholder="Password*"
+                /> */}
+                <input
+                  className="pass"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyUp={checkPasswordStrength}
+                  placeholder="Password*"
                 />
-                <span className="show-pass">SHOW</span>
+                <span
+                  className="show-pass"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  <i
+                    className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}
+                  ></i>
+                  {/* {showPassword ? "HIDE" : "SHOW"} */}
+                </span>
+                {/* <span className="show-pass">SHOW</span> */}
               </div>
-              <div className="pass-indicator">
+              {password && (
+                <div className="pass-indicator" style={{ display: "flex" }}>
+                  <div className={`weak ${no === 1 ? "active" : ""}`}></div>
+                  <div className={`medium ${no === 2 ? "active" : ""}`}></div>
+                  <div className={`strong ${no === 3 ? "active" : ""}`}></div>
+                </div>
+              )}
+              {no === 1 && (
+                <div className="pass-text weak">Your password is too weak</div>
+              )}
+              {no === 2 && (
+                <div className="pass-text medium">Your password is medium</div>
+              )}
+              {no === 3 && (
+                <div className="pass-text strong">Your password is strong</div>
+              )}
+              {/* <div className="pass-indicator">
                 <span className="weak"></span>
                 <span className="medium"></span>
                 <span className="strong"></span>
               </div>
-              <div className="pass-text">Yours password is too weak</div>
+              <div className="pass-text">Yours password is too weak</div> */}
               {errors.password && <p>{errors.password}</p>}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
