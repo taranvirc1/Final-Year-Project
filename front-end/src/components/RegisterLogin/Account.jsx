@@ -71,7 +71,7 @@ function Account() {
             if (token !== null) {
               console.log(res);
               console.log(token);
-              sessionStorage.setItem("jwt", token);
+              localStorage.setItem("jwt", token);
               setInvalidAttempts(0);
               setTimeRemaining(0);
               // setValidLoginAttempts(0);
