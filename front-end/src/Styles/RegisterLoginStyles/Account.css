@@ -168,8 +168,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   font-weight: 600;
   font-size: 1.1rem;
-  display: none;
   color: #000;
+  display: block;
 }
 
 .pass-indicator {
@@ -179,7 +179,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  display: none;
+  /* display: none; */
 }
 
 .pass-indicator span {
