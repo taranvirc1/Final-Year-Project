@@ -13,9 +13,6 @@ function Account() {
     useForm(validateSignUpForm);
 
   const today = new Date().toISOString().slice(0, 10);
-  const minDate = new Date(new Date().getFullYear() - 100, 0, 1)
-    .toISOString()
-    .slice(0, 10);
   // const [timeRemaining, setTimeRemaining] = useState(0);
   // const [timerActive, setTimerActive] = useState(false);
   const [invalidAttempts, setInvalidAttempts] = useState(0);
@@ -364,7 +361,7 @@ function Account() {
                   className="date"
                   type="date"
                   name="dob"
-                  min={minDate}
+                  // min={minDate}
                   max={today}
                   value={values.dob}
                   onChange={handleChange}
