@@ -30,4 +30,8 @@ public class ThreadService {
 	public Optional<Threads> findByID(Integer id) {
 		return threadsRepository.findById(id);
 	}
+
+	public Threads findByEmail(String email) {
+		return threadsRepository.findByStudents_Email(email);
+	}
 }

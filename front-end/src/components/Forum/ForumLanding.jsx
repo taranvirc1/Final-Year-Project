@@ -1,7 +1,8 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import "../../Styles/Forum/Forum_Landing.css"
-
+import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 import SearchIcon from "../../images/forum/search.png"
 import CreateIcon from "../../images/forum/create.png"
 import SortIcon from "../../images/forum/sort.png"
@@ -9,6 +10,22 @@ import LikeIcon from "../../images/forum/like.png"
 import ReplyIcon from "../../images/forum/reply.png"
 
 function ForumLanding() {
+  const [threads, setthreads] = useState([]);
+  const jwt = localStorage.getItem("jwt");
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/threads`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then((resp) => {
+        console.log(resp.data);
+
+        setthreads(resp.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   return (
     <>
     <div className='navbar-spacing'>
@@ -47,15 +64,14 @@ function ForumLanding() {
           
     </div>
     <section className='Thread-List'>
-      
+      {threads.map((item, index) => (
       <div className="thread">
         <div className='topic-items'>
           <Link to="/Forum_page">
-            <a href="" className='thread-title'>CS2001-Thread</a>
+            <a href="" className='thread-title'>{item.threadName}</a>
           </Link>
           <ul className='tags'>
-            <li>CS</li>
-            <li>Programming</li>
+            <li>{item.fTags}</li>
           </ul>
           <div className='Stats'>
             <div className='Likes'><img src={LikeIcon}></img></div>
@@ -64,115 +80,12 @@ function ForumLanding() {
             <h4>4 Replies</h4>
           </div>
           
-          <div className='thread-creatorname'>Started 2 hours ago By Kenura</div>
+          <div className='thread-creatorname'>Started on {item.fDateCreated} By {item.students.firstName} {item.students.lastName} </div>
           
           
         </div>
       </div>
-
-      <div className="thread">
-        <div className='topic-items'>
-        <a href="" className='thread-title'>CS2005-Thread</a>
-          <ul className='tags'>
-            <li>CS</li>
-            <li>Networks</li>
-          </ul>
-          <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>5 Likes</h4>
-            <div className='Replies'><img src={ReplyIcon}></img></div>
-            <h4>4 Replies</h4>
-          </div>
-          <div className='thread-creatorname'>Started 2 hours ago By Kenura</div>
-        </div>
-      </div>
-      
-      <div className="thread">
-        <div className='topic-items'>
-        <a href="" className='thread-title'>CS2004-Thread</a>
-          <ul className='tags'>
-            <li>CS</li>
-            <li>Algorithms</li>
-          </ul>
-          <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>7 Likes</h4>
-            <div className='Replies'><img src={ReplyIcon}></img></div>
-            <h4>5 Replies</h4>
-          </div>
-          <div className='thread-creatorname'>Started 2 hours ago By Kenura</div>
-        </div>
-      </div>
-      
-      <div className="thread">
-        <div className='topic-items'>
-        <a href="" className='thread-title'>CS2001-Thread</a>
-          <ul className='tags'>
-            <li>CS</li>
-            <li>Programming</li>
-          </ul>
-          <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>5 Likes</h4>
-            <div className='Replies'><img src={ReplyIcon}></img></div>
-            <h4>4 Replies</h4>
-          </div>
-          
-          <div className='thread-creatorname'>Started 2 hours ago By Kenura</div>
-          
-          
-        </div>
-      </div>
-
-      <div className="thread">
-        <div className='topic-items'>
-        <a href="" className='thread-title'>CS2005-Thread</a>  
-          <ul className='tags'>
-            <li>CS</li>
-            <li>Networks</li>
-          </ul>
-          <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>5 Likes</h4>
-            <div className='Replies'><img src={ReplyIcon}></img></div>
-            <h4>4 Replies</h4>
-          </div>
-          <div className='thread-creatorname'>Started 2 hours ago By Kenura</div>
-        </div>
-      </div>
-      
-      <div className="thread">
-        <div className='topic-items'>
-        <a href="" className='thread-title'>CS2004-Thread</a>
-          <ul className='tags'>
-            <li>CS</li>
-            <li>Algorithms</li>
-          </ul>
-          <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>7 Likes</h4>
-            <div className='Replies'><img src={ReplyIcon}></img></div>
-            <h4>5 Replies</h4>
-          </div>
-          <div className='thread-creatorname'>Started 2 hours ago By Kenura</div>
-        </div>
-      </div>
-      <div className="thread">
-        <div className='topic-items'>
-        <a href="" className='thread-title'>CS2004-Thread</a>
-          <ul className='tags'>
-            <li>CS</li>
-            <li>Algorithms</li>
-          </ul>
-          <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>7 Likes</h4>
-            <div className='Replies'><img src={ReplyIcon}></img></div>
-            <h4>5 Replies</h4>
-          </div>
-          <div className='thread-creatorname'>Started 2 hours ago By Kenura</div>
-        </div>
-      </div>
+      ))}
     </section>
     </>
   )
