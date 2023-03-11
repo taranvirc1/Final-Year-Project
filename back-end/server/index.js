@@ -1,5 +1,5 @@
 require("dotenv").config();
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -7,13 +7,14 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 
 const nodemailer = require("nodemailer");
+const { randomUUID } = require("crypto");
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   password: process.env.DB_PASSWORD,
@@ -26,6 +27,49 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USERNAME,
     pass: process.env.EMAIL_PASSWORD,
   },
+});
+
+app.post("/api/forgot-password", async (req, res) => {
+  const { email } = req.body;
+
+  console.log(email);
+
+  const student = await db.query("SELECT * FROM student WHERE email = ?", [
+    email,
+  ]);
+
+  console.log(student);
+
+  if (!student) {
+    return res
+      .status(404)
+      .json({ message: `Student not found with email: ${email}` });
+  }
+
+  const resetToken = randomUUID();
+  console.log(resetToken);
+  const resetExp = new Date(Date.now() + 3600000);
+  console.log(resetExp);
+
+  await db.query(
+    "UPDATE student SET reset_password_token = ?, reset_exp = ? WHERE student_id = ?",
+    [resetToken, resetExp, student.student_Id]
+  );
+
+  const url = `http://localhost:3000/reset-password?token=${resetToken}`;
+
+  console.log(url);
+
+  const mailOptions = {
+    from: process.env.EMAIL_USERNAME,
+    to: email,
+    subject: "Reset Password",
+    html: `<h4>Hello, ${student.first_name}</h4>
+      <p>Click on the link to reset your password: ${url}.</p>`,
+  };
+  await transporter.sendMail(mailOptions);
+
+  res.json({ message: "Password reset link has been sent to your email!!!" });
 });
 
 app.post("/api/student/update-password", async (req, res) => {
