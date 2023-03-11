@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import CS2001.Group47.ELearning_Platform.dto.CreateThreadDTO;
-import CS2001.Group47.ELearning_Platform.model.Threads;
-import CS2001.Group47.ELearning_Platform.service.ThreadService;
+import CS2001.Group47.ELearning_Platform.model.Messages;
+import CS2001.Group47.ELearning_Platform.service.MessageService;
+
 
 @RestController
-public class ThreadController {
+public class MessageController {
     @Autowired
-    ThreadService threadService;
+    MessageService messageService;
 
     @GetMapping("/thread")
-    public List<Threads> getAllThreads() {
+    public List<Messages> getAllThreads() {
 
-        return threadService.getThreads();
+        return messageService.getThreads();
     
 }
-    @PostMapping("/thread/create")
-    public ResponseEntity<Optional<Threads>> addThread(@RequestBody CreateThreadDTO newThreadDTO) {
+    @PostMapping("/thread/{id}")
+    public ResponseEntity<Optional<Messages>> addMessage(@RequestBody CreateThreadDTO newThreadDTO) {
         // CreateThreadDTO has null attributes
-        if (newThreadDTO.getThreadName() == null || newThreadDTO.getfTags() == null) {
+        if (newThreadDTO.getThreadName() == null) {
             // This is for testing purposes
             System.out.println(newThreadDTO.toString());
 
@@ -39,11 +39,11 @@ public class ThreadController {
         }
 
         // Else create a thread with DTO
-        Threads newThread = new Threads(
+        Messages newThread = new Threads(
                 newThreadDTO.getThreadName(),
                 newThreadDTO.getfTags());
         // Add thread through ThreadService
-        threadService.addThread(newThread);
+        messageService.addThread(newThread);
 
         // Return response entity with new thread and CREATED status
         return new ResponseEntity<>(Optional.ofNullable(newThread), HttpStatus.CREATED);
