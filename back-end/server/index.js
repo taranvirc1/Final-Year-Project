@@ -32,7 +32,7 @@ const transporter = nodemailer.createTransport({
 app.post("/api/forgot-password", async (req, res) => {
   const { email } = req.body;
 
-  console.log(email);
+  console.log("Line 35: " + email);
 
   const student = await db.query("SELECT * FROM student WHERE email = ?", [
     email,
@@ -47,18 +47,20 @@ app.post("/api/forgot-password", async (req, res) => {
   }
 
   const resetToken = randomUUID();
-  console.log(resetToken);
+  console.log("Line 50: " + resetToken);
   const resetExp = new Date(Date.now() + 3600000);
-  console.log(resetExp);
+  console.log("Line 52: " + resetExp);
 
   await db.query(
-    "UPDATE student SET reset_password_token = ?, reset_exp = ? WHERE student_id = ?",
-    [resetToken, resetExp, student.student_Id]
+    "UPDATE student SET reset_password_token = ?, reset_exp = ? WHERE email = ?",
+    [resetToken, resetExp, email]
   );
 
-  const url = `http://localhost:3000/reset-password?token=${resetToken}`;
+  console.log("Line 59: " + email);
 
-  console.log(url);
+  const url = `http://localhost:3000/newPassword?token=${resetToken}`;
+
+  console.log("Line 35: " + url);
 
   const mailOptions = {
     from: process.env.EMAIL_USERNAME,
