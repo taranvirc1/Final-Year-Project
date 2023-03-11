@@ -7,11 +7,16 @@ public class CreateThreadDTO {
     String threadName;
     String fTags;
     private	int studentId;
+  
     public CreateThreadDTO(String threadName, String fTags) {
         super();
         this.threadName = threadName;
         this.fTags = fTags;
     }
+
+    
+
+
     public String getThreadName() {
         return threadName;
     }
@@ -24,12 +29,11 @@ public class CreateThreadDTO {
     public void setfTags(String fTags) {
         this.fTags = fTags;
     }
+
     @Override
     public String toString() {
-        return "CreateThreadDTO [threadName=" + threadName + ", fTags=" + fTags+ " + ]";
+        return "CreateThreadDTO [threadName=" + threadName + ", fTags=" + fTags + ", studentId=" + studentId
+                + "]";
     }
-    
-    
-    
-
 }
+

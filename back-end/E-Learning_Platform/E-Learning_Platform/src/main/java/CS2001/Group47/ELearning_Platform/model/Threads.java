@@ -1,9 +1,12 @@
 package CS2001.Group47.ELearning_Platform.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -13,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,6 +24,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Threads")
@@ -33,7 +39,7 @@ public class Threads implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer id;
+	Integer threadId;
 	
 
 	String threadName;
@@ -51,6 +57,11 @@ public class Threads implements Serializable {
 	@JoinColumn(name = "student")
 	//@JsonIgnore
 	private Student students;
+
+	@OneToMany(mappedBy = "threads", cascade = CascadeType.ALL)
+	@JsonIgnore
+
+	private List<Messages> messages = new ArrayList<>();
 	
 	public Threads() {
 		super();
@@ -66,12 +77,14 @@ public class Threads implements Serializable {
 		
 	}
 
-	public Integer getId() {
-		return id;
+	
+
+	public Integer getThreadId() {
+		return threadId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setThreadId(Integer threadId) {
+		this.threadId = threadId;
 	}
 
 	public String getThreadName() {
@@ -110,9 +123,10 @@ public class Threads implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Threads [id=" + id + ", threadName=" + threadName + ", fTags=" + fTags + ", fDateCreated="
-				+ fDateCreated + ", students=" + students + "]";
+		return "Threads [threadId=" + threadId + ", threadName=" + threadName + ", fTags=" + fTags + ", fDateCreated="
+				+ fDateCreated + ", students=" + students + ", messages=" + messages + "]";
 	}
+
 
 	
 }
