@@ -19,5 +19,7 @@ public interface ThreadsRepository extends JpaRepository<Threads, Integer> {
 
 	Threads findByStudents_Email(String email);
 
+	Threads findByThreadId(Integer id);
+
 }
 

@@ -2,13 +2,17 @@ package CS2001.Group47.ELearning_Platform.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,10 +35,10 @@ public class Messages implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer messageID;
 	
-	@NotBlank
+
 	String message;
 	
-	@NotBlank
+
 	int mLikes;
 	
 	@Column(nullable = false, updatable = false)
@@ -42,19 +46,25 @@ public class Messages implements Serializable {
 	@CreatedDate
 	private Date createdAtDate;
 
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "thread")
+	//@JsonIgnore
+	private Threads threads;
+
 	public Messages() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Messages(String message, int mLikes, Date createdAtDate) {
+	public Messages(String message, int mLikes , Threads threads) {
 		super();
 		this.message = message;
 		this.mLikes = mLikes;
-		this.createdAtDate = createdAtDate;
+		this.threads = threads;
 	}
 
-	public Integer getMessageID() {
+
+    public Integer getMessageID() {
 		return messageID;
 	}
 
@@ -86,11 +96,21 @@ public class Messages implements Serializable {
 		this.createdAtDate = createdAtDate;
 	}
 
+	public Threads getThreads() {
+		return threads;
+	}
+
+	public void setThreads(Threads threads) {
+		this.threads = threads;
+	}
+
 	@Override
 	public String toString() {
 		return "Messages [messageID=" + messageID + ", message=" + message + ", mLikes=" + mLikes + ", createdAtDate="
-				+ createdAtDate + "]";
-	}	
+				+ createdAtDate + ", threads=" + threads + "]";
+	}
+
+	
 
 }
 

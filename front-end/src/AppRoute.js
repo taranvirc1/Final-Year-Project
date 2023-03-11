@@ -78,6 +78,7 @@ function AppRoute() {
               element={<SearchThreadResults />}
             />
             <Route path="/Forum_page" element={<ForumPage />} />
+          
             <Route path="/Create_forum" element={<CreateForum />} />
 
             {/* ======route for quizzes====== */}

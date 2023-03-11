@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom"
 import "../../Styles/Forum/Forum_Page.css"
 import DeleteIcon from "../../images/forum/delete.png"
@@ -31,6 +31,7 @@ const likeselect = { LikeIcon, LikedIcon }
 
 
 function ForumPage() {
+  
   //subscribe button colour changer white to orange
   const [subcolor,setsubcolor]=useState('white');
   function subbg(){
@@ -72,6 +73,16 @@ function ForumPage() {
       setLikeButton(likeselect.LikedIcon)
     }
   }
+
+  const [threadid, setthreadid] = useState("");
+
+  useEffect(() => {
+    const saveThreadID = localStorage.getItem("ThreadID");
+    if (saveThreadID) {
+      setthreadid(saveThreadID);
+    }
+  }, []);
+  console.log(threadid);
   return (
     <>
     <div className='navbar-spacing'>

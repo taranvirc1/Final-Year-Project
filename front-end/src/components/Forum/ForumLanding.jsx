@@ -8,10 +8,18 @@ import CreateIcon from "../../images/forum/create.png"
 import SortIcon from "../../images/forum/sort.png"
 import LikeIcon from "../../images/forum/like.png"
 import ReplyIcon from "../../images/forum/reply.png"
+import { useNavigate } from "react-router-dom";
 
 function ForumLanding() {
   const [threads, setthreads] = useState([]);
+  const [threadid, setthreadid] = useState(0);
   const jwt = localStorage.getItem("jwt");
+  const navigate = useNavigate();
+  const ViewForum = (item) => {
+    localStorage.setItem("ThreadID", item);
+    navigate("/Forum_page");
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/threads`, {
@@ -67,9 +75,13 @@ function ForumLanding() {
       {threads.map((item, index) => (
       <div className="thread">
         <div className='topic-items'>
-          <Link to="/Forum_page">
-            <a href="" className='thread-title'>{item.threadName}</a>
-          </Link>
+          <div className='thread-title'
+            onClick={() => {
+              ViewForum(item.id);
+            }}
+            >{item.threadName}</div>
+            
+    
           <ul className='tags'>
             <li>{item.fTags}</li>
           </ul>
