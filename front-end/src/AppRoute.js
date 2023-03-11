@@ -57,7 +57,10 @@ function AppRoute() {
               path="/resetPassword/:id/:token"
               element={<ResetPassword />}
             /> */}
-            <Route path="/newPassword" element={<NewPassword />} />
+            <Route
+              path="/newPassword?token=:resetToken"
+              element={<NewPassword />}
+            />
             <Route path="/updatePassword" element={<UpdatePassword />} />
             <Route path="/confirmAccount" element={<ConfirmAccount />} />
             {/* route for donations */}
