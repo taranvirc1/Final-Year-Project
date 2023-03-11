@@ -5,8 +5,9 @@ import java.util.Date;
 
 public class CreateThreadDTO {
     String threadName;
-    String[] fTags;
-    public CreateThreadDTO(String threadName, String[] fTags) {
+    String fTags;
+    private	int studentId;
+    public CreateThreadDTO(String threadName, String fTags) {
         super();
         this.threadName = threadName;
         this.fTags = fTags;
@@ -17,15 +18,15 @@ public class CreateThreadDTO {
     public void setThreadName(String threadName) {
         this.threadName = threadName;
     }
-    public String[] getfTags() {
+    public String getfTags() {
         return fTags;
     }
-    public void setfTags(String[] fTags) {
+    public void setfTags(String fTags) {
         this.fTags = fTags;
     }
     @Override
     public String toString() {
-        return "CreateThreadDTO [threadName=" + threadName + ", fTags=" + Arrays.toString(fTags)+ "]";
+        return "CreateThreadDTO [threadName=" + threadName + ", fTags=" + fTags+ " + ]";
     }
     
     

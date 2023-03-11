@@ -7,9 +7,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,26 +35,35 @@ public class Threads implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	
-	@NotBlank
+
 	String threadName;
 
-	@NotBlank
-	String[] fTags;
+	
+	String fTags;
 	
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date fDateCreated;
+	
 
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "student")
+	//@JsonIgnore
+	private Student students;
+	
 	public Threads() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Threads(String threadName, String[] fTags) {
+	public Threads(String threadName, String fTags, Student students) {
 		super();
 		this.threadName = threadName;
 		this.fTags = fTags;
+		this.students = students;
+		
+		
 	}
 
 	public Integer getId() {
@@ -71,11 +83,11 @@ public class Threads implements Serializable {
 	}
 	
 
-	public String[] getfTags() {
+	public String getfTags() {
 		return fTags;
 	}
 
-	public void setfTags(String[] fTags) {
+	public void setfTags(String fTags) {
 		this.fTags = fTags;
 	}
 
@@ -87,12 +99,20 @@ public class Threads implements Serializable {
 		this.fDateCreated = fDateCreated;
 	}
 
-	@Override
-	public String toString() {
-		return "Threads [id=" + id + ", threadName=" + threadName + ", fTags=" + Arrays.toString(fTags)
-				+ ", fDateCreated=" + fDateCreated + "]";
+	
+	public Student getStudents() {
+		return students;
 	}
 
+	public void setStudents(Student students) {
+		this.students = students;
+	}
+
+	@Override
+	public String toString() {
+		return "Threads [id=" + id + ", threadName=" + threadName + ", fTags=" + fTags + ", fDateCreated="
+				+ fDateCreated + ", students=" + students + "]";
+	}
 
 	
 }
