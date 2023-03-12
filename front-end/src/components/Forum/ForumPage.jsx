@@ -30,7 +30,7 @@ const likeselect = { LikeIcon, LikedIcon }
 
 
 function ForumPage() {
-  const [threadId,setThreadId]=useState(1);
+  const [threadId,setThreadId]=useState(0);
   const [messages, setMessages] = useState([]);
   const [mLikes, setmLikes] = useState(0);
   const [newMessage, setnewMessage] = useState([]);
