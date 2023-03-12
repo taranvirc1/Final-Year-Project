@@ -96,6 +96,7 @@ const newmessagehandle = (e) => {
         setnewMessage("");
       })
       .catch((err) => {
+        alert(`Please login to post a message`);
         console.log(err);
 
       });

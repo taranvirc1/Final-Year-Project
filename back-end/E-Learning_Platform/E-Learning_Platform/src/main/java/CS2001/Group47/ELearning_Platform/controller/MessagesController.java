@@ -37,7 +37,16 @@ public class MessagesController {
         
     @PostMapping("/messages/create")
     public ResponseEntity<Optional<Messages>> addThread(@RequestBody NewMessageDTO newMessageDTO) {
-        
+        String studentnull = Integer.toString(newMessageDTO.getStudentId());
+        if (studentnull == null) {
+            // This is for testing purposes
+            System.out.println(newMessageDTO.toString());
+
+            // Return response entity with error and BAD REQUEST status
+            return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
+
+        }
+
         Threads threads = threadService.findByID(newMessageDTO.getSaveThreadID());
         Student students = studentRepository.findByStudentId(newMessageDTO.getStudentId());
         // Else create a thread with DTO
@@ -50,6 +59,9 @@ public class MessagesController {
         // Return response entity with new thread and CREATED status
         return new ResponseEntity<>(Optional.ofNullable(newMessage), HttpStatus.CREATED);
 
+    }
+
+    private void alert(String string) {
     }
 
     @RequestMapping("/messages/{threadId}")
