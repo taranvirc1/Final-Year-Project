@@ -9,28 +9,30 @@ function NewPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [updateSuccess, setUpdateSuccess] = useState("");
-  const navigate = useNavigate();
-  const { id, token } = useParams();
-  const baseUrl = "http://localhost:8080/reset_password";
+  const { resetToken } = useParams();
+  console.log(resetToken);
+  // const navigate = useNavigate();
+  // const { id, token } = useParams();
+  // const baseUrl = "http://localhost:8080/reset_password";
 
-  const userValid = async () => {
-    const res = await fetch(`/forgot_password/${id}/${token}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  // const userValid = async () => {
+  //   const res = await fetch(`/forgot_password/${id}/${token}`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
 
-    const userData = await res.json();
+  //   const userData = await res.json();
 
-    if (userData.status === 201) {
-      console.log("user valid");
-    } else {
-      navigate("/");
-    }
-  };
+  //   if (userData.status === 201) {
+  //     console.log("user valid");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
 
-  const handleUpdateSubmit = (e) => {
+  const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
     if (newPassword === "" || confirmPassword === "") {
@@ -39,57 +41,78 @@ function NewPassword() {
       setErrorMessage("Passwords do not match!");
     } else {
       axios
-        .post(baseUrl, newPassword)
-        .then((res) => {
-          console.log(res);
+        .post(`http://localhost:5000/api/reset-password`, {
+          resetToken,
+          newPassword,
+        })
+        .then((response) => {
+          console.log(response);
+          console.log(resetToken);
           console.log(newPassword);
-          if (res.status === 200) {
-            alert("Password has been updated!!!");
-            setUpdateSuccess(`Password has been reset successfully!!!`);
+          if (response.status === 200) {
+            alert("password has been updated successfully!!!");
+            setUpdateSuccess("Password updated!!!");
             setNewPassword("");
             setConfirmPassword("");
           }
         })
         .catch((error) => {
-          console.log(newPassword);
           console.log(error);
-          alert("Password could not be updated!!!");
-          setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
+          alert("Password not updated!!!");
+          setErrorMessage("Problem updating password!!!");
         });
+      // axios
+      //   .post(baseUrl, newPassword)
+      //   .then((res) => {
+      //     console.log(res);
+      //     console.log(newPassword);
+      //     if (res.status === 200) {
+      //       alert("Password has been updated!!!");
+      //       setUpdateSuccess(`Password has been reset successfully!!!`);
+      //       setNewPassword("");
+      //       setConfirmPassword("");
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.log(newPassword);
+      //     console.log(error);
+      //     alert("Password could not be updated!!!");
+      //     setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
+      //   });
     }
   };
 
-  const passwordSubmit = async (e) => {
-    e.preventDefault();
+  // const passwordSubmit = async (e) => {
+  //   e.preventDefault();
 
-    if (newPassword === "" || confirmPassword === "") {
-      setErrorMessage("Password and confirm password required!");
-    } else if (confirmPassword !== newPassword) {
-      setErrorMessage("Passwords do not match!");
-    } else {
-      const res = await fetch(`/${id}/${token}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ newPassword }),
-      });
+  //   if (newPassword === "" || confirmPassword === "") {
+  //     setErrorMessage("Password and confirm password required!");
+  //   } else if (confirmPassword !== newPassword) {
+  //     setErrorMessage("Passwords do not match!");
+  //   } else {
+  //     const res = await fetch(`/${id}/${token}`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ newPassword }),
+  //     });
 
-      const userData = await res.json();
+  //     const userData = await res.json();
 
-      if (userData.status === 201) {
-        alert("Password has been updated!!!");
-        setUpdateSuccess(`Password has been reset successfully!!!`);
-      } else {
-        alert("Password could not be updated!!!");
-        setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
-      }
-    }
-  };
+  //     if (userData.status === 201) {
+  //       alert("Password has been updated!!!");
+  //       setUpdateSuccess(`Password has been reset successfully!!!`);
+  //     } else {
+  //       alert("Password could not be updated!!!");
+  //       setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    userValid();
-  }, []);
+  // useEffect(() => {
+  //   userValid();
+  // }, []);
 
   const indicator = document.querySelector(".pass-indicator");
   const input = document.querySelector(".pass");
