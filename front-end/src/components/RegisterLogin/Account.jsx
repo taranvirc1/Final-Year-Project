@@ -416,8 +416,9 @@ function Account() {
                 <input
                   className="pass"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
                   onKeyUp={checkPasswordStrength}
                   placeholder="Password*"
                 />
