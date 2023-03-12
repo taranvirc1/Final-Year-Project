@@ -118,6 +118,11 @@ public class Student implements Serializable {
 
 	private List<Threads> threads = new ArrayList<>();
 
+	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
+	@JsonIgnore
+
+	private List<Messages> messages = new ArrayList<>();
+
 	public Student() {
 
 		super();

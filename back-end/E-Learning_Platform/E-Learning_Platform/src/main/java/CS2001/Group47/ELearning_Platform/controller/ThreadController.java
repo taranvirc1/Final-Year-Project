@@ -82,4 +82,6 @@ public class ThreadController {
     public String currentUserName(Principal principal) {
         return principal.getName();
     }
+
+    
 }

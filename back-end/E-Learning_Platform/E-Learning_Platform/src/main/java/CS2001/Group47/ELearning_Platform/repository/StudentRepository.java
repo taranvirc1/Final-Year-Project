@@ -20,6 +20,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 	Student findByResetPasswordToken(String token);
 
-	Student findByStudentId(Long userId);
+	Student findByStudentId(Integer userId);
 
 }
