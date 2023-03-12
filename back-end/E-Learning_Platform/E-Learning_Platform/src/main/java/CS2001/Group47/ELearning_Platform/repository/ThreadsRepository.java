@@ -15,7 +15,11 @@ public interface ThreadsRepository extends JpaRepository<Threads, Integer> {
 
 	Threads findByfTags(String fTags);
     
-    Threads findByfDateCreated(Date fDateCreated); 
+    Threads findByfDateCreated(Date fDateCreated);
+
+	Threads findByStudents_Email(String email);
+
+	Threads findByThreadId(Integer id);
 
 }
 

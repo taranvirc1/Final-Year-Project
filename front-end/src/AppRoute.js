@@ -57,7 +57,7 @@ function AppRoute() {
               path="/resetPassword/:id/:token"
               element={<ResetPassword />}
             /> */}
-            <Route path="/newPassword" element={<NewPassword />} />
+            <Route path="/newPassword/:resetToken" element={<NewPassword />} />
             <Route path="/updatePassword" element={<UpdatePassword />} />
             <Route path="/confirmAccount" element={<ConfirmAccount />} />
             {/* route for donations */}
@@ -78,6 +78,7 @@ function AppRoute() {
               element={<SearchThreadResults />}
             />
             <Route path="/Forum_page" element={<ForumPage />} />
+          
             <Route path="/Create_forum" element={<CreateForum />} />
 
             {/* ======route for quizzes====== */}

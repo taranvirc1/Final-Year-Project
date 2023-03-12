@@ -27,7 +27,12 @@ public class ThreadService {
 		threadsRepository.save(newThread);
 	}
 
-	public Optional<Threads> findByID(Integer id) {
-		return threadsRepository.findById(id);
+	public Threads findByID(Integer id) {
+		return threadsRepository.findByThreadId(id);
 	}
+
+	public Threads findByEmail(String email) {
+		return threadsRepository.findByStudents_Email(email);
+	}
+
 }
