@@ -77,7 +77,7 @@ function ForumLanding() {
         <div className='topic-items'>
           <div className='thread-title'
             onClick={() => {
-              ViewForum(item.id);
+              ViewForum(item.threadId);
             }}
             >{item.threadName}</div>
             
