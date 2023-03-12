@@ -30,17 +30,16 @@ const likeselect = { LikeIcon, LikedIcon }
 
 
 function ForumPage() {
-  const [threadId,setThreadId]=useState(0);
-
+  const [threadId,setThreadId]=useState(1);
   const [messages, setMessages] = useState([]);
-
+  const [mLikes, setmLikes] = useState(0);
+  const [newMessage, setnewMessage] = useState([]);
+  const saveThreadID = localStorage.getItem("ThreadID");
   const jwt = localStorage.getItem("jwt");
-  const [loggedInUser, setLoggedinUser] = useState(1);
 
   useEffect(() => {
-    const saveLoggedinUser = localStorage.getItem("ThreadID");
-
-      setLoggedinUser(saveLoggedinUser);
+    const saveThreadID = localStorage.getItem("ThreadID");
+    setThreadId(saveThreadID);
     
   }, []);
 
@@ -48,14 +47,13 @@ function ForumPage() {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
-  const Api = `http://localhost:8080/messages/${loggedInUser}`;
+  const Api = `http://localhost:8080/messages/${threadId}`;
   const params = {
-loggedInUser  };
+    threadId  };
 
 useEffect(() => {
-  const saveLoggedinUser = localStorage.getItem("ThreadID");
   axios
-  .get(`http://localhost:8080/messages/${saveLoggedinUser}`, { headers })
+  .get(`http://localhost:8080/messages/${saveThreadID}`, { headers })
 
     .then((resp) => {
       console.log(resp.data);
@@ -67,9 +65,27 @@ useEffect(() => {
     });
 }, []);
 
+const newmessagehandle = (e) => {
+  e.preventDefault();
 
+    axios
+      .post("http://localhost:8080/messages/create", {newMessage,mLikes,saveThreadID},
+        {headers: { Authorization: `Bearer ${jwt}` }},
+      )
+      .then((res) => {
+          console.log(res);
+})
+      .then(() => {
+        setnewMessage("");
+      })
+      .catch((err) => {
+        console.log(err);
 
-console.log(loggedInUser)
+      });
+    
+  }
+
+console.log(threadId)
 
 
 
@@ -204,15 +220,13 @@ console.log(loggedInUser)
           </ul>
         </div>
         <div className='ThreadEditorText'>
-          <textarea rows="15" name="pagetext_body"></textarea>
+          <textarea rows="15" name="pagetext_body" onChange={(e) => setnewMessage(e.target.value)}></textarea>
         </div>
       </div>
       <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div>
-      <div className="ThreadTextEditorReply">
-      <Link to="/Forum_landing">
+      <div className="ThreadTextEditorReply" onClick={newmessagehandle}>
         <a href="/" ><img src={ReplyIcon}/></a>
         <label>Post Reply</label>
-      </Link>
       </div>
     </section>
     </>
