@@ -21,8 +21,6 @@ public class MessageService {
 		messagesRepository.save(newMessage);
 	}
 
-    public Messages findByThreads_ThreadId(Integer id) {
-		return messagesRepository.findByThreads_ThreadId(id);
-	}
+
     
 }

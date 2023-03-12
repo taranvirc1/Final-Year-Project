@@ -47,8 +47,7 @@ public class MessagesController {
     }
 
     @RequestMapping("/messages/{threadId}")
-    public Messages getMessages( @PathVariable("threadId") Integer threadId) {
+    public Iterable<Messages>  getMessages( @PathVariable("threadId") Integer threadId) {
     return messagesRepository.findByThreads_ThreadId(threadId) ;
 }
 }
-

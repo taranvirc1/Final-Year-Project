@@ -6,7 +6,7 @@ import DeleteIcon from "../../images/forum/delete.png"
 import SortIcon from "../../images/forum/sort.png"
 import ReplyIcon from "../../images/forum/reply.png"
 import ProfileIcon from "../../images/forum/profile.png"
-
+import axios from 'axios'
 
 import BoldIcon from "../../images/forum/text-editor/bold.png"
 import ItalicIcon from "../../images/forum/text-editor/italic.png"
@@ -29,8 +29,57 @@ const likeselect = { LikeIcon, LikedIcon }
 
 
 
-
 function ForumPage() {
+  const [threadId,setThreadId]=useState(0);
+
+  const [messages, setMessages] = useState([]);
+
+  const jwt = localStorage.getItem("jwt");
+  const [loggedInUser, setLoggedinUser] = useState(1);
+
+  useEffect(() => {
+    const saveLoggedinUser = localStorage.getItem("ThreadID");
+
+      setLoggedinUser(saveLoggedinUser);
+    
+  }, []);
+
+  const token = jwt;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const Api = `http://localhost:8080/messages/${loggedInUser}`;
+  const params = {
+loggedInUser  };
+
+useEffect(() => {
+  const saveLoggedinUser = localStorage.getItem("ThreadID");
+  axios
+  .get(`http://localhost:8080/messages/${saveLoggedinUser}`, { headers })
+
+    .then((resp) => {
+      console.log(resp.data);
+
+      setMessages(resp.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, []);
+
+
+
+console.log(loggedInUser)
+
+
+
+
+
+
+
+
+
+
   
   //subscribe button colour changer white to orange
   const [subcolor,setsubcolor]=useState('white');
@@ -116,22 +165,24 @@ function ForumPage() {
       </a> 
           
     </div>
-    
+    {messages.map((item, index) => (
+
       <div className='Thread-Messages'>
         <div className='ThreadMessage'>
           <div className='ThreadProfile'><img src={ProfileIcon}></img></div>
           <div className='ThreadParagraph'>
-            <p>      
+            <p>  {item.message }    
               </p>
           </div>
         </div>
-        <div className='ThreadUser'>UserName</div>
+        <div className='ThreadUser'>{item.threads.students.firstName}</div>
         <div className='ThreadTime'>2 hours ago</div>
         <div className='ThreadInteraction'>
           <div className='ThreadLike' style={{background:likecolor}} onClick={event=>{likebg();presslike();}}><img src={LikeButton}/></div>
         <div className="ThreadReply"><img src={ReplyIcon}/><label>Reply</label></div>
         </div>
       </div>
+    ))}
     <section className='ThreadReplySection'>
       <div className='ThreadTextEditor'>
         <div className="ThreadTextEditorPanel">

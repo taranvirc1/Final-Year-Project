@@ -13,5 +13,5 @@ import CS2001.Group47.ELearning_Platform.model.Messages;
 public interface MessagesRepository extends CrudRepository<Messages, Integer>  {
     Messages findByMessage(String message);
 
-    Messages findByThreads_ThreadId(Integer id);
+    List <Messages> findByThreads_ThreadId(Integer id);
 }
