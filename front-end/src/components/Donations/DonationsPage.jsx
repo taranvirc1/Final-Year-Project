@@ -2,14 +2,48 @@ import React, { useState } from "react";
 import donationsPicture from "../../images/donations image 3.jpeg";
 import "../../Styles/DonationsStyles/DonationsPage.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { useEffect } from "react";
 
 function DonationsPage() {
+
+  const [loggedInUser, setLoggedinUser] = useOutletContext();
+  const params = {
+    email: loggedInUser,
+  };
+
+  const jwt = localStorage.getItem("jwt");
+  const token = jwt;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  const [donator, setDonator] = useState([]);
+
+  useEffect(() => { 
+    axios
+      .get("http://localhost:8080/user/findByEmail", {headers, params})
+      .then((response) => {
+        setDonator(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, );
+
+ 
+
+  const FN= donator && donator.firstName;
+  const LN = donator && donator.lastName;
+  const NU = donator && donator.phone;
+  const EM = donator && donator.email;
+
+
   const [donatorTitle, setDonatorTitle] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState(FN);
+  const [lastName, setLastName] = useState(LN);
+  const [phone, setPhone] = useState(NU);
+  const [email, setEmail] = useState(EM);
   const [howHear, setHowHear] = useState("");
   const [motivate, setMotivate] = useState("");
   const [errors, setErrors] = useState({
@@ -19,6 +53,7 @@ function DonationsPage() {
     email: "",
     phone: "",
   });
+
 
   const navigate = useNavigate();
   const Next = () => {
@@ -138,7 +173,8 @@ function DonationsPage() {
               type="text"
               id="fname"
               name="fname"
-              value={firstName}
+              // value={firstName}
+              defaultValue={donator && donator.firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             {errors.firstName && <p>{errors.firstName}</p>}
@@ -150,7 +186,8 @@ function DonationsPage() {
               type="text"
               id="lname"
               name="lname"
-              value={lastName}
+              // value={lastName}
+              defaultValue={donator && donator.lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
             {errors.lastName && <p>{errors.lastName}</p>}
@@ -162,7 +199,8 @@ function DonationsPage() {
               type="text"
               id="Pnumber"
               name="Pnumber"
-              value={phone}
+              // value={phone}
+              defaultValue={donator && donator.phone}
               onChange={(e) => setPhone(e.target.value)}
             />
             {errors.phone && <p>{errors.phone}</p>}
@@ -174,7 +212,8 @@ function DonationsPage() {
               type="text"
               id="Eaddress"
               name="Eaddress"
-              value={email}
+              // value={email}
+              defaultValue={donator && donator.email}
               onChange={(e) => setEmail(e.target.value)}
             />
             {errors.email && <p>{errors.email}</p>}
