@@ -25,9 +25,6 @@ function SearchThread() {
             <option value="Most Replies">Most Replies</option>
           </select>
         </div>
-        <div className='ClearSearch'>
-          <button className='clearbutton'><img src={DeleteIcon} alt="delete icon"/></button>
-        </div>
         <div className='searchpost'>
         <Link to="/SearchThread_results">
           <a href="/" className='spost'><img src={SearchIcon} alt="search icon"/></a>

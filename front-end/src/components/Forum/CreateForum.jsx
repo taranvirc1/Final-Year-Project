@@ -29,6 +29,7 @@ function CreateForum() {
   console.log(threadName);
   console.log(fTags);
   const CreateLanding = () => {
+    localStorage.setItem("ThreadID", 0);
     navigate("/Forum_page");
   };
   const handlecreatethread = (e) => {
@@ -37,6 +38,7 @@ function CreateForum() {
       axios
         .post("http://localhost:8080/threads/create", {threadName, fTags},
           {headers: { Authorization: `Bearer ${jwt}` }},
+          
         )
         .then((res) => {
             console.log(res);
@@ -70,35 +72,9 @@ function CreateForum() {
         <label for="c_tags">Tags: </label>
         <input type="text" id="c_tags" name="c_tags" placeholder="  Catergorise Topic Tags" onChange={(e) => setfTags(e.target.value)}/>
       </div>
-      
-      <div className='ThreadCreator'>
-            {/* <div className="ThreadTextCreatorPanel">
-            <ul className='ThreadCreatorIcons'>
-                <li><img src={BoldIcon} alt="bold icon"/></li>
-                <li><img src={ItalicIcon} style={{height: 38}} alt="italic icon"/></li>
-                <li><img src={UnderlineIcon} style={{height: 38}} alt="underline icon"/></li>
-                <li><img src={StrikethroughIcon} alt="strike icon"/></li>
-                <li><img src={ColourWheelIcon} alt="colour wheeel icon"/></li>
-                <li><img src={FontSizeIcon} alt="font icon"/></li>
-                <img className="Createline" src={replyline} alt="reply icon"/>
-                <li><img src={HyperlinkIcon} alt="hyperlink icon"/></li>
-                <li><img src={PhotoIcon} alt="file icon"/></li>
-                <li><img src={EmojiIcon} alt="emoji icon"/></li>
-                <li><img src={ListIcon} alt="list icon"/></li>
-                <li><img src={TextAlignIcon} style={{height: 38}} alt="text align icon"/></li>
-                <li><img src={QuoteIcon} alt="quote icon"/></li>
-                <li><img src={SpoilerIcon} alt="spoiler icon"/></li>
-            </ul>
-            </div>
-            <div className='ThreadCreatorText'>
-            <textarea rows="20" name="text_body" placeholder=' First Message'></textarea>
-            </div>
-        </div>
-        <div className='ThreadCreatorTextTrash'><button className='threadcreatetrashbutton'><img src={DeleteIcon}/></button></div> */}
         <div className="ThreadTextEditorCreate" onClick={handlecreatethread}>
           <a href="/" ><img src={ReplyIcon} alt="reply icon"/></a>
           <label>Post Thread</label>
-        </div>
         </div>
     </section>
     </>
