@@ -63,7 +63,7 @@ function UPM() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [loggedInUser]);
 
   const userId = user && user.studentId; // Add null check before accessing studentId
 
