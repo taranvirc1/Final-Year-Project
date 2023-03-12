@@ -68,7 +68,6 @@ public class Student implements Serializable {
 	@Column(name = "role")
 	private String role;
 
-	
 	@Column(name = "twitter")
 	private String twitter;
 
@@ -101,6 +100,9 @@ public class Student implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date updatedAt;
+
+	@Column(name = "totXp")
+	int totXp;
 
 	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -142,7 +144,7 @@ public class Student implements Serializable {
 	public Student(byte [] backavatar,String username,String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String firstName, String lastName,
 			String dateOfBirth,
 			String country, String phone, String email,
-			String password) {
+			String password, int totXp) {
 
 		super();
 		this.avatar = avatar;
@@ -161,6 +163,7 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+		this.totXp = totXp; 
 
 	}
 
@@ -336,13 +339,22 @@ public class Student implements Serializable {
 		this.rate_Reviews = rate_Reviews;
 	}
 
+	
+	public int getTotXp() {
+		return totXp;
+	}
+
+	public void setTotXp(int totXp) {
+		this.totXp = totXp;
+	}
+
 	@Override
 	public String toString() {
 		return "Student [id=" + studentId  + "profile=" + avatar+ "backavatar" + backavatar+ "twitter=" +twitter + "linkedIn="+ "username=" + username +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
 				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
-				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + "]";
+				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + ", totXp=" + totXp + "]";
 	}
 
 }
