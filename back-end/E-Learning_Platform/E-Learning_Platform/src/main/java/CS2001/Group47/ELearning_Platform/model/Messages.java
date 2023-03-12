@@ -51,16 +51,22 @@ public class Messages implements Serializable {
 	//@JsonIgnore
 	private Threads threads;
 
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "student")
+	//@JsonIgnore
+	private Student students;
+
 	public Messages() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Messages(String message, int mLikes , Threads threads) {
+	public Messages(String message, int mLikes , Threads threads, Student students) {
 		super();
 		this.message = message;
 		this.mLikes = mLikes;
 		this.threads = threads;
+		this.students = students;
 	}
 
 
@@ -104,11 +110,21 @@ public class Messages implements Serializable {
 		this.threads = threads;
 	}
 
+	public Student getStudents() {
+		return students;
+	}
+
+	public void setStudents(Student students) {
+		this.students = students;
+	}
+
 	@Override
 	public String toString() {
 		return "Messages [messageID=" + messageID + ", message=" + message + ", mLikes=" + mLikes + ", createdAtDate="
-				+ createdAtDate + ", threads=" + threads + "]";
+				+ createdAtDate + ", threads=" + threads + ", students=" + students + "]";
 	}
+
+	
 
 	
 

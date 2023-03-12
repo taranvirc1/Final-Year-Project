@@ -34,7 +34,9 @@ function ForumPage() {
   const [messages, setMessages] = useState([]);
   const [mLikes, setmLikes] = useState(0);
   const [newMessage, setnewMessage] = useState([]);
+  const [studentId, setStudentId] = useState("");
   const saveThreadID = localStorage.getItem("ThreadID");
+  const loggedInUser = localStorage.getItem("ThreadID");
   const jwt = localStorage.getItem("jwt");
 
   useEffect(() => {
@@ -42,6 +44,21 @@ function ForumPage() {
     setThreadId(saveThreadID);
     
   }, []);
+
+  useEffect(() => {
+
+    const saveLoggedinUser = localStorage.getItem("loggedInUser");
+    axios.get(`http://localhost:8080/profile/${saveLoggedinUser}`, { headers})
+      .then(response => {
+        setStudentId(response.data.studentId)
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+console.log("this"+studentId);
+
 
   const token = jwt;
   const headers = {
@@ -69,7 +86,7 @@ const newmessagehandle = (e) => {
   e.preventDefault();
 
     axios
-      .post("http://localhost:8080/messages/create", {newMessage,mLikes,saveThreadID},
+      .post("http://localhost:8080/messages/create", {newMessage,mLikes,saveThreadID,studentId},
         {headers: { Authorization: `Bearer ${jwt}` }},
       )
       .then((res) => {
@@ -85,7 +102,8 @@ const newmessagehandle = (e) => {
     
   }
 
-console.log(threadId)
+console.log(saveThreadID)
+console.log(studentId)
 
 
 
@@ -185,13 +203,16 @@ console.log(threadId)
 
       <div className='Thread-Messages'>
         <div className='ThreadMessage'>
-          <div className='ThreadProfile'><img src={ProfileIcon}></img></div>
+        {item.students.avatar?  <img   className="ThreadProfile" src={"data:image/png;base64," + item.students.avatar } height="90" width="90" alt="" /> :
+        <img className="ThreadProfile" src={ProfileIcon} height="90" width="90" alt="" />}
+        
+
           <div className='ThreadParagraph'>
             <p>  {item.message }    
               </p>
           </div>
         </div>
-        <div className='ThreadUser'>{item.threads.students.firstName}</div>
+        <div className='ThreadUser'>{item.students.firstName}</div>
         <div className='ThreadTime'>2 hours ago</div>
         <div className='ThreadInteraction'>
           <div className='ThreadLike' style={{background:likecolor}} onClick={event=>{likebg();presslike();}}><img src={LikeButton}/></div>
