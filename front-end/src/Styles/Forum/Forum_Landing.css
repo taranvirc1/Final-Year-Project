@@ -9,31 +9,46 @@
     margin-bottom: -5px;
 }
 
-.LandingPage-list{
-    background-color: aliceblue;
+.thread-pages{
     display: inline-block;
-    position: relative;
-    justify-content: left;
-    margin-left: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.1rem;
+    user-select: none;
     
 }
-.LandingPage-list a{
+.thread-pages li{
+    list-style: none;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
-    padding: 10px 20px;
-    font-size: 20px;
-    color:black;
-    cursor: pointer;
+}
+.thread-pages li a{
+    display: inline-block;
+    padding: 0px 20px;
     outline: auto;
-    outline-style: inset;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    outline-style: outset;
+    font-size: 2rem;
+    background-color: white;
+    text-decoration: none;
+    color:black;
+    user-select: none;
+}
+.thread-pages li.previous a,
+.thread-pages li.next a,
+.thread-pages li.break a {
+  border-color: transparent;
+}
+.thread-pages li.active a {
+    background-color: #9d5bf3;
+    color: rgb(0, 0, 0);
+}
+.thread-pages li.disabled a {
+    color: rgb(148, 148, 148);
+}
+.thread-pages li.disable,
+.thread-pages li.disabled a {
+cursor: default;
 }
 
-.LandingPage-list a:active {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    outline-color: black;
-}
 .LandingOptions{
     display: inline;
     float: right;
@@ -49,6 +64,7 @@
     height: 50px;
     
 }
+
 .LandingOptions a:active{
     background-color: orange;
 }

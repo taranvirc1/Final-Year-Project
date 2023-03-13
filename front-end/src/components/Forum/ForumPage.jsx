@@ -151,25 +151,10 @@ const newmessagehandle = (e) => {
       setlikeColor("white")
     }
   }
-  //subscribe button image changer "LikeIcon" to "LikedIcon"
-  const[LikeButton, setLikeButton] = useState(likeselect.LikeIcon);
-  function presslike(){
-    if(LikeButton===likeselect.LikedIcon){
-      setLikeButton(likeselect.LikeIcon)
-    }
-    else{
-      setLikeButton(likeselect.LikedIcon)
-    }
-  }
 
   const [threadid, setthreadid] = useState("");
 
-  useEffect(() => {
-    const saveThreadID = localStorage.getItem("ThreadID");
-    if (saveThreadID) {
-      setthreadid(saveThreadID);
-    }
-  }, []);
+ 
   return (
     <>
     <div className='navbar-spacing'>
