@@ -19,7 +19,8 @@ function Contact() {
             <h1> Contact Form </h1>
             </div>
                   <form className="contact-form">
-                    <input type="text" id="name" placeholder="Enter Your Name" required/>
+                    <input type="text" id="firstname" placeholder="Enter Your First Name" required/>
+                    <input type="text" id="lastname" placeholder="Enter Your Lat Name" required/>
                     <input type="email" id="email" placeholder="Enter Your Email" required/>
                     <input type="phone" id="phone" placeholder="Enter Your Phone Number" required/>
         
