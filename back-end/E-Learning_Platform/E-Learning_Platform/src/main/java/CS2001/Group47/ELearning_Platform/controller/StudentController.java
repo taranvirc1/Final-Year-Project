@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import CS2001.Group47.ELearning_Platform.dto.StudentPostDTO;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
+import CS2001.Group47.ELearning_Platform.service.RankingService;
 import CS2001.Group47.ELearning_Platform.service.StudentService;
 
 @RestController
@@ -112,7 +113,8 @@ public class StudentController {
         return (studentService.findByEmail(email));
 
     }
-
+   
+    
     // @RequestMapping(value = "/username", method = RequestMethod.GET)
     // @ResponseBody
     // public String currentUserName(Principal principal) {

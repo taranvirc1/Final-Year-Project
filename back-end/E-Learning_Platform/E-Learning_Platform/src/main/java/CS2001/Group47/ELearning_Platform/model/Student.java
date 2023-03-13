@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -61,6 +62,8 @@ public class Student implements Serializable {
 	@NotBlank
 	String password;
 
+
+
 	String resetPasswordToken;
 	@Column(name = "Biog")
 	private String bio;
@@ -102,6 +105,7 @@ public class Student implements Serializable {
 	private Date updatedAt;
 
 	@Column(name = "totXp")
+	@NotNull
 	int totXp;
 
 	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
