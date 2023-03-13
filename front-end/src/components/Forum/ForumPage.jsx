@@ -22,6 +22,7 @@ import ListIcon from "../../images/forum/text-editor/list.png"
 import TextAlignIcon from "../../images/forum/text-editor/textalign.png"
 import QuoteIcon from "../../images/forum/text-editor/quote.png"
 import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
+import ReactPaginate from 'react-paginate';
 
 const LikeIcon = require('../../images/forum/like.png')
 const LikedIcon = require('../../images/forum/liked.png')
@@ -31,6 +32,8 @@ const likeselect = { LikeIcon, LikedIcon }
 
 function ForumPage() {
   const [threadId,setThreadId]=useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [postsPerPage, setPostsPerPage] = useState(10);
   const [messages, setMessages] = useState([]);
   const [mLikes, setmLikes] = useState(0);
   const [newMessage, setnewMessage] = useState("");
@@ -96,7 +99,6 @@ const newmessagehandle = (e) => {
         console.log(res);
 })
     .then(() => {
-      setnewMessage("");
       messageloader();
     })
     .catch((err) => {
@@ -114,11 +116,18 @@ const newmessagehandle = (e) => {
   }, []);
 
 
+//Get current posts
+const endOffset = itemOffset + postsPerPage;
+const currentMessages = messages.slice(itemOffset, endOffset);
+const pageCount = Math.ceil(messages.length / postsPerPage);
 
-
-
-
-
+const handlePageClick = (event) => {
+  const newOffset = (event.selected * postsPerPage) % messages.length;
+  console.log(
+    `User requested page number ${event.selected}, which is offset ${newOffset}`
+  );
+  setItemOffset(newOffset);
+};
   
   //subscribe button colour changer white to orange
   const [subcolor,setsubcolor]=useState('white');
@@ -152,7 +161,6 @@ const newmessagehandle = (e) => {
     }
   }
 
-  const [threadid, setthreadid] = useState("");
 
  
   return (
@@ -162,12 +170,18 @@ const newmessagehandle = (e) => {
     <div className="forums-title">
         <h2>Student Forum Threads</h2>
     </div>
-    <nav className='ForumPage-list'>
-        <a >Previous</a>
-        <a >1</a>
-        <a >2</a>
-        <a >Next</a>
-    </nav>
+    <div className='thread-messages'>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="Next>"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="<Prev"
+        renderOnZeroPageCount={null}
+        activeClassName="active"
+      />
+    </div>
     
     <div className='PageOptions'>
         
@@ -188,7 +202,7 @@ const newmessagehandle = (e) => {
       </a> 
           
     </div>
-    {messages.map((item, index) => (
+    {currentMessages.map((item, index) => (
 
       <div className='Thread-Messages'>
         <div className='ThreadMessage'>
@@ -202,11 +216,11 @@ const newmessagehandle = (e) => {
           </div>
         </div>
         <div className='ThreadUser'>{item.students.firstName}</div>
-        <div className='ThreadTime'>2 hours ago</div>
-        <div className='ThreadInteraction'>
-          {/* <div className='ThreadLike' style={{background:likecolor}} onClick={event=>{likebg();presslike();}}><img src={LikeButton}/></div> */}
-        <div className="ThreadReply"><img src={ReplyIcon}/><label>Reply</label></div>
+        <div className='dateandreply'>
+          <div className='ThreadTime'>Posted on {item.createdAtDate}</div>
+          <div className="ThreadReply"><img src={ReplyIcon}/><label>Reply</label></div>
         </div>
+        
       </div>
     ))}
     <section className='ThreadReplySection'>

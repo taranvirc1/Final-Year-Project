@@ -9,8 +9,6 @@ import SortIcon from "../../images/forum/sort.png"
 import ReplyIcon from "../../images/forum/reply.png"
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
-import PrevIcon from '../../images/forum/prev.png';
-import NextIcon from '../../images/forum/next.png';
 
 function ForumLanding() {
   const [threads, setthreads] = useState([]);
