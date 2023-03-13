@@ -84,12 +84,14 @@ function Account() {
             } else {
               // setValidLoginAttempts(validLoginAttempts + 1);
               setInvalidAttempts(invalidAttempts + 1);
+              setTimeRemaining(0);
               alert("Failed token!!!");
               setLoggedinUser("");
             }
           } else {
             // setValidLoginAttempts(validLoginAttempts + 1);
             setInvalidAttempts(invalidAttempts + 1);
+            setTimeRemaining(0);
             alert("Login unsuccessful!!!");
             setLoggedinUser("");
           }
@@ -97,6 +99,7 @@ function Account() {
         .then(() => {
           // setValidLoginAttempts(0);
           setInvalidAttempts(0);
+          setTimeRemaining(0);
           setLoginErrorMessages("");
           setEmail("");
           setPassword("");
@@ -105,10 +108,12 @@ function Account() {
           console.log(err);
           // setValidLoginAttempts(validLoginAttempts + 1);
           setInvalidAttempts(invalidAttempts + 1);
+          setInvalidAttempts(0);
           alert("PROBLEM WITH LOGIN!!!");
           setLoggedinUser("");
         });
-      if (invalidAttempts === 2) {
+      if (invalidAttempts >= 2) {
+        setInvalidAttempts(0);
         setTimeRemaining(30);
       }
     }
