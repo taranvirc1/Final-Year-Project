@@ -52,8 +52,8 @@ function SearchThreadResults() {
             <li>Programming</li>
           </ul>
           <div className='rStats'>
-            <div className='rLikes'><img src={LikeIcon} alt="like icon"></img></div>
-            <h4>5 Likes</h4>
+            {/* <div className='rLikes'><img src={LikeIcon} alt="like icon"></img></div>
+            <h4>5 Likes</h4> */}
             <div className='rReplies'><img src={ReplyIcon} alt="reply icon"></img></div>
             <h4>4 Replies</h4>
           </div>
@@ -64,90 +64,6 @@ function SearchThreadResults() {
         </div>
       </div>
 
-      <div className="threadresult">
-        <div className='result-items'>
-          <Link to="/Forum_page">
-            <a href="/" className='result-title'>CS2001-Thread</a>
-          </Link>
-          <ul className='rtags'>
-            <li>CS</li>
-            <li>Programming</li>
-          </ul>
-          <div className='rStats'>
-            <div className='rLikes'><img src={LikeIcon} alt="like icon"></img></div>
-            <h4>5 Likes</h4>
-            <div className='rReplies'><img src={ReplyIcon} alt="reply icon"></img></div>
-            <h4>4 Replies</h4>
-          </div>
-          
-          <div className='result-creatorname'>Started 2 hours ago By Kenura</div>
-          
-          
-        </div>
-      </div>
-      <div className="threadresult">
-        <div className='result-items'>
-          <Link to="/Forum_page">
-            <a href="/" className='result-title'>CS2001-Thread</a>
-          </Link>
-          <ul className='rtags'>
-            <li>CS</li>
-            <li>Programming</li>
-          </ul>
-          <div className='rStats'>
-            <div className='rLikes'><img src={LikeIcon} alt="like icon"></img></div>
-            <h4>5 Likes</h4>
-            <div className='rReplies'><img src={ReplyIcon} alt="reply icon"></img></div>
-            <h4>4 Replies</h4>
-          </div>
-          
-          <div className='result-creatorname'>Started 2 hours ago By Kenura</div>
-          
-          
-        </div>
-      </div>
-      <div className="threadresult">
-        <div className='result-items'>
-          <Link to="/Forum_page">
-            <a href="/" className='result-title'>CS2001-Thread</a>
-          </Link>
-          <ul className='rtags'>
-            <li>CS</li>
-            <li>Programming</li>
-          </ul>
-          <div className='rStats'>
-            <div className='rLikes'><img src={LikeIcon} alt="like icon"></img></div>
-            <h4>5 Likes</h4>
-            <div className='rReplies'><img src={ReplyIcon} alt="reply icon"></img></div>
-            <h4>4 Replies</h4>
-          </div>
-          
-          <div className='result-creatorname'>Started 2 hours ago By Kenura</div>
-          
-          
-        </div>
-      </div>
-      <div className="threadresult">
-        <div className='result-items'>
-          <Link to="/Forum_page">
-            <a href="/" className='result-title'>CS2001-Thread</a>
-          </Link>
-          <ul className='rtags'>
-            <li>CS</li>
-            <li>Programming</li>
-          </ul>
-          <div className='rStats'>
-            <div className='rLikes'><img src={LikeIcon} alt="like icon"></img></div>
-            <h4>5 Likes</h4>
-            <div className='rReplies'><img src={ReplyIcon} alt="reply icon"></img></div>
-            <h4>4 Replies</h4>
-          </div>
-          
-          <div className='result-creatorname'>Started 2 hours ago By Kenura</div>
-          
-          
-        </div>
-      </div>
 
      
     </section>

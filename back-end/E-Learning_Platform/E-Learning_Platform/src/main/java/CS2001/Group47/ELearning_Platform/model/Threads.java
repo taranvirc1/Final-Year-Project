@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -41,7 +42,6 @@ public class Threads implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer threadId;
 	
-
 	String threadName;
 
 	
