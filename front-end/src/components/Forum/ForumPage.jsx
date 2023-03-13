@@ -33,11 +33,12 @@ function ForumPage() {
   const [threadId,setThreadId]=useState(0);
   const [messages, setMessages] = useState([]);
   const [mLikes, setmLikes] = useState(0);
-  const [newMessage, setnewMessage] = useState([]);
+  const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
   const saveThreadID = localStorage.getItem("ThreadID");
   const loggedInUser = localStorage.getItem("ThreadID");
   const jwt = localStorage.getItem("jwt");
+  console.log("This is thread "+ saveThreadID);
 
   useEffect(() => {
     const saveThreadID = localStorage.getItem("ThreadID");
@@ -57,18 +58,12 @@ function ForumPage() {
         console.log(error);
       });
   }, []);
-console.log("this"+studentId);
-
-
-  const token = jwt;
+console.log("this message was created by"+studentId);
   const headers = {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${jwt}`,
   };
-  const Api = `http://localhost:8080/messages/${threadId}`;
-  const params = {
-    threadId  };
 
-useEffect(() => {
+const messageloader = (e) => {
   axios
   .get(`http://localhost:8080/messages/${saveThreadID}`, { headers })
 
@@ -79,35 +74,44 @@ useEffect(() => {
     })
     .catch((error) => {
       console.error(error);
-    });
-}, []);
+});
+}
+
 
 const newmessagehandle = (e) => {
   e.preventDefault();
-
+  console.log(newMessage);
+  if (localStorage.getItem("loggedInUser") === "") {
+    alert("Please Login to post a message");
+  }
+  else if (newMessage === "") {
+    alert("Please fill in the text field");
+  }
+  else{
     axios
-      .post("http://localhost:8080/messages/create", {newMessage,mLikes,saveThreadID,studentId},
-        {headers: { Authorization: `Bearer ${jwt}` }},
-      )
-      .then((res) => {
-          console.log(res);
+    .post("http://localhost:8080/messages/create", {newMessage,mLikes,saveThreadID,studentId},
+      {headers: { Authorization: `Bearer ${jwt}` }},
+    )
+    .then((res) => {
+        console.log(res);
 })
-      .then(() => {
-        setnewMessage("");
-      })
-      .catch((err) => {
-        alert(`Please login to post a message`);
-        console.log(err);
+    .then(() => {
+      setnewMessage("");
+      messageloader();
+    })
+    .catch((err) => {
+      console.log(err);
 
-      });
+    });
+  }
     
+     
   }
 
-console.log(saveThreadID)
-console.log(studentId)
 
-
-
+  useEffect(() => {
+    messageloader();
+  }, []);
 
 
 
@@ -166,7 +170,6 @@ console.log(studentId)
       setthreadid(saveThreadID);
     }
   }, []);
-  console.log(threadid);
   return (
     <>
     <div className='navbar-spacing'>
@@ -216,7 +219,7 @@ console.log(studentId)
         <div className='ThreadUser'>{item.students.firstName}</div>
         <div className='ThreadTime'>2 hours ago</div>
         <div className='ThreadInteraction'>
-          <div className='ThreadLike' style={{background:likecolor}} onClick={event=>{likebg();presslike();}}><img src={LikeButton}/></div>
+          {/* <div className='ThreadLike' style={{background:likecolor}} onClick={event=>{likebg();presslike();}}><img src={LikeButton}/></div> */}
         <div className="ThreadReply"><img src={ReplyIcon}/><label>Reply</label></div>
         </div>
       </div>

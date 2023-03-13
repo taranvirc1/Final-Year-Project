@@ -86,8 +86,6 @@ function ForumLanding() {
             <li>{item.fTags}</li>
           </ul>
           <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>5 Likes</h4>
             <div className='Replies'><img src={ReplyIcon}></img></div>
             <h4>4 Replies</h4>
           </div>

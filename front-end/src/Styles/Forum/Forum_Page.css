@@ -140,7 +140,6 @@
     margin-top: 25px;
     background-color: #a6aefd;
     border: 2px solid black;
-    border-radius: 25px;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
     margin-bottom: 30px;
     padding: 25px;
@@ -167,16 +166,16 @@
     position: relative;
     width:86%;
     height: 200px;
-    background-color: white;
+    color: rgb(0, 0, 0);
+    background-color: rgba(175, 175, 175, 0.747);
     border: 2px solid black;
-    border-radius: 40px;
 }
 .ThreadParagraph p{
     box-sizing: border-box;
     padding-top: 10px;
     padding-left: 10px;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }
 .ThreadUser{
     display: inline-block;
@@ -196,7 +195,7 @@
     float:right;
     margin-top: 10px;
 }
-.ThreadLike{
+/* .ThreadLike{
     display: inline;
     position: relative;
     top: 10px;
@@ -213,7 +212,7 @@
 }
 .ThreadLike:active{
     transform: scale(0.97);
-}
+} */
 .ThreadReply{
     float: right;
     display: inline;
