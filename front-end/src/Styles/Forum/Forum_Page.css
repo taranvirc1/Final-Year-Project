@@ -246,8 +246,7 @@ cursor: default;
     margin: auto;
     margin-top: 55px;
     margin-bottom: 50px;
-    padding: 15px 15px;
-    padding-bottom: 50px;
+    padding: 10px 0px;
     background-color: #a6aefd;
     border: 2px solid black;
     border-radius: 25px;
@@ -260,50 +259,7 @@ cursor: default;
     margin-top: 25px;
     background-color: #ffffff;
     border: 2px solid black;
-    border-radius: 25px;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-}
-.ThreadTextEditorPanel{
-    display: grid;
-    border-radius: 20px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border: 1px solid black;
-    position: relative;
-    background-color: rgb(177, 177, 177);
-    height:55px;
-    overflow:hidden;
-}
-.ThreadEditorIcons{
-    margin-left: 30px;
-    list-style: none;
-    user-select: none;
-}
-
-.ThreadEditorIcons li{
-    display: inline-block;
-    padding: 0 15px;
-    padding-top: 3px;
-}
-
-.ThreadEditorIcons li:hover{
-    background-color:#858383;
-    padding-top: 3px;
-    border-radius: 20px;
-}
-.ThreadEditorIcons li:active{
-    background-color: #6193ff;
-    box-shadow: 0 1px #666;
-    transform:scale(0.99);
-}
-
-.ThreadEditorIcons li img{
-    height:45px;
-    width: 45px;
-}
-
-.Replyline{
-    height:45px
 }
 
 .ThreadEditorText textarea{
@@ -351,7 +307,7 @@ cursor: default;
     float:right;
     border: 1px outset black;
     border-radius: 15px;
-    padding: 5px 10px;
+    padding: 0 10px;
     margin-right: 40px;
     background-color: #6193ff;
     box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -364,8 +320,8 @@ cursor: default;
     transform:scale(0.99);
 }
 .ThreadTextEditorReply img{
-    height:40px;
-    width:50px;
+    height:35px;
+    width:30x;
 }
 .ThreadTextEditorReply label{
     padding-left: 10px;

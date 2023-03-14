@@ -217,26 +217,8 @@ const newmessagehandle = (e) => {
     ))}
     <section id="replysection" className='ThreadReplySection'>
       <div className='ThreadTextEditor'>
-        <div className="ThreadTextEditorPanel">
-          <ul className='ThreadEditorIcons'>
-            <li><img src={BoldIcon}/></li>
-            <li><img src={ItalicIcon} style={{height: 42}}/></li>
-            <li><img src={UnderlineIcon} style={{height: 42}}/></li>
-            <li><img src={StrikethroughIcon}/></li>
-            <li><img src={ColourWheelIcon}/></li>
-            <li><img src={FontSizeIcon}/></li>
-            <img className="Replyline" src={replyline}/>
-            <li><img src={HyperlinkIcon}/></li>
-            <li><img src={PhotoIcon}/></li>
-            <li><img src={EmojiIcon}/></li>
-            <li><img src={ListIcon}/></li>
-            <li><img src={TextAlignIcon} style={{height: 44}}/></li>
-            <li><img src={QuoteIcon}/></li>
-            <li><img src={SpoilerIcon}/></li>
-          </ul>
-        </div>
         <div className='ThreadEditorText'>
-          <textarea rows="15" name="pagetext_body" onChange={(e) => setnewMessage(e.target.value)}></textarea>
+          <textarea rows="10" name="pagetext_body" onChange={(e) => setnewMessage(e.target.value)}></textarea>
         </div>
       </div>
       <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div>
