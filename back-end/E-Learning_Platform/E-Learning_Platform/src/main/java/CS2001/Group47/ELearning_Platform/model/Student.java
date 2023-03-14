@@ -110,8 +110,11 @@ public class Student implements Serializable {
 	
 	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
 	@JsonIgnore
-
 	private List<QuizCategory> QuizCategory = new ArrayList<>();
+
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL) //for result
+    @JsonIgnore
+    private List<Result> results = new ArrayList<>();
 
 	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -344,5 +347,12 @@ public class Student implements Serializable {
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
 				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + "]";
 	}
+	public List<Result> getResults() {         //for the result
+        return results;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results; 
+    }
 
 }
