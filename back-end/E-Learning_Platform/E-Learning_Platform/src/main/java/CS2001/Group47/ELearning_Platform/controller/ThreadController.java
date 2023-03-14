@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import CS2001.Group47.ELearning_Platform.dto.CreateThreadDTO;
 import CS2001.Group47.ELearning_Platform.model.Student;
 import CS2001.Group47.ELearning_Platform.model.Threads;
+import CS2001.Group47.ELearning_Platform.repository.ThreadsRepository;
 import CS2001.Group47.ELearning_Platform.service.Rate_ReviewService;
 import CS2001.Group47.ELearning_Platform.service.ThreadService;
 
@@ -29,6 +30,8 @@ public class ThreadController {
     ThreadService threadService;
     @Autowired
     StudentController studentController;
+    @Autowired
+    ThreadsRepository threadsRepository;
 
     @GetMapping("/threads")
     public List<Threads> getAllThreads() {
@@ -73,6 +76,20 @@ public class ThreadController {
     public Threads getThread(@PathVariable("threadId") Integer threadId) {
     	
     	return threadService.findByID(threadId);
+    	
+    }
+
+    @GetMapping("/threadname/{threadname}")
+    public Threads getThreadbyname(@PathVariable("threadId") String threadName) {
+    	
+    	return threadsRepository.findByThreadNameContaining(threadName);
+    	
+    }
+
+    @GetMapping("/threadtag/{threadtag}")
+    public Threads getThreadbytag(@PathVariable("threadId") String threadtag) {
+    	
+    	return threadsRepository.findByfTagsContaining(threadtag);
     	
     }
 
