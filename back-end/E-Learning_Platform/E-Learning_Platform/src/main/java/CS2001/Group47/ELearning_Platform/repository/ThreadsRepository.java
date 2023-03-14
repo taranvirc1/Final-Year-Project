@@ -12,9 +12,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface ThreadsRepository extends JpaRepository<Threads, Integer> {
 
-	Threads findByThreadNameContaining(String threadName);
+	List<Threads> findByThreadNameContaining(String place);
 
-	Threads findByfTagsContaining(String fTags);
+	List<Threads> findByfTagsContaining(String place);
     
     Threads findByfDateCreated(Date fDateCreated);
 

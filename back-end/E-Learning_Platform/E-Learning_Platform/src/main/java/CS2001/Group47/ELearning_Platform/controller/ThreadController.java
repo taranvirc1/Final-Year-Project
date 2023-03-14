@@ -80,16 +80,16 @@ public class ThreadController {
     }
 
     @GetMapping("/threadname/{threadname}")
-    public Threads getThreadbyname(@PathVariable("threadId") String threadName) {
+    public List<Threads> getThreadbynameContaining(String threadName) {
     	
-    	return threadsRepository.findByThreadNameContaining(threadName);
+    	return threadService.findByThreadNameContaining(threadName);
     	
     }
 
     @GetMapping("/threadtag/{threadtag}")
-    public Threads getThreadbytag(@PathVariable("threadId") String threadtag) {
+    public List<Threads> getThreadbytagContaining(String threadtag) {
     	
-    	return threadsRepository.findByfTagsContaining(threadtag);
+    	return threadService.findByfTagContaining(threadtag);
     	
     }
 
