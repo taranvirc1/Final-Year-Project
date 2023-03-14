@@ -72,14 +72,7 @@ function Navbar() {
             
           </li>
 
-          <li>
-            {/* Link for rankings page */}
-            <Link to="Ranking" className="navLink" href="#Rankings">
-              <img img src={rankinglogo} alt="rankings icon" />
-              Rankings
-            </Link>
-            
-          </li>
+          
 
           <li>
             {/* Link for login/signup page */}

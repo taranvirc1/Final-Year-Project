@@ -22,7 +22,7 @@ public class RankingService {
 	// 	List<Student> orderedList = studentRepository.findAllByOrderBytotXpAsc();
 	// 	for (int i = 0; i < orderedList.size(); i++){
 	// 		Student student = orderedList.get(i);
-    //         if(student.getStudentId() == studentID ) {
+    //         if(student.getStudentId()  ) {
     //             return i + 1; 
     //         }
     //         return 0; 
@@ -30,8 +30,5 @@ public class RankingService {
        
            
 	// }
-    public List<Student> getRankingsTable(){
-        List<Student> rankingsList = studentRepository.findAllByOrderBytotXpAsc();
-        return rankingsList; 
-        }
+  
     }

@@ -18,10 +18,6 @@ public class RankingController {
     public RankingService rankingService; 
 
 
-    @GetMapping("/Ranking")
-    public List<Student> orderBytotXp() {
-        
-        return rankingService.getRankingsTable();
-    }
+ 
 
 }

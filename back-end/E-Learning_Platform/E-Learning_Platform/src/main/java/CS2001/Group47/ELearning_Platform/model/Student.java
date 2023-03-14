@@ -104,9 +104,8 @@ public class Student implements Serializable {
 	@LastModifiedDate
 	private Date updatedAt;
 
-	@Column(name = "totXp")
-	@NotNull
-	int totXp;
+	@Column(name = "xp")
+	private Integer xp;
 
 	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -147,13 +146,14 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+	
 
 	}
 
 	public Student(byte [] backavatar,String username,String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String firstName, String lastName,
 			String dateOfBirth,
 			String country, String phone, String email,
-			String password, int totXp) {
+			String password, Integer xp) {
 
 		super();
 		this.avatar = avatar;
@@ -172,7 +172,7 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
-		this.totXp = totXp; 
+		this.xp = xp;
 
 	}
 
@@ -349,12 +349,13 @@ public class Student implements Serializable {
 	}
 
 	
-	public int getTotXp() {
-		return totXp;
+
+	public Integer getXp() {
+		return xp;
 	}
 
-	public void setTotXp(int totXp) {
-		this.totXp = totXp;
+	public void setXp(Integer xp) {
+		this.xp = xp;
 	}
 
 	@Override
@@ -363,7 +364,7 @@ public class Student implements Serializable {
 				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
-				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + ", totXp=" + totXp + "]";
+				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + ", xp=" + xp + "]";
 	}
 
 }

@@ -128,5 +128,9 @@ public class StudentController {
 
 
     }
+    @GetMapping("/getRankings")
+    public List<Student> getRankings() {
 
+        return studentRepository.findByOrderByXpDesc();
+    }
 }

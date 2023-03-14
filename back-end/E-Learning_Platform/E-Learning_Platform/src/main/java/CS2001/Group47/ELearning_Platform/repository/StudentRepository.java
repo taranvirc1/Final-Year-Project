@@ -24,5 +24,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 	Student findByStudentId(Integer userId);
 
-	List<Student> findAllByOrderBytotXpAsc();
+	List<Student> findByOrderByXpDesc();
 }
