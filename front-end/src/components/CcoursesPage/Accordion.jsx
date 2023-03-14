@@ -4,9 +4,7 @@ import { useOutletContext } from "react-router-dom";
 
 import ReactPlayer from "react-player";
 
-const Accordion = () => {
-  const [loggedInUser, setLoggedinUser] = useOutletContext();
-
+const Accordion = (loggedInUser) => {
   const jwt = sessionStorage.getItem("jwt");
 
   const [videoUrl, setVideoUrl] = useState("");
@@ -17,11 +15,9 @@ const Accordion = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/categories`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
+      .get(`http://localhost:8080/categories`, {})
       .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
 
         setCategory(resp.data);
       })
@@ -30,7 +26,7 @@ const Accordion = () => {
       });
   }, []);
 
-  console.log("cat" + JSON.stringify(category));
+  //console.log("cat" + JSON.stringify(category));
 
   const retrieveUrl = (videoName, courseID) => {
     const i = category.find(

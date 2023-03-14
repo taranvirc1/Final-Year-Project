@@ -1,8 +1,7 @@
  .background{
-  background-color: #252839;
-padding-bottom: 200px;
+  background-color: #8087b1;
+padding-bottom: 400px;
 padding-top: 200px;
-margin-bottom: 10%;
  }
   .Courseswrapper {
     display:flex;
@@ -63,18 +62,19 @@ margin-bottom: 10%;
   .Coursescard .info {
     position: relative;
     z-index: 3;
-    color: rgb(217, 220, 220);
+    color: rgb(1, 14, 9);
     opacity: 0;
     transform: translateY(30px);
     transition: 0.5s;
     max-width: 250px;
     max-height: 600px;
 
+
   }
-  .Coursescard.info h1 {
-  
-    text-align: left;
-   
+  .Coursescard .info h1 {
+    position: relative;
+bottom:150px;    text-align:center; font-size: 32px;
+background-color: #9a9c9b;
   }
   .Coursescard .info p {
     Font: Monospace ;
