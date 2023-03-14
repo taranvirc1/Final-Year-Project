@@ -26,23 +26,36 @@ import Footer from "./components/Quizzes/components/Footer/Footer";
 import Home from "./components/Quizzes/Pages/Home/Home";
 import Quiz from "./components/Quizzes/Pages/Quiz/Quiz";
 import Result from "./components/Quizzes/Pages/Result/Result";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UpdatePassword from "./components/RegisterLogin/UpdatePassword";
 
 function AppRoute() {
-  const [questions, setQuestions] = useState();
+  const [questions, setQuestions] = useState([]);
   const [name, setName] = useState();
   const [score, setScore] = useState(0);
 
   const fetchQuestions = async (category = "", difficulty = "") => {
     const { data } = await axios.get(
-      `https://opentdb.com/api.php?amount=10${
-        category && `&category=${category}`
-      }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
+      `http://localhost:8080/api/questions`
     );
 
-    setQuestions(data.results);
+  //  setQuestions(data.results);
+
+
+
+
+
+
+
+
+
   };
+  
+
+
+
+
+
   return (
     <div>
       <BrowserRouter>
