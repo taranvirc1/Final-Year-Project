@@ -4,14 +4,12 @@ package CS2001.Group47.ELearning_Platform.dto;
 
 public class NewMessageDTO {
     String newMessage;
-    int mlikes;
     int saveThreadID;
     int studentId;
     
-    public NewMessageDTO(String newMessage, int mlikes, int saveThreadID, int studentId) {
+    public NewMessageDTO(String newMessage,  int saveThreadID, int studentId) {
         super();
         this.newMessage = newMessage;
-        this.mlikes = mlikes;
         this.saveThreadID = saveThreadID;
         this.studentId = studentId;
     }
@@ -22,14 +20,6 @@ public class NewMessageDTO {
 
     public void setNewMessage(String newMessage) {
         this.newMessage = newMessage;
-    }
-
-    public int getMlikes() {
-        return mlikes;
-    }
-
-    public void setMlikes(int mlikes) {
-        this.mlikes = mlikes;
     }
 
     public int getSaveThreadID() {
@@ -50,7 +40,7 @@ public class NewMessageDTO {
 
     @Override
     public String toString() {
-        return "NewMessageDTO [newMessage=" + newMessage + ", mlikes=" + mlikes + ", saveThreadID=" + saveThreadID
+        return "NewMessageDTO [newMessage=" + newMessage + ", saveThreadID=" + saveThreadID
                 + ", studentId=" + studentId + "]";
     }
 

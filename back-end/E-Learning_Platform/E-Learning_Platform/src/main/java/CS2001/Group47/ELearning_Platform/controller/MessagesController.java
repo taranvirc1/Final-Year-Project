@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import CS2001.Group47.ELearning_Platform.dto.CreateThreadDTO;
 import CS2001.Group47.ELearning_Platform.dto.NewMessageDTO;
 import CS2001.Group47.ELearning_Platform.model.Messages;
 import CS2001.Group47.ELearning_Platform.model.Student;
@@ -22,7 +21,6 @@ import CS2001.Group47.ELearning_Platform.model.Threads;
 import CS2001.Group47.ELearning_Platform.repository.MessagesRepository;
 import CS2001.Group47.ELearning_Platform.repository.StudentRepository;
 import CS2001.Group47.ELearning_Platform.service.MessageService;
-import CS2001.Group47.ELearning_Platform.service.StudentService;
 import CS2001.Group47.ELearning_Platform.service.ThreadService;
 @RestController
 public class MessagesController {
@@ -51,8 +49,7 @@ public class MessagesController {
         Student students = studentRepository.findByStudentId(newMessageDTO.getStudentId());
         // Else create a thread with DTO
         Messages newMessage = new Messages(
-            newMessageDTO.getNewMessage(),
-            newMessageDTO.getMlikes(), threads, students);
+            newMessageDTO.getNewMessage(), threads, students);
         // Add thread through ThreadService
         messageService.addMessage(newMessage);
 
