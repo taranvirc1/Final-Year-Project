@@ -1,19 +1,19 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import "./Question.css";
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-
+import axios from "axios";
 
 const Question = ({
   currQues,
   setCurrQues,
-  questions,
+
   options,
   correct,
   setScore,
   score,
-  setQuestions,
+
 }) => {
   const [selected, setSelected] = useState();
   const [error, setError] = useState(false);
@@ -45,6 +45,30 @@ const Question = ({
     setCurrQues(0);
     setQuestions();
   };
+
+  const [questions, setQuestions] = useState([]);
+
+const difficulty  = "easy";
+const category = "Java";
+  const jwt = localStorage.getItem("jwt");
+
+  
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/difficulty/${"easy"}/${"Java"}`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then((response) => {
+        setQuestions(response.data);
+      //  setQuizLength(response.data.length);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("cant get quiz");
+      });
+  }, []);
+
+console.log(questions);
 
   return (
     <div className="question">
