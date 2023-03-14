@@ -1,5 +1,5 @@
 import { Button, MenuItem, TextField } from "@mui/material";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Categories from "../../Data/Categories";
@@ -12,47 +12,17 @@ const Home = ({ name, setName, fetchQuestions }) => {
   const [difficulty, setDifficulty] = useState("");
   const [error, setError] = useState(false);
 
-
-
-  const [loggedInUser, setLoggedinUser] = useState("");
-
-  useEffect(() => {
-    const saveLoggedinUser = localStorage.getItem("loggedInUser");
-    if (saveLoggedinUser) {
-      setLoggedinUser(saveLoggedinUser);
-    }
-  }, []);
-
-
-
-
-  useEffect(()=>{
-localStorage.setItem("category", category);
-localStorage.setItem("difficulty", difficulty);
-
-})
-
-
-
-
-
-
-
   const Navigate = useNavigate();
 
   const handleSubmit = () => {
-    if(!loggedInUser){
-      alert("please log in to do the quiz")
-    }else{
     if (!category || !difficulty || !name) {
       setError(true);
       return;
     } else {
       setError(false);
       fetchQuestions(category, difficulty);
-      Navigate("/testQuiz");
+      Navigate("/quiz");
     }
-  }
   };
 
   return (
