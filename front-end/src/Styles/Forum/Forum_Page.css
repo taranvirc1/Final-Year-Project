@@ -15,17 +15,19 @@
     margin-top: 0.1rem;
     user-select: none;
     
+    
 }
 .thread-messages li{
     list-style: none;
     display: inline-block;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 .thread-messages li a{
     display: inline-block;
     padding: 0px 20px;
-    outline: auto;
-    outline-style: outset;
     font-size: 2rem;
+    outline: 3px;
+    outline-style: outset;
     background-color: white;
     text-decoration: none;
     color:black;
@@ -34,7 +36,7 @@
 .thread-messages li.previous a,
 .thread-messages li.next a,
 .thread-messages li.break a {
-  border-color: transparent;
+  color: #5a18b1;
 }
 .thread-messages li.active a {
     background-color: #9d5bf3;
@@ -238,7 +240,6 @@ cursor: default;
 .ThreadReply:active{
     transform: scale(0.97);
 }
-
 
 .ThreadReplySection{
     width: 96%;

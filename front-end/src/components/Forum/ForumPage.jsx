@@ -25,7 +25,7 @@ import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 import ReactPaginate from 'react-paginate';
 
 function ForumPage() {
-  const [threadId,setThreadId]=useState(0);
+  const [threadName,setthreadName]=useState([]);
   const [itemOffset, setItemOffset] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [messages, setMessages] = useState([]);
@@ -33,13 +33,19 @@ function ForumPage() {
   const [studentId, setStudentId] = useState("");
   const saveThreadID = localStorage.getItem("ThreadID");
   const jwt = localStorage.getItem("jwt");
-  console.log("This is thread "+ saveThreadID);
 
-  useEffect(() => {
-    const saveThreadID = localStorage.getItem("ThreadID");
-    setThreadId(saveThreadID);
-    
-  }, []);
+  const threadnameloader = (e) => {
+    axios
+    .get(`http://localhost:8080/threadid/${saveThreadID}`, { headers })
+  
+      .then((resp) => {
+        setthreadName(resp.data.threadName);
+        console.log("Thread Name: " + threadName);
+      })
+      .catch((error) => {
+        console.error(error);
+  });
+  }
 
   useEffect(() => {
 
@@ -53,7 +59,7 @@ function ForumPage() {
         console.log(error);
       });
   }, []);
-console.log("this message was created by"+studentId);
+console.log("Message created by"+studentId);
   const headers = {
     Authorization: `Bearer ${jwt}`,
   };
@@ -72,6 +78,18 @@ const messageloader = (e) => {
 });
 }
 
+//Get current posts
+const endOffset = itemOffset + postsPerPage;
+const currentMessages = messages.slice(itemOffset, endOffset);
+const pageCount = Math.ceil(messages.length / postsPerPage);
+
+const handlePageClick = (event) => {
+  const newOffset = (event.selected * postsPerPage) % messages.length;
+  console.log(
+    `User requested page number ${event.selected}, which is offset ${newOffset}`
+  );
+  setItemOffset(newOffset);
+};
 
 const newmessagehandle = (e) => {
   e.preventDefault();
@@ -105,21 +123,11 @@ const newmessagehandle = (e) => {
 
   useEffect(() => {
     messageloader();
+    threadnameloader();
   }, []);
 
 
-//Get current posts
-const endOffset = itemOffset + postsPerPage;
-const currentMessages = messages.slice(itemOffset, endOffset);
-const pageCount = Math.ceil(messages.length / postsPerPage);
 
-const handlePageClick = (event) => {
-  const newOffset = (event.selected * postsPerPage) % messages.length;
-  console.log(
-    `User requested page number ${event.selected}, which is offset ${newOffset}`
-  );
-  setItemOffset(newOffset);
-};
   
   //subscribe button colour changer white to orange
   const [subcolor,setsubcolor]=useState('white');
@@ -149,7 +157,7 @@ const handlePageClick = (event) => {
     <div className='navbar-spacing'>
     </div>
     <div className="forums-title">
-        <h2>Student Forum Threads</h2>
+        <h2>{threadName}</h2>
     </div>
     <div className='thread-messages'>
       <ReactPaginate
@@ -199,12 +207,15 @@ const handlePageClick = (event) => {
         <div className='ThreadUser'>{item.students.firstName}</div>
         <div className='dateandreply'>
           <div className='ThreadTime'>Posted on {item.createdAtDate}</div>
-          <div className="ThreadReply"><img src={ReplyIcon}/><label>Reply</label></div>
+          <a href= "#replysection" className="ThreadReply">
+            <img src={ReplyIcon}/>
+            <label>Reply</label>
+          </a>
         </div>
         
       </div>
     ))}
-    <section className='ThreadReplySection'>
+    <section id="replysection" className='ThreadReplySection'>
       <div className='ThreadTextEditor'>
         <div className="ThreadTextEditorPanel">
           <ul className='ThreadEditorIcons'>
