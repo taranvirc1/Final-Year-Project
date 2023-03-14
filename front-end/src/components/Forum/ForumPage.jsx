@@ -22,36 +22,49 @@ import ListIcon from "../../images/forum/text-editor/list.png"
 import TextAlignIcon from "../../images/forum/text-editor/textalign.png"
 import QuoteIcon from "../../images/forum/text-editor/quote.png"
 import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
-
-const LikeIcon = require('../../images/forum/like.png')
-const LikedIcon = require('../../images/forum/liked.png')
-const likeselect = { LikeIcon, LikedIcon }
-
-
+import ReactPaginate from 'react-paginate';
 
 function ForumPage() {
-  const [threadId,setThreadId]=useState(0);
+  const [threadName,setthreadName]=useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [postsPerPage, setPostsPerPage] = useState(10);
   const [messages, setMessages] = useState([]);
-  const [mLikes, setmLikes] = useState(0);
-  const [newMessage, setnewMessage] = useState([]);
+  const [newMessage, setnewMessage] = useState("");
+  const [studentId, setStudentId] = useState("");
   const saveThreadID = localStorage.getItem("ThreadID");
   const jwt = localStorage.getItem("jwt");
 
+  const threadnameloader = (e) => {
+    axios
+    .get(`http://localhost:8080/threadid/${saveThreadID}`, { headers })
+  
+      .then((resp) => {
+        setthreadName(resp.data.threadName);
+        console.log("Thread Name: " + threadName);
+      })
+      .catch((error) => {
+        console.error(error);
+  });
+  }
+
   useEffect(() => {
-    const saveThreadID = localStorage.getItem("ThreadID");
-    setThreadId(saveThreadID);
-    
+
+    const saveLoggedinUser = localStorage.getItem("loggedInUser");
+    axios.get(`http://localhost:8080/profile/${saveLoggedinUser}`, { headers})
+      .then(response => {
+        setStudentId(response.data.studentId)
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, []);
-
-  const token = jwt;
+console.log("Message created by"+studentId);
   const headers = {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${jwt}`,
   };
-  const Api = `http://localhost:8080/messages/${threadId}`;
-  const params = {
-    threadId  };
 
-useEffect(() => {
+const messageloader = (e) => {
   axios
   .get(`http://localhost:8080/messages/${saveThreadID}`, { headers })
 
@@ -62,37 +75,56 @@ useEffect(() => {
     })
     .catch((error) => {
       console.error(error);
-    });
-}, []);
+});
+}
+
+//Get current posts
+const endOffset = itemOffset + postsPerPage;
+const currentMessages = messages.slice(itemOffset, endOffset);
+const pageCount = Math.ceil(messages.length / postsPerPage);
+
+const handlePageClick = (event) => {
+  const newOffset = (event.selected * postsPerPage) % messages.length;
+  console.log(
+    `User requested page number ${event.selected}, which is offset ${newOffset}`
+  );
+  setItemOffset(newOffset);
+};
 
 const newmessagehandle = (e) => {
   e.preventDefault();
-
+  console.log(newMessage);
+  if (localStorage.getItem("loggedInUser") === "") {
+    alert("Please Login to post a message");
+  }
+  else if (newMessage === "") {
+    alert("Please fill in the text field");
+  }
+  else{
     axios
-      .post("http://localhost:8080/messages/create", {newMessage,mLikes,saveThreadID},
-        {headers: { Authorization: `Bearer ${jwt}` }},
-      )
-      .then((res) => {
-          console.log(res);
+    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId},
+      {headers: { Authorization: `Bearer ${jwt}` }},
+    )
+    .then((res) => {
+        console.log(res);
 })
-      .then(() => {
-        setnewMessage("");
-      })
-      .catch((err) => {
-        console.log(err);
+    .then(() => {
+      messageloader();
+    })
+    .catch((err) => {
+      console.log(err);
 
-      });
+    });
+  }
     
+     
   }
 
-console.log(threadId)
 
-
-
-
-
-
-
+  useEffect(() => {
+    messageloader();
+    threadnameloader();
+  }, []);
 
 
 
@@ -118,49 +150,27 @@ console.log(threadId)
     }
     
   }
-  //like button colour changer white to Dodger Blue
-  const [likecolor,setlikeColor]=useState('white');
-  function likebg(){
-    if(likecolor==="white"){
-      setlikeColor("#4882ff")
-    }
-    else{
-      setlikeColor("white")
-    }
-  }
-  //subscribe button image changer "LikeIcon" to "LikedIcon"
-  const[LikeButton, setLikeButton] = useState(likeselect.LikeIcon);
-  function presslike(){
-    if(LikeButton===likeselect.LikedIcon){
-      setLikeButton(likeselect.LikeIcon)
-    }
-    else{
-      setLikeButton(likeselect.LikedIcon)
-    }
-  }
 
-  const [threadid, setthreadid] = useState("");
-
-  useEffect(() => {
-    const saveThreadID = localStorage.getItem("ThreadID");
-    if (saveThreadID) {
-      setthreadid(saveThreadID);
-    }
-  }, []);
-  console.log(threadid);
+ 
   return (
     <>
-    <div className='navbar-spacing'>
+    <div className='fp-navbar-spacing'>
     </div>
     <div className="forums-title">
-        <h2>Student Forum Threads</h2>
+        <h2>{threadName}</h2>
     </div>
-    <nav className='ForumPage-list'>
-        <a >Previous</a>
-        <a >1</a>
-        <a >2</a>
-        <a >Next</a>
-    </nav>
+    <div className='thread-messages'>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="Next>"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="<Prev"
+        renderOnZeroPageCount={null}
+        activeClassName="active"
+      />
+    </div>
     
     <div className='PageOptions'>
         
@@ -181,25 +191,31 @@ console.log(threadId)
       </a> 
           
     </div>
-    {messages.map((item, index) => (
+    {currentMessages.map((item, index) => (
 
       <div className='Thread-Messages'>
         <div className='ThreadMessage'>
-          <div className='ThreadProfile'><img src={ProfileIcon}></img></div>
+        {item.students.avatar?  <img   className="ThreadProfile" src={"data:image/png;base64," + item.students.avatar } height="90" width="90" alt="" /> :
+        <img className="ThreadProfile" src={ProfileIcon} height="90" width="90" alt="" />}
+        
+
           <div className='ThreadParagraph'>
             <p>  {item.message }    
               </p>
           </div>
         </div>
-        <div className='ThreadUser'>{item.threads.students.firstName}</div>
-        <div className='ThreadTime'>2 hours ago</div>
-        <div className='ThreadInteraction'>
-          <div className='ThreadLike' style={{background:likecolor}} onClick={event=>{likebg();presslike();}}><img src={LikeButton}/></div>
-        <div className="ThreadReply"><img src={ReplyIcon}/><label>Reply</label></div>
+        <div className='ThreadUser'>{item.students.firstName}</div>
+        <div className='dateandreply'>
+          <div className='ThreadTime'>Posted on {item.createdAtDate}</div>
+          <a href= "#replysection" className="ThreadReply">
+            <img src={ReplyIcon}/>
+            <label>Reply</label>
+          </a>
         </div>
+        
       </div>
     ))}
-    <section className='ThreadReplySection'>
+    <section id="replysection" className='ThreadReplySection'>
       <div className='ThreadTextEditor'>
         <div className="ThreadTextEditorPanel">
           <ul className='ThreadEditorIcons'>

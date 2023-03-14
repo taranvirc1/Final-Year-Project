@@ -2,16 +2,18 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import "../../Styles/Forum/Forum_Landing.css"
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 import axios from "axios";
 import SearchIcon from "../../images/forum/search.png"
 import CreateIcon from "../../images/forum/create.png"
 import SortIcon from "../../images/forum/sort.png"
-import LikeIcon from "../../images/forum/like.png"
 import ReplyIcon from "../../images/forum/reply.png"
-import { useNavigate } from "react-router-dom";
 
 function ForumLanding() {
   const [threads, setthreads] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [postsPerPage, setPostsPerPage] = useState(10);
   const [threadid, setthreadid] = useState(0);
   const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate();
@@ -34,19 +36,39 @@ function ForumLanding() {
         console.error(error);
       });
   }, []);
+
+  //Get current posts
+  const endOffset = itemOffset + postsPerPage;
+  const currentPosts = threads.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(threads.length / postsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * postsPerPage) % threads.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
-    <div className='navbar-spacing'>
+    <div className='fl-navbar-spacing'>
     </div>
     <div className="forums-title">
         <h2>Student Forum Threads</h2>
     </div>
-    <nav className='LandingPage-list'>
-        <a >Previous</a>
-        <a >1</a>
-        <a >2</a>
-        <a >Next</a>
-    </nav>
+    <div className='thread-pages'>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="Next>"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="<Prev"
+        renderOnZeroPageCount={null}
+        activeClassName="active"
+      />
+    </div>
     
     <div className='LandingOptions'>
         
@@ -72,7 +94,7 @@ function ForumLanding() {
           
     </div>
     <section className='Thread-List'>
-      {threads.map((item, index) => (
+      {currentPosts.map((item, index) => (
       <div className="thread">
         <div className='topic-items'>
           <div className='thread-title'
@@ -86,8 +108,6 @@ function ForumLanding() {
             <li>{item.fTags}</li>
           </ul>
           <div className='Stats'>
-            <div className='Likes'><img src={LikeIcon}></img></div>
-            <h4>5 Likes</h4>
             <div className='Replies'><img src={ReplyIcon}></img></div>
             <h4>4 Replies</h4>
           </div>

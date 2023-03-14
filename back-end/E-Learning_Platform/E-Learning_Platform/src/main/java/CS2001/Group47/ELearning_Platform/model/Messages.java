@@ -38,9 +38,6 @@ public class Messages implements Serializable {
 
 	String message;
 	
-
-	int mLikes;
-	
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
@@ -51,16 +48,21 @@ public class Messages implements Serializable {
 	//@JsonIgnore
 	private Threads threads;
 
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "student")
+	//@JsonIgnore
+	private Student students;
+
 	public Messages() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Messages(String message, int mLikes , Threads threads) {
+	public Messages(String message, Threads threads, Student students) {
 		super();
 		this.message = message;
-		this.mLikes = mLikes;
 		this.threads = threads;
+		this.students = students;
 	}
 
 
@@ -80,14 +82,6 @@ public class Messages implements Serializable {
 		this.message = message;
 	}
 
-	public int getmLikes() {
-		return mLikes;
-	}
-
-	public void setmLikes(int mLikes) {
-		this.mLikes = mLikes;
-	}
-
 	public Date getCreatedAtDate() {
 		return createdAtDate;
 	}
@@ -104,11 +98,21 @@ public class Messages implements Serializable {
 		this.threads = threads;
 	}
 
+	public Student getStudents() {
+		return students;
+	}
+
+	public void setStudents(Student students) {
+		this.students = students;
+	}
+
 	@Override
 	public String toString() {
-		return "Messages [messageID=" + messageID + ", message=" + message + ", mLikes=" + mLikes + ", createdAtDate="
-				+ createdAtDate + ", threads=" + threads + "]";
+		return "Messages [messageID=" + messageID + ", message=" + message + ", createdAtDate="
+				+ createdAtDate + ", threads=" + threads + ", students=" + students + "]";
 	}
+
+	
 
 	
 

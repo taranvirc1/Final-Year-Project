@@ -28,13 +28,19 @@ function CreateForum() {
   const navigate = useNavigate();
   console.log(threadName);
   console.log(fTags);
-  const CreateLanding = () => {
-    localStorage.setItem("ThreadID", 0);
+  const CreateLanding = (newthreadId) => {
+    localStorage.setItem("ThreadID", newthreadId);
     navigate("/Forum_page");
   };
   const handlecreatethread = (e) => {
     e.preventDefault();
-
+    if (localStorage.getItem("loggedInUser") === "") {
+      alert("Please Login to create a topic thread");
+    }
+    else if (threadName === "" || fTags === "") {
+      alert("Thread Title and Tags Required");
+    }
+    else{
       axios
         .post("http://localhost:8080/threads/create", {threadName, fTags},
           {headers: { Authorization: `Bearer ${jwt}` }},
@@ -42,16 +48,18 @@ function CreateForum() {
         )
         .then((res) => {
             console.log(res);
-            CreateLanding();
+            CreateLanding(res.data.threadId);
   })
         .then(() => {
           setthreadName("");
           setfTags("");
         })
         .catch((err) => {
+          alert(`Please login to create a forum thread`);
           console.log(err);
 
         });
+    }
       
     }
 
@@ -60,7 +68,7 @@ function CreateForum() {
 
   return (
     <>
-    <div className='navbar-spacing'>
+    <div className='cf-navbar-spacing'>
     </div>
     <h2 className='CreateForum-Title'>Create Forum Threads</h2>
     <section className='thread-create'>
