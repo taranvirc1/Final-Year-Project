@@ -154,27 +154,29 @@ function Account() {
   const passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
   function checkPasswordStrength() {
-    if (password !== "") {
+    if (values.password !== "") {
       if (
-        password.length <= 3 &&
-        (password.match(passRegexWeak) ||
-          password.match(passRegexMedium) ||
-          password.match(passRegexStrong))
+        values.password.length <= 3 &&
+        (values.password.match(passRegexWeak) ||
+          values.password.match(passRegexMedium) ||
+          values.password.match(passRegexStrong))
       )
         setNo(1);
       if (
-        password.length >= 6 &&
-        ((password.match(passRegexWeak) && password.match(passRegexMedium)) ||
-          (password.match(passRegexMedium) &&
-            password.match(passRegexStrong)) ||
-          (password.match(passRegexWeak) && password.match(passRegexStrong)))
+        values.password.length >= 6 &&
+        ((values.password.match(passRegexWeak) &&
+          values.password.match(passRegexMedium)) ||
+          (values.password.match(passRegexMedium) &&
+            values.password.match(passRegexStrong)) ||
+          (values.password.match(passRegexWeak) &&
+            values.password.match(passRegexStrong)))
       )
         setNo(2);
       if (
-        password.length >= 6 &&
-        password.match(passRegexWeak) &&
-        password.match(passRegexMedium) &&
-        password.match(passRegexStrong)
+        values.password.length >= 6 &&
+        values.password.match(passRegexWeak) &&
+        values.password.match(passRegexMedium) &&
+        values.password.match(passRegexStrong)
       )
         setNo(3);
     } else {
@@ -438,11 +440,11 @@ function Account() {
                 </span>
                 {/* <span className="show-pass">SHOW</span> */}
               </div>
-              {password && (
-                <div className="pass-indicator" style={{ display: "flex" }}>
-                  <div className={`weak ${no === 1 ? "active" : ""}`}></div>
-                  <div className={`medium ${no === 2 ? "active" : ""}`}></div>
-                  <div className={`strong ${no === 3 ? "active" : ""}`}></div>
+              {values.password && (
+                <div className="pass-indicator">
+                  <span className={`weak ${no === 1 ? "active" : ""}`}></span>
+                  <span className={`medium ${no === 2 ? "active" : ""}`}></span>
+                  <span className={`strong ${no === 3 ? "active" : ""}`}></span>
                 </div>
               )}
               {no === 1 && (

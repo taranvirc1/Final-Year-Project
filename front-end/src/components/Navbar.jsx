@@ -72,8 +72,6 @@ function Navbar() {
             
           </li>
 
-          
-
           <li>
             {/* Link for login/signup page */}
             <Link to="account" className="navLink" href="#log">
