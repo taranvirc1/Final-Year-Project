@@ -1,7 +1,6 @@
 .footer {
-  position: relative;
+  position: sticky;
   background: #05b3a4;
-  min-height: 100px;
   padding: 20px 50px;
   display: flex;
   justify-content: center;
