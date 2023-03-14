@@ -51,6 +51,13 @@ public class Rate_ReviewController {
         if (reviewService.findByEmail(email)!=null) {
             return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
         };
+        if (newReviewPostDTO.getRatingStars() == 0 || newReviewPostDTO.getReviewDesc() == null) {
+          // This is for testing purposes
+         
+          // Return response entity with error and BAD REQUEST status
+          return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.CONFLICT);
+
+      }
   
          Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
         
