@@ -20,7 +20,7 @@ import nft1 from "../../images/UPM/assets/nft1_low.png";
 import nft2 from "../../images/UPM/assets/nft2_low.png";
  function Avatar() {
     const [loggedInUser, setLoggedinUser] = useState("");
-  
+    const [profile, setProfile] = useState([]);
     useEffect(() => {
       const saveLoggedinUser = localStorage.getItem("loggedInUser");
       if (saveLoggedinUser) {
@@ -50,7 +50,7 @@ const jwt = localStorage.getItem("jwt");
       });
     },[]);
   
-    const [profile, setProfile] = useState([]);
+   
     const token = jwt;
     const headers = {
       Authorization: `Bearer ${token}`
@@ -63,7 +63,8 @@ const xpBar = document.querySelector(".xp-bar");
 function updateXP(currentXp, totalXP) {
   const percentComplete = (currentXp / totalXP) * 100;
   xpBar.style.width = `${percentComplete}%`;
-  console.log(currentXp)
+  console.log("The percent is " + percentComplete);
+  console.log("The current xp is " + currentXp);
 }
     useEffect(() => {
    
@@ -72,7 +73,7 @@ function updateXP(currentXp, totalXP) {
         .then(response => {
           setProfile(response.data);
           setStudentId(response.data.studentId)
-          updateXP(xp, 500); 
+          updateXP(currentXp, 500); 
           setCurrentXp(response.data.xp)
           
         })
@@ -114,7 +115,7 @@ return (
           </div>
           <div class="xp-container">
             <div class="xp-bar">
-             
+              <script src="front-end\src\components\Section Avatar\avatar-details.js"></script>
             </div>
           </div>
         </div>
