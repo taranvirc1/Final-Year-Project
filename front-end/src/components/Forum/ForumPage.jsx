@@ -24,22 +24,14 @@ import QuoteIcon from "../../images/forum/text-editor/quote.png"
 import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 import ReactPaginate from 'react-paginate';
 
-const LikeIcon = require('../../images/forum/like.png')
-const LikedIcon = require('../../images/forum/liked.png')
-const likeselect = { LikeIcon, LikedIcon }
-
-
-
 function ForumPage() {
   const [threadId,setThreadId]=useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [messages, setMessages] = useState([]);
-  const [mLikes, setmLikes] = useState(0);
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
   const saveThreadID = localStorage.getItem("ThreadID");
-  const loggedInUser = localStorage.getItem("ThreadID");
   const jwt = localStorage.getItem("jwt");
   console.log("This is thread "+ saveThreadID);
 
@@ -92,7 +84,7 @@ const newmessagehandle = (e) => {
   }
   else{
     axios
-    .post("http://localhost:8080/messages/create", {newMessage,mLikes,saveThreadID,studentId},
+    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId},
       {headers: { Authorization: `Bearer ${jwt}` }},
     )
     .then((res) => {
@@ -150,17 +142,6 @@ const handlePageClick = (event) => {
     }
     
   }
-  //like button colour changer white to Dodger Blue
-  const [likecolor,setlikeColor]=useState('white');
-  function likebg(){
-    if(likecolor==="white"){
-      setlikeColor("#4882ff")
-    }
-    else{
-      setlikeColor("white")
-    }
-  }
-
 
  
   return (
