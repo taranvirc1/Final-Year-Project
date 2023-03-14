@@ -1,12 +1,59 @@
 import React from 'react'
 import {Link} from "react-router-dom"
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
+import axios from "axios";
 import  "../../Styles/Forum/Search_Thread.css"
-import DeleteIcon from "../../images/forum/delete.png"
+
+import ReplyIcon from "../../images/forum/reply.png"
 import SearchIcon from "../../images/forum/search.png"
+import SortIcon from "../../images/forum/sort.png"
 
 function SearchThread() {
+
+  const [threads, setthreads] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [threadid, setthreadid] = useState(0);
+  const jwt = localStorage.getItem("jwt");
+  const resultsfound = threads.length;
+  const navigate = useNavigate();
+  const ViewForum = (item) => {
+    localStorage.setItem("ThreadID", item);
+    navigate("/Forum_page");
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/threads`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then((resp) => {
+        console.log(resp.data);
+
+        setthreads(resp.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  //result pagination
+  const endOffset = itemOffset + postsPerPage;
+  const currentPosts = threads.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(threads.length / postsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * postsPerPage) % threads.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
-    <div className='navbar-spacing'>
+    <div className='s-navbar-spacing'>
       <h2 className='SearchForum-Title'>Search Forum Threads</h2>
       <section className='thread-search'>
         <div className='searchthread-title'>
@@ -26,11 +73,75 @@ function SearchThread() {
           </select>
         </div>
         <div className='searchpost'>
-        <Link to="/SearchThread_results">
           <a href="/" className='spost'><img src={SearchIcon} alt="search icon"/></a>
           <label>Search Thread</label>
-        </Link>
         </div>
+      </section>
+      
+      <section className='searchResults'>
+      
+        <div className="searchresult-title">
+          <h2>You Searched For: "CS"</h2>
+        </div>
+        <div className='ThreadResultsFound'><h2>{resultsfound} results found</h2></div>
+        <nav className='thread-pages'>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next>"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="<Prev"
+            renderOnZeroPageCount={null}
+            activeClassName="active"
+          />
+        </nav>
+        
+        <div className='SearchResultOptions'>
+            
+          <a href='/' className="SearchResultSort">
+            
+            <label for="srsortbtn"><img src={SortIcon} alt="sort icon"/></label>               
+            <input type="checkbox" id="srsortbtn"/> 
+            
+            <ul class="searchresultsort-optn">
+              <li><a href="/">Last Updated</a></li> 
+              <li><a href="/">Most Liked</a></li>
+              <li><a href="/">Most Replies</a></li>
+            </ul>
+
+          </a>
+              
+        </div>
+
+        <section className='Thread-List'>
+          {currentPosts.map((item, index) => (
+          <div className="thread">
+            <div className='topic-items'>
+              <div className='thread-title'
+                onClick={() => {
+                  ViewForum(item.threadId);
+                }}
+                >{item.threadName}</div>
+                
+        
+              <ul className='tags'>
+                <li>{item.fTags}</li>
+              </ul>
+              <div className='Stats'>
+                <div className='Replies'><img src={ReplyIcon}></img></div>
+                <h4>4 Replies</h4>
+              </div>
+              
+              <div className='thread-creatorname'>Started on {item.fDateCreated} By {item.students.firstName} {item.students.lastName} </div>
+              
+              
+            </div>
+          </div>
+          ))}
+        </section>
+
+        
       </section>
     </div>
     

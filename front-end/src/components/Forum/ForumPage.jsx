@@ -154,7 +154,7 @@ const newmessagehandle = (e) => {
  
   return (
     <>
-    <div className='navbar-spacing'>
+    <div className='fp-navbar-spacing'>
     </div>
     <div className="forums-title">
         <h2>{threadName}</h2>
