@@ -2,13 +2,13 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import "../../Styles/Forum/Forum_Landing.css"
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 import axios from "axios";
 import SearchIcon from "../../images/forum/search.png"
 import CreateIcon from "../../images/forum/create.png"
 import SortIcon from "../../images/forum/sort.png"
 import ReplyIcon from "../../images/forum/reply.png"
-import { useNavigate } from "react-router-dom";
-import ReactPaginate from 'react-paginate';
 
 function ForumLanding() {
   const [threads, setthreads] = useState([]);
@@ -52,7 +52,7 @@ function ForumLanding() {
 
   return (
     <>
-    <div className='navbar-spacing'>
+    <div className='fl-navbar-spacing'>
     </div>
     <div className="forums-title">
         <h2>Student Forum Threads</h2>

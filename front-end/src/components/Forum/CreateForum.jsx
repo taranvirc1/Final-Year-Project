@@ -68,7 +68,7 @@ function CreateForum() {
 
   return (
     <>
-    <div className='navbar-spacing'>
+    <div className='cf-navbar-spacing'>
     </div>
     <h2 className='CreateForum-Title'>Create Forum Threads</h2>
     <section className='thread-create'>

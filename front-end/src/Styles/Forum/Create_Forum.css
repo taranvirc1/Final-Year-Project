@@ -1,5 +1,8 @@
+.cf-navbar-spacing{
+    margin-top: 60px;
+    padding-top:35px;
+}
 .CreateForum-Title{
-    margin-top: 70px;
     position: relative;
     padding: 0 40px;
     color: black;
