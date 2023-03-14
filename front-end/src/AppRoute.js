@@ -29,7 +29,7 @@ import Quiz from "./components/Quizzes/Pages/Quiz/Quiz";
 import Result from "./components/Quizzes/Pages/Result/Result";
 import { useState, useEffect } from "react";
 import UpdatePassword from "./components/RegisterLogin/UpdatePassword";
-
+import TestQuiz from "./components/Quizzes/TestQuiz";
 function AppRoute() {
   const [questions, setQuestions] = useState([]);
   const [name, setName] = useState();
@@ -95,6 +95,8 @@ function AppRoute() {
             <Route path="/Create_forum" element={<CreateForum />} />
 
             {/* ======route for quizzes====== */}
+            <Route path="/testQuiz" element={<TestQuiz />} />
+
             <Route
               path="/Quizzes"
               element={
