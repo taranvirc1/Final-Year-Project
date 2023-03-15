@@ -7,7 +7,14 @@ import "./Home.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
-const [loggedInUser, setLoggedinUser] = useState("");
+const Home = ({ name, setName, fetchQuestions }) => {
+  const [category, setCategory] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [error, setError] = useState(false);
+
+
+
+  const [loggedInUser, setLoggedinUser] = useState("");
 
   useEffect(() => {
     const saveLoggedinUser = localStorage.getItem("loggedInUser");
@@ -25,13 +32,18 @@ localStorage.setItem("difficulty", difficulty);
   const Navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (!category || !difficulty ) {
-      setError(true);
-      return;
-    } else {
-      setError(false);
-      fetchQuestions(category, difficulty);
-      Navigate("/quiz");
+    if(!loggedInUser){
+      alert("please log in to do the quiz")
+    }else{
+      // Check only category and difficulty, ignore name
+      if (!category || !difficulty) {
+        setError(true);
+        return;
+      } else {
+        setError(false);
+        fetchQuestions(category, difficulty);
+        Navigate("/testQuiz");
+      }
     }
   };
 
