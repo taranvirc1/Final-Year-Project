@@ -46,7 +46,7 @@ localStorage.setItem("difficulty", difficulty);
       }
     }
   };
-
+// testc
   return (
     <>
     <Header />
@@ -105,4 +105,4 @@ localStorage.setItem("difficulty", difficulty);
   );
 };
 
-export default Home;
+export default Home; 
