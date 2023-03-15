@@ -29,7 +29,7 @@ import Result from "./components/Quizzes/Pages/Result/Result";
 import { useState, useEffect } from "react";
 import UpdatePassword from "./components/RegisterLogin/UpdatePassword";
 import JavaScriptVideos from "./components/CcoursesPage/AllVideoPages/JavaScriptVideos";
-import TestQuiz from "./components/Quizzes/TestQuiz";
+
 function AppRoute() {
   const [questions, setQuestions] = useState([]);
   const [name, setName] = useState();
@@ -40,8 +40,23 @@ function AppRoute() {
       `http://localhost:8080/api/questions`
     );
 
+  //  setQuestions(data.results);
+
+
+
+
+
+
+
+
+
   };
   
+
+
+
+
+
   return (
     <div>
       <BrowserRouter>
@@ -78,8 +93,6 @@ function AppRoute() {
             <Route path="/Create_forum" element={<CreateForum />} />
 
             {/* ======route for quizzes====== */}
-            <Route path="/testQuiz" element={<TestQuiz />} />
-
             <Route
               path="/Quizzes"
               element={

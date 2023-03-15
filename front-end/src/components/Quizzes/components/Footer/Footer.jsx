@@ -6,7 +6,8 @@ const Footer = () => {
         marginBottom: 10,
       }}
     >
-      make sure you log in to start the Quiz!
+      Made with ♥ by{" "}
+      Mihretab
     </div>
   );
 };

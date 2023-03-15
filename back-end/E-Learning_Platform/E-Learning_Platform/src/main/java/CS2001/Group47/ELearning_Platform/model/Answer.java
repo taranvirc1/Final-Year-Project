@@ -1,7 +1,5 @@
 package CS2001.Group47.ELearning_Platform.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,11 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "answer")
-public class Answer implements Serializable {
+public class Answer {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +28,8 @@ public class Answer implements Serializable {
   @Column(name = "is_correct")
   private boolean isCorrect;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "question_id", nullable = false)
-  @JsonIgnore
-
   private Question question;
  
 
