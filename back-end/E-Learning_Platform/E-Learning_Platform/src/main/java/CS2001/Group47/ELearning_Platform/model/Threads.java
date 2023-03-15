@@ -72,6 +72,11 @@ public class Threads implements Serializable {
 	@JsonIgnore
 
 	private List<Messages> messages = new ArrayList<>();
+
+	@OneToMany(mappedBy = "threads", cascade = CascadeType.ALL)
+	@JsonIgnore
+
+	private List<Subscriptions> subscriptions = new ArrayList<>();
 	
 	public Threads() {
 		super();
@@ -150,8 +155,11 @@ public class Threads implements Serializable {
 	public String toString() {
 		return "Threads [threadId=" + threadId + ", threadName=" + threadName + ", fTags=" + fTags
 				+ ", fTimestampCreated=" + fTimestampCreated + ", fDateCreated=" + fDateCreated + ", fTimeCreated="
-				+ fTimeCreated + ", students=" + students + ", messages=" + messages + "]";
+				+ fTimeCreated + ", students=" + students + ", messages=" + messages + ", subscriptions="
+				+ subscriptions + "]";
 	}
+
+	
 
 	
 
