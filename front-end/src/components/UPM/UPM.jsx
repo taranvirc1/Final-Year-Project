@@ -506,7 +506,7 @@ function UPM() {
                           <div className="upm-split-2">
                             <div class="upm-form field">
                               <select
-                                class="upm-field"
+                                class="upm-field-2"
                                 color="black"
                                 defaultValue={user && user.country}
                                 onChange={(event) => {
@@ -514,7 +514,6 @@ function UPM() {
                                   setCountry(newValue);
                                 }}
                                 name="Country"
-                                id="country"
                                 required
                               >
                                 <option className="upm-op" value="">
