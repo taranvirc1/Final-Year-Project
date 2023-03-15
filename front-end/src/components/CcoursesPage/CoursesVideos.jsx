@@ -502,53 +502,61 @@ function CoursesVideos() {
           </div>
         )}
 
-        <div className="reviews">
-          {reviews.slice(0, visible).map((reviewd) => (
-            <div className="eachReview">
-            {reviewd.students.avatar?  <img  className="reviewphoto" src={"data:image/png;base64," + reviewd.students.avatar } height="90" width="90" alt="" /> : <img  className="reviewphoto" src={"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} height="90" width="90" alt="" /> }
+<div className="reviews">
+        {reviews.slice(0, visible).map((reviewd) => (
+                 
 
-            <div className="reviewBox">
+          <div className="eachReview">
+                   <div className="reviewSorter">
+          {reviewd.students.avatar?  <img  className="reviewphoto" src={"data:image/png;base64," + reviewd.students.avatar } height="90" width="90" alt="" /> : <img  className="reviewphoto" src={"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} height="90" width="90" alt="" /> }
+   
+          <div className="reviewBox">
 
-              <div className="top-review">
-                <h4 className="reviewerName">
+            <div className="top-review">
+              <h4 className="reviewerName">
 
-                  {reviewd.students.firstName}
-                  <span></span> {reviewd.students.lastName}
-                </h4>
-                {new Array(reviewd.ratingStars).fill().map(() => (
-                  <i className="fas fa-star icon-c" />
-                ))}
-              </div>
-              <div className="reviewDiscription">
-
-                <p>{reviewd.reviewDesc}</p>
-                <p2>{reviewd.createdAt}</p2>
-              </div>
-              </div>
-
-              {loggedInUser === reviewd.students.email && (
-                <button
-                  className="editReview"
-                  onClick={() => {
-                    handleEdit(reviewd.ratingID);
-                    handleForm();
-                  }}
-                >
-                  Edit
-                </button>
-              )}
-
-              {loggedInUser === reviewd.students.email && (
-                <button
-                  className="deleteReview"
-                  onClick={() => deleteReview(reviewd.ratingID)}
-                >
-                  Delete
-                </button>
-              )}
+                {reviewd.students.firstName}
+                <span></span> {reviewd.students.lastName}
+              </h4>
+              {new Array(reviewd.ratingStars).fill().map(() => (
+                <i className="fas fa-star icon-c" />
+              ))}
             </div>
-          ))}
-        </div>
+            <div className="reviewDiscription">
+
+              <p>{reviewd.reviewDesc}</p>
+              <p2>{reviewd.createdAt}</p2>
+            </div>
+            </div>
+            </div>
+
+            <div className="editanddeleteButton">
+
+            {loggedInUser === reviewd.students.email && (
+              <button
+                className="editReview"
+                onClick={() => {
+                  handleEdit(reviewd.ratingID);
+                  handleForm();
+                }}
+              >
+                Edit
+              </button>
+            )}
+
+            {loggedInUser === reviewd.students.email && (
+              <button
+                className="deleteReview"
+                onClick={() => deleteReview(reviewd.ratingID)}
+              >
+                Delete
+              </button>
+            )}
+          </div>
+          </div>
+
+        ))}
+      </div>
         <button className="viewMore" onClick={showMoreReviews}>
           View More
         </button>
