@@ -38,6 +38,7 @@ function Courses() {
           <div className="info">
             <h1 className="courseTitle">JAVA</h1>
             <Link to="/coursesvideos">
+    
               <button> Watch Videos</button>
             </Link>
           </div>
@@ -96,7 +97,10 @@ function Courses() {
           <div className="info">
             <h1>Java Script</h1>
            
-            <button>Watch Videos</button>
+            <Link to="/javaScriptVideos">
+        
+              <button> Watch Videos</button>
+            </Link>
           </div>
         </div>
       </div>

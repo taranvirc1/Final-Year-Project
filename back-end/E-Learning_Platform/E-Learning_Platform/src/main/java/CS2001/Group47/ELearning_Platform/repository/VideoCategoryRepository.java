@@ -6,5 +6,5 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VideoCategoryRepository extends JpaRepository <VideoCategory, Integer> {
-    List<VideoCategory> findAll();
+    List<VideoCategory> findDistinctByVideos_Courses_CourseID(Integer courseID);
 }
