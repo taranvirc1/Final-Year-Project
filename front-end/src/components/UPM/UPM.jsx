@@ -75,9 +75,9 @@ function UPM() {
     },
   };
   const maxDate = new Date().toISOString().split("T")[0];
-  const [error, setError] = useState("");
-
+  const [error2, setError2] = useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [error, setError] = useState("");
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -155,6 +155,20 @@ function UPM() {
       console.error(error);
     }
   };
+  function checkPasswordStrength(password) {
+    const hasNumber = /\d/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[$&+,:;=?@#|'<>.^*()%!-]/.test(password);
+
+    return (
+      hasNumber &&
+      hasLowercase &&
+      hasUppercase &&
+      hasSpecialChar &&
+      password.length >= 8
+    );
+  }
 
   function updateInfo2() {
     axios
@@ -412,7 +426,7 @@ function UPM() {
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   if (!emailRegex.test(newValue)) {
-                                    setError("X");
+                                    setError2("X");
                                   } else {
                                     setEmail(newValue);
                                   }
@@ -422,11 +436,7 @@ function UPM() {
                                 required
                               />
 
-                              {error && (
-                                <span className="error">
-                                  {error}
-                                </span>
-                              )}
+                              {error2 && <span className="error">{error}</span>}
 
                               <label for="name" class="upm-label">
                                 Email
@@ -439,16 +449,24 @@ function UPM() {
                               <input
                                 type="password"
                                 class="upm-field"
-                                placeholder={"*******************************"}
-                                defaultValue={"*****************"}
+                                placeholder="*******************************"
+                                defaultValue="*****************"
                                 onChange={(event) => {
                                   const newValue = event.target.value;
-                                  setNewPasswords(newValue);
+                                  const isStrongEnough =
+                                    checkPasswordStrength(newValue);
+
+                                  if (!isStrongEnough) {
+                                    setNewPasswords("default");
+                                  } else {
+                                    setNewPasswords(newValue);
+                                  }
                                 }}
                                 name="Password"
                                 id="Password"
                                 required
                               />
+
                               <label for="name" class="upm-label">
                                 Password
                               </label>
