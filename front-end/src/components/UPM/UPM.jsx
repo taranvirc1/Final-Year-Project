@@ -505,19 +505,31 @@ function UPM() {
                           </div>
                           <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input
-                                type="input"
+                              <select
                                 class="upm-field"
-                                placeholder={user && user.lastName}
+                                color="black"
                                 defaultValue={user && user.country}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setCountry(newValue);
                                 }}
-                                name="Language"
-                                id="language"
+                                name="Country"
+                                id="country"
                                 required
-                              />
+                              >
+                                <option className="upm-op" value="">
+                                  Select a country
+                                </option>
+                                <option
+                                  className="upm-op"
+                                  color="black"
+                                  value="USA"
+                                >
+                                  English
+                                </option>
+                                {/* Add more options as needed */}
+                              </select>
+
                               <label for="name" class="upm-label">
                                 Language
                               </label>
