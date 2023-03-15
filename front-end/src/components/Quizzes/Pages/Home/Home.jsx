@@ -46,7 +46,7 @@ localStorage.setItem("difficulty", difficulty);
       }
     }
   };
-//kkkkk
+
   return (
     <>
     <Header />
