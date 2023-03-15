@@ -8,13 +8,11 @@ import { getReviews } from "./APIs/RetrieveReviews";
 import Background from "./background/Background";
 import Accordion from "./Accordion";
 
-import img1 from"../../images/footer image/brunel-logo-blue.png"
-import img2 from "../../images/footer image/codecademy-logo-vector.png"
-import img3 from "../../images/footer image/Logo_of_the_United_Nations.svg.png"
-import img4 from "../../images/footer image/ioc_logo_onwhite_aw.258x0-is-hidpi.png"
-
-
-
+import img1 from "../../images/footer image/brunel-logo-blue.png";
+import img2 from "../../images/footer image/codecademy-logo-vector.png";
+import img3 from "../../images/footer image/Logo_of_the_United_Nations.svg.png";
+import img4 from "../../images/footer image/ioc_logo_onwhite_aw.258x0-is-hidpi.png";
+import SortIcon from "../../images/forum/sort.png";
 
 function CoursesVideos() {
   const reDirect = useNavigate();
@@ -173,7 +171,7 @@ function CoursesVideos() {
   const jwt = localStorage.getItem("jwt");
   console.log(jwt);
   const retrieveReviews = () =>
-    getReviews({ setTotalReviews, average, setReviews, jwt,CurrentCourseID });
+    getReviews({ setTotalReviews, average, setReviews, jwt, CurrentCourseID });
 
   useEffect(() => {
     // getReviews();
@@ -187,6 +185,32 @@ function CoursesVideos() {
   };
   const showLessReviews = () => {
     setVisible((prevValue) => prevValue - 5);
+  };
+
+  const sortByDescendingReviews = (event) => {
+    reviews.sort(
+      (a, b) =>
+        new Date(...b.createdAt.split("/").reverse()) -
+        new Date(...a.createdAt.split("/").reverse())
+    );
+  };
+  const sortByAscendingReviews = (event) => {
+    reviews.sort(
+      (a, b) =>
+        new Date(...a.createdAt.split("/").reverse()) -
+        new Date(...b.createdAt.split("/").reverse())
+    );
+  };
+
+  const sortBYRatingAsc = (event) => {
+    reviews.sort(function (a, b) {
+      return a.ratingStars - b.ratingStars;
+    });
+  };
+  const sortBYRatingDsc = (event) => {
+    reviews.sort(function (a, b) {
+      return b.ratingStars - a.ratingStars;
+    });
   };
 
   console.log(reviews);
@@ -345,12 +369,10 @@ function CoursesVideos() {
   }, [reviews, loggedInUser]);
   console.log(hasReview);
 
-
-
   const checkIfFilled = (e) => {
     if (!loggedInUser) {
       alert("please log in to review");
-        reDirect("/Account");
+      reDirect("/Account");
     } else if (!review.ratingID) {
       if (hasReview) {
         alert("you already have a review");
@@ -402,7 +424,10 @@ function CoursesVideos() {
       </div>
       <div className="Space"> </div>
 
-      <Accordion CurrentCourseID={CurrentCourseID} loggedInUser={loggedInUser} />
+      <Accordion
+        CurrentCourseID={CurrentCourseID}
+        loggedInUser={loggedInUser}
+      />
 
       <div className="trackerContainer">
         Quiz Progress For this Course
@@ -429,23 +454,54 @@ function CoursesVideos() {
       <div className="Coursediscription">
         <h1 className="DescriptionHeader">Discription </h1>
         <div className="DescriptionText">
-   
-The course consists of JAVA features, Java SE
-Concept of programming are made simple and easy.
-Every topic is explained with real-life examples.
-This course is designed to make you familiar with JAVA Programming in detail.
-By the end of the course you will understand Java extremely well and will be able to build your own Java applications.
-After completion of the course, you will be as productive as a software developer.
-The course is taken right from basics to all the features in JAVA.
-Basic topics like – Methods, Object-Orientation and Inheritance are explained.
-Features like – Multithreading, AWT, Swing, Collection Framework and Networking are also covered in a detailed manner.
-
+          The course consists of JAVA features, Java SE Concept of programming
+          are made simple and easy. Every topic is explained with real-life
+          examples. This course is designed to make you familiar with JAVA
+          Programming in detail. By the end of the course you will understand
+          Java extremely well and will be able to build your own Java
+          applications. After completion of the course, you will be as
+          productive as a software developer. The course is taken right from
+          basics to all the features in JAVA. Basic topics like – Methods,
+          Object-Orientation and Inheritance are explained. Features like –
+          Multithreading, AWT, Swing, Collection Framework and Networking are
+          also covered in a detailed manner.
         </div>
       </div>
 
       <div className="reviewsContainer">
         <div className="averageRating">
           {totalSum}
+          <div className="LandingOptions">
+            <a href="#!" className="LandingSort">
+              <label for="lsortbtn">
+                <img src={SortIcon} alt="" />
+              </label>
+              <input type="checkbox" id="lsortbtn" />
+
+              <ul className="landingsort-optn">
+                <li>
+                  <a href="#!" onClick={sortByDescendingReviews}>
+                    Sort By Date Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortByAscendingReviews}>
+                    Sort By Date Desc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingAsc}>
+                    Sort By Rating Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingDsc}>
+                    Sort By Rating Desc
+                  </a>
+                </li>
+              </ul>
+            </a>
+          </div>
           <i className="star fa fa-star">
             Course Rating | {totalReviews} ratings
           </i>
@@ -505,61 +561,72 @@ Features like – Multithreading, AWT, Swing, Collection Framework and Networkin
           </div>
         )}
 
-<div className="reviews">
-        {reviews.slice(0, visible).map((reviewd) => (
-                 
+        <div className="reviews">
+          {reviews.slice(0, visible).map((reviewd) => (
+            <div className="eachReview">
+              <div className="reviewSorter">
+                {reviewd.students.avatar ? (
+                  <img
+                    className="reviewphoto"
+                    src={"data:image/png;base64," + reviewd.students.avatar}
+                    height="90"
+                    width="90"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="reviewphoto"
+                    src={
+                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    }
+                    height="90"
+                    width="90"
+                    alt=""
+                  />
+                )}
 
-          <div className="eachReview">
-                   <div className="reviewSorter">
-          {reviewd.students.avatar?  <img  className="reviewphoto" src={"data:image/png;base64," + reviewd.students.avatar } height="90" width="90" alt="" /> : <img  className="reviewphoto" src={"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} height="90" width="90" alt="" /> }
-   
-          <div className="reviewBox">
+                <div className="reviewBox">
+                  <div className="top-review">
+                    <h4 className="reviewerName">
+                      {reviewd.students.firstName}
+                      <span></span> {reviewd.students.lastName}
+                    </h4>
+                    {new Array(reviewd.ratingStars).fill().map(() => (
+                      <i className="fas fa-star icon-c" />
+                    ))}
+                  </div>
+                  <div className="reviewDiscription">
+                    <p>{reviewd.reviewDesc}</p>
+                    <p2>{reviewd.createdAt}</p2>
+                  </div>
+                </div>
+              </div>
 
-            <div className="top-review">
-              <h4 className="reviewerName">
+              <div className="editanddeleteButton">
+                {loggedInUser === reviewd.students.email && (
+                  <button
+                    className="editReview"
+                    onClick={() => {
+                      handleEdit(reviewd.ratingID);
+                      handleForm();
+                    }}
+                  >
+                    Edit
+                  </button>
+                )}
 
-                {reviewd.students.firstName}
-                <span></span> {reviewd.students.lastName}
-              </h4>
-              {new Array(reviewd.ratingStars).fill().map(() => (
-                <i className="fas fa-star icon-c" />
-              ))}
+                {loggedInUser === reviewd.students.email && (
+                  <button
+                    className="deleteReview"
+                    onClick={() => deleteReview(reviewd.ratingID)}
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="reviewDiscription">
-
-              <p>{reviewd.reviewDesc}</p>
-              <p2>{reviewd.createdAt}</p2>
-            </div>
-            </div>
-            </div>
-
-            <div className="editanddeleteButton">
-
-            {loggedInUser === reviewd.students.email && (
-              <button
-                className="editReview"
-                onClick={() => {
-                  handleEdit(reviewd.ratingID);
-                  handleForm();
-                }}
-              >
-                Edit
-              </button>
-            )}
-
-            {loggedInUser === reviewd.students.email && (
-              <button
-                className="deleteReview"
-                onClick={() => deleteReview(reviewd.ratingID)}
-              >
-                Delete
-              </button>
-            )}
-          </div>
-          </div>
-
-        ))}
-      </div>
+          ))}
+        </div>
         <button className="viewMore" onClick={showMoreReviews}>
           View More
         </button>
@@ -573,35 +640,19 @@ Features like – Multithreading, AWT, Swing, Collection Framework and Networkin
 
         <div className="row">
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src={img1}
-              style={{ width: "200px" }}
-            />
+            <img alt="" src={img1} style={{ width: "200px" }} />
           </div>
 
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src={img2}
-              style={{ width: "155px" }}
-            />
+            <img alt="" src={img2} style={{ width: "155px" }} />
           </div>
 
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src={img3}
-              style={{ width: "155px" }}
-            />
+            <img alt="" src={img3} style={{ width: "155px" }} />
           </div>
 
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src={img4}
-              style={{ width: "155px" }}
-            />
+            <img alt="" src={img4} style={{ width: "155px" }} />
           </div>
         </div>
       </div>
