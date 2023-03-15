@@ -159,11 +159,12 @@ function CoursesVideos() {
   const [reviews, setReviews] = useState([]); // retrieved reveiws is stored in this array
   const [average, setAverage] = useState(0);
   const [totalReviews, setTotalReviews] = useState(null);
+  const CurrentCourseID = 1;
 
   const jwt = localStorage.getItem("jwt");
   console.log(jwt);
   const retrieveReviews = () =>
-    getReviews({ setTotalReviews, average, setReviews, jwt });
+    getReviews({ setTotalReviews, average, setReviews, jwt,CurrentCourseID });
 
   useEffect(() => {
     // getReviews();
@@ -392,7 +393,7 @@ function CoursesVideos() {
       </div>
       <div className="Space"> </div>
 
-      <Accordion />
+      <Accordion CurrentCourseID={CurrentCourseID} />
 
       <div className="trackerContainer">
         Quiz Progress For this Course

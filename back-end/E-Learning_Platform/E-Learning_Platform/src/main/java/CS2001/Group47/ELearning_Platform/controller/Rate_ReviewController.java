@@ -32,112 +32,102 @@ import javax.management.RuntimeErrorException;
 
 @RestController
 public class Rate_ReviewController {
-    @Autowired
-    // Rate_ReviewService reviewService;
-      Rate_ReviewRepository rate_ReviewRepository;
-     
-      
-    ReviewPostDTO newReviewPostDTO;
-       @Autowired
-       CoursesService coursesService;
-       @Autowired
-       StudentController studentController;
-       @Autowired
-      Rate_ReviewService reviewService;
-    @PostMapping("/review")
-    public ResponseEntity<Optional<Rate_Review>> addReview(@RequestBody ReviewPostDTO newReviewPostDTO, Principal principal) {
-        String email = currentUserName(principal);
-        
-        if (reviewService.findByEmail(email)!=null) {
-            return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
-        };
-        if (newReviewPostDTO.getRatingStars() == 0 || newReviewPostDTO.getReviewDesc() == null) {
-          // This is for testing purposes
-         
-          // Return response entity with error and BAD REQUEST status
-          return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.CONFLICT);
+  @Autowired
+  // Rate_ReviewService reviewService;
+  Rate_ReviewRepository rate_ReviewRepository;
 
-      }
-  
-         Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
-        
-         Student  student = studentController.getByEmail(email);
+  ReviewPostDTO newReviewPostDTO;
+  @Autowired
+  CoursesService coursesService;
+  @Autowired
+  StudentController studentController;
+  @Autowired
+  Rate_ReviewService reviewService;
 
-         Rate_Review newReview = new Rate_Review(newReviewPostDTO.getRatingStars(),newReviewPostDTO.getReviewDesc(), courses,student,newReviewPostDTO.getCreatedAt());
-
-         reviewService.addReview(newReview);
-
-         //Return response entity with new user and CREATED status
-         return new ResponseEntity<>(Optional.ofNullable(newReview), HttpStatus.CREATED);
-
-
-    }
-
-    @GetMapping("/getReviews")  
-    public List<Rate_Review> getAllReview() {
-        
-        return reviewService.getReviews();
-
-    }
-
-
-    @RequestMapping(value = "/username", method = RequestMethod.GET)
-    @ResponseBody
-    public String currentUserName(Principal principal) {
-        return principal.getName();
-    }
-
-    
-
-    @GetMapping("/review/getByEmail")
-    public Rate_Review getByEmail(@RequestParam String email) {
-    	
-    	return (reviewService.findByEmail(email));
-    	
-    }
-
-
-    //build update review
-  @PutMapping("update/{ratingID}")
-  public ResponseEntity<Optional<Rate_Review>> updateReview(@RequestBody ReviewPostDTO newReviewPostDTO, Principal principal) {
+  @PostMapping("/review")
+  public ResponseEntity<Optional<Rate_Review>> addReview(@RequestBody ReviewPostDTO newReviewPostDTO,
+      Principal principal) {
     String email = currentUserName(principal);
-    
-  
 
-     Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
-    
-     Student  student = studentController.getByEmail(email);
+    if (reviewService.findByEmail(email,newReviewPostDTO.getCourseID()) != null) {
+      return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
+    }
+    ;
+    if (newReviewPostDTO.getRatingStars() == 0 || newReviewPostDTO.getReviewDesc() == null) {
+      // This is for testing purposes
 
+      // Return response entity with error and BAD REQUEST status
+      return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.CONFLICT);
 
+    }
 
-     Rate_Review newReview = new Rate_Review();
-     newReview.setRatingID(newReviewPostDTO.getRatingID());
-     newReview.setRatingStars(newReviewPostDTO.getRatingStars());
-     newReview.setReviewDesc(newReviewPostDTO.getReviewDesc());
-     newReview.setCourses(courses);
-     newReview.setStudents(student);
-     newReview.setCreatedAt(newReviewPostDTO.getCreatedAt());
+    Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
 
+    Student student = studentController.getByEmail(email);
 
+    Rate_Review newReview = new Rate_Review(newReviewPostDTO.getRatingStars(), newReviewPostDTO.getReviewDesc(),
+        courses, student, newReviewPostDTO.getCreatedAt());
 
-     reviewService.addReview(newReview);
+    reviewService.addReview(newReview);
 
-     //Return response entity with new user and CREATED status
-     return new ResponseEntity<>(Optional.ofNullable(newReview), HttpStatus.CREATED);
+    // Return response entity with new user and CREATED status
+    return new ResponseEntity<>(Optional.ofNullable(newReview), HttpStatus.CREATED);
 
+  }
 
-}
+  @RequestMapping("/getReviews/{courseID}")
+  public Iterable<Rate_Review> getAllReview(@PathVariable("courseID") Integer courseID) {
 
-@DeleteMapping("delete/{ratingID}")
+    return reviewService.getReviews(courseID);
 
-public String deleteStudent(@PathVariable Integer ratingID) {
+  }
 
-    //Delete student by using their ID
+  @RequestMapping(value = "/username", method = RequestMethod.GET)
+  @ResponseBody
+  public String currentUserName(Principal principal) {
+    return principal.getName();
+  }
+
+  @GetMapping("/review/getByEmail")
+  public Rate_Review getByEmail(@RequestParam String email,@RequestParam Integer courseID) {
+
+    return (reviewService.findByEmail(email,courseID));
+
+  }
+
+  // build update review
+  @PutMapping("update/{ratingID}")
+  public ResponseEntity<Optional<Rate_Review>> updateReview(@RequestBody ReviewPostDTO newReviewPostDTO,
+      Principal principal) {
+    String email = currentUserName(principal);
+
+    Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
+
+    Student student = studentController.getByEmail(email);
+
+    Rate_Review newReview = new Rate_Review();
+    newReview.setRatingID(newReviewPostDTO.getRatingID());
+    newReview.setRatingStars(newReviewPostDTO.getRatingStars());
+    newReview.setReviewDesc(newReviewPostDTO.getReviewDesc());
+    newReview.setCourses(courses);
+    newReview.setStudents(student);
+    newReview.setCreatedAt(newReviewPostDTO.getCreatedAt());
+
+    reviewService.addReview(newReview);
+
+    // Return response entity with new user and CREATED status
+    return new ResponseEntity<>(Optional.ofNullable(newReview), HttpStatus.CREATED);
+
+  }
+
+  @DeleteMapping("delete/{ratingID}")
+
+  public String deleteStudent(@PathVariable Integer ratingID) {
+
+    // Delete student by using their ID
     reviewService.deleteReview(ratingID);
     return "Student Deleted";
 
-}
-
-
+  }
 
 }

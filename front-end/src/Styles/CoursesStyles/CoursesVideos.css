@@ -152,7 +152,7 @@ button.dropdown-btn {
 .dropdown-btn {
   border-radius: 6px 6px 6px 6px;
   margin: auto;
-  color: #444;
+  color: #070606;
   max-height: 100px;
   text-align: center;
   cursor: pointer;
@@ -422,8 +422,11 @@ button.dropdown-btn {
   margin-right: 10px;
   margin-left: 20px;
   margin-bottom: 10px;
-  display: flex;
+
   border-top: 0.5px solid rgb(117, 103, 103);
+}
+.reviewSorter{
+  display: flex;
 }
 
 .viewMore {
@@ -445,12 +448,12 @@ button.dropdown-btn {
 }
 
 .editReview {
+
   border: 2px solid #555555;
   background: none;
   padding: 4px 8px;
   text-align: center;
 
-  display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   transition-duration: 0.4s;
@@ -462,6 +465,7 @@ button.dropdown-btn {
   color: black;
 }
 .deleteReview {
+
   background: none;
   border: 2px solid #555555;
   padding: 4px 8px;
@@ -478,6 +482,10 @@ button.dropdown-btn {
   background-color: #a53e4f;
   color: black;
 }
+.editanddeleteButton{
+  margin-left: 43px;
+}
+
 
 .trackerContainer {
   border: 3px solid rgb(245, 242, 242);

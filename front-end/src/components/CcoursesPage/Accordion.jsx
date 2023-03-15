@@ -4,7 +4,22 @@ import { useOutletContext } from "react-router-dom";
 
 import ReactPlayer from "react-player";
 
-const Accordion = (loggedInUser) => {
+
+
+
+const Accordion = ({ loggedInUser, CurrentCourseID }) => {
+
+ 
+
+
+
+
+
+
+
+
+
+
   const jwt = sessionStorage.getItem("jwt");
 
   const [videoUrl, setVideoUrl] = useState("");
@@ -15,7 +30,7 @@ const Accordion = (loggedInUser) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/categories`, {})
+      .get(`http://localhost:8080/categories/${CurrentCourseID}`, {})
       .then((resp) => {
         // console.log(resp.data);
 
@@ -25,7 +40,7 @@ const Accordion = (loggedInUser) => {
         console.error(error);
       });
   }, []);
-
+  console.log(category);
   //console.log("cat" + JSON.stringify(category));
 
   const retrieveUrl = (videoName, courseID) => {
@@ -47,7 +62,7 @@ const Accordion = (loggedInUser) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [rotate, setRotate] = useState(null);
 
-  const colors = ["#a0acea", "#fe9687", "#ffe587"];
+  const colors = ["#a0acea", "#fe9687", "#ffe587","#009B77","#7FCDCD","#C3447A","#A0DAA9","#E8A798"];
 
   const handleDropdown = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -86,7 +101,7 @@ const Accordion = (loggedInUser) => {
             <div
               className="dropdown-btn"
               key={index}
-              style={{ backgroundColor: colors[index] }}
+              style={{ backgroundColor: colors[index]}}
               onClick={() => {
                 handleDropdown(index);
               }}
