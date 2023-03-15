@@ -94,9 +94,9 @@ const Accordion = (loggedInUser) => {
               <span className="line-2"></span>
               <span className="line-1">{item.categoryName}</span>
               <i
-                className="fa fa-angle-up"
+                className="fa fa-angle-right"
                 style={{
-                  transform: `rotate(${activeIndex === index ? 180 : 0}deg)`,
+                  transform: `rotate(${activeIndex === index ? 90 : 0}deg)`,
                   transition: "all 0.25s",
                 }}
               ></i>
