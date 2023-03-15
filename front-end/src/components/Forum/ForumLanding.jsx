@@ -43,6 +43,13 @@ function ForumLanding() {
   }, []);
 
 
+  const latestthreadsort = (event) => {
+    threads.sort((a, b) => b.fTimestampCreated.localeCompare(a.fTimestampCreated));
+  };
+
+  const oldestthreadsort = (event) => {
+    threads.sort((a, b) => a.fTimestampCreated.localeCompare(b.fTimestampCreated));
+  };
 
   //Get current posts
   const endOffset = itemOffset + postsPerPage;
@@ -85,8 +92,9 @@ function ForumLanding() {
           <input type="checkbox" id="lsortbtn"/> 
           
           <ul className="landingsort-optn">
-            <li><a href="#">Last Updated</a></li>
-            <li><a href="#">Most Replies</a></li>
+            <li><a href="#!" onClick={oldestthreadsort}>Oldest Threads</a></li>
+            <li><a href="#!" onClick={latestthreadsort}>Last Updated</a></li>
+            
           </ul>
 
         </a>
@@ -113,10 +121,6 @@ function ForumLanding() {
           <ul className='tags'>
             <li>{item.fTags}</li>
           </ul>
-          <div className='Stats'>
-            <div className='Replies'><img src={ReplyIcon}/></div>
-            <h4>4 Replies</h4>
-          </div>
           
           <div className='thread-creatorname'>Started on {item.fDateCreated} at {item.fTimeCreated} By {item.students.firstName} {item.students.lastName} </div>
           

@@ -177,7 +177,7 @@ const newmessagehandle = (e) => {
     
     <div className='PageOptions'>
         
-      <a className="PageSort">
+      {/* <a className="PageSort">
           
           <label for="psortbtn"><img src={SortIcon}/></label>               
           <input type="checkbox" id="psortbtn"/> 
@@ -187,7 +187,7 @@ const newmessagehandle = (e) => {
             <li><a href="#">Most Replies</a></li>
           </ul>
 
-      </a>
+      </a> */}
       <a>
         <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();subbg();}}>{SubButton}</button>
       </a> 
