@@ -21,6 +21,11 @@ import nft2 from "../../images/UPM/assets/nft2_low.png";
  function Avatar() {
     const [loggedInUser, setLoggedinUser] = useState("");
     const [profile, setProfile] = useState([]);
+    const [student, setStudent] = useState([]);
+    const [currentXp, setCurrentXp] = useState(0);
+    const [studentId, setStudentId] = useState("");
+    const jwt = localStorage.getItem("jwt");
+    
     useEffect(() => {
       const saveLoggedinUser = localStorage.getItem("loggedInUser");
       if (saveLoggedinUser) {
@@ -28,44 +33,38 @@ import nft2 from "../../images/UPM/assets/nft2_low.png";
       }
     }, []);
     console.log("lgeed"+loggedInUser);
-const [student, setStudent] = useState([]);
-const [currentXp, setCurrentXp] = useState(0);
-const [studentId, setStudentId] = useState("");
-
-
-const jwt = localStorage.getItem("jwt");
-
-  useEffect(() => {
-    axios.get("http://localhost:8080/getRankings",{  headers: {"Authorization" : `Bearer ${jwt}`} })
-      .then(response => {
-       // setReviews(response.data);
-     
-         
-      console.log(response.data);
-      setStudent(response.data);
-      })
-      .catch(error=>{
-         console.error(error)
-         alert("cant get reviews")
-      });
-    },[]);
-  
    
+
+    useEffect(() => {
+      axios.get("http://localhost:8080/getRankings",{  headers: {"Authorization" : `Bearer ${jwt}`} })
+        .then(response => {
+        // setReviews(response.data);
+      
+          
+        console.log(response.data);
+        setStudent(response.data);
+        })
+        .catch(error=>{
+          console.error(error)
+          alert("cant get reviews")
+        });
+      },[]);
+  
     const token = jwt;
     const headers = {
       Authorization: `Bearer ${token}`
     };
-    const Api = `http://localhost:8080/profile/${loggedInUser}`;
     
     var noOfQuiz = 6;
-var xp = (noOfQuiz) * 10;
-const xpBar = document.querySelector(".xp-bar");
-function updateXP(currentXp, totalXP) {
-  const percentComplete = (currentXp / totalXP) * 100;
-  xpBar.style.width = `${percentComplete}%`;
-  console.log("The percent is " + percentComplete);
-  console.log("The current xp is " + currentXp);
-}
+    var xp = (noOfQuiz) * 10;
+    const xpBar = document.querySelector(".xp-bar");
+    function updateXP(currentXp, totalXP) {
+      const percentComplete = (currentXp / totalXP) * 100;
+      xpBar.style.width = `${percentComplete}%`;
+      console.log("The percent is " + percentComplete);
+      console.log("The current xp is " + currentXp);
+    }
+
     useEffect(() => {
    
       const saveLoggedinUser = localStorage.getItem("loggedInUser");
@@ -115,7 +114,6 @@ return (
           </div>
           <div class="xp-container">
             <div class="xp-bar">
-              <script src="front-end\src\components\Section Avatar\avatar-details.js"></script>
             </div>
           </div>
         </div>

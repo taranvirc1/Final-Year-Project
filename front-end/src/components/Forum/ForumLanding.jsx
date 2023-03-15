@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import "../../Styles/Forum/Forum_Landing.css"
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import axios from "axios";
@@ -12,9 +12,9 @@ import ReplyIcon from "../../images/forum/reply.png"
 
 function ForumLanding() {
   const [threads, setthreads] = useState([]);
+  const [threadId, setthreadId] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
-  const [threadid, setthreadid] = useState(0);
   const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate();
   const ViewForum = (item) => {
@@ -22,20 +22,27 @@ function ForumLanding() {
     navigate("/Forum_page");
   };
 
+  const headers = {
+    Authorization: `Bearer ${jwt}`,
+  };
+  const postamount = (topicamount) => {
+    setPostsPerPage(topicamount);
+  };
+
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/threads`, {
-        headers: { Authorization: `Bearer ${jwt}` },
+      .get(`http://localhost:8080/threads`, {headers,
       })
       .then((resp) => {
         console.log(resp.data);
-
         setthreads(resp.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
+
+
 
   //Get current posts
   const endOffset = itemOffset + postsPerPage;
@@ -77,9 +84,8 @@ function ForumLanding() {
           <label for="lsortbtn"><img src={SortIcon}/></label>               
           <input type="checkbox" id="lsortbtn"/> 
           
-          <ul class="landingsort-optn">
-            <li><a href="#">Last Updated</a></li> 
-            <li><a href="#">Most Liked</a></li>
+          <ul className="landingsort-optn">
+            <li><a href="#">Last Updated</a></li>
             <li><a href="#">Most Replies</a></li>
           </ul>
 
@@ -108,7 +114,7 @@ function ForumLanding() {
             <li>{item.fTags}</li>
           </ul>
           <div className='Stats'>
-            <div className='Replies'><img src={ReplyIcon}></img></div>
+            <div className='Replies'><img src={ReplyIcon}/></div>
             <h4>4 Replies</h4>
           </div>
           
