@@ -41,7 +41,17 @@ public class Messages implements Serializable {
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-	private Date createdAtDate;
+	private Date mTimestampCreated;
+
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.DATE)
+	@CreatedDate
+	private Date mDateCreated;
+	
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.TIME)
+	@CreatedDate
+	private Date mTimeCreated;
 
 	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name = "thread")
@@ -82,12 +92,28 @@ public class Messages implements Serializable {
 		this.message = message;
 	}
 
-	public Date getCreatedAtDate() {
-		return createdAtDate;
+	public Date getmTimestampCreated() {
+		return mTimestampCreated;
 	}
 
-	public void setCreatedAtDate(Date createdAtDate) {
-		this.createdAtDate = createdAtDate;
+	public void setmTimestampCreated(Date mTimestampCreated) {
+		this.mTimestampCreated = mTimestampCreated;
+	}
+
+	public Date getmDateCreated() {
+		return mDateCreated;
+	}
+
+	public void setmDateCreated(Date mDateCreated) {
+		this.mDateCreated = mDateCreated;
+	}
+
+	public Date getmTimeCreated() {
+		return mTimeCreated;
+	}
+
+	public void setmTimeCreated(Date mTimeCreated) {
+		this.mTimeCreated = mTimeCreated;
 	}
 
 	public Threads getThreads() {
@@ -108,9 +134,12 @@ public class Messages implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Messages [messageID=" + messageID + ", message=" + message + ", createdAtDate="
-				+ createdAtDate + ", threads=" + threads + ", students=" + students + "]";
+		return "Messages [messageID=" + messageID + ", message=" + message + ", mTimestampCreated=" + mTimestampCreated
+				+ ", mDateCreated=" + mDateCreated + ", mTimeCreated=" + mTimeCreated + ", threads=" + threads
+				+ ", students=" + students + "]";
 	}
+
+	
 
 	
 

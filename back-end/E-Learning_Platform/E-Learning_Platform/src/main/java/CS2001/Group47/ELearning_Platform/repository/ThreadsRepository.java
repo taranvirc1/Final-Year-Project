@@ -18,6 +18,10 @@ public interface ThreadsRepository extends JpaRepository<Threads, Integer> {
     
     Threads findByfDateCreated(Date fDateCreated);
 
+	Threads findByfTimeCreated(Date fTimeCreated);
+	
+	List<Threads> findByfTimestampCreated(Date fTimestampCreated);
+
 	Threads findByStudents_Email(String email);
 
 	Threads findByThreadId(Integer id);
