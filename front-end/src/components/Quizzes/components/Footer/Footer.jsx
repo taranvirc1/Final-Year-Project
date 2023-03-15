@@ -3,7 +3,11 @@ const Footer = () => {
     <div
       style={{
         textAlign: "center",
-        marginBottom: 10,
+        marginBottom: 100,
+        marginTop: 10,
+        fontWeight: 'bold',
+        backgroundColor: 'white',
+        opacity: 0.7
       }}
     >
       make sure you log in to start the Quiz!
