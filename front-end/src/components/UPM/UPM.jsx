@@ -338,7 +338,7 @@ function UPM() {
                       <img class="upm-round" src={image} alt="avatar" />
                     )}
                     <button className="upm-click" onClick={handleButtonClick}>
-                      <MdOutlineModeEdit size={25} />
+                      <MdOutlineModeEdit size={55} />
                     </button>
                     <button
                       className="upm-saver-1"
