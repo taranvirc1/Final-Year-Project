@@ -1,10 +1,12 @@
 .s-navbar-spacing{
-    margin-top: 70px;
+    margin-top: 3%;
+    padding-top: 2%;
+    min-height: 100vh;
+    overflow: hidden;
 }
 .SearchForum-Title{
-    margin-top: 20px;
     position: relative;
-    padding: 20px 40px;
+    padding:0px 40px;
     user-select: none;
     color: black;
     font-size: 2rem;
@@ -123,7 +125,6 @@
 
 /* search results */
 
-
 .searchresult-title h2{
     margin-top: 20px;
     position: relative;
@@ -200,7 +201,7 @@
 }    
 
 #srsortbtn:checked + .searchresultsort-optn {
-    height: 150px;
+    height: 100px;
     background-color: black;
     z-index: 1;
     position: absolute;

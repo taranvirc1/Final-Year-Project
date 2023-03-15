@@ -36,6 +36,7 @@ import rare2 from "../../images/UPM/assets/rare2_low.png";
 import nft from "../../images/UPM/assets/nft_low.png";
 import nft1 from "../../images/UPM/assets/nft1_low.png";
 import nft2 from "../../images/UPM/assets/nft2_low.png";
+import { VscChromeClose } from "react-icons/vsc";
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
@@ -73,7 +74,10 @@ function UPM() {
       "Content-Type": "application/json",
     },
   };
+  const maxDate = new Date().toISOString().split("T")[0];
+  const [error, setError] = useState("");
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -401,18 +405,29 @@ function UPM() {
                           <div className="upm-split-2">
                             <div class="upm-form field">
                               <input
-                                type="input"
+                                type="email"
                                 class="upm-field"
                                 placeholder={user && user.lastName}
                                 defaultValue={user && user.email}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
-                                  setEmail(newValue);
+                                  if (!emailRegex.test(newValue)) {
+                                    setError("X");
+                                  } else {
+                                    setEmail(newValue);
+                                  }
                                 }}
                                 name="Email"
                                 id="Email"
                                 required
                               />
+
+                              {error && (
+                                <span className="error">
+                                  {error}
+                                </span>
+                              )}
+
                               <label for="name" class="upm-label">
                                 Email
                               </label>
@@ -546,6 +561,8 @@ function UPM() {
                                 name="DOB"
                                 id="DOB"
                                 required
+                                dateFormat="yyyy-MM-dd"
+                                max={maxDate}
                               />
                               <label for="name" class="upm-label">
                                 DOB

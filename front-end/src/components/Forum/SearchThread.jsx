@@ -13,31 +13,45 @@ import SortIcon from "../../images/forum/sort.png"
 function SearchThread() {
 
   const [threads, setthreads] = useState([]);
+  const [threadName, setThreadName] = useState("");
   const [itemOffset, setItemOffset] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
+  const [showresult, setshowresult] = useState(false);
   const [threadid, setthreadid] = useState(0);
   const jwt = localStorage.getItem("jwt");
   const resultsfound = threads.length;
+  console.log(threadName);
   const navigate = useNavigate();
   const ViewForum = (item) => {
     localStorage.setItem("ThreadID", item);
     navigate("/Forum_page");
   };
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/threads`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
-      .then((resp) => {
-        console.log(resp.data);
+  const headers = {
+    Authorization: `Bearer ${jwt}`,
+  };
 
-        setthreads(resp.data);
-      })
-      .catch((error) => {
-        console.error(error);
+  const threadsearch = (e) => {
+    e.preventDefault();
+    console.log(threadName);
+    if (threadName === "") {
+      alert("Please fill in ");
+    }
+    else{
+      axios
+        .get(`http://localhost:8080/threadName/${threadName}`, { headers })
+
+          .then((resp) => {
+            console.log(resp.data);
+
+            setthreads(resp.data);
+            setshowresult(true);
+          })
+          .catch((error) => {
+            console.error(error);
       });
-  }, []);
+    }
+  }
 
   //result pagination
   const endOffset = itemOffset + postsPerPage;
@@ -58,32 +72,27 @@ function SearchThread() {
       <section className='thread-search'>
         <div className='searchthread-title'>
           <label for="sthread-title">Thread Title: </label>
-          <input type="text" id="sthread-title" name="sthread-title" placeholder="  Search For Topic Thread Title"/>
-        </div>
-        <div className='searchtags'>
-          <label for="s_tags">Tags: </label>
-          <input type="text" id="s_tags" name="s_tags" placeholder="  Catergorise Topic Tags"/>
+          <input type="text" id="sthread-title" name="sthread-title" placeholder="  Search For Topic Thread Title" onChange={(e) => setThreadName(e.target.value)}/>
         </div>
         <div className='searchsort'>
           <label for="ssort">Sort By: </label>
           <select id="ssort" name="ssort">
             <option value="Last Updated">Last Updated</option>
-            <option value="Most Liked">Most Liked</option>
             <option value="Most Replies">Most Replies</option>
           </select>
         </div>
-        <div className='searchpost'>
+        <div className='searchpost' onClick={threadsearch}>
           <a href="/" className='spost'><img src={SearchIcon} alt="search icon"/></a>
           <label>Search Thread</label>
         </div>
       </section>
       
-      <section className='searchResults'>
+      <section className='searchResults' style={{ display: showresult ? "block" : "none" }}>
       
         <div className="searchresult-title">
           <h2>You Searched For: "CS"</h2>
         </div>
-        <div className='ThreadResultsFound'><h2>{resultsfound} results found</h2></div>
+        <div className='ThreadResultsFound'><h2>{resultsfound} result(s) found</h2></div>
         <nav className='thread-pages'>
           <ReactPaginate
             breakLabel="..."

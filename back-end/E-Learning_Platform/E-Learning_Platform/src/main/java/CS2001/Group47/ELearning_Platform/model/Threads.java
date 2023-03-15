@@ -50,7 +50,17 @@ public class Threads implements Serializable {
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
+	private Date fTimestampCreated;
+
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.DATE)
+	@CreatedDate
 	private Date fDateCreated;
+
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.TIME)
+	@CreatedDate
+	private Date fTimeCreated;
 	
 
 	@ManyToOne( fetch = FetchType.EAGER)
@@ -104,15 +114,30 @@ public class Threads implements Serializable {
 		this.fTags = fTags;
 	}
 
+	public Date getfTimestampCreated() {
+		return fTimestampCreated;
+	}
+
+	public void setfTimestampCreated(Date fTimestampCreated) {
+		this.fTimestampCreated = fTimestampCreated;
+	}
+
 	public Date getfDateCreated() {
 		return fDateCreated;
 	}
 
-	public void settDateCreated(Date fDateCreated) {
+	public void setfDateCreated(Date fDateCreated) {
 		this.fDateCreated = fDateCreated;
 	}
 
-	
+	public Date getfTimeCreated() {
+		return fTimeCreated;
+	}
+
+	public void setfTimeCreated(Date fTimeCreated) {
+		this.fTimeCreated = fTimeCreated;
+	}
+
 	public Student getStudents() {
 		return students;
 	}
@@ -123,9 +148,15 @@ public class Threads implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Threads [threadId=" + threadId + ", threadName=" + threadName + ", fTags=" + fTags + ", fDateCreated="
-				+ fDateCreated + ", students=" + students + ", messages=" + messages + "]";
+		return "Threads [threadId=" + threadId + ", threadName=" + threadName + ", fTags=" + fTags
+				+ ", fTimestampCreated=" + fTimestampCreated + ", fDateCreated=" + fDateCreated + ", fTimeCreated="
+				+ fTimeCreated + ", students=" + students + ", messages=" + messages + "]";
 	}
+
+	
+
+	
+	
 
 
 	

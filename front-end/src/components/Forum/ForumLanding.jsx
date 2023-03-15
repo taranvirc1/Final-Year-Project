@@ -60,7 +60,7 @@ function ForumLanding() {
   return (
     <>
     <div className='fl-navbar-spacing'>
-    </div>
+    
     <div className="forums-title">
         <h2>Student Forum Threads</h2>
     </div>
@@ -118,13 +118,14 @@ function ForumLanding() {
             <h4>4 Replies</h4>
           </div>
           
-          <div className='thread-creatorname'>Started on {item.fDateCreated} By {item.students.firstName} {item.students.lastName} </div>
+          <div className='thread-creatorname'>Started on {item.fDateCreated} at {item.fTimeCreated} By {item.students.firstName} {item.students.lastName} </div>
           
           
         </div>
       </div>
       ))}
     </section>
+    </div>
     </>
   )
 }

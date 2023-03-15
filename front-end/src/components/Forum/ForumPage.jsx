@@ -26,6 +26,7 @@ import ReactPaginate from 'react-paginate';
 
 function ForumPage() {
   const [threadName,setthreadName]=useState([]);
+  const [threadTag,setthreadtag]=useState([]);
   const [itemOffset, setItemOffset] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [messages, setMessages] = useState([]);
@@ -40,6 +41,7 @@ function ForumPage() {
   
       .then((resp) => {
         setthreadName(resp.data.threadName);
+        setthreadtag(resp.data.fTags)
         console.log("Thread Name: " + threadName);
       })
       .catch((error) => {
@@ -157,7 +159,8 @@ const newmessagehandle = (e) => {
     <div className='fp-navbar-spacing'>
     </div>
     <div className="forums-title">
-        <h2>{threadName}</h2>
+        <h2 className='threadName'>{threadName}</h2>
+        <h2 className='threadTag'>{threadTag}</h2>
     </div>
     <div className='thread-messages'>
       <ReactPaginate
@@ -205,7 +208,7 @@ const newmessagehandle = (e) => {
         </div>
         <div className='ThreadUser'>{item.students.firstName}</div>
         <div className='dateandreply'>
-          <div className='ThreadTime'>Posted on {item.createdAtDate}</div>
+          <div className='ThreadTime'>Posted on {item.mDateCreated} at {item.mTimeCreated}</div>
           <a href= "#replysection" className="ThreadReply">
             <img src={ReplyIcon}/>
             <label>Reply</label>

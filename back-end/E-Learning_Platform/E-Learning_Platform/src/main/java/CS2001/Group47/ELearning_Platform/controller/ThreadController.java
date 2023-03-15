@@ -1,6 +1,7 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +91,11 @@ public class ThreadController {
     return threadService.findByfTagContaining(fTags) ;
 }
 
+    @GetMapping("/threadtime")
+    public List<Threads> getThreadbyTime(Date fTimestampCreated) {
+        return threadsRepository.findByfTimestampCreated(fTimestampCreated);
+
+    }
 
     @RequestMapping(value = "/threadcreator", method = RequestMethod.GET)
     @ResponseBody
