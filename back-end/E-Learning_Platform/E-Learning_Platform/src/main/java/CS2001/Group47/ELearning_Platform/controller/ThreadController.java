@@ -91,10 +91,11 @@ public class ThreadController {
     return threadService.findByfTagContaining(fTags) ;
 }
 
-    @RequestMapping("/threadtime/{fTimestampCreated}")
-    public Iterable<Threads> getThreadbyTime( @PathVariable("fTimestampCreated")Date fTimestampCreated) {
-    return threadsRepository.findByfTimestampCreated(fTimestampCreated) ;
-}
+    @GetMapping("/threadtime")
+    public List<Threads> getThreadbyTime(Date fTimestampCreated) {
+        return threadsRepository.findByfTimestampCreated(fTimestampCreated);
+
+    }
 
     @RequestMapping(value = "/threadcreator", method = RequestMethod.GET)
     @ResponseBody
