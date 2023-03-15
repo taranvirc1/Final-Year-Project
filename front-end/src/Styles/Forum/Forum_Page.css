@@ -1,39 +1,68 @@
-.navbar-spacing{
-    margin-top: 80px;
+.fp-navbar-spacing{
+    margin-top: 2%;
+    padding-top: 2%;
 }
 .forums-title{
-    margin-top: 20px;
     position: relative;
     padding: 20px 40px;
     font-size: 25px;
 }
 
-.ForumPage-list{
-    user-select: none;
-    background-color: aliceblue;
-    display: inline-block;
-    position: relative;
-    justify-content: left;
-    margin-left: 40px;
-    
+.threadName{
+    display:inline-block;
 }
-.ForumPage-list a{
-    display: inline-block;
-    background-color: rgb(255, 255, 255);
-    padding: 10px 20px;
-    font-size: 20px;
-    color:black;
-    cursor: pointer;
-    outline: auto;
-    outline-style: inset;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+.threadTag{
+    display:inline-block;
+    padding-left: 10px;
+    margin-left: 5px;
+    padding:0px 3px;
+    border-style: inset;
+    border-radius: 10px;
+    border-color: #5a18b1;
 }
 
-.ForumPage-list a:active {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    outline-color: black;
+.thread-messages{
+    display: inline-block;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.1rem;
+    user-select: none;
+    
+    
 }
+.thread-messages li{
+    list-style: none;
+    display: inline-block;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.thread-messages li a{
+    display: inline-block;
+    padding: 0px 20px;
+    font-size: 2rem;
+    outline: 3px;
+    outline-style: outset;
+    background-color: white;
+    text-decoration: none;
+    color:black;
+    user-select: none;
+}
+.thread-messages li.previous a,
+.thread-messages li.next a,
+.thread-messages li.break a {
+  color: #5a18b1;
+}
+.thread-messages li.active a {
+    background-color: #9d5bf3;
+    color: rgb(0, 0, 0);
+}
+.thread-messages li.disabled a {
+    color: rgb(148, 148, 148);
+}
+.thread-messages li.disable,
+.thread-messages li.disabled a {
+cursor: default;
+}
+
 .PageOptions{
     display: inline;
     float: right;
@@ -127,7 +156,7 @@
 }    
 
 #psortbtn:checked + .pagesort-optn {
-    height: 150px;
+    height: 100px;
     background-color: black;
     z-index: 1;
     position: absolute;
@@ -140,10 +169,10 @@
     margin-top: 25px;
     background-color: #a6aefd;
     border: 2px solid black;
-    border-radius: 25px;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     margin-bottom: 30px;
-    padding: 25px;
+    padding: 10px;
+    padding-bottom:40px;
 }
 .ThreadProfile{
     display: inline-block;
@@ -151,12 +180,13 @@
     position: relative;
     background-color: white;
     border: 2px solid black;
-    border-radius: 40px;
+    border-radius: 50%;
     height: 200px;
     width: 200px;
 }
 .ThreadProfile img{
-    padding: 15px;
+    border-radius: 50%;
+    height: 200px;
     width: 200px;
     user-select: none;
     -webkit-user-drag: none;
@@ -164,18 +194,18 @@
 .ThreadParagraph{
     float:right;
     position: relative;
-    width:86%;
+    width:85%;
     height: 200px;
-    background-color: white;
+    color: rgb(0, 0, 0);
+    background-color: rgba(175, 175, 175, 0.747);
     border: 2px solid black;
-    border-radius: 40px;
 }
 .ThreadParagraph p{
     box-sizing: border-box;
     padding-top: 10px;
     padding-left: 10px;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }
 .ThreadUser{
     display: inline-block;
@@ -183,38 +213,18 @@
     font-family:'Poppins', sans-serif;
     font-size: 1.5rem;
 }
-.ThreadTime{
-    display: inline-block;
-    margin-top: 1%;
-    margin-left: 8%;
-    font-family:'Poppins', sans-serif;
-    font-size: 1.5rem;
-}
-.ThreadInteraction{
+.dateandreply{
     display: inline;
     float:right;
     margin-top: 10px;
 }
-.ThreadLike{
-    display: inline;
-    position: relative;
-    top: 10px;
-    border:1px black solid;
-    border-radius: 20px;
-    padding:15px 10px;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    user-select: none;
-    
-}
-.ThreadLike img{
-    height: 40px;
-    width: 40px;
-}
-.ThreadLike:active{
-    transform: scale(0.97);
+.ThreadTime{
+    display: inline-block;
+    margin-left: 20px;
+    font-family:'Poppins', sans-serif;
+    font-size: 1.5rem;
 }
 .ThreadReply{
-    float: right;
     display: inline;
     border:1px outset black;
     border-radius: 20px;
@@ -244,14 +254,12 @@
     transform: scale(0.97);
 }
 
-
 .ThreadReplySection{
     width: 96%;
     margin: auto;
-    margin-top: 15px;
+    margin-top: 55px;
     margin-bottom: 50px;
-    padding: 15px 15px;
-    padding-bottom: 50px;
+    padding: 10px 0px;
     background-color: #a6aefd;
     border: 2px solid black;
     border-radius: 25px;
@@ -264,50 +272,7 @@
     margin-top: 25px;
     background-color: #ffffff;
     border: 2px solid black;
-    border-radius: 25px;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-}
-.ThreadTextEditorPanel{
-    display: grid;
-    border-radius: 20px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border: 1px solid black;
-    position: relative;
-    background-color: rgb(177, 177, 177);
-    height:55px;
-    overflow:hidden;
-}
-.ThreadEditorIcons{
-    margin-left: 30px;
-    list-style: none;
-    user-select: none;
-}
-
-.ThreadEditorIcons li{
-    display: inline-block;
-    padding: 0 15px;
-    padding-top: 3px;
-}
-
-.ThreadEditorIcons li:hover{
-    background-color:#858383;
-    padding-top: 3px;
-    border-radius: 20px;
-}
-.ThreadEditorIcons li:active{
-    background-color: #6193ff;
-    box-shadow: 0 1px #666;
-    transform:scale(0.99);
-}
-
-.ThreadEditorIcons li img{
-    height:45px;
-    width: 45px;
-}
-
-.Replyline{
-    height:45px
 }
 
 .ThreadEditorText textarea{
@@ -355,7 +320,7 @@
     float:right;
     border: 1px outset black;
     border-radius: 15px;
-    padding: 5px 10px;
+    padding: 0 10px;
     margin-right: 40px;
     background-color: #6193ff;
     box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -368,8 +333,8 @@
     transform:scale(0.99);
 }
 .ThreadTextEditorReply img{
-    height:40px;
-    width:50px;
+    height:35px;
+    width:30x;
 }
 .ThreadTextEditorReply label{
     padding-left: 10px;

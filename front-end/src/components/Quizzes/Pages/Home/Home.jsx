@@ -7,14 +7,7 @@ import "./Home.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
-const Home = ({ name, setName, fetchQuestions }) => {
-  const [category, setCategory] = useState("");
-  const [difficulty, setDifficulty] = useState("");
-  const [error, setError] = useState(false);
-
-
-
-  const [loggedInUser, setLoggedinUser] = useState("");
+const [loggedInUser, setLoggedinUser] = useState("");
 
   useEffect(() => {
     const saveLoggedinUser = localStorage.getItem("loggedInUser");
@@ -23,36 +16,23 @@ const Home = ({ name, setName, fetchQuestions }) => {
     }
   }, []);
 
-
-
-
   useEffect(()=>{
 localStorage.setItem("category", category);
 localStorage.setItem("difficulty", difficulty);
 
 })
 
-
-
-
-
-
-
   const Navigate = useNavigate();
 
   const handleSubmit = () => {
-    if(!loggedInUser){
-      alert("please log in to do the quiz")
-    }else{
-    if (!category || !difficulty || !name) {
+    if (!category || !difficulty ) {
       setError(true);
       return;
     } else {
       setError(false);
       fetchQuestions(category, difficulty);
-      Navigate("/testQuiz");
+      Navigate("/quiz");
     }
-  }
   };
 
   return (
@@ -63,12 +43,7 @@ localStorage.setItem("difficulty", difficulty);
         <span style={{ fontSize: 30 }}>Quiz Settings</span>
         <div className="settings__select">
           {error && <ErrorMessage>Please Fill all the feilds</ErrorMessage>}
-          <TextField
-            style={{ marginBottom: 25 }}
-            label="Enter Your Name"
-            variant="outlined"
-            onChange={(e) => setName(e.target.value)}
-          />
+          
           <TextField
             select
             label="Select Category"
@@ -111,7 +86,7 @@ localStorage.setItem("difficulty", difficulty);
           </Button>
         </div>
       </div>
-      <img src="/quiz.svg" className="banner" alt="quiz app" />
+      <img src="/quiz.png" className="banner" alt="quiz app" />
     </div>
     <Footer />
     </>

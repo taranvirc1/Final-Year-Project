@@ -28,28 +28,38 @@ function CreateForum() {
   const navigate = useNavigate();
   console.log(threadName);
   console.log(fTags);
-  const CreateLanding = () => {
+  const CreateLanding = (newthreadId) => {
+    localStorage.setItem("ThreadID", newthreadId);
     navigate("/Forum_page");
   };
   const handlecreatethread = (e) => {
     e.preventDefault();
-
+    if (localStorage.getItem("loggedInUser") === "") {
+      alert("Please Login to create a topic thread");
+    }
+    else if (threadName === "" || fTags === "") {
+      alert("Thread Title and Tags Required");
+    }
+    else{
       axios
         .post("http://localhost:8080/threads/create", {threadName, fTags},
           {headers: { Authorization: `Bearer ${jwt}` }},
+          
         )
         .then((res) => {
             console.log(res);
-            CreateLanding();
+            CreateLanding(res.data.threadId);
   })
         .then(() => {
           setthreadName("");
           setfTags("");
         })
         .catch((err) => {
+          alert(`Please login to create a forum thread`);
           console.log(err);
 
         });
+    }
       
     }
 
@@ -58,8 +68,7 @@ function CreateForum() {
 
   return (
     <>
-    <div className='navbar-spacing'>
-    </div>
+    <div className='cf-navbar-spacing'>
     <h2 className='CreateForum-Title'>Create Forum Threads</h2>
     <section className='thread-create'>
       <div className='createthread-title'>
@@ -70,37 +79,12 @@ function CreateForum() {
         <label for="c_tags">Tags: </label>
         <input type="text" id="c_tags" name="c_tags" placeholder="  Catergorise Topic Tags" onChange={(e) => setfTags(e.target.value)}/>
       </div>
-      
-      <div className='ThreadCreator'>
-            {/* <div className="ThreadTextCreatorPanel">
-            <ul className='ThreadCreatorIcons'>
-                <li><img src={BoldIcon} alt="bold icon"/></li>
-                <li><img src={ItalicIcon} style={{height: 38}} alt="italic icon"/></li>
-                <li><img src={UnderlineIcon} style={{height: 38}} alt="underline icon"/></li>
-                <li><img src={StrikethroughIcon} alt="strike icon"/></li>
-                <li><img src={ColourWheelIcon} alt="colour wheeel icon"/></li>
-                <li><img src={FontSizeIcon} alt="font icon"/></li>
-                <img className="Createline" src={replyline} alt="reply icon"/>
-                <li><img src={HyperlinkIcon} alt="hyperlink icon"/></li>
-                <li><img src={PhotoIcon} alt="file icon"/></li>
-                <li><img src={EmojiIcon} alt="emoji icon"/></li>
-                <li><img src={ListIcon} alt="list icon"/></li>
-                <li><img src={TextAlignIcon} style={{height: 38}} alt="text align icon"/></li>
-                <li><img src={QuoteIcon} alt="quote icon"/></li>
-                <li><img src={SpoilerIcon} alt="spoiler icon"/></li>
-            </ul>
-            </div>
-            <div className='ThreadCreatorText'>
-            <textarea rows="20" name="text_body" placeholder=' First Message'></textarea>
-            </div>
-        </div>
-        <div className='ThreadCreatorTextTrash'><button className='threadcreatetrashbutton'><img src={DeleteIcon}/></button></div> */}
         <div className="ThreadTextEditorCreate" onClick={handlecreatethread}>
           <a href="/" ><img src={ReplyIcon} alt="reply icon"/></a>
           <label>Post Thread</label>
         </div>
-        </div>
     </section>
+    </div>
     </>
   )
 }

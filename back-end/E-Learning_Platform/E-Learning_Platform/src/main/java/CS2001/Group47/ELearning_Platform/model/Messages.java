@@ -38,29 +38,41 @@ public class Messages implements Serializable {
 
 	String message;
 	
-
-	int mLikes;
-	
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-	private Date createdAtDate;
+	private Date mTimestampCreated;
+
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.DATE)
+	@CreatedDate
+	private Date mDateCreated;
+	
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.TIME)
+	@CreatedDate
+	private Date mTimeCreated;
 
 	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name = "thread")
 	//@JsonIgnore
 	private Threads threads;
 
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "student")
+	//@JsonIgnore
+	private Student students;
+
 	public Messages() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Messages(String message, int mLikes , Threads threads) {
+	public Messages(String message, Threads threads, Student students) {
 		super();
 		this.message = message;
-		this.mLikes = mLikes;
 		this.threads = threads;
+		this.students = students;
 	}
 
 
@@ -80,20 +92,28 @@ public class Messages implements Serializable {
 		this.message = message;
 	}
 
-	public int getmLikes() {
-		return mLikes;
+	public Date getmTimestampCreated() {
+		return mTimestampCreated;
 	}
 
-	public void setmLikes(int mLikes) {
-		this.mLikes = mLikes;
+	public void setmTimestampCreated(Date mTimestampCreated) {
+		this.mTimestampCreated = mTimestampCreated;
 	}
 
-	public Date getCreatedAtDate() {
-		return createdAtDate;
+	public Date getmDateCreated() {
+		return mDateCreated;
 	}
 
-	public void setCreatedAtDate(Date createdAtDate) {
-		this.createdAtDate = createdAtDate;
+	public void setmDateCreated(Date mDateCreated) {
+		this.mDateCreated = mDateCreated;
+	}
+
+	public Date getmTimeCreated() {
+		return mTimeCreated;
+	}
+
+	public void setmTimeCreated(Date mTimeCreated) {
+		this.mTimeCreated = mTimeCreated;
 	}
 
 	public Threads getThreads() {
@@ -104,11 +124,24 @@ public class Messages implements Serializable {
 		this.threads = threads;
 	}
 
+	public Student getStudents() {
+		return students;
+	}
+
+	public void setStudents(Student students) {
+		this.students = students;
+	}
+
 	@Override
 	public String toString() {
-		return "Messages [messageID=" + messageID + ", message=" + message + ", mLikes=" + mLikes + ", createdAtDate="
-				+ createdAtDate + ", threads=" + threads + "]";
+		return "Messages [messageID=" + messageID + ", message=" + message + ", mTimestampCreated=" + mTimestampCreated
+				+ ", mDateCreated=" + mDateCreated + ", mTimeCreated=" + mTimeCreated + ", threads=" + threads
+				+ ", students=" + students + "]";
 	}
+
+	
+
+	
 
 	
 

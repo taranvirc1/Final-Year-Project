@@ -84,12 +84,14 @@ function Account() {
             } else {
               // setValidLoginAttempts(validLoginAttempts + 1);
               setInvalidAttempts(invalidAttempts + 1);
+              setTimeRemaining(0);
               alert("Failed token!!!");
               setLoggedinUser("");
             }
           } else {
             // setValidLoginAttempts(validLoginAttempts + 1);
             setInvalidAttempts(invalidAttempts + 1);
+            setTimeRemaining(0);
             alert("Login unsuccessful!!!");
             setLoggedinUser("");
           }
@@ -97,6 +99,7 @@ function Account() {
         .then(() => {
           // setValidLoginAttempts(0);
           setInvalidAttempts(0);
+          setTimeRemaining(0);
           setLoginErrorMessages("");
           setEmail("");
           setPassword("");
@@ -105,10 +108,12 @@ function Account() {
           console.log(err);
           // setValidLoginAttempts(validLoginAttempts + 1);
           setInvalidAttempts(invalidAttempts + 1);
+          setInvalidAttempts(0);
           alert("PROBLEM WITH LOGIN!!!");
           setLoggedinUser("");
         });
-      if (invalidAttempts === 2) {
+      if (invalidAttempts >= 2) {
+        setInvalidAttempts(0);
         setTimeRemaining(30);
       }
     }
@@ -149,27 +154,29 @@ function Account() {
   const passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
   function checkPasswordStrength() {
-    if (password !== "") {
+    if (values.password !== "") {
       if (
-        password.length <= 3 &&
-        (password.match(passRegexWeak) ||
-          password.match(passRegexMedium) ||
-          password.match(passRegexStrong))
+        values.password.length <= 3 &&
+        (values.password.match(passRegexWeak) ||
+          values.password.match(passRegexMedium) ||
+          values.password.match(passRegexStrong))
       )
         setNo(1);
       if (
-        password.length >= 6 &&
-        ((password.match(passRegexWeak) && password.match(passRegexMedium)) ||
-          (password.match(passRegexMedium) &&
-            password.match(passRegexStrong)) ||
-          (password.match(passRegexWeak) && password.match(passRegexStrong)))
+        values.password.length >= 6 &&
+        ((values.password.match(passRegexWeak) &&
+          values.password.match(passRegexMedium)) ||
+          (values.password.match(passRegexMedium) &&
+            values.password.match(passRegexStrong)) ||
+          (values.password.match(passRegexWeak) &&
+            values.password.match(passRegexStrong)))
       )
         setNo(2);
       if (
-        password.length >= 6 &&
-        password.match(passRegexWeak) &&
-        password.match(passRegexMedium) &&
-        password.match(passRegexStrong)
+        values.password.length >= 6 &&
+        values.password.match(passRegexWeak) &&
+        values.password.match(passRegexMedium) &&
+        values.password.match(passRegexStrong)
       )
         setNo(3);
     } else {
@@ -416,8 +423,9 @@ function Account() {
                 <input
                   className="pass"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
                   onKeyUp={checkPasswordStrength}
                   placeholder="Password*"
                 />
@@ -432,11 +440,11 @@ function Account() {
                 </span>
                 {/* <span className="show-pass">SHOW</span> */}
               </div>
-              {password && (
-                <div className="pass-indicator" style={{ display: "flex" }}>
-                  <div className={`weak ${no === 1 ? "active" : ""}`}></div>
-                  <div className={`medium ${no === 2 ? "active" : ""}`}></div>
-                  <div className={`strong ${no === 3 ? "active" : ""}`}></div>
+              {values.password && (
+                <div className="pass-indicator">
+                  <span className={`weak ${no === 1 ? "active" : ""}`}></span>
+                  <span className={`medium ${no === 2 ? "active" : ""}`}></span>
+                  <span className={`strong ${no === 3 ? "active" : ""}`}></span>
                 </div>
               )}
               {no === 1 && (

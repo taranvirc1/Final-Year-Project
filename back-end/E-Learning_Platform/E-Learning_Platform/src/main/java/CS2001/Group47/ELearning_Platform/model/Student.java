@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -61,6 +62,8 @@ public class Student implements Serializable {
 	@NotBlank
 	String password;
 
+
+
 	String resetPasswordToken;
 	@Column(name = "Biog")
 	private String bio;
@@ -68,7 +71,6 @@ public class Student implements Serializable {
 	@Column(name = "role")
 	private String role;
 
-	
 	@Column(name = "twitter")
 	private String twitter;
 
@@ -102,6 +104,9 @@ public class Student implements Serializable {
 	@LastModifiedDate
 	private Date updatedAt;
 
+	@Column(name = "xp")
+	private Integer xp;
+
 	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
 	@JsonIgnore
 
@@ -121,6 +126,11 @@ public class Student implements Serializable {
 
 	private List<Threads> threads = new ArrayList<>();
 
+	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
+	@JsonIgnore
+
+	private List<Messages> messages = new ArrayList<>();
+
 	public Student() {
 
 		super();
@@ -139,13 +149,14 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+	
 
 	}
 
 	public Student(byte [] backavatar,String username,String twitter,String linkedIn,String instagram,String role,String optionValue, String bio, byte[] avatar, String firstName, String lastName,
 			String dateOfBirth,
 			String country, String phone, String email,
-			String password) {
+			String password, Integer xp) {
 
 		super();
 		this.avatar = avatar;
@@ -164,6 +175,7 @@ public class Student implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+		this.xp = xp;
 
 	}
 
@@ -339,13 +351,23 @@ public class Student implements Serializable {
 		this.rate_Reviews = rate_Reviews;
 	}
 
+	
+
+	public Integer getXp() {
+		return xp;
+	}
+
+	public void setXp(Integer xp) {
+		this.xp = xp;
+	}
+
 	@Override
 	public String toString() {
 		return "Student [id=" + studentId  + "profile=" + avatar+ "backavatar" + backavatar+ "twitter=" +twitter + "linkedIn="+ "username=" + username +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
 				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
-				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + "]";
+				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + ", xp=" + xp + "]";
 	}
 	public List<Result> getResults() {         //for the result
         return results;

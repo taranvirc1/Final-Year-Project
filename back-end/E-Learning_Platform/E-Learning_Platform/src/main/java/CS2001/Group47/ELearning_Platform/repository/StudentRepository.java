@@ -3,6 +3,8 @@
  */
 package CS2001.Group47.ELearning_Platform.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 	Student findByResetPasswordToken(String token);
 
-	Student findByStudentId(Long userId);
+	Student findByStudentId(Integer userId);
 
+	List<Student> findByOrderByXpDesc();
 }

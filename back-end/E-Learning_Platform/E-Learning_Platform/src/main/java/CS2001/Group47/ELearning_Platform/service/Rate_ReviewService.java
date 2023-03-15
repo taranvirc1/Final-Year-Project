@@ -12,29 +12,25 @@ import CS2001.Group47.ELearning_Platform.repository.Rate_ReviewRepository;
 @Service
 
 public class Rate_ReviewService {
-    @Autowired
-    Rate_ReviewRepository reviewRepository;
+	@Autowired
+	Rate_ReviewRepository reviewRepository;
 
 	public void addReview(Rate_Review newReview) {
 		reviewRepository.save(newReview);
 	}
 
-	
+	public List<Rate_Review> getReviews(Integer courseID) {
+		return (List<Rate_Review>) reviewRepository.findAllByCourses_CourseID(courseID);
 
-    public List<Rate_Review> getReviews() {
-		return (List<Rate_Review>) reviewRepository.findAllByOrderByRatingStarsAsc();  
-  
 	}
 
-	public Rate_Review findByEmail(String email) {
-		return reviewRepository.findByStudents_Email(email);
+	public Rate_Review findByEmail(String email, Integer courseID) {
+		return reviewRepository.findByStudents_EmailAndCourses_CourseID(email,courseID);
 	}
-
-
 
 	public void deleteReview(Integer ratingID) {
 		Rate_Review rate_Review = reviewRepository.findById(ratingID)
-				  .orElseThrow(() -> new ResourceNotFoundException("rate_review", "ratingID", ratingID));
+				.orElseThrow(() -> new ResourceNotFoundException("rate_review", "ratingID", ratingID));
 		reviewRepository.delete(rate_Review);
 	}
 

@@ -4,8 +4,21 @@ import { useOutletContext } from "react-router-dom";
 
 import ReactPlayer from "react-player";
 
-const Accordion = () => {
-  const [loggedInUser, setLoggedinUser] = useOutletContext();
+
+
+
+const Accordion = ({ loggedInUser, CurrentCourseID }) => {
+
+ 
+
+
+
+
+
+
+
+
+
 
   const jwt = sessionStorage.getItem("jwt");
 
@@ -17,11 +30,9 @@ const Accordion = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/categories`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
+      .get(`http://localhost:8080/categories/${CurrentCourseID}`, {})
       .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
 
         setCategory(resp.data);
       })
@@ -29,8 +40,8 @@ const Accordion = () => {
         console.error(error);
       });
   }, []);
-
-  console.log("cat" + JSON.stringify(category));
+  console.log(category);
+  //console.log("cat" + JSON.stringify(category));
 
   const retrieveUrl = (videoName, courseID) => {
     const i = category.find(
@@ -51,7 +62,7 @@ const Accordion = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [rotate, setRotate] = useState(null);
 
-  const colors = ["#a0acea", "#fe9687", "#ffe587"];
+  const colors = ["#a0acea", "#fe9687", "#ffe587","#009B77","#7FCDCD","#C3447A","#A0DAA9","#E8A798"];
 
   const handleDropdown = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -90,7 +101,7 @@ const Accordion = () => {
             <div
               className="dropdown-btn"
               key={index}
-              style={{ backgroundColor: colors[index] }}
+              style={{ backgroundColor: colors[index]}}
               onClick={() => {
                 handleDropdown(index);
               }}
@@ -98,9 +109,9 @@ const Accordion = () => {
               <span className="line-2"></span>
               <span className="line-1">{item.categoryName}</span>
               <i
-                className="fa fa-angle-up"
+                className="fa fa-angle-right"
                 style={{
-                  transform: `rotate(${activeIndex === index ? 180 : 0}deg)`,
+                  transform: `rotate(${activeIndex === index ? 90 : 0}deg)`,
                   transition: "all 0.25s",
                 }}
               ></i>

@@ -1,7 +1,12 @@
+.s-navbar-spacing{
+    margin-top: 3%;
+    padding-top: 2%;
+    min-height: 100vh;
+    overflow: hidden;
+}
 .SearchForum-Title{
-    margin-top: 20px;
     position: relative;
-    padding: 20px 40px;
+    padding:0px 40px;
     user-select: none;
     color: black;
     font-size: 2rem;
@@ -16,7 +21,6 @@
     border: 2px solid black;
     border-radius: 25px;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-    margin-bottom: 440px;
 }
 .searchthread-title{
     margin-top: 15px;
@@ -34,7 +38,7 @@
     display:inline-block;
     font-family:'Poppins', sans-serif;
     font-size: 20px;
-    width: 89.5%;
+    width: 91%;
     border-radius: 10px;
 }
 
@@ -53,7 +57,7 @@
     display:inline-block;
     font-family:'Poppins', sans-serif;
     font-size: 20px;
-    width: 93.6%;
+    width: 15;
     border-radius: 10px;
 }
 
@@ -83,40 +87,21 @@
     transition-duration: 1s;
     transform:scale(0.99);
 }
-.ClearSearch{
-    display: inline-block;
-    margin-top: 20px;
-    padding-left: 20px;
 
-}
-.clearbutton{
-    border: 1px outset black;
-    border-radius: 10px;
-    padding:0.25%;
-
-}
-.clearbutton:active {
-    background-color: #b1b1b1;
-    box-shadow: 0 1px #666;
-    transform:scale(0.99);
-  }
-.clearbutton img{
-    height:40px;
-    width:40px
-}
 .searchpost{
     display: inline;
-    margin-top: 10px;
+    user-select: none;
+    margin-top: -14px;
     align-items: center;
     position:relative;
     display:inline;
     float:right;
     border: 1px outset black;
     border-radius: 15px;
-    padding: 10px 10px;
+    padding: 5px 10px;
     margin-right: 40px;
-    box-shadow: 0 1px #646464;
-    background-color:#6193ff;
+    background-color: #6193ff;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 .searchpost:hover{
     background-color:#4882ff;
@@ -136,4 +121,97 @@
 .spost img{
     height:40px;
     width:40px;
+}
+
+/* search results */
+
+.searchresult-title h2{
+    margin-top: 20px;
+    position: relative;
+    padding: 10px 40px;
+    user-select: none;
+    color: black;
+    font-size: 2rem;
+}
+
+.SearchResultOptions{
+    display: inline;
+    float: right;
+    position: relative;
+    block-size: fit-content;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    margin-right: 5%;
+}
+.SearchResultOptions a{
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    height: 50px;
+    
+}
+.SearchResultOptions a:active{
+    background-color: orange;
+}
+
+.SearchResultOptions a img{
+    user-select: none;
+    position: relative;
+    margin:auto;
+    height:50px;
+    width:55px;
+    border: 2px solid black;
+    padding: 2px;
+}
+
+.SearchResultSort {
+    position: absolute;
+    cursor: pointer;
+    width : 55px;
+    height: 50px;
+    user-select: none;
+    direction: rtl;
+}
+
+.searchresultsort-optn {
+    
+    width:160px;
+    height:0px;
+    overflow: hidden;
+    transition: height .4s ease;
+    list-style: none;
+    padding-left:0;
+    background-color: black;
+}
+.searchresultsort-optn :hover{
+    background-color: orange;
+}
+
+.searchresultsort-optn li a{
+    display: inline-block;
+    padding: 10px;
+    width: 100%;
+    background-color: black;
+    color:white;
+    font-size:20px;
+    text-decoration: none;
+    text-align: left;
+}
+
+#srsortbtn { /* hidden checkbox*/
+    position: absolute; opacity: 0; height: 0px;
+}    
+
+#srsortbtn:checked + .searchresultsort-optn {
+    height: 100px;
+    background-color: black;
+    z-index: 1;
+    position: absolute;
+}
+
+.ThreadResultsFound h2{
+    margin-left: 40px;
+    margin-top: -15px;
+    position: relative;
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }

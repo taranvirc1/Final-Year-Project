@@ -2,12 +2,25 @@ import axios from "axios";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { getReviews } from "./APIs/RetrieveReviews";
 import Background from "./background/Background";
 import Accordion from "./Accordion";
 function CoursesVideos() {
+  const reDirect = useNavigate();
+
+  //getting logged in user from loaclStorage
+  const [loggedInUser, setLoggedinUser] = useState("");
+
+  useEffect(() => {
+    const saveLoggedinUser = localStorage.getItem("loggedInUser");
+    if (saveLoggedinUser) {
+      setLoggedinUser(saveLoggedinUser);
+    }
+  }, []);
+  console.log(loggedInUser);
+
   //getting the current date using this function
   const current = new Date();
   const getCurrentDate = `${current.getDate()}/${
@@ -26,7 +39,6 @@ function CoursesVideos() {
   });
 
   // used to get the current user
-  const [loggedInUser, setLoggedinUser] = useOutletContext();
   const [currentUser, setCurrentUser] = useState({
     email: loggedInUser,
   });
@@ -37,7 +49,7 @@ function CoursesVideos() {
 
   const [currentStudentID, setCurrentStudentID] = useState("");
 
-  const [checkrating, setCheckRating] = useState(0);
+  const [checkrating, setCheckRating] = useState("");
   const [checkReview, setCheckReview] = useState("");
 
   // getting the review text and store in the review object of posting purposes
@@ -70,15 +82,10 @@ function CoursesVideos() {
     setReview(reviewCopy);
   }
 
-  const enabled = checkrating.length > 0 && checkReview.length > 0;
-
-  console.log(checkReview.length);
-
   // method used to post and edit review--
   // if statement checks if review has an id to call the edit mapping else if null calls the post mapping
   const onSubmit = async (e) => {
     e.preventDefault();
-    setForm(false);
 
     const jwt = localStorage.getItem("jwt");
 
@@ -99,6 +106,7 @@ function CoursesVideos() {
             reviewDesc: "",
             createdAt: getCurrentDate,
           });
+          alert("review edited");
         }) //;
         .catch(async (error) => {
           console.log(error);
@@ -109,7 +117,7 @@ function CoursesVideos() {
           headers: { Authorization: `Bearer ${jwt}` },
         })
         .then((response) => {
-          console.log(response);
+          console.log("status" + response);
           if (response.status === 201) {
             alert("Registered Successfully!!!");
             setReview({
@@ -118,8 +126,7 @@ function CoursesVideos() {
               reviewDesc: "",
               createdAt: getCurrentDate,
             });
-          }
-          if (response.status === 400) {
+          } else {
             alert("you already have a review");
           }
         })
@@ -127,24 +134,37 @@ function CoursesVideos() {
         .catch(async (error) => {
           console.log(review);
           console.log(error);
+          alert("you already have a review");
         });
-      setCheckReview("");
 
       // setForm(false);
       // onStarsClick(0);
       //setHover(0);
     }
+
+    setReview({
+      courseID: "1",
+      ratingStars: "",
+      reviewDesc: "",
+      createdAt: getCurrentDate,
+    });
+    setForm(false);
+
     retrieveReviews();
+    setCheckReview("");
+    setCheckRating("");
+    setHover(0);
   };
 
   const [reviews, setReviews] = useState([]); // retrieved reveiws is stored in this array
   const [average, setAverage] = useState(0);
   const [totalReviews, setTotalReviews] = useState(null);
+  const CurrentCourseID = 1;
 
   const jwt = localStorage.getItem("jwt");
   console.log(jwt);
   const retrieveReviews = () =>
-    getReviews({ setTotalReviews, average, setReviews, jwt });
+    getReviews({ setTotalReviews, average, setReviews, jwt,CurrentCourseID });
 
   useEffect(() => {
     // getReviews();
@@ -188,6 +208,7 @@ function CoursesVideos() {
       .catch((error) => {
         console.error(error);
       });
+    retrieveReviews();
   };
 
   const [totalSum, setTotalSum] = useState(0);
@@ -246,8 +267,19 @@ function CoursesVideos() {
   function handleForm() {
     setForm(true);
   }
+  function closeForm() {
+    setReview({
+      courseID: "1",
+      ratingStars: "",
+      reviewDesc: "",
+      createdAt: getCurrentDate,
+    });
+    setCheckReview("");
+    setCheckRating("");
+    setForm(false);
+  }
 
-  function dropdown() {
+  /*function dropdown() {
     const dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
 
@@ -256,7 +288,7 @@ function CoursesVideos() {
         this.classList.toggle("active");
       });
     }
-  }
+  }*/
 
   const [videoUrl, setVideoUrl] = useState("");
 
@@ -289,6 +321,49 @@ function CoursesVideos() {
     setVideoUrl(url);
   };
 
+  const [hasReview, setHasReview] = useState(false);
+
+  useEffect(() => {
+    const hasReview = reviews.filter(
+      (item) => item.students.email === loggedInUser
+    );
+    if (hasReview.length > 0) {
+      console.log("rfrs true");
+      setHasReview(true);
+    } else {
+      setHasReview(false);
+    }
+  }, [reviews, loggedInUser]);
+  console.log(hasReview);
+
+
+
+  const checkIfFilled = (e) => {
+    if (!loggedInUser) {
+      alert("please log in to review");
+        reDirect("/Account");
+    } else if (!review.ratingID) {
+      if (hasReview) {
+        alert("you already have a review");
+      } else {
+        if (checkReview && checkrating) {
+          //alert("check");
+          onSubmit(e);
+        } else {
+          alert("please filll in all fileds");
+        }
+      }
+    } else {
+      if (review.ratingID) {
+        if (!checkReview && !checkrating) {
+          alert("please change  rating or review");
+        } else {
+          onSubmit(e);
+        }
+      }
+    }
+  };
+
   return (
     <div className="couresesVideos">
       <Background />
@@ -318,7 +393,7 @@ function CoursesVideos() {
       </div>
       <div className="Space"> </div>
 
-      <Accordion />
+      <Accordion CurrentCourseID={CurrentCourseID} loggedInUser={loggedInUser} />
 
       <div className="trackerContainer">
         Quiz Progress For this Course
@@ -381,8 +456,7 @@ function CoursesVideos() {
             <button
               className="ratingcloseIcon"
               onClick={() => {
-                setForm(false);
-                onStarsClick(0);
+                closeForm();
                 setHover(0);
               }}
             >
@@ -417,58 +491,72 @@ function CoursesVideos() {
               value={review.reviewDesc}
               placeholder="Reivew Here..."
             ></textarea>
-            <Link to="/coursesvideos">
-              <button
-                className="submitButton"
-                type="button"
-                disabled={!(checkReview && checkrating)}
-                onClick={onSubmit}
-              >
-                Submit
-              </button>
-            </Link>
+
+            <button
+              className="submitButton"
+              type="button"
+              onClick={checkIfFilled}
+            >
+              Submit
+            </button>
           </div>
         )}
 
-        <div className="reviews">
-          {reviews.slice(0, visible).map((reviewd) => (
-            <div className="eachReview">
-              <div className="top-review">
-                <h4 className="reviewerName">
-                  {reviewd.students.firstName}
-                  <span></span> {reviewd.students.lastName}
-                </h4>
-                {new Array(reviewd.ratingStars).fill().map(() => (
-                  <i className="fas fa-star icon-c" />
-                ))}
-              </div>
-              <div className="reviewDiscription">
-                <p>{reviewd.reviewDesc}</p>
-                <p2>{reviewd.createdAt}</p2>
-              </div>
-              {loggedInUser === reviewd.students.email && (
-                <button
-                  className="editReview"
-                  onClick={() => {
-                    handleEdit(reviewd.ratingID);
-                    handleForm();
-                  }}
-                >
-                  Edit
-                </button>
-              )}
+<div className="reviews">
+        {reviews.slice(0, visible).map((reviewd) => (
+                 
 
-              {loggedInUser === reviewd.students.email && (
-                <button
-                  className="deleteReview"
-                  onClick={() => deleteReview(reviewd.ratingID)}
-                >
-                  Delete
-                </button>
-              )}
+          <div className="eachReview">
+                   <div className="reviewSorter">
+          {reviewd.students.avatar?  <img  className="reviewphoto" src={"data:image/png;base64," + reviewd.students.avatar } height="90" width="90" alt="" /> : <img  className="reviewphoto" src={"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} height="90" width="90" alt="" /> }
+   
+          <div className="reviewBox">
+
+            <div className="top-review">
+              <h4 className="reviewerName">
+
+                {reviewd.students.firstName}
+                <span></span> {reviewd.students.lastName}
+              </h4>
+              {new Array(reviewd.ratingStars).fill().map(() => (
+                <i className="fas fa-star icon-c" />
+              ))}
             </div>
-          ))}
-        </div>
+            <div className="reviewDiscription">
+
+              <p>{reviewd.reviewDesc}</p>
+              <p2>{reviewd.createdAt}</p2>
+            </div>
+            </div>
+            </div>
+
+            <div className="editanddeleteButton">
+
+            {loggedInUser === reviewd.students.email && (
+              <button
+                className="editReview"
+                onClick={() => {
+                  handleEdit(reviewd.ratingID);
+                  handleForm();
+                }}
+              >
+                Edit
+              </button>
+            )}
+
+            {loggedInUser === reviewd.students.email && (
+              <button
+                className="deleteReview"
+                onClick={() => deleteReview(reviewd.ratingID)}
+              >
+                Delete
+              </button>
+            )}
+          </div>
+          </div>
+
+        ))}
+      </div>
         <button className="viewMore" onClick={showMoreReviews}>
           View More
         </button>

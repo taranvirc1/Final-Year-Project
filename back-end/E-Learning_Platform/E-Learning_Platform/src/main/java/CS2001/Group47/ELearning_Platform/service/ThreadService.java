@@ -31,8 +31,20 @@ public class ThreadService {
 		return threadsRepository.findByThreadId(id);
 	}
 
+	public List<Threads> findByThreadNameContaining(String threadName) {
+		return threadsRepository.findByThreadNameContaining(threadName);
+	}
+
+	public List<Threads> findByfTagContaining(String fTags) {
+		return threadsRepository.findByfTagsContaining(fTags);
+	}
+
 	public Threads findByEmail(String email) {
 		return threadsRepository.findByStudents_Email(email);
+	}
+
+	public Threads findByTagContaining(String threadtag) {
+		return null;
 	}
 
 }

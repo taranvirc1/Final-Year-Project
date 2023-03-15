@@ -62,43 +62,8 @@ useEffect(()=>{
   return (
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     <div className="quizTesdwdwt">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         
@@ -122,11 +87,7 @@ useEffect(()=>{
 						))}
 
 
-
-
-
-
-                  
+     
                 </div>
               </>
             ))}

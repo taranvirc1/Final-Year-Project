@@ -14,7 +14,6 @@ import Background2 from "./background/Background2";
 function Courses() {
   return (
     <div className="background">
-      <Background2 />
 
       <div className="overflow-hidden">
         <div className="animated-border-box-glow"></div>
@@ -37,9 +36,9 @@ function Courses() {
           <img src={javaimage} alt="" />
 
           <div className="info">
-            <h1>JAVA</h1>
-            <p>In this course, you will get to learn everything about java </p>
+            <h1 className="courseTitle">JAVA</h1>
             <Link to="/coursesvideos">
+    
               <button> Watch Videos</button>
             </Link>
           </div>
@@ -48,9 +47,7 @@ function Courses() {
           <img src={pythonimage} alt="" />
           <div className="info">
             <h1>Python</h1>
-            <p>
-              In this course, you will get to learn everything about python{" "}
-            </p>
+          
             <button>Watch Videos</button>
           </div>
         </div>
@@ -59,7 +56,6 @@ function Courses() {
           <img src={clogo} alt="" />
           <div className="info">
             <h1>C++</h1>
-            <p>In this course, you will get to learn everything about C++ </p>
             <button>Watch Videos</button>
           </div>
         </div>
@@ -67,9 +63,7 @@ function Courses() {
           <img src={mysqlimage} alt="" />
           <div className="info">
             <h1>My SQL</h1>
-            <p>
-              In this course, you will get to learn everything about My Sql{" "}
-            </p>
+            
             <button>Watch Videos</button>
           </div>
         </div>
@@ -78,7 +72,6 @@ function Courses() {
           <img src={reactimage} alt="" />
           <div className="info">
             <h1>React</h1>
-            <p>In this course, you will get to learn everything about React </p>
             <button>Watch Videos</button>
           </div>
         </div>
@@ -87,7 +80,6 @@ function Courses() {
           <img src={htmlimage} alt="" />
           <div className="info">
             <h1>HTML</h1>
-            <p>In this course, you will get to learn everything about HTML </p>
             <button>Watch Videos</button>
           </div>
         </div>
@@ -95,9 +87,7 @@ function Courses() {
           <img src={cssimage} alt="" />
           <div className="info">
             <h1>CSS</h1>
-            <p>
-              In this course, you will get to learn everything about CSS styling{" "}
-            </p>
+           
             <button>Watch Videos</button>
           </div>
         </div>
@@ -106,10 +96,11 @@ function Courses() {
           <img src={js} alt="" />
           <div className="info">
             <h1>Java Script</h1>
-            <p>
-              In this course, you will get to learn everything about java Script{" "}
-            </p>
-            <button>Watch Videos</button>
+           
+            <Link to="/javaScriptVideos">
+        
+              <button> Watch Videos</button>
+            </Link>
           </div>
         </div>
       </div>

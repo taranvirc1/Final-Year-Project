@@ -9,13 +9,12 @@
 .account-container {
     position: relative;
     width: 100%;
-    background-color: #fff;
     min-height: 100vh;
     overflow: hidden;
     margin-bottom: 70px;
   }
 
-  /* Stylinf for both forms in the account file - signup and signin */
+  /* Styling for both forms in the account file - signup and signin */
   
   .forms-container {
     position: absolute;
@@ -182,14 +181,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   /* display: none; */
 }
 
-.pass-indicator span {
+/* .pass-indicator span {
   width: 100%;
   height: 50%;
   background: lightgray;
   border-radius: 15px;
   padding: 0px 50px;
   margin-right: 5px;
-}
+} */
 
 .pass-indicator .weak::before {
   content: '';
@@ -221,19 +220,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: red;
 }
 
-.pass-indicator span.active.weak::before {
+.pass-indicator .weak.active::before {
   background:#ff4757;
 }
 
-.pass-indicator span.active.medium::before {
+.pass-indicator .medium.active::before {
   background:orange;
 }
 
-.pass-indicator span.active.strong::before {
+.pass-indicator .strong.active::before {
   background:#23ad5c;
 }
 
-.pass-text {
+.pass-text .weak .medium .strong {
   font-size: .75rem;
   font-weight: 600;
   display: none;

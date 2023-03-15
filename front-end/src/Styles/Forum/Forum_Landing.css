@@ -1,45 +1,64 @@
-.navbar-spacing{
-    margin-top: 80px;
+.fl-navbar-spacing{
+    margin-top: 2%;
+    padding-top: 2%;
+    min-height: 100vh;
+    overflow: hidden;
 }
 .forums-title h2{
-    margin-top: 10px;
     position: relative;
     color: black;
     font-size: 2rem;
     margin-bottom: -5px;
 }
 
-.LandingPage-list{
-    background-color: aliceblue;
+.thread-pages{
     display: inline-block;
-    position: relative;
-    justify-content: left;
-    margin-left: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.1rem;
+    user-select: none;
+    
     
 }
-.LandingPage-list a{
+.thread-pages li{
+    list-style: none;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
-    padding: 10px 20px;
-    font-size: 20px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.thread-pages li a{
+    display: inline-block;
+    padding: 0px 20px;
+    font-size: 2rem;
+    outline: 3px;
+    outline-style: outset;
+    background-color: white;
+    text-decoration: none;
     color:black;
-    cursor: pointer;
-    outline: auto;
-    outline-style: inset;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    user-select: none;
+}
+.thread-pages li.previous a,
+.thread-pages li.next a,
+.thread-pages li.break a {
+  color: #5a18b1;
+}
+.thread-pages li.active a {
+    background-color: #9d5bf3;
+    color: rgb(0, 0, 0);
+}
+.thread-pages li.disabled a {
+    color: rgb(148, 148, 148);
+}
+.thread-pages li.disable,
+.thread-pages li.disabled a {
+cursor: default;
 }
 
-.LandingPage-list a:active {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    outline-color: black;
-}
 .LandingOptions{
     display: inline;
     float: right;
     position: relative;
     block-size: fit-content;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     margin-right: 40px;
 }
 .LandingOptions a{
@@ -49,6 +68,7 @@
     height: 50px;
     
 }
+
 .LandingOptions a:active{
     background-color: orange;
 }
@@ -71,7 +91,7 @@
 }
 
 .landingsort-optn {
-    width:160px;
+    width:165px;
     height:0px;
     overflow: hidden;
     transition: height .4s ease;
@@ -100,7 +120,7 @@
 }    
 
 #lsortbtn:checked + .landingsort-optn {
-    height: 150px;
+    height: 100px;
     background-color: black;
     z-index: 1;
     position: absolute;
@@ -112,7 +132,7 @@
 .Thread-List{
     width: 96%;
     margin: auto;
-    margin-top: 25px;
+    margin-top: 35px;
     padding: 15px 15px;
     background-color: #6870b9;
     border: 2px solid black;

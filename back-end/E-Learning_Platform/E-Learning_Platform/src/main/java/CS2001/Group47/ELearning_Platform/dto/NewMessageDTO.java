@@ -3,45 +3,58 @@ package CS2001.Group47.ELearning_Platform.dto;
 
 
 public class NewMessageDTO {
-    String message;
-    int mlikes;
-    int threadId;
+    String newMessage;
+    int saveThreadID;
+    int studentId;
     
-    public NewMessageDTO(String message, int mlikes, int threadId) {
+    public NewMessageDTO(String newMessage,  int saveThreadID, int studentId) {
         super();
-        this.message = message;
-        this.mlikes = mlikes;
-        this.threadId = threadId;
+        this.newMessage = newMessage;
+        this.saveThreadID = saveThreadID;
+        this.studentId = studentId;
     }
 
-    public String getMessage() {
-        return message;
+    public String getNewMessage() {
+        return newMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setNewMessage(String newMessage) {
+        this.newMessage = newMessage;
     }
 
-    public int getMlikes() {
-        return mlikes;
+    public int getSaveThreadID() {
+        return saveThreadID;
     }
 
-    public void setMlikes(int mlikes) {
-        this.mlikes = mlikes;
+    public void setSaveThreadID(int saveThreadID) {
+        this.saveThreadID = saveThreadID;
     }
 
-    public int getThreadId() {
-        return threadId;
+    public int getStudentId() {
+        return studentId;
     }
 
-    public void setThreadId(int threadId) {
-        this.threadId = threadId;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
     @Override
     public String toString() {
-        return "NewMessageDTO [message=" + message + ", mlikes=" + mlikes + ", threadId=" + threadId + "]";
+        return "NewMessageDTO [newMessage=" + newMessage + ", saveThreadID=" + saveThreadID
+                + ", studentId=" + studentId + "]";
     }
+
+    
+
+   
+
+    
+ 
+
+
+
+
+   
     
     
 }
