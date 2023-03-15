@@ -32,6 +32,7 @@ function ForumPage() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
+  const[SubButton, setSubButton] = useState("");
   const saveThreadID = localStorage.getItem("ThreadID");
   const jwt = localStorage.getItem("jwt");
 
@@ -142,7 +143,7 @@ const newmessagehandle = (e) => {
     }
   }
   //subscribe button text changer "Subscribe" to "Subscribed"
-  const[SubButton, setSubButton] = useState("Subscribe");
+  
   function watchthread(){
     if(SubButton==="Subscribed"){
       setSubButton("Subscribe")
@@ -152,6 +153,7 @@ const newmessagehandle = (e) => {
     }
     
   }
+
 
  
   return (
