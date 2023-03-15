@@ -83,7 +83,7 @@ useEffect(()=>{
                   <div className="answer-section">
 
                   {question.answer.map((answerOption) => (
-							<button onClick={() => handleAnswerOptionClick(answerOption.correct)}>{answerOption.answerText}</button>
+							<button className="answerButtons" onClick={() => handleAnswerOptionClick(answerOption.correct)}>{answerOption.answerText}</button>
 						))}
 
 
