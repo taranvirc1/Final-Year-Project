@@ -79,21 +79,18 @@ public class ThreadController {
     	
     }
 
-    @GetMapping("/threadname/{threadname}")
-    public List<Threads> getThreadbynameContaining(String threadName) {
-    	
-    	return threadService.findByThreadNameContaining(threadName);
-    	
-    }
+    @RequestMapping("/threadName/{threadName}")
+    public Iterable<Threads> getThreadbyNameContaining( @PathVariable("threadName")String threadName) {
+    return threadService.findByThreadNameContaining(threadName) ;
+}
 
-    @GetMapping("/threadtag/{threadtag}")
-    public List<Threads> getThreadbytagContaining(String threadtag) {
-    	
-    	return threadService.findByfTagContaining(threadtag);
-    	
-    }
 
-    
+    @RequestMapping("/threadtag/{fTags}")
+    public Iterable<Threads> getThreadbytagContaining( @PathVariable("fTags")String fTags) {
+    return threadService.findByfTagContaining(fTags) ;
+}
+
+
     @RequestMapping(value = "/threadcreator", method = RequestMethod.GET)
     @ResponseBody
     public String currentUserName(Principal principal) {
