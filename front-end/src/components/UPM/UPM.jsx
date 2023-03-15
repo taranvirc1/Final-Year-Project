@@ -73,7 +73,7 @@ function UPM() {
       "Content-Type": "application/json",
     },
   };
-
+  const maxDate = new Date().toISOString().split("T")[0];
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -547,8 +547,8 @@ function UPM() {
   id="DOB"
   required
   dateFormat="yyyy-MM-dd"
+  max={maxDate}
 />
-
 
                               <label for="name" class="upm-label">
                                 DOB
