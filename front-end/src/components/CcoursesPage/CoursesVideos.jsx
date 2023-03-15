@@ -393,7 +393,7 @@ function CoursesVideos() {
       </div>
       <div className="Space"> </div>
 
-      <Accordion CurrentCourseID={CurrentCourseID} />
+      <Accordion CurrentCourseID={CurrentCourseID} loggedInUser={loggedInUser} />
 
       <div className="trackerContainer">
         Quiz Progress For this Course
