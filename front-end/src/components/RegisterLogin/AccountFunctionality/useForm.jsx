@@ -38,7 +38,6 @@ const useForm = (validateForm) => {
     e.preventDefault();
     //check the values in the signup form
     const errors = validateForm(values);
-    // setErrors(validateForm(values));
     if (Object.keys(errors).length === 0) {
       const { firstName, lastName, dob, country, phone, email, password } =
         values;
@@ -71,7 +70,6 @@ const useForm = (validateForm) => {
       } catch (error) {
         console.log(user);
         console.log(error);
-        alert("Registration not sent!!!");
       }
     } else {
       setErrors(errors);

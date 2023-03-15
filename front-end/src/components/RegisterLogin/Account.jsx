@@ -72,9 +72,9 @@ function Account() {
               console.log(res);
               console.log(token);
               localStorage.setItem("jwt", token);
-              setInvalidAttempts(0);
+              // setInvalidAttempts(0);
               setTimeRemaining(0);
-              // setValidLoginAttempts(0);
+              setValidLoginAttempts(0);
               setLoginErrorMessages("");
               alert("You have logged in successfully!!!");
               setLoginSuccess("You have logged in successfully!!!");
@@ -82,23 +82,23 @@ function Account() {
               setLoggedinUser(email);
               login();
             } else {
-              // setValidLoginAttempts(validLoginAttempts + 1);
-              setInvalidAttempts(invalidAttempts + 1);
+              setValidLoginAttempts(validLoginAttempts + 1);
+              // setInvalidAttempts(invalidAttempts + 1);
               setTimeRemaining(0);
               alert("Failed token!!!");
               setLoggedinUser("");
             }
           } else {
-            // setValidLoginAttempts(validLoginAttempts + 1);
-            setInvalidAttempts(invalidAttempts + 1);
+            setValidLoginAttempts(validLoginAttempts + 1);
+            // setInvalidAttempts(invalidAttempts + 1);
             setTimeRemaining(0);
             alert("Login unsuccessful!!!");
             setLoggedinUser("");
           }
         })
         .then(() => {
-          // setValidLoginAttempts(0);
-          setInvalidAttempts(0);
+          setValidLoginAttempts(0);
+          // setInvalidAttempts(0);
           setTimeRemaining(0);
           setLoginErrorMessages("");
           setEmail("");
@@ -106,34 +106,19 @@ function Account() {
         })
         .catch((err) => {
           console.log(err);
-          // setValidLoginAttempts(validLoginAttempts + 1);
-          setInvalidAttempts(invalidAttempts + 1);
+          setValidLoginAttempts(validLoginAttempts + 1);
+          // setInvalidAttempts(invalidAttempts + 1);
           setInvalidAttempts(0);
           alert("PROBLEM WITH LOGIN!!!");
           setLoggedinUser("");
         });
-      if (invalidAttempts >= 2) {
-        setInvalidAttempts(0);
+      if (validLoginAttempts >= 2) {
+        setValidLoginAttempts(0);
+        // setInvalidAttempts(0);
         setTimeRemaining(30);
       }
     }
-
-    // }
   };
-
-  // const panelAnimation = () => {
-  //   const sign_in_btn = document.querySelector("#sign-in-btn");
-  //   const sign_up_btn = document.querySelector("#sign-up-btn");
-  //   const container = document.querySelector(".account-container");
-
-  //   sign_up_btn.addEventListener("click", () => {
-  //     container.classList.add("sign-up-mode");
-  //   });
-
-  //   sign_in_btn.addEventListener("click", () => {
-  //     container.classList.remove("sign-up-mode");
-  //   });
-  // };
 
   // useState for slide in animation
   const [isSignUpClick, setIsSignUpClick] = useState(false);
@@ -171,14 +156,14 @@ function Account() {
           (values.password.match(passRegexWeak) &&
             values.password.match(passRegexStrong)))
       )
-        setNo(2);
+        setNo(1 && 2);
       if (
         values.password.length >= 6 &&
         values.password.match(passRegexWeak) &&
         values.password.match(passRegexMedium) &&
         values.password.match(passRegexStrong)
       )
-        setNo(3);
+        setNo(1 && 2 && 3);
     } else {
       setNo(null);
     }
