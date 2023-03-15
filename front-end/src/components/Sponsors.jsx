@@ -1,22 +1,48 @@
 import React from 'react'
-import img1 from "../images/image/1.png"
-import img2 from "../images/image/2.png"
-import img3 from "../images/image/3.png"
-import img4 from "../images/image/4.png"
+import img1 from"../images/footer image/brunel-logo-blue.png"
+import img2 from "../images/footer image/codecademy-logo-vector.png"
+import img3 from "../images/footer image/Logo_of_the_United_Nations.svg.png"
+import img4 from "../images/footer image/ioc_logo_onwhite_aw.258x0-is-hidpi.png"
 import "../Styles/Sponsors.css";
 function Sponsors() {
   return (
-    <div className="Sponsors">
-     <h2 className='key'>
-       Key supporters
-     </h2>
-     <div className="Sponsors-header">
-       <img src={img1} alt="logo" />
-       <img src={img2} alt="logo" />
-       <img src={img3} alt="logo" />
-       <img src={img4} alt="logo" />
-     </div>
-    </div>
+    <div className="sponsor-header">
+        <h2>Sponsored By</h2>
+
+        <div className="row">
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src={img1}
+              style={{ width: "200px" }}
+            />
+          </div>
+
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src={img2}
+              style={{ width: "155px" }}
+            />
+          </div>
+
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src={img3}
+              style={{ width: "155px" }}
+            />
+          </div>
+
+          <div className="sponsor-feature">
+            <img
+              alt=""
+              src={img4}
+              style={{ width: "155px" }}
+            />
+          </div>
+        </div>
+      </div>
   )
 }
 
