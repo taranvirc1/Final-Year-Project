@@ -37,24 +37,23 @@ const useForm = (validateForm) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //check the values in the signup form
-    setErrors(validateForm(values));
-    const { firstName, lastName, dob, country, phone, email, password } =
-      values;
-    const user = {
-      firstName,
-      lastName,
-      dob,
-      country,
-      phone,
-      email,
-      password,
-    };
-    await axios
-      .post("http://localhost:8080/user", user)
-      .then((response) => {
-        console.log(response);
-        if (response.status === 201) {
-          alert("Registered successfully!!!");
+    const errors = validateForm(values);
+    // setErrors(validateForm(values));
+    if (Object.keys(errors).length === 0) {
+      const { firstName, lastName, dob, country, phone, email, password } =
+        values;
+      const user = {
+        firstName,
+        lastName,
+        dob,
+        country,
+        phone,
+        email,
+        password,
+      };
+      try {
+        const res = await axios.post("http://localhost:8080/user", user);
+        if (res.status === 201) {
           console.log(user);
           setValues({
             firstName: "",
@@ -66,17 +65,26 @@ const useForm = (validateForm) => {
             password: "",
             confirmPassword: "",
           });
+          setErrors({});
           goToLogin();
         }
-      })
-      .catch(async (error) => {
+      } catch (error) {
         console.log(user);
         console.log(error);
         alert("Registration not sent!!!");
-      });
+      }
+    } else {
+      setErrors(errors);
+    }
   };
 
-  return { handleChange, values, handleSubmit, errors };
+  return {
+    handleChange,
+    values,
+    handleSubmit,
+    errors,
+    showErrors: Object.keys(errors).length > 0,
+  };
 };
 
 export default useForm;

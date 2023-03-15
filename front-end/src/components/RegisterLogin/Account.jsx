@@ -9,7 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Account() {
-  const { handleChange, values, handleSubmit, errors } =
+  const { handleChange, values, handleSubmit, errors, showErrors } =
     useForm(validateSignUpForm);
 
   const today = new Date().toISOString().slice(0, 10);
@@ -350,7 +350,9 @@ function Account() {
                   placeholder="First Name*"
                 />
               </div>
-              {errors.firstName && <p>{errors.firstName}</p>}
+              {errors
+                ? errors.firstName && showErrors && <p>{errors.firstName}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-user"></i>
                 <input
@@ -361,7 +363,9 @@ function Account() {
                   placeholder="Last Name*"
                 />
               </div>
-              {errors.lastName && <p>{errors.lastName}</p>}
+              {errors
+                ? errors.lastName && showErrors && <p>{errors.lastName}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-calendar-alt"></i>
                 <input
@@ -375,7 +379,7 @@ function Account() {
                   placeholder="Date of Birth*"
                 />
               </div>
-              {errors.dob && <p>{errors.dob}</p>}
+              {errors ? errors.dob && showErrors && <p>{errors.dob}</p> : ""}
               <div className="input-field">
                 <i className="fas fa-globe-americas"></i>
                 <input
@@ -386,7 +390,9 @@ function Account() {
                   placeholder="Country*"
                 />
               </div>
-              {errors.country && <p>{errors.country}</p>}
+              {errors
+                ? errors.country && showErrors && <p>{errors.country}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-phone"></i>
                 <input
@@ -397,7 +403,9 @@ function Account() {
                   placeholder="Phone Number*"
                 />
               </div>
-              {errors.phone && <p>{errors.phone}</p>}
+              {errors
+                ? errors.phone && showErrors && <p>{errors.phone}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
@@ -408,7 +416,9 @@ function Account() {
                   placeholder="Email*"
                 />
               </div>
-              {errors.email && <p>{errors.email}</p>}
+              {errors
+                ? errors.email && showErrors && <p>{errors.email}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 {/* <input
@@ -462,7 +472,9 @@ function Account() {
                 <span className="strong"></span>
               </div>
               <div className="pass-text">Yours password is too weak</div> */}
-              {errors.password && <p>{errors.password}</p>}
+              {errors
+                ? errors.password && showErrors && <p>{errors.password}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
@@ -473,7 +485,10 @@ function Account() {
                   placeholder="Confirm Password*"
                 />
               </div>
-              {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+              {errors
+                ? errors.confirmPassword &&
+                  showErrors && <p>{errors.confirmPassword}</p>
+                : ""}
               {/* Link to confirmation page after sign up */}
               {/* <Link to="/confirmAccount"> */}
               <input type="submit" className="account-btn" value="Sign up" />
