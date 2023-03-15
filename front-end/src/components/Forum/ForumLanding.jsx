@@ -60,7 +60,7 @@ function ForumLanding() {
   return (
     <>
     <div className='fl-navbar-spacing'>
-    </div>
+    
     <div className="forums-title">
         <h2>Student Forum Threads</h2>
     </div>
@@ -125,6 +125,7 @@ function ForumLanding() {
       </div>
       ))}
     </section>
+    </div>
     </>
   )
 }
