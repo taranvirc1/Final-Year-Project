@@ -34,8 +34,6 @@ public class Messages implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer messageID;
-	
-
 	String message;
 	
 	@Column(nullable = false, updatable = false)

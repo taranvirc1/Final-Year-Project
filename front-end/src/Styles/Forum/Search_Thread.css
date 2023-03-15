@@ -16,7 +16,7 @@
     margin: auto;
     margin-top: 15px;
     padding: 15px 15px;
-    padding-bottom: 50px;
+    padding-bottom: 90px;
     background-color: #a6aefd;
     border: 2px solid black;
     border-radius: 25px;
@@ -35,6 +35,7 @@
 }
 #sthread-title{
     position: relative;
+    padding-left: 10px;
     display:inline-block;
     font-family:'Poppins', sans-serif;
     font-size: 20px;
@@ -42,56 +43,12 @@
     border-radius: 10px;
 }
 
-.searchtags{
-    margin-top: 15px;
-    position: relative;
-    padding-left: 100px;
-}
-.searchtags label{
-    position: relative;
-    padding-right: 5px;
-    font-size: 23px;
-}
-#s_tags{
-    position: relative;
-    display:inline-block;
-    font-family:'Poppins', sans-serif;
-    font-size: 20px;
-    width: 15;
-    border-radius: 10px;
-}
 
-.searchsort{
-    margin-top: 15px;
-    position: relative;
-    padding-left: 78px;
-    
-}
-.searchsort label{
-    position: relative;
-    padding-right: 5px;
-    font-size: 23px;
-    
-}
-#ssort{
-    position: relative;
-    display:inline-block;
-    text-align: center;
-    width: 300px;
-    font-family:'Poppins', sans-serif;
-    font-size: 20px;
-    border-radius: 10px;
-}
-#ssort:active{
-    box-shadow: 0 1px #666;
-    transition-duration: 1s;
-    transform:scale(0.99);
-}
 
 .searchpost{
     display: inline;
     user-select: none;
-    margin-top: -14px;
+    margin-top: 14px;
     align-items: center;
     position:relative;
     display:inline;
@@ -173,7 +130,7 @@
 
 .searchresultsort-optn {
     
-    width:160px;
+    width:180px;
     height:0px;
     overflow: hidden;
     transition: height .4s ease;
