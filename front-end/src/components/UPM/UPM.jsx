@@ -155,7 +155,7 @@ function UPM() {
       console.error(error);
     }
   };
-  function checkPasswordStrength(password) {
+  function isStrength(password) {
     const hasNumber = /\d/.test(password);
     const hasLowercase = /[a-z]/.test(password);
     const hasUppercase = /[A-Z]/.test(password);
@@ -168,6 +168,11 @@ function UPM() {
       hasSpecialChar &&
       password.length >= 8
     );
+  }
+
+  function isPhone(phoneNumber) {
+    const regex = /^\d{10}$/;
+    return regex.test(phoneNumber);
   }
 
   function updateInfo2() {
@@ -453,8 +458,7 @@ function UPM() {
                                 defaultValue="*****************"
                                 onChange={(event) => {
                                   const newValue = event.target.value;
-                                  const isStrongEnough =
-                                    checkPasswordStrength(newValue);
+                                  const isStrongEnough = isStrength(newValue);
 
                                   if (!isStrongEnough) {
                                     setNewPasswords("default");
@@ -481,12 +485,19 @@ function UPM() {
                                 defaultValue={user && user.phone}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
-                                  setNumber(newValue);
+                                  const isValidNumber = isPhone(newValue);
+
+                                  if (!isValidNumber) {
+                                    console.log("incorrect digits");
+                                  } else {
+                                    setNumber(newValue);
+                                  }
                                 }}
                                 name="Phone-number"
                                 id="number"
                                 required
                               />
+
                               <label for="name" class="upm-label">
                                 Phone-number
                               </label>
