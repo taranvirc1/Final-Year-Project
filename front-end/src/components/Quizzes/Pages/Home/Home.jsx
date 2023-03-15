@@ -105,4 +105,9 @@ localStorage.setItem("difficulty", difficulty);
   );
 };
 
-export default Home;
+
+
+
+
+export default Home; 
+
