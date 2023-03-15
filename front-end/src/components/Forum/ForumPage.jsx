@@ -180,8 +180,7 @@ const newmessagehandle = (e) => {
           <input type="checkbox" id="psortbtn"/> 
           
           <ul class="pagesort-optn">
-            <li><a href="#">Last Updated</a></li> 
-            <li><a href="#">Most Liked</a></li>
+            <li><a href="#">Last Updated</a></li>
             <li><a href="#">Most Replies</a></li>
           </ul>
 
