@@ -1,5 +1,5 @@
 import { Button, MenuItem, TextField } from "@mui/material";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Categories from "../../Data/Categories";
@@ -12,16 +12,38 @@ const Home = ({ name, setName, fetchQuestions }) => {
   const [difficulty, setDifficulty] = useState("");
   const [error, setError] = useState(false);
 
+
+
+  const [loggedInUser, setLoggedinUser] = useState("");
+
+  useEffect(() => {
+    const saveLoggedinUser = localStorage.getItem("loggedInUser");
+    if (saveLoggedinUser) {
+      setLoggedinUser(saveLoggedinUser);
+    }
+  }, []);
+
+  useEffect(()=>{
+localStorage.setItem("category", category);
+localStorage.setItem("difficulty", difficulty);
+
+})
+
   const Navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (!category || !difficulty || !name) {
-      setError(true);
-      return;
-    } else {
-      setError(false);
-      fetchQuestions(category, difficulty);
-      Navigate("/quiz");
+    if(!loggedInUser){
+      alert("please log in to do the quiz")
+    }else{
+      // Check only category and difficulty, ignore name
+      if (!category || !difficulty) {
+        setError(true);
+        return;
+      } else {
+        setError(false);
+        fetchQuestions(category, difficulty);
+        Navigate("/testQuiz");
+      }
     }
   };
 
@@ -33,12 +55,7 @@ const Home = ({ name, setName, fetchQuestions }) => {
         <span style={{ fontSize: 30 }}>Quiz Settings</span>
         <div className="settings__select">
           {error && <ErrorMessage>Please Fill all the feilds</ErrorMessage>}
-          <TextField
-            style={{ marginBottom: 25 }}
-            label="Enter Your Name"
-            variant="outlined"
-            onChange={(e) => setName(e.target.value)}
-          />
+          
           <TextField
             select
             label="Select Category"
@@ -81,7 +98,7 @@ const Home = ({ name, setName, fetchQuestions }) => {
           </Button>
         </div>
       </div>
-      <img src="/quiz.svg" className="banner" alt="quiz app" />
+      <img src="/quiz.png" className="banner" alt="quiz app" />
     </div>
     <Footer />
     </>
