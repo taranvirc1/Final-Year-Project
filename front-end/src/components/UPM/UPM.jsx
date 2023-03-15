@@ -75,9 +75,9 @@ function UPM() {
     },
   };
   const maxDate = new Date().toISOString().split("T")[0];
-  const [error2, setError2] = useState("");
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [error, setError] = useState("");
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -155,25 +155,6 @@ function UPM() {
       console.error(error);
     }
   };
-  function isStrength(password) {
-    const hasNumber = /\d/.test(password);
-    const hasLowercase = /[a-z]/.test(password);
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasSpecialChar = /[$&+,:;=?@#|'<>.^*()%!-]/.test(password);
-
-    return (
-      hasNumber &&
-      hasLowercase &&
-      hasUppercase &&
-      hasSpecialChar &&
-      password.length >= 8
-    );
-  }
-
-  function isPhone(phoneNumber) {
-    const regex = /^\d{10}$/;
-    return regex.test(phoneNumber);
-  }
 
   function updateInfo2() {
     axios
@@ -431,7 +412,7 @@ function UPM() {
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   if (!emailRegex.test(newValue)) {
-                                    setError2("X");
+                                    setError("X");
                                   } else {
                                     setEmail(newValue);
                                   }
@@ -441,7 +422,11 @@ function UPM() {
                                 required
                               />
 
-                              {error2 && <span className="error">{error}</span>}
+                              {error && (
+                                <span className="error">
+                                  {error}
+                                </span>
+                              )}
 
                               <label for="name" class="upm-label">
                                 Email
@@ -454,23 +439,16 @@ function UPM() {
                               <input
                                 type="password"
                                 class="upm-field"
-                                placeholder="*******************************"
-                                defaultValue="*****************"
+                                placeholder={"*******************************"}
+                                defaultValue={"*****************"}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
-                                  const isStrongEnough = isStrength(newValue);
-
-                                  if (!isStrongEnough) {
-                                    setNewPasswords("default");
-                                  } else {
-                                    setNewPasswords(newValue);
-                                  }
+                                  setNewPasswords(newValue);
                                 }}
                                 name="Password"
                                 id="Password"
                                 required
                               />
-
                               <label for="name" class="upm-label">
                                 Password
                               </label>
@@ -485,19 +463,12 @@ function UPM() {
                                 defaultValue={user && user.phone}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
-                                  const isValidNumber = isPhone(newValue);
-
-                                  if (!isValidNumber) {
-                                    console.log("incorrect digits");
-                                  } else {
-                                    setNumber(newValue);
-                                  }
+                                  setNumber(newValue);
                                 }}
                                 name="Phone-number"
                                 id="number"
                                 required
                               />
-
                               <label for="name" class="upm-label">
                                 Phone-number
                               </label>
@@ -505,30 +476,19 @@ function UPM() {
                           </div>
                           <div className="upm-split-2">
                             <div class="upm-form field">
-                              <select
-                                class="upm-field-2"
-                                color="black"
+                              <input
+                                type="input"
+                                class="upm-field"
+                                placeholder={user && user.lastName}
                                 defaultValue={user && user.country}
                                 onChange={(event) => {
                                   const newValue = event.target.value;
                                   setCountry(newValue);
                                 }}
-                                name="Country"
+                                name="Language"
+                                id="language"
                                 required
-                              >
-                                <option className="upm-op" value="">
-                                  Select a country
-                                </option>
-                                <option
-                                  className="upm-op"
-                                  color="black"
-                                  value="USA"
-                                >
-                                  English
-                                </option>
-                                {/* Add more options as needed */}
-                              </select>
-
+                              />
                               <label for="name" class="upm-label">
                                 Language
                               </label>
