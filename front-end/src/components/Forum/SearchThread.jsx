@@ -92,7 +92,7 @@ function SearchThread() {
         <div className="searchresult-title">
           <h2>You Searched For: "CS"</h2>
         </div>
-        <div className='ThreadResultsFound'><h2>{resultsfound} results found</h2></div>
+        <div className='ThreadResultsFound'><h2>{resultsfound} result(s) found</h2></div>
         <nav className='thread-pages'>
           <ReactPaginate
             breakLabel="..."
