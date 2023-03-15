@@ -40,23 +40,8 @@ function AppRoute() {
       `http://localhost:8080/api/questions`
     );
 
-  //  setQuestions(data.results);
-
-
-
-
-
-
-
-
-
   };
   
-
-
-
-
-
   return (
     <div>
       <BrowserRouter>

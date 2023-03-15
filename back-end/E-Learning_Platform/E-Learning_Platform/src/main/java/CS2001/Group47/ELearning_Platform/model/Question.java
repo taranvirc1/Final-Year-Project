@@ -80,5 +80,20 @@ public class Question {
   public void setCorrectAnswer(String correctAnswer) {
     this.correctAnswer = correctAnswer;
   }
+  
+  @Override
+  public String toString() {
+    return "Question [id=" + id + ", questionText=" + questionText + ", category=" + category + ", difficulty="
+        + difficulty + ", correctAnswer=" + correctAnswer + ", asnwer=" + answer + "]";
+  }
+
+  public List<Answer> getAnswer() {
+    return answer;
+  }
+
+  public void setAnswer(List<Answer> answer) {
+    this.answer = answer;
+  }
+
 }
 
