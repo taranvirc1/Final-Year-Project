@@ -73,7 +73,7 @@ function UPM() {
       "Content-Type": "application/json",
     },
   };
-
+  const maxDate = new Date().toISOString().split("T")[0];
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -534,19 +534,22 @@ function UPM() {
                           </div>
                           <div className="upm-split-2">
                             <div class="upm-form field">
-                              <input
-                                type="date"
-                                class="upm-field"
-                                placeholder="DOB"
-                                defaultValue={user && user.dateOfBirth}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  setDOB(newValue);
-                                }}
-                                name="DOB"
-                                id="DOB"
-                                required
-                              />
+                            <input
+  type="date"
+  class="upm-field"
+  placeholder="DOB"
+  defaultValue={user && user.dateOfBirth}
+  onChange={(event) => {
+    const newValue = event.target.value;
+    setDOB(newValue);
+  }}
+  name="DOB"
+  id="DOB"
+  required
+  dateFormat="yyyy-MM-dd"
+  max={maxDate}
+/>
+
                               <label for="name" class="upm-label">
                                 DOB
                               </label>
