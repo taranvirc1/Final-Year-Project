@@ -44,11 +44,11 @@ function ForumLanding() {
 
 
   const latestthreadsort = (event) => {
-    threads.sort((a, b) => b.fTimestampCreated.localeCompare(a.fTimestampCreated));
+    setthreads([...threads.sort((a, b) => b.fTimestampCreated.localeCompare(a.fTimestampCreated))])
   };
 
   const oldestthreadsort = (event) => {
-    threads.sort((a, b) => a.fTimestampCreated.localeCompare(b.fTimestampCreated));
+    setthreads([...threads.sort((a, b) => a.fTimestampCreated.localeCompare(b.fTimestampCreated))])
   };
 
   //Get current posts
