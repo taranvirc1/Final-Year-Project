@@ -32,8 +32,11 @@ function ForumPage() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
-  const[SubButton, setSubButton] = useState("");
+  const [subbed, setSubbed] = useState([]);
+  const[SubButton, setSubButton] = useState("Subscribe");
+  const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
+  const saveLoggedinUser = localStorage.getItem("loggedInUser");
   const jwt = localStorage.getItem("jwt");
 
   const threadnameloader = (e) => {
@@ -51,8 +54,6 @@ function ForumPage() {
   }
 
   useEffect(() => {
-
-    const saveLoggedinUser = localStorage.getItem("loggedInUser");
     axios.get(`http://localhost:8080/profile/${saveLoggedinUser}`, { headers})
       .then(response => {
         setStudentId(response.data.studentId)
@@ -70,6 +71,20 @@ console.log("Message created by"+studentId);
 const messageloader = (e) => {
   axios
   .get(`http://localhost:8080/messages/${saveThreadID}`, { headers })
+
+    .then((resp) => {
+      console.log(resp.data);
+
+      setMessages(resp.data);
+    })
+    .catch((error) => {
+      console.error(error);
+});
+}
+
+const subscribe = (e) => {
+  axios
+  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
 
     .then((resp) => {
       console.log(resp.data);
@@ -133,23 +148,17 @@ const newmessagehandle = (e) => {
 
   
   //subscribe button colour changer white to orange
-  const [subcolor,setsubcolor]=useState('white');
-  function subbg(){
-    if(subcolor==="white"){
-      setsubcolor("orange")
-    }
-    else{
-      setsubcolor("white")
-    }
-  }
+  
   //subscribe button text changer "Subscribe" to "Subscribed"
   
   function watchthread(){
     if(SubButton==="Subscribed"){
       setSubButton("Subscribe")
+      setsubcolor("white")
     }
     else{
       setSubButton("Subscribed")
+      setsubcolor("orange")
     }
     
   }
@@ -191,7 +200,7 @@ const newmessagehandle = (e) => {
 
       </a> */}
       <a>
-        <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();subbg();}}>{SubButton}</button>
+        <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();}}>{SubButton}</button>
       </a> 
           
     </div>
