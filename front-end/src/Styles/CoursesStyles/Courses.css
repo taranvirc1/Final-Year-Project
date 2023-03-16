@@ -73,8 +73,9 @@ padding-top: 200px;
   }
   .Coursescard .info h1 {
     position: relative;
-bottom:150px;    text-align:center; font-size: 32px;
-background-color: #9a9c9b;
+bottom:150px;    text-align:left; font-size: 32px;
+color:#01fe87;
+font-weight: bold;
   }
   .Coursescard .info p {
     Font: Monospace ;
