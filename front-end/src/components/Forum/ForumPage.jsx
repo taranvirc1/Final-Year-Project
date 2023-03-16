@@ -161,6 +161,10 @@ const newmessagehandle = (e) => {
         console.log(res);
 })
     .then(() => {
+      const message = "You have posted a new message",
+        icon = "success";
+      fireAlert(message, icon);
+      setnewMessage("");
       messageloader();
     })
     .catch((err) => {
@@ -325,7 +329,7 @@ const newmessagehandle = (e) => {
     <section id="replysection" className='ThreadReplySection'>
       <div className='ThreadTextEditor'>
         <div className='ThreadEditorText'>
-          <textarea rows="10" name="pagetext_body" onChange={(e) => setnewMessage(e.target.value)}></textarea>
+          <textarea rows="10" name="pagetext_body" value={newMessage} onChange={(e) => setnewMessage(e.target.value)}></textarea>
         </div>
       </div>
       {/* <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div> */}
