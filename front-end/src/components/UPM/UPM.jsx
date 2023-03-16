@@ -37,15 +37,38 @@ import nft from "../../images/UPM/assets/nft_low.png";
 import nft1 from "../../images/UPM/assets/nft1_low.png";
 import nft2 from "../../images/UPM/assets/nft2_low.png";
 import { VscChromeClose } from "react-icons/vsc";
+import Swal from "sweetalert2";
+
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
   const [user, setUser] = useState([]);
+  const navigate = "true";
   const logoutUser = () => {
     setLoggedinUser("");
     localStorage.setItem("jwt", "");
-    logout("/");
+    logo_out(navigate);
   };
+
+  const logo_out = (navigate) => {
+    Swal.fire({
+      title: "Do you want to logout?",
+
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#ff0055",
+      cancelButtonColor: "#999999",
+      icon: "question",
+    }).then((result) => {
+      if (navigate) {
+        if (result.isConfirmed) {
+          logout("/");
+        }
+      }
+    });
+  };
+
   const jwt = localStorage.getItem("jwt");
   const token = jwt;
   const headers = {
@@ -329,8 +352,23 @@ function UPM() {
               <div className="upm-mini-container">
                 <div class="upm-card-container">
                   <li>
-                    <span class="upm-logout">
-                      <CiLogout size={30} onClick={logoutUser} />
+                    <span
+                      class="upm-logout"
+                      style={{
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        backgroundColor: "black",
+                        padding: "15px",
+                        borderRadius: "10px",
+                      }}
+                      onClick={logoutUser}
+                    >
+                      {/* <CiLogout
+                        size={30}
+                        onClick={logoutUser}
+                        style={{ cursor: "pointer" }}
+                      /> */}
+                      Logout
                     </span>
                   </li>
                   <li>
