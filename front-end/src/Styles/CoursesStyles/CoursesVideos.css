@@ -313,7 +313,7 @@ button.dropdown-btn {
   transform: translate(-50%, -50%);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  z-index: 1000;
+  z-index: 9;
   border: 3px solid rgb(0, 0, 0);
 }
 
