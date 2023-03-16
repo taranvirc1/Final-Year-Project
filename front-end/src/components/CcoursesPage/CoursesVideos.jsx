@@ -282,7 +282,7 @@ function CoursesVideos() {
       })
       .catch((error) => {
         console.error(error);
-        alert("cant get quiz");
+       // alert("cant get quiz");
       });
   }, []);
   console.log("quiz", quiz);
@@ -434,14 +434,16 @@ function CoursesVideos() {
             icon = "success";
           fireAlert(message, icon);
         } else {
-          alert("please filll in all fileds");
-        }
+          const message = "please fill all fields",
+          icon = "error";
+        fireAlert(message, icon);        }
       }
     } else {
       if (review.ratingID) {
         if (!checkReview && !checkrating) {
-          alert("please change  rating or review");
-        } else {
+          const message = "please change rating or review",
+          icon = "error";
+        fireAlert(message, icon);        } else {
           onSubmit(e);
 
           const message = "Review Edited successfully",

@@ -30,6 +30,7 @@ import { useState, useEffect } from "react";
 import UpdatePassword from "./components/RegisterLogin/UpdatePassword";
 import JavaScriptVideos from "./components/CcoursesPage/AllVideoPages/JavaScriptVideos";
 import TestQuiz from "./components/Quizzes/TestQuiz";
+import PythonVideos from "./components/CcoursesPage/AllVideoPages/PythonVideos";
 function AppRoute() {
   const [questions, setQuestions] = useState([]);
   const [name, setName] = useState();
@@ -69,6 +70,8 @@ function AppRoute() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/coursesvideos" element={<CoursesVideos />} />
             <Route path="/javaScriptVideos" element={<JavaScriptVideos />} />
+            <Route path="/pythonVideos" element={<PythonVideos />} />
+
 
             {/* route for student forum */}
             <Route path="/Forum_landing" element={<ForumLanding />} />
