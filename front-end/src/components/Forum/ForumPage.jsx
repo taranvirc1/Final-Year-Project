@@ -117,6 +117,27 @@ const fireAlert = (message, icon, nevigate) => {
   });
 };
 
+const unSubAlert = (x) => {
+  Swal.fire({
+    title: "Do you want to unsubscribe from this thread?",
+
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#ff0055",
+    cancelButtonColor: "#999999",
+    icon: "warning",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+
+    if (result.isConfirmed) {
+      Swal.fire("You are now Unsubscribed", "", "success");
+    } else Swal.fire(" Cancelled", "", "error");
+  });
+};
+
+
 const newmessagehandle = (e) => {
   e.preventDefault();
   console.log(newMessage);
@@ -157,12 +178,17 @@ const newmessagehandle = (e) => {
   
   function subbuttonchange(){
     if(SubButton==="Subscribed"){
-      setSubButton("Subscribe")
-      setsubcolor("white")
+      unSubAlert();
+      setSubButton("Subscribe");
+      setsubcolor("white");
+
     }
     else{
-      setSubButton("Subscribed")
-      setsubcolor("orange")
+      setSubButton("Subscribed");
+      setsubcolor("orange");
+      const message = "You are now Subscribed to this thread",
+        icon = "success";
+        fireAlert(message, icon);
     }
     
   }
