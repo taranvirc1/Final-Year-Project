@@ -160,7 +160,7 @@ const sortBYRatingDsc = (event) => {
            reviewDesc: "",
            createdAt: getCurrentDate,
          });
-         alert("review edited");
+         //alert("review edited");
        }) //;
        .catch(async (error) => {
          console.log(error);
@@ -173,7 +173,7 @@ const sortBYRatingDsc = (event) => {
        .then((response) => {
          console.log("status" + response);
          if (response.status === 201) {
-           alert("Registered Successfully!!!");
+          // alert("Registered Successfully!!!");
            setReview({
              courseID: "2",
              ratingStars: "",
@@ -181,14 +181,14 @@ const sortBYRatingDsc = (event) => {
              createdAt: getCurrentDate,
            });
          } else {
-           alert("you already have a review");
+         ///  alert("you already have a review");
          }
        })
 
        .catch(async (error) => {
          console.log(review);
          console.log(error);
-         alert("you already have a review");
+      //   alert("you already have a review");
        });
 
      // setForm(false);
@@ -254,7 +254,7 @@ const sortBYRatingDsc = (event) => {
      })
      .then((response) => {
        if (response.data != null) {
-         alert("deleted successfully ");
+       //  alert("deleted successfully ");
        }
        retrieveReviews();
      })
