@@ -7,6 +7,7 @@ import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Account() {
   const { handleChange, values, handleSubmit, errors, showErrors } =
@@ -50,7 +51,23 @@ function Account() {
   }, [timeRemaining]);
 
   const login = () => {
-    navigate("/");
+    Swal.fire({
+      title: "You have logged in successfully",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ff0055",
+      icon: "success",
+    }).then((result) => {
+      navigate("/");
+    });
+  };
+
+  const error = () => {
+    Swal.fire({
+      title: "Login error",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ff0055",
+      icon: "error",
+    }).then((result) => {});
   };
 
   const handleLoginSubmit = (e) => {
@@ -76,7 +93,7 @@ function Account() {
               setTimeRemaining(0);
               setValidLoginAttempts(0);
               setLoginErrorMessages("");
-              alert("You have logged in successfully!!!");
+              // alert("You have logged in successfully!!!");
               setLoginSuccess("You have logged in successfully!!!");
               console.log("this is " + loggedInUser);
               setLoggedinUser(email);
@@ -85,14 +102,16 @@ function Account() {
               setValidLoginAttempts(validLoginAttempts + 1);
               // setInvalidAttempts(invalidAttempts + 1);
               setTimeRemaining(0);
-              alert("Failed token!!!");
+              // alert("Failed token!!!");
+              error();
               setLoggedinUser("");
             }
           } else {
             setValidLoginAttempts(validLoginAttempts + 1);
             // setInvalidAttempts(invalidAttempts + 1);
             setTimeRemaining(0);
-            alert("Login unsuccessful!!!");
+            // alert("Login unsuccessful!!!");
+            error();
             setLoggedinUser("");
           }
         })
@@ -109,7 +128,8 @@ function Account() {
           setValidLoginAttempts(validLoginAttempts + 1);
           // setInvalidAttempts(invalidAttempts + 1);
           setInvalidAttempts(0);
-          alert("PROBLEM WITH LOGIN!!!");
+          // alert("PROBLEM WITH LOGIN!!!");
+          error();
           setLoggedinUser("");
         });
       if (validLoginAttempts >= 2) {
@@ -266,11 +286,9 @@ function Account() {
               onSubmit={handleLoginSubmit}
             >
               <h2 className="form-title">Sign in</h2>
-              {loginSuccess ? (
-                <p className="loginSuccess">{loginSuccess}</p>
-              ) : (
-                loginErrorMessages && <p>{loginErrorMessages}</p>
-              )}
+              {loginSuccess
+                ? ""
+                : loginErrorMessages && <p>{loginErrorMessages}</p>}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input

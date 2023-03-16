@@ -12,6 +12,9 @@ import { Link } from "react-router-dom";
 import Background2 from "./background/Background2";
 
 function Courses() {
+  const handleScrollToStop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="background">
       <div className="overflow-hidden">
@@ -37,7 +40,7 @@ function Courses() {
           <div className="info">
             <h1 className="courseTitle">JAVA</h1>
             <Link to="/coursesvideos">
-              <button> Watch Videos</button>
+              <button onClick={handleScrollToStop}> Watch Videos</button>
             </Link>
           </div>
         </div>
@@ -46,9 +49,7 @@ function Courses() {
           <div className="info">
             <h1>Python</h1>
 
-            <Link to="/pythonVideos">
-              <button> Watch Videos</button>
-            </Link>
+            <button onClick={handleScrollToStop}>Watch Videos</button>
           </div>
         </div>
 
@@ -56,9 +57,7 @@ function Courses() {
           <img src={clogo} alt="" />
           <div className="info">
             <h1>C++</h1>
-            <Link to="/javaScriptVideos">
-              <button> Watch Videos</button>
-            </Link>
+            <button onClick={handleScrollToStop}>Watch Videos</button>
           </div>
         </div>
         <div className="Coursescard">
@@ -66,7 +65,7 @@ function Courses() {
           <div className="info">
             <h1>My SQL</h1>
 
-            <button>Watch Videos</button>
+            <button onClick={handleScrollToStop}>Watch Videos</button>
           </div>
         </div>
 
@@ -74,7 +73,7 @@ function Courses() {
           <img src={reactimage} alt="" />
           <div className="info">
             <h1>React</h1>
-            <button>Watch Videos</button>
+            <button onClick={handleScrollToStop}>Watch Videos</button>
           </div>
         </div>
 
@@ -82,7 +81,7 @@ function Courses() {
           <img src={htmlimage} alt="" />
           <div className="info">
             <h1>HTML</h1>
-            <button>Watch Videos</button>
+            <button onClick={handleScrollToStop}>Watch Videos</button>
           </div>
         </div>
         <div className="Coursescard">
@@ -90,7 +89,7 @@ function Courses() {
           <div className="info">
             <h1>CSS</h1>
 
-            <button>Watch Videos</button>
+            <button onClick={handleScrollToStop}>Watch Videos</button>
           </div>
         </div>
 
@@ -100,7 +99,7 @@ function Courses() {
             <h1>Java Script</h1>
 
             <Link to="/javaScriptVideos">
-              <button> Watch Videos</button>
+              <button onClick={handleScrollToStop}> Watch Videos</button>
             </Link>
           </div>
         </div>

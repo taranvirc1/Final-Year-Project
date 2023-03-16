@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom"
+import { useOutletContext, useNavigate } from "react-router-dom";
 import "../../Styles/Forum/Forum_Page.css"
 import DeleteIcon from "../../images/forum/delete.png"
 import SortIcon from "../../images/forum/sort.png"
@@ -23,8 +24,11 @@ import TextAlignIcon from "../../images/forum/text-editor/textalign.png"
 import QuoteIcon from "../../images/forum/text-editor/quote.png"
 import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 import ReactPaginate from 'react-paginate';
+import Swal from "sweetalert2";
 
 function ForumPage() {
+  const reDirect = useNavigate();
+
   const [threadName,setthreadName]=useState([]);
   const [threadTag,setthreadtag]=useState([]);
   const [itemOffset, setItemOffset] = useState(0);
@@ -82,19 +86,7 @@ const messageloader = (e) => {
 });
 }
 
-const subscribe = (e) => {
-  axios
-  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
 
-    .then((resp) => {
-      console.log(resp.data);
-
-      setMessages(resp.data);
-    })
-    .catch((error) => {
-      console.error(error);
-});
-}
 
 //Get current posts
 const endOffset = itemOffset + postsPerPage;
@@ -109,14 +101,56 @@ const handlePageClick = (event) => {
   setItemOffset(newOffset);
 };
 
+const fireAlert = (message, icon, nevigate) => {
+  Swal.fire({
+    container: "swal2-container",
+
+    title: message,
+
+    icon: icon,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (nevigate)
+      if (result.isConfirmed) {
+        reDirect("/Account");
+      }
+  });
+};
+
+const unSubAlert = (x) => {
+  Swal.fire({
+    title: "Do you want to unsubscribe from this thread?",
+
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#ff0055",
+    cancelButtonColor: "#999999",
+    icon: "warning",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+
+    if (result.isConfirmed) {
+      Swal.fire("You are now Unsubscribed", "", "success");
+    } else Swal.fire(" Cancelled", "", "error");
+  });
+};
+
+
 const newmessagehandle = (e) => {
   e.preventDefault();
   console.log(newMessage);
   if (localStorage.getItem("loggedInUser") === "") {
-    alert("Please Login to post a message");
+    const message = "Please Login To Post A Message",
+        icon = "error",
+        nevigate = "true";
+    fireAlert(message, icon, nevigate);
   }
   else if (newMessage === "") {
-    alert("Please fill in the text field");
+    const message = "Please Fill In The Text Field",
+            icon = "error";
+          fireAlert(message, icon);
   }
   else{
     axios
@@ -138,33 +172,93 @@ const newmessagehandle = (e) => {
      
   }
 
-
-  useEffect(() => {
-    messageloader();
-    threadnameloader();
-  }, []);
-
-
-
-  
   //subscribe button colour changer white to orange
   
   //subscribe button text changer "Subscribe" to "Subscribed"
   
-  function watchthread(){
+  function subbuttonchange(){
     if(SubButton==="Subscribed"){
-      setSubButton("Subscribe")
-      setsubcolor("white")
+      unSubAlert();
+      setSubButton("Subscribe");
+      setsubcolor("white");
+
     }
     else{
-      setSubButton("Subscribed")
-      setsubcolor("orange")
+      setSubButton("Subscribed");
+      setsubcolor("orange");
+      const message = "You are now Subscribed to this thread",
+        icon = "success";
+        fireAlert(message, icon);
     }
     
   }
 
+  // useEffect(() => {
+  //   const saveSubId = subbed.filter((item) => item.subEmail === saveLoggedinUser);
+  //   if(saveSubId){
+  //     console.log("subId saved"+saveSubId)
+  //   }
+  //   else{
 
- 
+  //   }
+  // }, [subbed]);
+
+  
+
+  // const subscriptiondata = (e) => {
+  //   axios
+  //   .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
+  
+  //     .then((resp) => {
+  //       console.log(resp.data);
+  
+  //       setSubbed(resp.data);
+  //       console.log("getting subId: "+ subbed);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  // });
+  // }
+
+  // const subscribe = (e) => {
+  //   if(subbed){
+  //     axios
+  //     .delete(`http://localhost:8080/deleteSub/${s}`,{ headers })
+  //     .then((response) => {
+  //       if (response.data != null) {
+  //         // alert("deleted successfully ");
+  //       }
+  //       subbuttonchange();
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+      
+  //   }
+  //   else{
+      
+  //     axios
+  //     .get(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+    
+  //       .then((resp) => {
+  //         console.log(resp.data);
+  //         subbuttonchange();
+          
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       }
+  //     )
+  //   }
+  // }
+
+  useEffect(() => {
+    messageloader();
+    threadnameloader();
+    
+  }, []);
+
+
   return (
     <>
     <div className='fp-navbar-spacing'>
@@ -200,7 +294,7 @@ const newmessagehandle = (e) => {
 
       </a> */}
       <a>
-        <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();}}>{SubButton}</button>
+        <button id="subbtn" style={{background:subcolor}} onClick={event=>{subbuttonchange();}}>{SubButton}</button>
       </a> 
           
     </div>
@@ -234,7 +328,7 @@ const newmessagehandle = (e) => {
           <textarea rows="10" name="pagetext_body" onChange={(e) => setnewMessage(e.target.value)}></textarea>
         </div>
       </div>
-      <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div>
+      {/* <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div> */}
       <div className="ThreadTextEditorReply" onClick={newmessagehandle}>
         <a href="/" ><img src={ReplyIcon}/></a>
         <label>Post Reply</label>

@@ -29,7 +29,7 @@ function DonationsPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, );
+  }, [loggedInUser]);
 
  
 

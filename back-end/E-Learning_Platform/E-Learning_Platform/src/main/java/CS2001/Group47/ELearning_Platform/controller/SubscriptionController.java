@@ -53,10 +53,14 @@ public class SubscriptionController {
         return subscriptionService.findSub(subEmail, threadId) ;
     }
 
-    // @DeleteMapping("deletesub/{subEmail}/{threadId}")
+    @DeleteMapping("/deletesub/{subId}")
 
-    // public Iterable<Subscriptions>  deleteSub( @PathVariable("subEmail") String subEmail, @PathVariable("threadId") Integer threadId) {
-    //     return subscriptionRepository.deleteSub(subEmail, threadId) ;
-    // }
+    public String deleteSub(@PathVariable Integer subId) {
+  
+      // Delete student by using their ID
+      subscriptionService.deleteSub(subId);
+      return "Subscription Deleted";
+  
+    }
 
 }
