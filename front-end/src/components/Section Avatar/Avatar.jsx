@@ -77,7 +77,7 @@ const updateXP = (currentXp, totalXp) => {
           setProfile(response.data);
           setStudentId(response.data.studentId)
           setCurrentXp(response.data.xp)
-          updateXP(response.data.xp, 400); 
+          updateXP(response.data.xp, 1000); 
         })
         .catch(error => {
           console.log(error);
@@ -120,7 +120,7 @@ return (
           </div>
           <div class="xp-container">
             <div class="xp-bar">
-                {profile.xp} / 400
+                {profile.xp} / 1000
             </div>
           </div>
         </div>
