@@ -328,7 +328,7 @@ const newmessagehandle = (e) => {
           <textarea rows="10" name="pagetext_body" onChange={(e) => setnewMessage(e.target.value)}></textarea>
         </div>
       </div>
-      <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div>
+      {/* <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div> */}
       <div className="ThreadTextEditorReply" onClick={newmessagehandle}>
         <a href="/" ><img src={ReplyIcon}/></a>
         <label>Post Reply</label>
