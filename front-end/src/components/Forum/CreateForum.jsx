@@ -20,8 +20,10 @@ import QuoteIcon from "../../images/forum/text-editor/quote.png"
 import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function CreateForum() {
+  const reDirect = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const [threadName, setthreadName] = useState("");
   const [fTags, setfTags] = useState("");
@@ -35,10 +37,20 @@ function CreateForum() {
   const handlecreatethread = (e) => {
     e.preventDefault();
     if (localStorage.getItem("loggedInUser") === "") {
-      alert("Please Login to create a topic thread");
+      const message = "Please Login To Create A Topic Thread",
+        icon = "error",
+        nevigate = "true";
+      fireAlert(message, icon, nevigate);
     }
-    else if (threadName === "" || fTags === "") {
-      alert("Thread Title and Tags Required");
+    else if (threadName === "") {
+      const message = "Please Provide A Thread Name",
+            icon = "error";
+          fireAlert(message, icon);
+    }
+    else if (fTags === "") {
+      const message = "Please Provide A Thread Tag",
+            icon = "error";
+          fireAlert(message, icon);
     }
     else{
       axios
@@ -64,6 +76,21 @@ function CreateForum() {
     }
 
 
+    const fireAlert = (message, icon, nevigate) => {
+      Swal.fire({
+        container: "swal2-container",
+    
+        title: message,
+    
+        icon: icon,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (nevigate)
+          if (result.isConfirmed) {
+            reDirect("/Account");
+          }
+      });
+    };
 
 
   return (
