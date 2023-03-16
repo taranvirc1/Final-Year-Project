@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom"
+import { useOutletContext, useNavigate } from "react-router-dom";
 import "../../Styles/Forum/Forum_Page.css"
 import DeleteIcon from "../../images/forum/delete.png"
 import SortIcon from "../../images/forum/sort.png"
@@ -23,8 +24,11 @@ import TextAlignIcon from "../../images/forum/text-editor/textalign.png"
 import QuoteIcon from "../../images/forum/text-editor/quote.png"
 import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 import ReactPaginate from 'react-paginate';
+import Swal from "sweetalert2";
 
 function ForumPage() {
+  const reDirect = useNavigate();
+
   const [threadName,setthreadName]=useState([]);
   const [threadTag,setthreadtag]=useState([]);
   const [itemOffset, setItemOffset] = useState(0);
@@ -33,7 +37,6 @@ function ForumPage() {
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
   const [subbed, setSubbed] = useState([]);
-  const [saveSubId, setsaveSubId] = useState(0);
   const[SubButton, setSubButton] = useState("Subscribe");
   const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
@@ -98,14 +101,35 @@ const handlePageClick = (event) => {
   setItemOffset(newOffset);
 };
 
+const fireAlert = (message, icon, nevigate) => {
+  Swal.fire({
+    container: "swal2-container",
+
+    title: message,
+
+    icon: icon,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (nevigate)
+      if (result.isConfirmed) {
+        reDirect("/Account");
+      }
+  });
+};
+
 const newmessagehandle = (e) => {
   e.preventDefault();
   console.log(newMessage);
   if (localStorage.getItem("loggedInUser") === "") {
-    alert("Please Login to post a message");
+    const message = "Please Login To Post A Message",
+        icon = "error",
+        nevigate = "true";
+    fireAlert(message, icon, nevigate);
   }
   else if (newMessage === "") {
-    alert("Please fill in the text field");
+    const message = "Please Fill In The Text Field",
+            icon = "error";
+          fireAlert(message, icon);
   }
   else{
     axios
@@ -132,7 +156,7 @@ const newmessagehandle = (e) => {
   //subscribe button text changer "Subscribe" to "Subscribed"
   
   function subbuttonchange(){
-    if(saveSubId===0){
+    if(SubButton==="Subscribed"){
       setSubButton("Subscribe")
       setsubcolor("white")
     }
@@ -143,63 +167,68 @@ const newmessagehandle = (e) => {
     
   }
 
-  const subscriptiondata = (e) => {
-    axios
-    .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
-  
-      .then((resp) => {
-        console.log(resp.data);
-  
-        setSubbed(resp.data);
-        setsaveSubId(resp.data.subId);
-        console.log("getting subId: "+ subbed);
-        console.log("getting subId: "+ saveSubId);
-      })
-      .catch((error) => {
-        console.error(error);
-  });
-  }
+  // useEffect(() => {
+  //   const saveSubId = subbed.filter((item) => item.subEmail === saveLoggedinUser);
+  //   if(saveSubId){
+  //     console.log("subId saved"+saveSubId)
+  //   }
+  //   else{
 
-  const subscribe = (e) => {
-    if(saveSubId===0){
-      axios
-      .get(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+  //   }
+  // }, [subbed]);
+
+  
+
+  // const subscriptiondata = (e) => {
+  //   axios
+  //   .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
+  
+  //     .then((resp) => {
+  //       console.log(resp.data);
+  
+  //       setSubbed(resp.data);
+  //       console.log("getting subId: "+ subbed);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  // });
+  // }
+
+  // const subscribe = (e) => {
+  //   if(subbed){
+  //     axios
+  //     .delete(`http://localhost:8080/deleteSub/${s}`,{ headers })
+  //     .then((response) => {
+  //       if (response.data != null) {
+  //         // alert("deleted successfully ");
+  //       }
+  //       subbuttonchange();
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+      
+  //   }
+  //   else{
+      
+  //     axios
+  //     .get(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
     
-        .then((resp) => {
-          console.log(resp.data);
-          setsaveSubId(resp.subId);
-          subbuttonchange();
+  //       .then((resp) => {
+  //         console.log(resp.data);
+  //         subbuttonchange();
           
-        })
-        .catch((error) => {
-          console.error(error);
-        }
-      )
-    }
-    else{
-      console.log("delete subId: " +saveSubId);
-      axios
-      .delete(`http://localhost:8080/deleteSub/${saveSubId}`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
-      .then((response) => {
-        if (response.data != null) {
-          // alert("deleted successfully ");
-        }
-        setsaveSubId(0);
-        subbuttonchange();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    }
-  }
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       }
+  //     )
+  //   }
+  // }
 
   useEffect(() => {
     messageloader();
-    subscriptiondata();
     threadnameloader();
-    subbuttonchange();
     
   }, []);
 
@@ -239,7 +268,7 @@ const newmessagehandle = (e) => {
 
       </a> */}
       <a>
-        <button id="subbtn" style={{background:subcolor}} onClick={event=>{subscribe();}}>{SubButton}</button>
+        <button id="subbtn" style={{background:subcolor}} onClick={event=>{subbuttonchange();}}>{SubButton}</button>
       </a> 
           
     </div>
