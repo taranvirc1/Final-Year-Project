@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import { getReviews } from "./APIs/RetrieveReviews";
 import Background from "./background/Background";
 import Accordion from "./Accordion";
-
 import img1 from "../../images/footer image/brunel-logo-blue.png";
 import img2 from "../../images/footer image/codecademy-logo-vector.png";
 import img3 from "../../images/footer image/Logo_of_the_United_Nations.svg.png";
 import img4 from "../../images/footer image/ioc_logo_onwhite_aw.258x0-is-hidpi.png";
 import SortIcon from "../../images/forum/sort.png";
+import Swal from "sweetalert2";
 
 function CoursesVideos() {
   const reDirect = useNavigate();
@@ -113,7 +113,7 @@ function CoursesVideos() {
             reviewDesc: "",
             createdAt: getCurrentDate,
           });
-          alert("review edited");
+          //alert("review edited");
         }) //;
         .catch(async (error) => {
           console.log(error);
@@ -126,7 +126,7 @@ function CoursesVideos() {
         .then((response) => {
           console.log("status" + response);
           if (response.status === 201) {
-            alert("Registered Successfully!!!");
+            // alert("Registered Successfully!!!");
             setReview({
               courseID: "1",
               ratingStars: "",
@@ -187,32 +187,41 @@ function CoursesVideos() {
     setVisible((prevValue) => prevValue - 5);
   };
 
+ 
   const sortByDescendingReviews = (event) => {
-    reviews.sort(
+    
+    setReviews([...reviews.sort(
       (a, b) =>
         new Date(...b.createdAt.split("/").reverse()) -
         new Date(...a.createdAt.split("/").reverse())
-    );
+        
+    )
+  ])
   };
   const sortByAscendingReviews = (event) => {
-    reviews.sort(
+    setReviews([...reviews.sort(
       (a, b) =>
         new Date(...a.createdAt.split("/").reverse()) -
         new Date(...b.createdAt.split("/").reverse())
-    );
+        
+    )
+  ])
   };
 
   const sortBYRatingAsc = (event) => {
-    reviews.sort(function (a, b) {
+
+    setReviews([...reviews.sort((a, b) => {
       return a.ratingStars - b.ratingStars;
-    });
+  })])
+
+    
+  
   };
   const sortBYRatingDsc = (event) => {
-    reviews.sort(function (a, b) {
+    setReviews([...reviews.sort((a, b) => {
       return b.ratingStars - a.ratingStars;
-    });
+  })])
   };
-
   console.log(reviews);
 
   const getAverage = (reviews) => {
@@ -234,7 +243,7 @@ function CoursesVideos() {
       })
       .then((response) => {
         if (response.data != null) {
-          alert("deleted successfully ");
+          // alert("deleted successfully ");
         }
         retrieveReviews();
       })
@@ -369,17 +378,61 @@ function CoursesVideos() {
   }, [reviews, loggedInUser]);
   console.log(hasReview);
 
+  const deleteAlert = (x) => {
+    Swal.fire({
+      title: "Do you want to delete this Review?",
+
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#ff0055",
+      cancelButtonColor: "#999999",
+      icon: "warning",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+
+      if (result.isConfirmed) {
+        deleteReview(x);
+        Swal.fire("Review Deleted Successfully", "", "success");
+      } else Swal.fire(" Cancelled", "", "error");
+    });
+  };
+
+  const fireAlert = (message, icon, nevigate) => {
+    Swal.fire({
+      container: "swal2-container",
+
+      title: message,
+
+      icon: icon,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (nevigate)
+        if (result.isConfirmed) {
+          reDirect("/Account");
+        }
+    });
+  };
+
   const checkIfFilled = (e) => {
     if (!loggedInUser) {
-      alert("please log in to review");
-      reDirect("/Account");
+      const message = "Please log in to Review",
+        icon = "error",
+        nevigate = "true";
+      fireAlert(message, icon, nevigate);
     } else if (!review.ratingID) {
       if (hasReview) {
-        alert("you already have a review");
+        const message = "you already have a review",
+          icon = "warning";
+        fireAlert(message, icon);
       } else {
         if (checkReview && checkrating) {
           //alert("check");
           onSubmit(e);
+          const message = "Review added successfully",
+            icon = "success";
+          fireAlert(message, icon);
         } else {
           alert("please filll in all fileds");
         }
@@ -390,6 +443,10 @@ function CoursesVideos() {
           alert("please change  rating or review");
         } else {
           onSubmit(e);
+
+          const message = "Review Edited successfully",
+            icon = "success";
+          fireAlert(message, icon);
         }
       }
     }
@@ -427,6 +484,7 @@ function CoursesVideos() {
       <Accordion
         CurrentCourseID={CurrentCourseID}
         loggedInUser={loggedInUser}
+        fireAlert={fireAlert}
       />
 
       <div className="trackerContainer">
@@ -471,21 +529,21 @@ function CoursesVideos() {
       <div className="reviewsContainer">
         <div className="averageRating">
           {totalSum}
-          <div className="LandingOptions">
-            <a href="#!" className="LandingSort">
-              <label for="lsortbtn">
+          <div className="reviewFilterOptions">
+            <a href="#!" className="reviewsSort">
+              <label for="reviewsortbtn">
                 <img src={SortIcon} alt="" />
               </label>
-              <input type="checkbox" id="lsortbtn" />
+              <input type="checkbox" id="reviewsortbtn" />
 
-              <ul className="landingsort-optn">
+              <ul className="reviewsSort-optn">
                 <li>
-                  <a href="#!" onClick={sortByDescendingReviews}>
+                  <a href="#!"onClick={sortByDescendingReviews}>
                     Sort By Date Asc
                   </a>
                 </li>
                 <li>
-                  <a href="#!" onClick={sortByAscendingReviews}>
+                  <a href="#!"  onClick={sortByAscendingReviews}>
                     Sort By Date Desc
                   </a>
                 </li>
@@ -618,7 +676,7 @@ function CoursesVideos() {
                 {loggedInUser === reviewd.students.email && (
                   <button
                     className="deleteReview"
-                    onClick={() => deleteReview(reviewd.ratingID)}
+                    onClick={() => deleteAlert(reviewd.ratingID)}
                   >
                     Delete
                   </button>
