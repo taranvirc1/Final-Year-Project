@@ -33,6 +33,7 @@ function ForumPage() {
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
   const [subbed, setSubbed] = useState([]);
+  const [saveSubId, setsaveSubId] = useState(0);
   const[SubButton, setSubButton] = useState("Subscribe");
   const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
@@ -82,19 +83,7 @@ const messageloader = (e) => {
 });
 }
 
-const subscribe = (e) => {
-  axios
-  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
 
-    .then((resp) => {
-      console.log(resp.data);
-
-      setMessages(resp.data);
-    })
-    .catch((error) => {
-      console.error(error);
-});
-}
 
 //Get current posts
 const endOffset = itemOffset + postsPerPage;
@@ -138,21 +127,12 @@ const newmessagehandle = (e) => {
      
   }
 
-
-  useEffect(() => {
-    messageloader();
-    threadnameloader();
-  }, []);
-
-
-
-  
   //subscribe button colour changer white to orange
   
   //subscribe button text changer "Subscribe" to "Subscribed"
   
-  function watchthread(){
-    if(SubButton==="Subscribed"){
+  function subbuttonchange(){
+    if(saveSubId===0){
       setSubButton("Subscribe")
       setsubcolor("white")
     }
@@ -163,8 +143,67 @@ const newmessagehandle = (e) => {
     
   }
 
+  const subscriptiondata = (e) => {
+    axios
+    .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
+  
+      .then((resp) => {
+        console.log(resp.data);
+  
+        setSubbed(resp.data);
+        setsaveSubId(resp.data.subId);
+        console.log("getting subId: "+ subbed);
+        console.log("getting subId: "+ saveSubId);
+      })
+      .catch((error) => {
+        console.error(error);
+  });
+  }
 
- 
+  const subscribe = (e) => {
+    if(saveSubId===0){
+      axios
+      .get(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+    
+        .then((resp) => {
+          console.log(resp.data);
+          setsaveSubId(resp.subId);
+          subbuttonchange();
+          
+        })
+        .catch((error) => {
+          console.error(error);
+        }
+      )
+    }
+    else{
+      console.log("delete subId: " +saveSubId);
+      axios
+      .delete(`http://localhost:8080/deleteSub/${saveSubId}`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      })
+      .then((response) => {
+        if (response.data != null) {
+          // alert("deleted successfully ");
+        }
+        setsaveSubId(0);
+        subbuttonchange();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+  }
+
+  useEffect(() => {
+    messageloader();
+    subscriptiondata();
+    threadnameloader();
+    subbuttonchange();
+    
+  }, []);
+
+
   return (
     <>
     <div className='fp-navbar-spacing'>
@@ -200,7 +239,7 @@ const newmessagehandle = (e) => {
 
       </a> */}
       <a>
-        <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();}}>{SubButton}</button>
+        <button id="subbtn" style={{background:subcolor}} onClick={event=>{subscribe();}}>{SubButton}</button>
       </a> 
           
     </div>
