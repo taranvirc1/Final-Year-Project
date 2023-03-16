@@ -1,7 +1,7 @@
 import React from "react";
 import "../../Styles/CoursesStyles/Courses.css";
 import clogo from "../../images/Courseimages/C++.jpg";
-import javaimage from "../../images/Courseimages/java.webp";
+import javaimage from "../../images/Courseimages/JavaBackground.jpg";
 import htmlimage from "../../images/Courseimages/html.jpg";
 import js from "../../images/Courseimages/js.jpg";
 import cssimage from "../../images/Courseimages/css.jpg";
@@ -45,11 +45,13 @@ function Courses() {
           </div>
         </div>
         <div className="Coursescard">
-          <img src={pythonimage} alt="" />
+          <img src={js} alt="" />
           <div className="info">
-            <h1>Python</h1>
+            <h1>Java Script</h1>
 
-            <button onClick={handleScrollToStop}>Watch Videos</button>
+            <Link to="/javaScriptVideos">
+              <button onClick={handleScrollToStop}> Watch Videos</button>
+            </Link>
           </div>
         </div>
 
@@ -93,16 +95,7 @@ function Courses() {
           </div>
         </div>
 
-        <div className="Coursescard">
-          <img src={js} alt="" />
-          <div className="info">
-            <h1>Java Script</h1>
-
-            <Link to="/javaScriptVideos">
-              <button onClick={handleScrollToStop}> Watch Videos</button>
-            </Link>
-          </div>
-        </div>
+       
       </div>
     </div>
   );
