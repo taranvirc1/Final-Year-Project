@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import "../Styles/ImageSlider.css";
 import Gif from "../images/elearning.gif";
@@ -14,30 +14,27 @@ const SliderData = [
   {
     image:
       "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068854141039/1.png",
-    text:"learn programming easily"
+    text:"learn programming easily from anywhere and improve your knowledge"
   },
   {
     image:
-      "https://cdn.discordapp.com/attachments/1048691975437684746/1048980069122588744/2.png",
+      "https://miro.medium.com/v2/format:jpg/resize:fill:80:56/0*7Q3yvSIv_t0ioJ-Z.gif",
+      text:"Watch programming videos from a range of Courses"
+  },
+  
+  { image: "https://cdn.images.express.co.uk/img/dynamic/130/590x/Easy-quiz-questions-1282929.jpg?r=1621866486163",
+  text:"Do Quizzes on courses you feel confident about"},
+  
+  {
+    image: "https://cdn.imweb.me/upload/S202108243f92708905182/614781d074140.jpg",
+    text:"Join Us to meet UN's Quality Education Goal"
   },
   {
-    image:
-      "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068673781821/3.png",
-    Text: "test",
+    image: "https://img.freepik.com/free-vector/people-carrying-donation-charity-related-icons_53876-43091.jpg",
+    text:"Help us, so that we can help those who is in need of education"
+
   },
-  { image: Gif },
-  {
-    image: Gif2,
-  },
-  {
-    image: Gif3,
-  },
-  {
-    image: Gif4,
-  },
-  {
-    image: Gif5,
-  },
+  
 ];
 const ImageSlider = () => {
   const [index, setIndex] = React.useState(0);
@@ -49,7 +46,7 @@ const ImageSlider = () => {
     }
   }
 
-  React.useEffect(() => {
+useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(
       () =>
