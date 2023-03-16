@@ -7,10 +7,14 @@ import Gif3 from "../images/donate-gif.gif";
 import Gif4 from "../images/forum.gif";
 import Gif5 from "../images/leaderboard.gif";
 
+const delay = 4500;
+
+
 const SliderData = [
   {
     image:
       "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068854141039/1.png",
+    text:"learn programming easily"
   },
   {
     image:
@@ -36,39 +40,57 @@ const SliderData = [
   },
 ];
 const ImageSlider = () => {
-  const [current, setCurrent] = useState(0);
-  const length = SliderData.length;
+  const [index, setIndex] = React.useState(0);
+  const timeoutRef = React.useRef(null);
 
-  const prevSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
-  };
-
-  const nextSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-  };
-
-  if (!Array.isArray(SliderData) || SliderData.length <= 0) {
-    return null;
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   }
-  console.log(current);
+
+  React.useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === SliderData.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    );
+
+    return () => {
+      resetTimeout();
+    };
+  }, [index]);
 
   return (
-    <section className="slider">
-      <div className="wrapper">
-        <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
-        <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
-        {SliderData.map((slide, index) => {
-          return (
-            <div
-              className={index === current ? "slide-active" : "slide"}
-              key={index}
-            >
-              {index === current && <img src={slide.image} alt="slider" />}
-            </div>
-          );
-        })}
+    <div className="imgSlider">
+      <div
+        className="imgshowSlider"
+        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+      >
+        {SliderData.map((item, index) => (
+          <div
+            className="slide"
+            key={index}
+           
+          >  <img src={item.image} alt="slider" /><p className="sliderText">{item.text}</p></div>
+        ))}
       </div>
-    </section>
+
+      <div className="slideButtons">
+        {SliderData.map((_, idx) => (
+          <div
+            key={idx}
+            className={`sileShowButton${index === idx ? " active" : ""}`}
+            onClick={() => {
+              setIndex(idx);
+            }}
+          ></div>
+        ))}
+      </div>
+    </div>
   );
 };
 
