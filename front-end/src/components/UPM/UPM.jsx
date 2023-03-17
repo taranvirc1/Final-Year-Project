@@ -98,9 +98,6 @@ function UPM() {
     },
   };
   const maxDate = new Date().toISOString().split("T")[0];
-  const [error2, setError2] = useState("");
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const [error, setError] = useState("");
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -178,25 +175,6 @@ function UPM() {
       console.error(error);
     }
   };
-  function isStrength(password) {
-    const hasNumber = /\d/.test(password);
-    const hasLowercase = /[a-z]/.test(password);
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasSpecialChar = /[$&+,:;=?@#|'<>.^*()%!-]/.test(password);
-
-    return (
-      hasNumber &&
-      hasLowercase &&
-      hasUppercase &&
-      hasSpecialChar &&
-      password.length >= 8
-    );
-  }
-
-  function isPhone(phoneNumber) {
-    const regex = /^\d{10}$/;
-    return regex.test(phoneNumber);
-  }
 
   function updateInfo2() {
     axios
@@ -279,6 +257,61 @@ function UPM() {
     e.preventDefault();
     fileInput.current.click();
   };
+  //------------------------------------------------ERROR HANDLING---------------------------------------------------------------------------//
+  const [error, setError] = useState("");
+  const [error2, setError2] = useState("");
+  const [error3, setError3] = useState("");
+  function handleEmailChange(event) {
+    const newValue = event.target.value;
+    if (!validateEmail(newValue)) {
+      setError("Please enter a valid email address.");
+    } else {
+      setEmail(newValue);
+      setError("");
+    }
+  }
+
+  function validateEmail(email) {
+    const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    return emailRegex.test(email.trim());
+  }
+
+  function handlePasswordChange(event) {
+    const newValue = event.target.value;
+    const isStrongEnough = isPasswordStrongEnough(newValue);
+
+    if (!isStrongEnough) {
+      setError2(
+        "Password should contain at least one uppercase letter, one lowercase letter, one number and one special character."
+      );
+    } else {
+      setError2("");
+      setNewPasswords(newValue);
+    }
+  }
+
+  function isPasswordStrongEnough(password) {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  }
+
+  function handlePhoneNumberChange(event) {
+    const newValue = event.target.value;
+    const isValidPhoneNumber = isPhoneNumberValid(newValue);
+
+    if (!isValidPhoneNumber) {
+      setError3("Please enter a valid phone number.");
+    } else {
+      setNumber(newValue);
+      setError3("");
+    }
+  }
+
+  function isPhoneNumberValid(phoneNumber) {
+    const phoneNumberRegex = /^\d{11}$/;
+    return phoneNumberRegex.test(phoneNumber);
+  }
 
   //------
 
@@ -463,24 +496,15 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="email"
-                                class="upm-field"
-                                placeholder={user && user.lastName}
+                                className="upm-field"
+                                placeholder={user?.lastName}
                                 defaultValue={user && user.email}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  if (!emailRegex.test(newValue)) {
-                                    setError2("X");
-                                  } else {
-                                    setEmail(newValue);
-                                  }
-                                }}
+                                onChange={handleEmailChange}
                                 name="Email"
                                 id="Email"
                                 required
                               />
-
-                              {error2 && <span className="error">{error}</span>}
-
+                              {error && <div className="error">{error}</div>}
                               <label for="name" class="upm-label">
                                 Email
                               </label>
@@ -491,24 +515,15 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="password"
-                                class="upm-field"
+                                className="upm-field"
                                 placeholder="*******************************"
-                                defaultValue="*****************"
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  const isStrongEnough = isStrength(newValue);
-
-                                  if (!isStrongEnough) {
-                                    setNewPasswords("default");
-                                  } else {
-                                    setNewPasswords(newValue);
-                                  }
-                                }}
+                                defaultValue={"Code4All123!"}
+                                onChange={handlePasswordChange}
                                 name="Password"
                                 id="Password"
                                 required
                               />
-
+                              {error2 && <div className="error">{error2}</div>}
                               <label for="name" class="upm-label">
                                 Password
                               </label>
@@ -518,24 +533,14 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="input"
-                                class="upm-field"
-                                placeholder={user && user.lastName}
+                                className="upm-field"
                                 defaultValue={user && user.phone}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  const isValidNumber = isPhone(newValue);
-
-                                  if (!isValidNumber) {
-                                    console.log("incorrect digits");
-                                  } else {
-                                    setNumber(newValue);
-                                  }
-                                }}
+                                onChange={handlePhoneNumberChange}
                                 name="Phone-number"
                                 id="number"
                                 required
                               />
-
+                              {error3 && <div className="error">{error3}</div>}
                               <label for="name" class="upm-label">
                                 Phone-number
                               </label>
