@@ -38,7 +38,7 @@ function validateSignUpForm(values) {
     errors.country = "Country required!";
   } else if (!regexName.test(values.country)) {
     errors.country =
-      "Invalid first name. Must only contain alphabetical characters.";
+      "Invalid country nane. Must only contain alphabetical characters.";
   } else if (values.country.length < 3) {
     errors.country =
       "Invalid country name. Must be at least three characters long.";
