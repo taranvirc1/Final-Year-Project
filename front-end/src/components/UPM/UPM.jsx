@@ -458,13 +458,13 @@ function UPM() {
                   </li>
                   <li>
                     <div class="upm-buttons">
-                      <a href="/" className="upm-primary">
+                      <a href={Twitter} className="upm-primary">
                         <AiOutlineTwitter size={30} />
                       </a>
-                      <a href="/" className="upm-primary ghost">
+                      <a href={LinkedIn} className="upm-primary ghost">
                         <CiLinkedin size={30} />
                       </a>
-                      <a href="/" className="upm-primary ghost">
+                      <a href={Instagram} className="upm-primary ghost">
                         <AiOutlineInstagram size={30} />
                       </a>
                     </div>
@@ -658,7 +658,7 @@ function UPM() {
                                 type="date"
                                 className="upm-field"
                                 placeholder="DOB"
-                                defaultValue={user & user.dateOfBirthn}
+                                defaultValue={user && user.dateOfBirthn}
                                 onChange={handleDOBChange}
                                 name="DOB"
                                 id="DOB"
