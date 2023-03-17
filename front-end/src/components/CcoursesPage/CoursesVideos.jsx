@@ -187,40 +187,38 @@ function CoursesVideos() {
     setVisible((prevValue) => prevValue - 5);
   };
 
- 
   const sortByDescendingReviews = (event) => {
-    
-    setReviews([...reviews.sort(
-      (a, b) =>
-        new Date(...b.createdAt.split("/").reverse()) -
-        new Date(...a.createdAt.split("/").reverse())
-        
-    )
-  ])
+    setReviews([
+      ...reviews.sort(
+        (a, b) =>
+          new Date(...b.createdAt.split("/").reverse()) -
+          new Date(...a.createdAt.split("/").reverse())
+      ),
+    ]);
   };
   const sortByAscendingReviews = (event) => {
-    setReviews([...reviews.sort(
-      (a, b) =>
-        new Date(...a.createdAt.split("/").reverse()) -
-        new Date(...b.createdAt.split("/").reverse())
-        
-    )
-  ])
+    setReviews([
+      ...reviews.sort(
+        (a, b) =>
+          new Date(...a.createdAt.split("/").reverse()) -
+          new Date(...b.createdAt.split("/").reverse())
+      ),
+    ]);
   };
 
   const sortBYRatingAsc = (event) => {
-
-    setReviews([...reviews.sort((a, b) => {
-      return a.ratingStars - b.ratingStars;
-  })])
-
-    
-  
+    setReviews([
+      ...reviews.sort((a, b) => {
+        return a.ratingStars - b.ratingStars;
+      }),
+    ]);
   };
   const sortBYRatingDsc = (event) => {
-    setReviews([...reviews.sort((a, b) => {
-      return b.ratingStars - a.ratingStars;
-  })])
+    setReviews([
+      ...reviews.sort((a, b) => {
+        return b.ratingStars - a.ratingStars;
+      }),
+    ]);
   };
   console.log(reviews);
 
@@ -282,7 +280,7 @@ function CoursesVideos() {
       })
       .catch((error) => {
         console.error(error);
-       // alert("cant get quiz");
+        // alert("cant get quiz");
       });
   }, []);
   console.log("quiz", quiz);
@@ -435,15 +433,17 @@ function CoursesVideos() {
           fireAlert(message, icon);
         } else {
           const message = "please fill all fields",
-          icon = "error";
-        fireAlert(message, icon);        }
+            icon = "error";
+          fireAlert(message, icon);
+        }
       }
     } else {
       if (review.ratingID) {
         if (!checkReview && !checkrating) {
           const message = "please change rating or review",
-          icon = "error";
-        fireAlert(message, icon);        } else {
+            icon = "error";
+          fireAlert(message, icon);
+        } else {
           onSubmit(e);
 
           const message = "Review Edited successfully",
@@ -540,12 +540,12 @@ function CoursesVideos() {
 
               <ul className="reviewsSort-optn">
                 <li>
-                  <a href="#!"onClick={sortByDescendingReviews}>
+                  <a href="#!" onClick={sortByDescendingReviews}>
                     Sort By Date Asc
                   </a>
                 </li>
                 <li>
-                  <a href="#!"  onClick={sortByAscendingReviews}>
+                  <a href="#!" onClick={sortByAscendingReviews}>
                     Sort By Date Desc
                   </a>
                 </li>
@@ -608,7 +608,7 @@ function CoursesVideos() {
               name="reviewDesc"
               onChange={(e) => onInputChange(e)}
               value={review.reviewDesc}
-              placeholder="Reivew Here..."
+              placeholder="Review Here..."
             ></textarea>
 
             <button
