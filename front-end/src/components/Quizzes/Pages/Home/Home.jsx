@@ -1,18 +1,34 @@
 import { Button, MenuItem, TextField } from "@mui/material";
-import { useState,useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Categories from "../../Data/Categories";
 import "./Home.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import Swal from "sweetalert2";
 
 const Home = ({ name, setName, fetchQuestions }) => {
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
+  const fireAlert1 = (message, icon, nevigate) => {
+    Swal.fire({
+      container: "swal2-container",
 
+      title: message,
+
+      icon: icon,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (nevigate)
+        if (result.isConfirmed) {
+          navigate("/Account");
+        }
+    });
+  };
 
   const [loggedInUser, setLoggedinUser] = useState("");
 
@@ -23,18 +39,17 @@ const Home = ({ name, setName, fetchQuestions }) => {
     }
   }, []);
 
-  useEffect(()=>{
-localStorage.setItem("category", category);
-localStorage.setItem("difficulty", difficulty);
-
-})
+  useEffect(() => {
+    localStorage.setItem("category", category);
+    localStorage.setItem("difficulty", difficulty);
+  });
 
   const Navigate = useNavigate();
 
   const handleSubmit = () => {
-    if(!loggedInUser){
-      alert("please log in to do the quiz")
-    }else{
+    if (!loggedInUser) {
+      fireAlert1("login to complete quiz", "error", "true");
+    } else {
       // Check only category and difficulty, ignore name
       if (!category || !difficulty) {
         setError(true);
@@ -46,68 +61,63 @@ localStorage.setItem("difficulty", difficulty);
       }
     }
   };
-// testc
+  // testc
   return (
     <>
-    <Header />
-    <div className="content">
-      <div className="settings">
-        <span style={{ fontSize: 30 }}>Quiz Settings</span>
-        <div className="settings__select">
-          {error && <ErrorMessage>Please Fill all the feilds</ErrorMessage>}
-          
-          <TextField
-            select
-            label="Select Category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            variant="outlined"
-            style={{ marginBottom: 30 }}
-          >
-            {Categories.map((cat) => (
-              <MenuItem key={cat.category} value={cat.value}>
-                {cat.category}
+      <Header />
+      <div className="content">
+        <div className="settings">
+          <span style={{ fontSize: 30 }}>Quiz Settings</span>
+          <div className="settings__select">
+            {error && <ErrorMessage>Please Fill all the feilds</ErrorMessage>}
+
+            <TextField
+              select
+              label="Select Category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              variant="outlined"
+              style={{ marginBottom: 30 }}
+            >
+              {Categories.map((cat) => (
+                <MenuItem key={cat.category} value={cat.value}>
+                  {cat.category}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              select
+              label="Select Difficulty"
+              value={difficulty}
+              onChange={(e) => setDifficulty(e.target.value)}
+              variant="outlined"
+              style={{ marginBottom: 30 }}
+            >
+              <MenuItem key="Easy" value="easy">
+                Easy
               </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            select
-            label="Select Difficulty"
-            value={difficulty}
-            onChange={(e) => setDifficulty(e.target.value)}
-            variant="outlined"
-            style={{ marginBottom: 30 }}
-          >
-            <MenuItem key="Easy" value="easy">
-              Easy
-            </MenuItem>
-            <MenuItem key="Medium" value="medium">
-              Medium
-            </MenuItem>
-            <MenuItem key="Hard" value="hard">
-              Hard
-            </MenuItem>
-          </TextField>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={handleSubmit}
-          >
-            Start Quiz
-          </Button>
+              <MenuItem key="Medium" value="medium">
+                Medium
+              </MenuItem>
+              <MenuItem key="Hard" value="hard">
+                Hard
+              </MenuItem>
+            </TextField>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={handleSubmit}
+            >
+              Start Quiz
+            </Button>
+          </div>
         </div>
+        <img src="/quiz.png" className="banner" alt="quiz app" />
       </div>
-      <img src="/quiz.png" className="banner" alt="quiz app" />
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 };
 
-
-
-
-
-export default Home; 
-
+export default Home;

@@ -149,17 +149,17 @@ function UpdatePassword() {
                     type="password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    onKeyUp={passwordIndicator}
+                    // onKeyUp={passwordIndicator}
                     placeholder="New Password*"
                   />
-                  <span className="show-pass">SHOW</span>
+                  {/* <span className="show-pass">SHOW</span> */}
                 </div>
-                <div className="pass-indicator">
+                {/* <div className="pass-indicator">
                   <span className="weak"></span>
                   <span className="medium"></span>
                   <span className="strong"></span>
                 </div>
-                <div className="pass-text">Yours password is too weak</div>
+                <div className="pass-text">Yours password is too weak</div> */}
                 <div className="input-field">
                   <i className="fas fa-lock"></i>
                   <input
