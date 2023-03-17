@@ -397,7 +397,7 @@ function UPM() {
                   </li>
                   <li>
                     <p>
-                      {user && user.bio} <br /> Hi, weclome to my profile
+                      {user && user.bio} <br /> Hi, welcome to my profile
                       settings i am {user && user.firstName}
                     </p>
                   </li>
