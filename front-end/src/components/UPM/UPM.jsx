@@ -97,7 +97,6 @@ function UPM() {
       "Content-Type": "application/json",
     },
   };
-  const maxDate = new Date().toISOString().split("T")[0];
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -106,6 +105,9 @@ function UPM() {
   const BI = user && user.bio;
   const NU = user && user.phone;
   const EM = user && user.email;
+  const LI = user && user.linkedIn;
+  const TW = user && user.twiter;
+  const IG = user && user.instagram;
   const [firstname, setName] = useState(FN);
   const [userName, setUsername] = useState(UN);
   const [lastname, setLastName] = useState(LN);
@@ -116,9 +118,9 @@ function UPM() {
   const [newPasswords, setNewPasswords] = useState("default");
   const [Bio, setBio] = useState(BI);
   const [Role, setRole] = useState("Basic");
-  const [LinkedIn, setLink] = useState("LinkedIn URL :)");
-  const [Instagram, setInsta] = useState("Instagram URL :)");
-  const [Twitter, setTwit] = useState("Twitter URL :)");
+  const [LinkedIn, setLink] = useState(LI);
+  const [Instagram, setInsta] = useState(IG);
+  const [Twitter, setTwit] = useState(TW);
   const box = {
     firstName: firstname,
     lastName: lastname,
@@ -261,6 +263,7 @@ function UPM() {
   const [error, setError] = useState("");
   const [error2, setError2] = useState("");
   const [error3, setError3] = useState("");
+  const [error4, setError4] = useState("");
   function handleEmailChange(event) {
     const newValue = event.target.value;
     if (!validateEmail(newValue)) {
@@ -313,6 +316,25 @@ function UPM() {
     return phoneNumberRegex.test(phoneNumber);
   }
 
+  function handleDOBChange(event) {
+    const newValue = event.target.value;
+    const isValidDOB = isDOBValid(newValue);
+
+    if (!isValidDOB) {
+      setError4("Please enter a valid date of birth.");
+    } else {
+      setError4("");
+      setDOB(newValue);
+    }
+  }
+
+  function isDOBValid(dob) {
+    // Regular expression to validate date of birth format
+    const dobRegex = /^\d{4}-\d{2}-\d{2}$/;
+    return dobRegex.test(dob);
+  }
+
+  const maxDate = new Date().toISOString().split("T")[0];
   //------
 
   // const [image2, setImage2] = useState(null);
@@ -634,19 +656,17 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="date"
-                                class="upm-field"
+                                className="upm-field"
                                 placeholder="DOB"
-                                defaultValue={user && user.dateOfBirth}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  setDOB(newValue);
-                                }}
+                                defaultValue={user & user.dateOfBirthn}
+                                onChange={handleDOBChange}
                                 name="DOB"
                                 id="DOB"
                                 required
-                                dateFormat="yyyy-MM-dd"
+                                min="1900-01-01"
                                 max={maxDate}
                               />
+                              {error3 && <div className="error">{error3}</div>}
                               <label for="name" class="upm-label">
                                 DOB
                               </label>
