@@ -21,35 +21,6 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-button {
-  font-size: 16px;
-  color: #ffffff;
-  background-color: #2b2bbc;
-  border-radius: 15px;
-  display: flex;
-  padding: 5px;
-  margin: 8px;
-  justify-content: flex-start;
-  align-items: center;
-  border: 5px solid #234668;
-  cursor: pointer;
-  outline: none;
-}
-
-button:hover {
-  background-color: #555e7d;
-}
-
-button svg {
-  margin-right: 5px;
-}
-
-.quizTesdwdwt {
-  padding-top: 10%;
-  padding-bottom: 15%;
-  min-height: 100vh;
-}
-
 .question-section {
   margin: auto;
   position: relative;
@@ -102,6 +73,14 @@ button svg {
   margin-bottom: 30px;
 }
 
+button:hover {
+  background-color: #555e7d;
+}
+
+button svg {
+  margin-right: 5px;
+}
+
 .answerButtons {
   width: 450px;
   height: 140px;
@@ -125,6 +104,9 @@ button svg {
 
 .quizTesdwdwt {
   height: 1000px;
+  padding-top: 10%;
+  padding-bottom: 15%;
+  min-height: 100vh;
 }
 
 .score-section {
