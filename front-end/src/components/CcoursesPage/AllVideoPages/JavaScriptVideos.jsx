@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import { getReviews } from "../APIs/RetrieveReviews";
 import Background from "../background/Background";
 import Accordion from "../Accordion";
+import SortIcon from "../../../images/forum/sort.png";
+import Swal from "sweetalert2";
+
 function JavaScriptVideos() {
     const reDirect = useNavigate();
     const CurrentCourseID = "2";
@@ -94,6 +97,45 @@ function JavaScriptVideos() {
    setReview(reviewCopy);
  }
 
+
+
+ const sortByDescendingReviews = (event) => {
+    
+  setReviews([...reviews.sort(
+    (a, b) =>
+      new Date(...b.createdAt.split("/").reverse()) -
+      new Date(...a.createdAt.split("/").reverse())
+      
+  )
+])
+};
+const sortByAscendingReviews = (event) => {
+  setReviews([...reviews.sort(
+    (a, b) =>
+      new Date(...a.createdAt.split("/").reverse()) -
+      new Date(...b.createdAt.split("/").reverse())
+      
+  )
+])
+};
+
+const sortBYRatingAsc = (event) => {
+
+  setReviews([...reviews.sort((a, b) => {
+    return a.ratingStars - b.ratingStars;
+})])
+
+  
+
+};
+const sortBYRatingDsc = (event) => {
+  setReviews([...reviews.sort((a, b) => {
+    return b.ratingStars - a.ratingStars;
+})])
+};
+
+
+
  // method used to post and edit review--
  // if statement checks if review has an id to call the edit mapping else if null calls the post mapping
  const onSubmit = async (e) => {
@@ -118,7 +160,7 @@ function JavaScriptVideos() {
            reviewDesc: "",
            createdAt: getCurrentDate,
          });
-         alert("review edited");
+         //alert("review edited");
        }) //;
        .catch(async (error) => {
          console.log(error);
@@ -131,7 +173,7 @@ function JavaScriptVideos() {
        .then((response) => {
          console.log("status" + response);
          if (response.status === 201) {
-           alert("Registered Successfully!!!");
+          // alert("Registered Successfully!!!");
            setReview({
              courseID: "2",
              ratingStars: "",
@@ -139,14 +181,14 @@ function JavaScriptVideos() {
              createdAt: getCurrentDate,
            });
          } else {
-           alert("you already have a review");
+         ///  alert("you already have a review");
          }
        })
 
        .catch(async (error) => {
          console.log(review);
          console.log(error);
-         alert("you already have a review");
+      //   alert("you already have a review");
        });
 
      // setForm(false);
@@ -212,7 +254,7 @@ function JavaScriptVideos() {
      })
      .then((response) => {
        if (response.data != null) {
-         alert("deleted successfully ");
+       //  alert("deleted successfully ");
        }
        retrieveReviews();
      })
@@ -251,7 +293,7 @@ function JavaScriptVideos() {
      })
      .catch((error) => {
        console.error(error);
-       alert("cant get quiz");
+      // alert("cant get quiz");
      });
  }, []);
  console.log("quiz", quiz);
@@ -347,33 +389,83 @@ function JavaScriptVideos() {
  }, [reviews, loggedInUser]);
  console.log(hasReview);
 
+ const deleteAlert = (x) => {
+  Swal.fire({
+    title: "Do you want to delete this Review?",
 
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#ff0055",
+    cancelButtonColor: "#999999",
+    icon: "warning",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
 
- const checkIfFilled = (e) => {
-   if (!loggedInUser) {
-     alert("please log in to review");
-       reDirect("/Account");
-   } else if (!review.ratingID) {
-     if (hasReview) {
-       alert("you already have a review");
-     } else {
-       if (checkReview && checkrating) {
-         //alert("check");
-         onSubmit(e);
-       } else {
-         alert("please filll in all fileds");
-       }
-     }
-   } else {
-     if (review.ratingID) {
-       if (!checkReview && !checkrating) {
-         alert("please change  rating or review");
-       } else {
-         onSubmit(e);
-       }
-     }
-   }
- };
+    if (result.isConfirmed) {
+      deleteReview(x);
+      Swal.fire("Review Deleted Successfully", "", "success");
+    } else Swal.fire(" Cancelled", "", "error");
+  });
+};
+
+const fireAlert = (message, icon, nevigate) => {
+  Swal.fire({
+    container: "swal2-container",
+
+    title: message,
+
+    icon: icon,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (nevigate)
+      if (result.isConfirmed) {
+        reDirect("/Account");
+      }
+  });
+};
+
+const checkIfFilled = (e) => {
+  if (!loggedInUser) {
+    const message = "Please log in to Review",
+      icon = "error",
+      nevigate = "true";
+    fireAlert(message, icon, nevigate);
+  } else if (!review.ratingID) {
+    if (hasReview) {
+      const message = "you already have a review",
+        icon = "warning";
+      fireAlert(message, icon);
+    } else {
+      if (checkReview && checkrating) {
+        //alert("check");
+        onSubmit(e);
+        const message = "Review added successfully",
+          icon = "success";
+        fireAlert(message, icon);
+      } else {
+        const message = "Please Fill ALl the Fields",
+        icon = "error";
+      fireAlert(message, icon);      }
+    }
+  } else {
+    if (review.ratingID) {
+      if (!checkReview && !checkrating) {
+        const message = "please change Rating or Review",
+        icon = "error";
+      fireAlert(message, icon);
+          } else {
+        onSubmit(e);
+
+        const message = "Review Edited successfully",
+          icon = "success";
+        fireAlert(message, icon);
+      }
+    }
+  }
+};
+
 
 
 
@@ -397,9 +489,9 @@ function JavaScriptVideos() {
     <Background />
 
     <div className="discription">
-      <h1 className="header">Learn C# Programming (In Ten Easy Steps) </h1>
+      <h1 className="header">Learn JavaScript Programming (In Ten Easy Steps) </h1>
       <h2 className="sub-header">
-        The simplest way to learn C# programming.
+        The simplest way to learn JavaScript programming.
       </h2>
     </div>
     <div className="objectVideos">
@@ -408,12 +500,12 @@ function JavaScriptVideos() {
         <li>Use the source code examples to learn step-by-step </li>
       </div>
       <div className="b">
-        <li>Master C# programming concepts from the ground up</li>
+        <li>Master JavaScript programming concepts from the ground up</li>
         <div className="c">
           <li>
             {" "}
             Use the source code examples to learn step-by-step Understand the
-            special features of C#: object orientation, the .NET framework,
+            special features of JavaScript: object orientation, the .NET framework,
             error-handling, serialization
           </li>
         </div>
@@ -448,19 +540,19 @@ function JavaScriptVideos() {
     <div className="Coursediscription">
       <h1 className="DescriptionHeader">Discription </h1>
       <div className="DescriptionText">
-        Learn C# Programming (in ten easy steps) [Version 2] is suitable for
+        Learn JavaScript Programming (in ten easy steps) [Version 2] is suitable for
         beginner programmers or anyone with experience in another programming
-        language who needs to learn C# from the ground up. Step-by-step it
-        explains how to write C# code to develop Windows applications using
+        language who needs to learn JavaScript from the ground up. Step-by-step it
+        explains how to write JavaScript code to develop Windows applications using
         either the free Visual Studio Community Edition or a commercial
-        edition of Microsoft Visual Studio (it even explains how to write C#
+        edition of Microsoft Visual Studio (it even explains how to write JavaScript
         programs using free tools for OS X). This is the completely revised
-        and updated second version of this course. C# is one of the most
+        and updated second version of this course. JavaScript is one of the most
         widely used an important of all modern programming languages. If you
-        need to learn C# quickly and painlessly, this is the perfect course.
+        need to learn JavaScript quickly and painlessly, this is the perfect course.
         You will begin by learning the core features of programming variables,
         constants, functions and data types. You will move on rapidly to learn
-        about Object Orientation and the more advanced features of C# and the
+        about Object Orientation and the more advanced features of JavaScript and the
         .NET framework such as file-handling, data-streaming, dealing with
         exceptions (errors) and overriding methods. Even if you start out as a
         complete beginner, by the end of this course you will have built a
@@ -471,6 +563,37 @@ function JavaScriptVideos() {
     <div className="reviewsContainer">
       <div className="averageRating">
         {totalSum}
+        <div className="reviewFilterOptions">
+            <a href="#!" className="reviewsSort">
+              <label for="reviewsortbtn">
+                <img src={SortIcon} alt="" />
+              </label>
+              <input type="checkbox" id="reviewsortbtn" />
+
+              <ul className="reviewsSort-optn">
+                <li>
+                  <a href="#!"onClick={sortByDescendingReviews}>
+                    Sort By Date Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!"  onClick={sortByAscendingReviews}>
+                    Sort By Date Desc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingAsc}>
+                    Sort By Rating Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingDsc}>
+                    Sort By Rating Desc
+                  </a>
+                </li>
+              </ul>
+            </a>
+          </div>
         <i className="star fa fa-star">
           Course Rating | {totalReviews} ratings
         </i>
@@ -575,8 +698,8 @@ function JavaScriptVideos() {
             {loggedInUser === reviewd.students.email && (
               <button
                 className="deleteReview"
-                onClick={() => deleteReview(reviewd.ratingID)}
-              >
+                onClick={() => deleteAlert(reviewd.ratingID)}
+                >
                 Delete
               </button>
             )}

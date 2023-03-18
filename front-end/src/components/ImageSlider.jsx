@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import "../Styles/ImageSlider.css";
 import Gif from "../images/elearning.gif";
@@ -7,68 +7,89 @@ import Gif3 from "../images/donate-gif.gif";
 import Gif4 from "../images/forum.gif";
 import Gif5 from "../images/leaderboard.gif";
 
+const delay = 4500;
+
 const SliderData = [
   {
     image:
       "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068854141039/1.png",
+    text: "learn programming easily from anywhere and improve your knowledge",
   },
   {
     image:
-      "https://cdn.discordapp.com/attachments/1048691975437684746/1048980069122588744/2.png",
+      "https://miro.medium.com/v2/format:jpg/resize:fill:80:56/0*7Q3yvSIv_t0ioJ-Z.gif",
+    text: "Watch programming videos from a range of Courses",
+  },
+
+  {
+    image:
+      "https://cdn.images.express.co.uk/img/dynamic/130/590x/Easy-quiz-questions-1282929.jpg?r=1621866486163",
+    text: "Do Quizzes on courses you feel confident about",
+  },
+
+  {
+    image:
+      "https://cdn.imweb.me/upload/S202108243f92708905182/614781d074140.jpg",
+    text: "Join Us to meet UN's Quality Education Goal",
   },
   {
     image:
-      "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068673781821/3.png",
-    Text: "test",
-  },
-  { image: Gif },
-  {
-    image: Gif2,
-  },
-  {
-    image: Gif3,
-  },
-  {
-    image: Gif4,
-  },
-  {
-    image: Gif5,
+      "https://img.freepik.com/free-vector/people-carrying-donation-charity-related-icons_53876-43091.jpg",
+    text: "Help us, so that we can help those who are in need of education",
   },
 ];
 const ImageSlider = () => {
-  const [current, setCurrent] = useState(0);
-  const length = SliderData.length;
+  const [index, setIndex] = React.useState(0);
+  const timeoutRef = React.useRef(null);
 
-  const prevSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
-  };
-
-  const nextSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-  };
-
-  if (!Array.isArray(SliderData) || SliderData.length <= 0) {
-    return null;
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   }
-  console.log(current);
+
+  useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === SliderData.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    );
+
+    return () => {
+      resetTimeout();
+    };
+  }, [index]);
 
   return (
-    <section className="slider">
-      <div className="wrapper">
-        <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
-        <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
-        {SliderData.map((slide, index) => {
-          return (
-            <div
-              className={index === current ? "slide-active" : "slide"}
-              key={index}
-            >
-              {index === current && <img src={slide.image} alt="slider" />}
-            </div>
-          );
-        })}
+    <div className="imgSlider">
+      <div
+        className="imgshowSlider"
+        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+      >
+        {SliderData.map((item, index) => (
+          <div className="slide" key={index}>
+            {" "}
+            <img src={item.image} alt="slider" />
+            <p className="sliderText">{item.text}</p>
+          </div>
+        ))}
       </div>
-    </section>
+
+      <div className="slideButtons">
+        {SliderData.map((_, idx) => (
+          <div
+            key={idx}
+            className={`sileShowButton${index === idx ? " active" : ""}`}
+            onClick={() => {
+              setIndex(idx);
+            }}
+          ></div>
+        ))}
+      </div>
+    </div>
   );
 };
 

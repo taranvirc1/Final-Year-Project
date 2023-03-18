@@ -25,14 +25,4 @@ public class PaymentService {
    public Payment save(Payment payment) {
        return paymentRepository.save(payment);
    }
-
-
-   public List<Payment> findAll() {
-       return paymentRepository.findAll();
-   }
-
-
-   public Payment findById(Integer id) {
-       return paymentRepository.findById(id).orElse(null);
-   }
 }

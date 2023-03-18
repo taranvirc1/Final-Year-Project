@@ -20,6 +20,7 @@
 
   min-height: 100vh;
   margin: 0;
+  margin-bottom: 10px;
 }
 
 .upm-mini-container {
@@ -104,6 +105,7 @@
   margin-left: auto;
   position: relative;
   top: 20px;
+  border-width: 3px;
 }
 
 .upm-card-container .upm-round {
@@ -117,18 +119,22 @@
 .upm-click {
   background-color: transparent;
   position: absolute;
-  border-radius: 100px;
-  border-color: white;
-  color: white;
-  right: 49%;
-  top: 25%;
+  border-color: transparent;
+  color: rgb(255, 255, 255);
+  right: 56%;
+  top: 55%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .upm-saver-1 {
   background-color: transparent;
   position: absolute;
-  right: 49%;
-  top: 45%;
+  right: 40.5%;
+  top: 59%;
   border: none;
   color: white;
 }

@@ -7,9 +7,10 @@ import useForm from "./AccountFunctionality/useForm";
 import validateSignUpForm from "../RegisterLogin/AccountFunctionality/validateSignUpForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Account() {
-  const { handleChange, values, handleSubmit, errors } =
+  const { handleChange, values, handleSubmit, errors, showErrors } =
     useForm(validateSignUpForm);
 
   const today = new Date().toISOString().slice(0, 10);
@@ -50,7 +51,23 @@ function Account() {
   }, [timeRemaining]);
 
   const login = () => {
-    navigate("/");
+    Swal.fire({
+      title: "You have logged in successfully",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ff0055",
+      icon: "success",
+    }).then((result) => {
+      navigate("/");
+    });
+  };
+
+  const error = () => {
+    Swal.fire({
+      title: "Login error",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ff0055",
+      icon: "error",
+    }).then((result) => {});
   };
 
   const handleLoginSubmit = (e) => {
@@ -72,33 +89,35 @@ function Account() {
               console.log(res);
               console.log(token);
               localStorage.setItem("jwt", token);
-              setInvalidAttempts(0);
+              // setInvalidAttempts(0);
               setTimeRemaining(0);
-              // setValidLoginAttempts(0);
+              setValidLoginAttempts(0);
               setLoginErrorMessages("");
-              alert("You have logged in successfully!!!");
+              // alert("You have logged in successfully!!!");
               setLoginSuccess("You have logged in successfully!!!");
               console.log("this is " + loggedInUser);
               setLoggedinUser(email);
               login();
             } else {
-              // setValidLoginAttempts(validLoginAttempts + 1);
-              setInvalidAttempts(invalidAttempts + 1);
+              setValidLoginAttempts(validLoginAttempts + 1);
+              // setInvalidAttempts(invalidAttempts + 1);
               setTimeRemaining(0);
-              alert("Failed token!!!");
+              // alert("Failed token!!!");
+              error();
               setLoggedinUser("");
             }
           } else {
-            // setValidLoginAttempts(validLoginAttempts + 1);
-            setInvalidAttempts(invalidAttempts + 1);
+            setValidLoginAttempts(validLoginAttempts + 1);
+            // setInvalidAttempts(invalidAttempts + 1);
             setTimeRemaining(0);
-            alert("Login unsuccessful!!!");
+            // alert("Login unsuccessful!!!");
+            error();
             setLoggedinUser("");
           }
         })
         .then(() => {
-          // setValidLoginAttempts(0);
-          setInvalidAttempts(0);
+          setValidLoginAttempts(0);
+          // setInvalidAttempts(0);
           setTimeRemaining(0);
           setLoginErrorMessages("");
           setEmail("");
@@ -106,34 +125,20 @@ function Account() {
         })
         .catch((err) => {
           console.log(err);
-          // setValidLoginAttempts(validLoginAttempts + 1);
-          setInvalidAttempts(invalidAttempts + 1);
+          setValidLoginAttempts(validLoginAttempts + 1);
+          // setInvalidAttempts(invalidAttempts + 1);
           setInvalidAttempts(0);
-          alert("PROBLEM WITH LOGIN!!!");
+          // alert("PROBLEM WITH LOGIN!!!");
+          error();
           setLoggedinUser("");
         });
-      if (invalidAttempts >= 2) {
-        setInvalidAttempts(0);
+      if (validLoginAttempts >= 2) {
+        setValidLoginAttempts(0);
+        // setInvalidAttempts(0);
         setTimeRemaining(30);
       }
     }
-
-    // }
   };
-
-  // const panelAnimation = () => {
-  //   const sign_in_btn = document.querySelector("#sign-in-btn");
-  //   const sign_up_btn = document.querySelector("#sign-up-btn");
-  //   const container = document.querySelector(".account-container");
-
-  //   sign_up_btn.addEventListener("click", () => {
-  //     container.classList.add("sign-up-mode");
-  //   });
-
-  //   sign_in_btn.addEventListener("click", () => {
-  //     container.classList.remove("sign-up-mode");
-  //   });
-  // };
 
   // useState for slide in animation
   const [isSignUpClick, setIsSignUpClick] = useState(false);
@@ -171,14 +176,14 @@ function Account() {
           (values.password.match(passRegexWeak) &&
             values.password.match(passRegexStrong)))
       )
-        setNo(2);
+        setNo(1 && 2);
       if (
         values.password.length >= 6 &&
         values.password.match(passRegexWeak) &&
         values.password.match(passRegexMedium) &&
         values.password.match(passRegexStrong)
       )
-        setNo(3);
+        setNo(1 && 2 && 3);
     } else {
       setNo(null);
     }
@@ -281,11 +286,9 @@ function Account() {
               onSubmit={handleLoginSubmit}
             >
               <h2 className="form-title">Sign in</h2>
-              {loginSuccess ? (
-                <p className="loginSuccess">{loginSuccess}</p>
-              ) : (
-                loginErrorMessages && <p>{loginErrorMessages}</p>
-              )}
+              {loginSuccess
+                ? ""
+                : loginErrorMessages && <p>{loginErrorMessages}</p>}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
@@ -325,7 +328,7 @@ function Account() {
               </p> */}
               {/* </Link> */}
               {/* Link to reset password form when user forgets password */}
-              <Link to="/resetPassword" className="forgot">
+              <Link to="/updatePassword" className="forgot">
                 {/* <a href="/" className="forgot"> */}
                 Forgot your password?
                 {/* </a> */}
@@ -350,7 +353,9 @@ function Account() {
                   placeholder="First Name*"
                 />
               </div>
-              {errors.firstName && <p>{errors.firstName}</p>}
+              {errors
+                ? errors.firstName && showErrors && <p>{errors.firstName}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-user"></i>
                 <input
@@ -361,7 +366,9 @@ function Account() {
                   placeholder="Last Name*"
                 />
               </div>
-              {errors.lastName && <p>{errors.lastName}</p>}
+              {errors
+                ? errors.lastName && showErrors && <p>{errors.lastName}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-calendar-alt"></i>
                 <input
@@ -375,7 +382,7 @@ function Account() {
                   placeholder="Date of Birth*"
                 />
               </div>
-              {errors.dob && <p>{errors.dob}</p>}
+              {errors ? errors.dob && showErrors && <p>{errors.dob}</p> : ""}
               <div className="input-field">
                 <i className="fas fa-globe-americas"></i>
                 <input
@@ -386,7 +393,9 @@ function Account() {
                   placeholder="Country*"
                 />
               </div>
-              {errors.country && <p>{errors.country}</p>}
+              {errors
+                ? errors.country && showErrors && <p>{errors.country}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-phone"></i>
                 <input
@@ -397,7 +406,9 @@ function Account() {
                   placeholder="Phone Number*"
                 />
               </div>
-              {errors.phone && <p>{errors.phone}</p>}
+              {errors
+                ? errors.phone && showErrors && <p>{errors.phone}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
@@ -408,7 +419,9 @@ function Account() {
                   placeholder="Email*"
                 />
               </div>
-              {errors.email && <p>{errors.email}</p>}
+              {errors
+                ? errors.email && showErrors && <p>{errors.email}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 {/* <input
@@ -462,7 +475,9 @@ function Account() {
                 <span className="strong"></span>
               </div>
               <div className="pass-text">Yours password is too weak</div> */}
-              {errors.password && <p>{errors.password}</p>}
+              {errors
+                ? errors.password && showErrors && <p>{errors.password}</p>
+                : ""}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
@@ -473,7 +488,10 @@ function Account() {
                   placeholder="Confirm Password*"
                 />
               </div>
-              {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+              {errors
+                ? errors.confirmPassword &&
+                  showErrors && <p>{errors.confirmPassword}</p>
+                : ""}
               {/* Link to confirmation page after sign up */}
               {/* <Link to="/confirmAccount"> */}
               <input type="submit" className="account-btn" value="Sign up" />

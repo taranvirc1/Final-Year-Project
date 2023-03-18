@@ -9,6 +9,10 @@ import "../Styles/Footer.css";
 import { Link } from "react-router-dom";
 
 function Footer() {
+  const handleScrollToStop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="footer">
       {/* Section 1 - Footer About */}
@@ -43,27 +47,31 @@ function Footer() {
           <h3 className="footer-title">Links</h3>
           <ul className="footer-box link h-box">
             <li>
-              <Link to="donations" className="link" href="/donate">
+              <Link
+                to="donations"
+                className="link"
+                onClick={handleScrollToStop}
+              >
                 Donate
               </Link>
             </li>
             <li>
-              <Link to="FAQ" className="link" href="/faq">
+              <Link to="FAQ" className="link" onClick={handleScrollToStop}>
                 FAQ
               </Link>
             </li>
             <li>
-              <Link to="courses" className="link" href="/courses">
+              <Link to="courses" className="link" onClick={handleScrollToStop}>
                 Courses
               </Link>
             </li>
             <li>
-              <Link to="quizzes" className="link" href="/quizzes">
+              <Link to="quizzes" className="link" onClick={handleScrollToStop}>
                 Quizzes
               </Link>
             </li>
             <li>
-              <Link to="Ranking" className="link" href="/rankings">
+              <Link to="Ranking" className="link" onClick={handleScrollToStop}>
                 Rankings
               </Link>
             </li>
@@ -100,13 +108,12 @@ function Footer() {
         </li>
       </ul>
 
-
-    <div className="animations">
-		<div className="animation" id="animation1"></div>
-		<div className="animation" id="animation2"></div>
-		<div className="animation" id="animation3"></div>
-		<div className="animation4" id="animation4"></div>
-	</div>
+      <div className="animations">
+        <div className="animation" id="animation1"></div>
+        <div className="animation" id="animation2"></div>
+        <div className="animation" id="animation3"></div>
+        <div className="animation4" id="animation4"></div>
+      </div>
 
       <div className="footer-container-bottom">
         <p>All Rights Reserved by &copy;Code4All 2022</p>

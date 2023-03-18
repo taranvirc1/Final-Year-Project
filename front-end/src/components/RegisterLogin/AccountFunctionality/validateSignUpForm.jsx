@@ -2,10 +2,16 @@ function validateSignUpForm(values) {
   let errors = {};
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
+  const regexName = /^[a-zA-Z]+$/;
+  const regexPhone1 = /^[0-9 ()+-]+$/;
+  const regexPhone2 = /[ ()+-]/g;
 
   //Error handling for First Name
   if (!values.firstName.trim()) {
     errors.firstName = "First Name required!";
+  } else if (!regexName.test(values.firstName)) {
+    errors.firstName =
+      "Invalid first name. Must only contain alphabetical characters.";
   } else if (values.firstName.length < 3) {
     errors.firstName =
       "Invalid first name. Must be at least three characters long.";
@@ -14,6 +20,9 @@ function validateSignUpForm(values) {
   //Error handling for Last Name
   if (!values.lastName.trim()) {
     errors.lastName = "Last Name required!";
+  } else if (!regexName.test(values.lastName)) {
+    errors.lastName =
+      "Invalid first name. Must only contain alphabetical characters.";
   } else if (values.lastName.length < 3) {
     errors.lastName =
       "Invalid last name. Must be at least three characters long.";
@@ -27,6 +36,9 @@ function validateSignUpForm(values) {
   //Error handling for Country
   if (!values.country) {
     errors.country = "Country required!";
+  } else if (!regexName.test(values.country)) {
+    errors.country =
+      "Invalid country nane. Must only contain alphabetical characters.";
   } else if (values.country.length < 3) {
     errors.country =
       "Invalid country name. Must be at least three characters long.";
@@ -35,6 +47,10 @@ function validateSignUpForm(values) {
   //Error handling for Phone Number
   if (!values.phone) {
     errors.phone = "Phone Number required!";
+  } else if (!regexPhone1.test(values.phone)) {
+    errors.phone = "Invalid phone number. Must contain digits and separators.";
+  } else if (values.phone.replace(/[ ()+-]/g, "").length < 10) {
+    errors.phone = "Invalid phone number. Must be 10 digits or more.";
   }
 
   //Error handling for Email Address

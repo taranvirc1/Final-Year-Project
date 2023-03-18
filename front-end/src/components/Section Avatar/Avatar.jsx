@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useRef, useState, useCallback } from "react";
 import axios from "axios";
 import image1 from "../../images/Avatar section/Badges/Solid_red.png";
-import profileImage from "../../images/Avatar section/Profile section/Profile picture/defaultProfilePic.png";
 import otherProfileImage from "../../images/Avatar section/Profile section/Profile picture/defaultProfilePic.png";
 import chosenBadge1 from "../../images/Avatar section/Profile section/Chosen badges/Badge1.png";
 import chosenBadge2 from "../../images/Avatar section/Profile section/Chosen badges/Badge2.png";
@@ -21,49 +20,54 @@ import nft2 from "../../images/UPM/assets/nft2_low.png";
  function Avatar() {
     const [loggedInUser, setLoggedinUser] = useState("");
     const [profile, setProfile] = useState([]);
-    const [student, setStudent] = useState([]);
-    const [currentXp, setCurrentXp] = useState(0);
-    const [studentId, setStudentId] = useState("");
-    const jwt = localStorage.getItem("jwt");
-    
     useEffect(() => {
       const saveLoggedinUser = localStorage.getItem("loggedInUser");
       if (saveLoggedinUser) {
         setLoggedinUser(saveLoggedinUser);
       }
     }, []);
-    console.log("lgeed"+loggedInUser);
-   
+    console.log("user email is "+loggedInUser);
+const [student, setStudent] = useState([]);
+const [currentXp, setCurrentXp] = useState(0);
+const [studentId, setStudentId] = useState("");
 
-    useEffect(() => {
-      axios.get("http://localhost:8080/getRankings",{  headers: {"Authorization" : `Bearer ${jwt}`} })
-        .then(response => {
-        // setReviews(response.data);
-      
-          
-        console.log(response.data);
-        setStudent(response.data);
-        })
-        .catch(error=>{
-          console.error(error)
-          alert("cant get reviews")
-        });
-      },[]);
+
+const jwt = localStorage.getItem("jwt");
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/getRankings",{  headers: {"Authorization" : `Bearer ${jwt}`} })
+      .then(response => {
+       // setReviews(response.data);
+     
+         
+      console.log(response.data);
+      setStudent(response.data);
+      })
+      .catch(error=>{
+         console.error(error)
+         alert("cant get reviews")
+      });
+    },[]);
   
+   
     const token = jwt;
     const headers = {
       Authorization: `Bearer ${token}`
     };
+    const Api = `http://localhost:8080/profile/${loggedInUser}`;
     
     var noOfQuiz = 6;
-    var xp = (noOfQuiz) * 10;
-    const xpBar = document.querySelector(".xp-bar");
-    function updateXP(currentXp, totalXP) {
-      const percentComplete = (currentXp / totalXP) * 100;
-      xpBar.style.width = `${percentComplete}%`;
-      console.log("The percent is " + percentComplete);
-      console.log("The current xp is " + currentXp);
-    }
+var xp = (noOfQuiz) * 10;
+
+const updateXP = (currentXp, totalXp) => {
+  const xpBar = document.querySelector(".xp-bar");
+  const percentComplete = (currentXp / totalXp) * 100;
+  xpBar.style.width = `${percentComplete}%`;
+  console.log("The percent is " + percentComplete);
+  console.log("The current xp is " + currentXp);
+
+};
+ 
 
     useEffect(() => {
    
@@ -72,17 +76,18 @@ import nft2 from "../../images/UPM/assets/nft2_low.png";
         .then(response => {
           setProfile(response.data);
           setStudentId(response.data.studentId)
-          updateXP(currentXp, 500); 
           setCurrentXp(response.data.xp)
-          
+          updateXP(response.data.xp, 1000); 
         })
         .catch(error => {
           console.log(error);
+        
         });
     }, []);
 
 console.log(profile);
-console.log("this"+studentId);
+console.log("logged user studentId is : "+studentId );
+
 
 
 
@@ -100,20 +105,22 @@ return (
     
   <div>
     <div class="topPart">
+   
       <div class="left">
         <div class="profileTab">
-          <img src={profile} class="profilePicture" />
+          <img src={"data:image/png;base64," + profile.avatar} class="profilePicture" />
           <img src={rankImg} class="rankimg" />
         </div>
         <div class="badges-and-xpbar">
           <div class="selectedBadges">
-            <img src={chosenBadge1} class="profileBadges" />
-            <img src={chosenBadge2} class="profileBadges" />
-            <img src={chosenBadge3} class="profileBadges" />
-            <img src={chosenBadge1} class="profileBadges" />
+            <img src={basic} class="profileBadges" />
+            <img src={intermediate} class="profileBadges" />
+            <img src={advanced} class="profileBadges" />
+            <img src={rare} class="profileBadges" />
           </div>
           <div class="xp-container">
             <div class="xp-bar">
+                {profile.xp} / 1000
             </div>
           </div>
         </div>
@@ -124,96 +131,56 @@ return (
     <h3 class="titles">unlock/choose a badge:</h3>
     <div class="badgeCollagePosition">
       <div class="Collage">
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
-        <img src={image1} class="avaiableBadges" />
+        
+        <li>
+                        <h6></h6>
+                        <div className="upm-info">
+                          <div className="upm-split">
+                            <div class="upm-form2 upm-field2">
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={basic} />
+                                </div>
+                               
+                              </div>
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={intermediate} />
+                                </div>
+                               
+                              </div>
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={advanced} />
+                                </div>
+                                
+                              </div>
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={rare} />
+                                </div>
+                                
+                              </div>
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={rare2} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50} />
+                              </div>
+                              <div class="upm-avatar-container">
+                                <div class="upm-avatar">
+                                  <img src={nft} />
+                                </div>
+                                <AiFillLock className="upm-ic-lock" size={50} />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+        
       </div>
     </div>
-    <h3 class="titles">unlock/choose a background:</h3>
-    <div class="backgroundCollagePosition">
-      <div class="Collage">
-        <img src={image1} class="avaiableBackgrounds"/>
-        <img src={image1} class="avaiableBackgrounds"/>
-        <img src={image1} class="avaiableBackgrounds"/>
-        <img src={image1} class="avaiableBackgrounds"/>
-      </div>
-    </div>
+  
 
 
       <div class="league-title">

@@ -6,9 +6,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,78 +32,73 @@ public class Subscriptions implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer subIid;
+	Integer subId;
+	
+	String subEmail;
 	
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-	private Date createdAtDate;
-	
-	@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
-	private Date updatedAt;
+	private Date subbedAtDate;
 
-//	@ManyToOne
-//	@JoinColumn(name = "Students")
-//	private Student student;
-//	
-//	@ManyToOne
-//	@JoinColumn(name = "Threads")
-//	private Threads thread;
+	@ManyToOne( fetch = FetchType.EAGER)
+	@JoinColumn(name = "threads")
+	private Threads threads;
 
 	public Subscriptions() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Subscriptions(Date createdAtDate, Date updatedAt) {
+	public Subscriptions(String subEmail, Threads threads) {
 		super();
-		this.createdAtDate = createdAtDate;
-		this.updatedAt = updatedAt;
+		this.subEmail = subEmail;
+		this.threads = threads;
 	}
 
-	public Integer getSubIid() {
-		return subIid;
+	public Integer getSubId() {
+		return subId;
 	}
 
-
-
-	public void setSubIid(Integer subIid) {
-		this.subIid = subIid;
+	public void setSubId(Integer subId) {
+		this.subId = subId;
 	}
 
-
-
-	public Date getCreatedAtDate() {
-		return createdAtDate;
+	public String getSubEmail() {
+		return subEmail;
 	}
 
-
-
-	public void setCreatedAtDate(Date createdAtDate) {
-		this.createdAtDate = createdAtDate;
+	public void setSubEmail(String subEmail) {
+		this.subEmail = subEmail;
 	}
 
-
-
-	public Date getUpdatedAt() {
-		return updatedAt;
+	public Date getSubbedAtDate() {
+		return subbedAtDate;
 	}
 
-
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setSubbedAtDate(Date subbedAtDate) {
+		this.subbedAtDate = subbedAtDate;
 	}
 
+	public Threads getThreads() {
+		return threads;
+	}
 
+	public void setThreads(Threads threads) {
+		this.threads = threads;
+	}
 
 	@Override
 	public String toString() {
-		return "Subscriptions [subIid=" + subIid + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt
-				+ "]";
+		return "Subscriptions [subId=" + subId + ", subEmail=" + subEmail + ", subbedAtDate=" + subbedAtDate
+				+ ", threads=" + threads + "]";
 	}
+
 	
+
+	
+
+	
+
 
 }

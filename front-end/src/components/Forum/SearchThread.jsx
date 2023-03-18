@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import axios from "axios";
 import  "../../Styles/Forum/Search_Thread.css"
-
 import ReplyIcon from "../../images/forum/reply.png"
 import SearchIcon from "../../images/forum/search.png"
 import SortIcon from "../../images/forum/sort.png"
+import { red } from '@mui/material/colors';
 
 function SearchThread() {
 
@@ -43,7 +43,6 @@ function SearchThread() {
 
           .then((resp) => {
             console.log(resp.data);
-
             setthreads(resp.data);
             setshowresult(true);
           })
@@ -51,8 +50,18 @@ function SearchThread() {
             console.error(error);
       });
     }
+    
   }
 
+
+  const latestthreadsort = (event) => {
+    setthreads([...threads.sort((a, b) => b.fTimestampCreated.localeCompare(a.fTimestampCreated))])
+  }
+
+  const oldestthreadsort = (event) => {
+    setthreads([...threads.sort((a, b) => a.fTimestampCreated.localeCompare(b.fTimestampCreated))])
+  };
+  
   //result pagination
   const endOffset = itemOffset + postsPerPage;
   const currentPosts = threads.slice(itemOffset, endOffset);
@@ -66,6 +75,7 @@ function SearchThread() {
     setItemOffset(newOffset);
   };
 
+  
   return (
     <div className='s-navbar-spacing'>
       <h2 className='SearchForum-Title'>Search Forum Threads</h2>
@@ -74,13 +84,7 @@ function SearchThread() {
           <label for="sthread-title">Thread Title: </label>
           <input type="text" id="sthread-title" name="sthread-title" placeholder="  Search For Topic Thread Title" onChange={(e) => setThreadName(e.target.value)}/>
         </div>
-        <div className='searchsort'>
-          <label for="ssort">Sort By: </label>
-          <select id="ssort" name="ssort">
-            <option value="Last Updated">Last Updated</option>
-            <option value="Most Replies">Most Replies</option>
-          </select>
-        </div>
+        
         <div className='searchpost' onClick={threadsearch}>
           <a href="/" className='spost'><img src={SearchIcon} alt="search icon"/></a>
           <label>Search Thread</label>
@@ -114,9 +118,8 @@ function SearchThread() {
             <input type="checkbox" id="srsortbtn"/> 
             
             <ul class="searchresultsort-optn">
-              <li><a href="/">Last Updated</a></li> 
-              <li><a href="/">Most Liked</a></li>
-              <li><a href="/">Most Replies</a></li>
+              <li><a href="#!" onClick={latestthreadsort}>Last Updated</a></li>
+              <li><a href="#!" onClick={oldestthreadsort}>Oldest Threads</a></li>
             </ul>
 
           </a>
@@ -137,12 +140,8 @@ function SearchThread() {
               <ul className='tags'>
                 <li>{item.fTags}</li>
               </ul>
-              <div className='Stats'>
-                <div className='Replies'><img src={ReplyIcon}></img></div>
-                <h4>4 Replies</h4>
-              </div>
               
-              <div className='thread-creatorname'>Started on {item.fDateCreated} By {item.students.firstName} {item.students.lastName} </div>
+              <div className='thread-creatorname'>Started on {item.fDateCreated} at {item.fTimeCreated} By {item.students.firstName} {item.students.lastName} </div>
               
               
             </div>

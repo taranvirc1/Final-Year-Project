@@ -37,15 +37,38 @@ import nft from "../../images/UPM/assets/nft_low.png";
 import nft1 from "../../images/UPM/assets/nft1_low.png";
 import nft2 from "../../images/UPM/assets/nft2_low.png";
 import { VscChromeClose } from "react-icons/vsc";
+import Swal from "sweetalert2";
+
 function UPM() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const logout = useNavigate();
   const [user, setUser] = useState([]);
+  const navigate = "true";
   const logoutUser = () => {
     setLoggedinUser("");
     localStorage.setItem("jwt", "");
-    logout("/");
+    logo_out(navigate);
   };
+
+  const logo_out = (navigate) => {
+    Swal.fire({
+      title: "Do you want to logout?",
+
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      confirmButtonColor: "#ff0055",
+      cancelButtonColor: "#999999",
+      icon: "question",
+    }).then((result) => {
+      if (navigate) {
+        if (result.isConfirmed) {
+          logout("/");
+        }
+      }
+    });
+  };
+
   const jwt = localStorage.getItem("jwt");
   const token = jwt;
   const headers = {
@@ -74,10 +97,6 @@ function UPM() {
       "Content-Type": "application/json",
     },
   };
-  const maxDate = new Date().toISOString().split("T")[0];
-  const [error2, setError2] = useState("");
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const [error, setError] = useState("");
   const FN = user && user.firstName;
   const LN = user && user.lastName;
   const UN = user && user.username;
@@ -86,6 +105,9 @@ function UPM() {
   const BI = user && user.bio;
   const NU = user && user.phone;
   const EM = user && user.email;
+  const LI = user && user.linkedIn;
+  const TW = user && user.twiter;
+  const IG = user && user.instagram;
   const [firstname, setName] = useState(FN);
   const [userName, setUsername] = useState(UN);
   const [lastname, setLastName] = useState(LN);
@@ -96,9 +118,9 @@ function UPM() {
   const [newPasswords, setNewPasswords] = useState("default");
   const [Bio, setBio] = useState(BI);
   const [Role, setRole] = useState("Basic");
-  const [LinkedIn, setLink] = useState("LinkedIn URL :)");
-  const [Instagram, setInsta] = useState("Instagram URL :)");
-  const [Twitter, setTwit] = useState("Twitter URL :)");
+  const [LinkedIn, setLink] = useState(LI);
+  const [Instagram, setInsta] = useState(IG);
+  const [Twitter, setTwit] = useState(TW);
   const box = {
     firstName: firstname,
     lastName: lastname,
@@ -155,25 +177,6 @@ function UPM() {
       console.error(error);
     }
   };
-  function isStrength(password) {
-    const hasNumber = /\d/.test(password);
-    const hasLowercase = /[a-z]/.test(password);
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasSpecialChar = /[$&+,:;=?@#|'<>.^*()%!-]/.test(password);
-
-    return (
-      hasNumber &&
-      hasLowercase &&
-      hasUppercase &&
-      hasSpecialChar &&
-      password.length >= 8
-    );
-  }
-
-  function isPhone(phoneNumber) {
-    const regex = /^\d{10}$/;
-    return regex.test(phoneNumber);
-  }
 
   function updateInfo2() {
     axios
@@ -256,7 +259,82 @@ function UPM() {
     e.preventDefault();
     fileInput.current.click();
   };
+  //------------------------------------------------ERROR HANDLING---------------------------------------------------------------------------//
+  const [error, setError] = useState("");
+  const [error2, setError2] = useState("");
+  const [error3, setError3] = useState("");
+  const [error4, setError4] = useState("");
+  function handleEmailChange(event) {
+    const newValue = event.target.value;
+    if (!validateEmail(newValue)) {
+      setError("Please enter a valid email address.");
+    } else {
+      setEmail(newValue);
+      setError("");
+    }
+  }
 
+  function validateEmail(email) {
+    const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    return emailRegex.test(email.trim());
+  }
+
+  function handlePasswordChange(event) {
+    const newValue = event.target.value;
+    const isStrongEnough = isPasswordStrongEnough(newValue);
+
+    if (!isStrongEnough) {
+      setError2(
+        "Password should contain at least one uppercase letter, one lowercase letter, one number and one special character."
+      );
+    } else {
+      setError2("");
+      setNewPasswords(newValue);
+    }
+  }
+
+  function isPasswordStrongEnough(password) {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  }
+
+  function handlePhoneNumberChange(event) {
+    const newValue = event.target.value;
+    const isValidPhoneNumber = isPhoneNumberValid(newValue);
+
+    if (!isValidPhoneNumber) {
+      setError3("Please enter a valid phone number.");
+    } else {
+      setNumber(newValue);
+      setError3("");
+    }
+  }
+
+  function isPhoneNumberValid(phoneNumber) {
+    const phoneNumberRegex = /^\d{11}$/;
+    return phoneNumberRegex.test(phoneNumber);
+  }
+
+  function handleDOBChange(event) {
+    const newValue = event.target.value;
+    const isValidDOB = isDOBValid(newValue);
+
+    if (!isValidDOB) {
+      setError4("Please enter a valid date of birth.");
+    } else {
+      setError4("");
+      setDOB(newValue);
+    }
+  }
+
+  function isDOBValid(dob) {
+    // Regular expression to validate date of birth format
+    const dobRegex = /^\d{4}-\d{2}-\d{2}$/;
+    return dobRegex.test(dob);
+  }
+
+  const maxDate = new Date().toISOString().split("T")[0];
   //------
 
   // const [image2, setImage2] = useState(null);
@@ -329,8 +407,23 @@ function UPM() {
               <div className="upm-mini-container">
                 <div class="upm-card-container">
                   <li>
-                    <span class="upm-logout">
-                      <CiLogout size={30} onClick={logoutUser} />
+                    <span
+                      class="upm-logout"
+                      style={{
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        backgroundColor: "black",
+                        padding: "15px",
+                        borderRadius: "10px",
+                      }}
+                      onClick={logoutUser}
+                    >
+                      {/* <CiLogout
+                        size={30}
+                        onClick={logoutUser}
+                        style={{ cursor: "pointer" }}
+                      /> */}
+                      Logout
                     </span>
                   </li>
                   <li>
@@ -338,7 +431,7 @@ function UPM() {
                       <img class="upm-round" src={image} alt="avatar" />
                     )}
                     <button className="upm-click" onClick={handleButtonClick}>
-                      <MdOutlineModeEdit size={25} />
+                      <MdOutlineModeEdit size={55} />
                     </button>
                     <button
                       className="upm-saver-1"
@@ -359,19 +452,19 @@ function UPM() {
                   </li>
                   <li>
                     <p>
-                      {user && user.bio} <br /> Hi, weclome to my profile
+                      {user && user.bio} <br /> Hi, welcome to my profile
                       settings i am {user && user.firstName}
                     </p>
                   </li>
                   <li>
                     <div class="upm-buttons">
-                      <a href="/" className="upm-primary">
+                      <a href={Twitter} className="upm-primary">
                         <AiOutlineTwitter size={30} />
                       </a>
-                      <a href="/" className="upm-primary ghost">
+                      <a href={LinkedIn} className="upm-primary ghost">
                         <CiLinkedin size={30} />
                       </a>
-                      <a href="/" className="upm-primary ghost">
+                      <a href={Instagram} className="upm-primary ghost">
                         <AiOutlineInstagram size={30} />
                       </a>
                     </div>
@@ -425,24 +518,15 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="email"
-                                class="upm-field"
-                                placeholder={user && user.lastName}
+                                className="upm-field"
+                                placeholder={user?.lastName}
                                 defaultValue={user && user.email}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  if (!emailRegex.test(newValue)) {
-                                    setError2("X");
-                                  } else {
-                                    setEmail(newValue);
-                                  }
-                                }}
+                                onChange={handleEmailChange}
                                 name="Email"
                                 id="Email"
                                 required
                               />
-
-                              {error2 && <span className="error">{error}</span>}
-
+                              {error && <div className="error">{error}</div>}
                               <label for="name" class="upm-label">
                                 Email
                               </label>
@@ -453,24 +537,15 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="password"
-                                class="upm-field"
+                                className="upm-field"
                                 placeholder="*******************************"
-                                defaultValue="*****************"
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  const isStrongEnough = isStrength(newValue);
-
-                                  if (!isStrongEnough) {
-                                    setNewPasswords("default");
-                                  } else {
-                                    setNewPasswords(newValue);
-                                  }
-                                }}
+                                defaultValue={"Code4All123!"}
+                                onChange={handlePasswordChange}
                                 name="Password"
                                 id="Password"
                                 required
                               />
-
+                              {error2 && <div className="error">{error2}</div>}
                               <label for="name" class="upm-label">
                                 Password
                               </label>
@@ -480,24 +555,14 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="input"
-                                class="upm-field"
-                                placeholder={user && user.lastName}
+                                className="upm-field"
                                 defaultValue={user && user.phone}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  const isValidNumber = isPhone(newValue);
-
-                                  if (!isValidNumber) {
-                                    console.log("incorrect digits");
-                                  } else {
-                                    setNumber(newValue);
-                                  }
-                                }}
+                                onChange={handlePhoneNumberChange}
                                 name="Phone-number"
                                 id="number"
                                 required
                               />
-
+                              {error3 && <div className="error">{error3}</div>}
                               <label for="name" class="upm-label">
                                 Phone-number
                               </label>
@@ -591,19 +656,17 @@ function UPM() {
                             <div class="upm-form field">
                               <input
                                 type="date"
-                                class="upm-field"
+                                className="upm-field"
                                 placeholder="DOB"
-                                defaultValue={user && user.dateOfBirth}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  setDOB(newValue);
-                                }}
+                                defaultValue={user && user.dateOfBirthn}
+                                onChange={handleDOBChange}
                                 name="DOB"
                                 id="DOB"
                                 required
-                                dateFormat="yyyy-MM-dd"
+                                min="1900-01-01"
                                 max={maxDate}
                               />
+                              {error3 && <div className="error">{error3}</div>}
                               <label for="name" class="upm-label">
                                 DOB
                               </label>
