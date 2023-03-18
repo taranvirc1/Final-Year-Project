@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import { getReviews } from "../APIs/RetrieveReviews";
 import Background from "../background/Background";
 import Accordion from "../Accordion";
+import SortIcon from "../../../images/forum/sort.png";
+import Swal from "sweetalert2";
+
 function JavaScriptVideos() {
     const reDirect = useNavigate();
     const CurrentCourseID = "2";
@@ -93,6 +96,45 @@ function JavaScriptVideos() {
    };
    setReview(reviewCopy);
  }
+
+
+
+ const sortByDescendingReviews = (event) => {
+    
+  setReviews([...reviews.sort(
+    (a, b) =>
+      new Date(...b.createdAt.split("/").reverse()) -
+      new Date(...a.createdAt.split("/").reverse())
+      
+  )
+])
+};
+const sortByAscendingReviews = (event) => {
+  setReviews([...reviews.sort(
+    (a, b) =>
+      new Date(...a.createdAt.split("/").reverse()) -
+      new Date(...b.createdAt.split("/").reverse())
+      
+  )
+])
+};
+
+const sortBYRatingAsc = (event) => {
+
+  setReviews([...reviews.sort((a, b) => {
+    return a.ratingStars - b.ratingStars;
+})])
+
+  
+
+};
+const sortBYRatingDsc = (event) => {
+  setReviews([...reviews.sort((a, b) => {
+    return b.ratingStars - a.ratingStars;
+})])
+};
+
+
 
  // method used to post and edit review--
  // if statement checks if review has an id to call the edit mapping else if null calls the post mapping
@@ -251,7 +293,7 @@ function JavaScriptVideos() {
      })
      .catch((error) => {
        console.error(error);
-       alert("cant get quiz");
+      // alert("cant get quiz");
      });
  }, []);
  console.log("quiz", quiz);
@@ -347,33 +389,83 @@ function JavaScriptVideos() {
  }, [reviews, loggedInUser]);
  console.log(hasReview);
 
+ const deleteAlert = (x) => {
+  Swal.fire({
+    title: "Do you want to delete this Review?",
 
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#ff0055",
+    cancelButtonColor: "#999999",
+    icon: "warning",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
 
- const checkIfFilled = (e) => {
-   if (!loggedInUser) {
-     alert("please log in to review");
-       reDirect("/Account");
-   } else if (!review.ratingID) {
-     if (hasReview) {
-       alert("you already have a review");
-     } else {
-       if (checkReview && checkrating) {
-         //alert("check");
-         onSubmit(e);
-       } else {
-         alert("please filll in all fileds");
-       }
-     }
-   } else {
-     if (review.ratingID) {
-       if (!checkReview && !checkrating) {
-         alert("please change  rating or review");
-       } else {
-         onSubmit(e);
-       }
-     }
-   }
- };
+    if (result.isConfirmed) {
+      deleteReview(x);
+      Swal.fire("Review Deleted Successfully", "", "success");
+    } else Swal.fire(" Cancelled", "", "error");
+  });
+};
+
+const fireAlert = (message, icon, nevigate) => {
+  Swal.fire({
+    container: "swal2-container",
+
+    title: message,
+
+    icon: icon,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (nevigate)
+      if (result.isConfirmed) {
+        reDirect("/Account");
+      }
+  });
+};
+
+const checkIfFilled = (e) => {
+  if (!loggedInUser) {
+    const message = "Please log in to Review",
+      icon = "error",
+      nevigate = "true";
+    fireAlert(message, icon, nevigate);
+  } else if (!review.ratingID) {
+    if (hasReview) {
+      const message = "you already have a review",
+        icon = "warning";
+      fireAlert(message, icon);
+    } else {
+      if (checkReview && checkrating) {
+        //alert("check");
+        onSubmit(e);
+        const message = "Review added successfully",
+          icon = "success";
+        fireAlert(message, icon);
+      } else {
+        const message = "Please Fill ALl the Fields",
+        icon = "error";
+      fireAlert(message, icon);      }
+    }
+  } else {
+    if (review.ratingID) {
+      if (!checkReview && !checkrating) {
+        const message = "please change Rating or Review",
+        icon = "error";
+      fireAlert(message, icon);
+          } else {
+        onSubmit(e);
+
+        const message = "Review Edited successfully",
+          icon = "success";
+        fireAlert(message, icon);
+      }
+    }
+  }
+};
+
 
 
 
@@ -471,6 +563,37 @@ function JavaScriptVideos() {
     <div className="reviewsContainer">
       <div className="averageRating">
         {totalSum}
+        <div className="reviewFilterOptions">
+            <a href="#!" className="reviewsSort">
+              <label for="reviewsortbtn">
+                <img src={SortIcon} alt="" />
+              </label>
+              <input type="checkbox" id="reviewsortbtn" />
+
+              <ul className="reviewsSort-optn">
+                <li>
+                  <a href="#!"onClick={sortByDescendingReviews}>
+                    Sort By Date Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!"  onClick={sortByAscendingReviews}>
+                    Sort By Date Desc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingAsc}>
+                    Sort By Rating Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingDsc}>
+                    Sort By Rating Desc
+                  </a>
+                </li>
+              </ul>
+            </a>
+          </div>
         <i className="star fa fa-star">
           Course Rating | {totalReviews} ratings
         </i>
@@ -575,8 +698,8 @@ function JavaScriptVideos() {
             {loggedInUser === reviewd.students.email && (
               <button
                 className="deleteReview"
-                onClick={() => deleteReview(reviewd.ratingID)}
-              >
+                onClick={() => deleteAlert(reviewd.ratingID)}
+                >
                 Delete
               </button>
             )}

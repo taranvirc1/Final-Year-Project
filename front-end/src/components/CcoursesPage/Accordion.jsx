@@ -7,7 +7,7 @@ import ReactPlayer from "react-player";
 
 
 
-const Accordion = ({ loggedInUser, CurrentCourseID }) => {
+const Accordion = ({ loggedInUser, CurrentCourseID,fireAlert }) => {
 
  
 
@@ -72,7 +72,8 @@ const Accordion = ({ loggedInUser, CurrentCourseID }) => {
     if (loggedInUser) {
       playVideo(url);
     } else {
-      alert("please log in");
+      const message = "Please log in to Watch", icon='error',nevigate="true"
+      fireAlert(message,icon,nevigate);
     }
   };
 

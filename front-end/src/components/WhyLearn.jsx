@@ -3,6 +3,9 @@ import "../Styles/Whylearn.css";
 import { Link } from "react-router-dom";
 
 export default function Whylearn() {
+  const handleScrollToStop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="whylearn">
       <div>
@@ -72,10 +75,12 @@ export default function Whylearn() {
         </div>
       </div>
       <div className="button-container">
-      {/* Link to login/signup page */}
+        {/* Link to login/signup page */}
         <Link to="/account">
           {/* <a href="/"> */}
-            <button className="btn-1">Get started</button>
+          <button className="btn-1" onClick={handleScrollToStop}>
+            Get started
+          </button>
           {/* </a> */}
         </Link>
       </div>
