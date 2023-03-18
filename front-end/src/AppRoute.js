@@ -20,28 +20,20 @@ import Contact from "./components/FAQ/Contact";
 import UPM from "./components/UPM/UPM";
 import CoursesVideos from "./components/CcoursesPage/CoursesVideos";
 import Avatar from "./components/Section Avatar/Avatar";
-
-import Header from "./components/Quizzes/components/Header/Header";
-import Footer from "./components/Quizzes/components/Footer/Footer";
-import Home from "./components/Quizzes/Pages/Home/Home";
-import Quiz from "./components/Quizzes/Pages/Quiz/Quiz";
-import Result from "./components/Quizzes/Pages/Result/Result";
-import { useState, useEffect } from "react";
+import Home from "./components/Quizzes/Home/Home";
 import UpdatePassword from "./components/RegisterLogin/UpdatePassword";
 import JavaScriptVideos from "./components/CcoursesPage/AllVideoPages/JavaScriptVideos";
 import TestQuiz from "./components/Quizzes/TestQuiz";
 import PythonVideos from "./components/CcoursesPage/AllVideoPages/PythonVideos";
 function AppRoute() {
-  const [questions, setQuestions] = useState([]);
-  const [name, setName] = useState();
-  const [score, setScore] = useState(0);
+
+  
+  
 
   const fetchQuestions = async (category = "", difficulty = "") => {
-    const { data } = await axios.get(
-      `http://localhost:8080/api/questions`
-    );
-
+    await axios.get(`http://localhost:8080/api/questions`);
   };
+  
   
   return (
     <div>
@@ -87,29 +79,10 @@ function AppRoute() {
               path="/Quizzes"
               element={
                 <Home
-                  name={name}
-                  setName={setName}
                   fetchQuestions={fetchQuestions}
                 />
               }
             />
-            <Route
-              path="/quiz"
-              element={
-                <Quiz
-                  name={name}
-                  questions={questions}
-                  score={score}
-                  setScore={setScore}
-                  setQuestions={setQuestions}
-                />
-              }
-            />
-            <Route
-              path="/result"
-              element={<Result name={name} score={score} />}
-            />
-
             {/* route for FAQ */}
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/Contact" element={<Contact />} />
