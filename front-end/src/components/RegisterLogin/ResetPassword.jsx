@@ -28,7 +28,7 @@ function ResetPassword() {
       );
     } else {
       axios
-        .post("http://localhost:5000/api/forgot-password", { email })
+        .post("http://localhost:5000/api/student/forgot-password", { email })
         .then((res) => {
           console.log(res);
           console.log(email);
