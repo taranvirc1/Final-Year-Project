@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import new_password from "../../images/login-register-icons/reset_email.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/NewPassword.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function NewPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -10,6 +11,7 @@ function NewPassword() {
   const [errorMessage, setErrorMessage] = useState("");
   const [updateSuccess, setUpdateSuccess] = useState("");
   const { resetToken } = useParams();
+  const Navigate = useNavigate();
   console.log(resetToken);
   // const navigate = useNavigate();
   // const { id, token } = useParams();
@@ -32,6 +34,17 @@ function NewPassword() {
   //   }
   // };
 
+  const fireAlert = () => {
+    Swal.fire({
+      title: "Password has been updated successfully!!!",
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Navigate("/account");
+      }
+    });
+  };
+
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,15 +63,16 @@ function NewPassword() {
           console.log(resetToken);
           console.log(newPassword);
           if (response.status === 200) {
-            alert("password has been updated successfully!!!");
-            setUpdateSuccess("Password updated!!!");
+            // alert("password has been updated successfully!!!");
+            // setUpdateSuccess("Password updated!!!");
+            fireAlert();
             setNewPassword("");
             setConfirmPassword("");
           }
         })
         .catch((error) => {
           console.log(error);
-          alert("Password not updated!!!");
+          // alert("Password not updated!!!");
           setErrorMessage("Problem updating password!!!");
         });
       // axios
