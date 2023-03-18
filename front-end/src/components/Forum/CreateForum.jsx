@@ -42,13 +42,8 @@ function CreateForum() {
         nevigate = "true";
       fireAlert(message, icon, nevigate);
     }
-    else if (threadName === "") {
-      const message = "Please Provide A Thread Name",
-            icon = "error";
-          fireAlert(message, icon);
-    }
-    else if (fTags === "") {
-      const message = "Please Provide A Thread Tag",
+    else if (threadName === "" || fTags ==="") {
+      const message = "Please fill in all fields",
             icon = "error";
           fireAlert(message, icon);
     }

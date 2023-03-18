@@ -117,9 +117,9 @@ const fireAlert = (message, icon, nevigate) => {
   });
 };
 
-const unSubAlert = (x) => {
+const confirmAlert = (message, alerttype, mId) => {
   Swal.fire({
-    title: "Do you want to unsubscribe from this thread?",
+    title: message,
 
     showConfirmButton: true,
     showCancelButton: true,
@@ -131,11 +131,20 @@ const unSubAlert = (x) => {
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
 
-    if (result.isConfirmed) {
-      Swal.fire("You are now Unsubscribed", "", "success");
-    } else Swal.fire(" Cancelled", "", "error");
+    if (alerttype === "sub"){
+      if (result.isConfirmed) {
+        Swal.fire("You are now Unsubscribed", "", "success");
+      }
+    }
+    else if (alerttype === "message"){
+      if (result.isConfirmed) {
+        deleteMessage(mId);
+        Swal.fire("Message Deleted", "", "success");
+      }
+    }
   });
 };
+
 
 
 const newmessagehandle = (e) => {
@@ -154,9 +163,7 @@ const newmessagehandle = (e) => {
   }
   else{
     axios
-    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId},
-      {headers: { Authorization: `Bearer ${jwt}` }},
-    )
+    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId}, {headers})
     .then((res) => {
         console.log(res);
 })
@@ -172,9 +179,22 @@ const newmessagehandle = (e) => {
 
     });
   }
-    
-     
   }
+
+  const deleteMessage = (mId) => {
+    axios
+      .delete(`http://localhost:8080/deletemessage/${mId}`, {headers})
+      .then((response) => {
+        if (response.data != null) {
+          // alert("deleted successfully ");
+        }
+        messageloader();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      messageloader();
+  };
 
   //subscribe button colour changer white to orange
   
@@ -182,7 +202,7 @@ const newmessagehandle = (e) => {
   
   function subbuttonchange(){
     if(SubButton==="Subscribed"){
-      unSubAlert();
+      confirmAlert("Are you sure you want to unsubscribe?","sub");
       setSubButton("Subscribe");
       setsubcolor("white");
 
@@ -284,24 +304,12 @@ const newmessagehandle = (e) => {
       />
     </div>
     
-    <div className='PageOptions'>
-        
-      {/* <a className="PageSort">
-          
-          <label for="psortbtn"><img src={SortIcon}/></label>               
-          <input type="checkbox" id="psortbtn"/> 
-          
-          <ul class="pagesort-optn">
-            <li><a href="#">Last Updated</a></li>
-            <li><a href="#">Most Replies</a></li>
-          </ul>
-
-      </a> */}
-      <a>
+    {saveLoggedinUser && (
+      <div className='SubButton'>
         <button id="subbtn" style={{background:subcolor}} onClick={event=>{subbuttonchange();}}>{SubButton}</button>
-      </a> 
-          
-    </div>
+      </div>
+    )}
+    
     {currentMessages.map((item, index) => (
 
       <div className='Thread-Messages'>
@@ -318,10 +326,22 @@ const newmessagehandle = (e) => {
         <div className='ThreadUser'>{item.students.firstName}</div>
         <div className='dateandreply'>
           <div className='ThreadTime'>Posted on {item.mDateCreated} at {item.mTimeCreated}</div>
-          <a href= "#replysection" className="ThreadReply">
-            <img src={ReplyIcon}/>
-            <label>Reply</label>
-          </a>
+          
+          <div className='replydelete'>
+            {saveLoggedinUser === item.students.email && (
+                    <div
+                      className="DeleteReply"
+                      onClick={() => confirmAlert("Are you sure you want to delete this message?","message",item.messageID)}
+                    >
+                      <img src={DeleteIcon}/>
+                    </div>
+                  )}
+            <a href= "#replysection" className="ThreadReply">
+              <img src={ReplyIcon}/>
+              <label>Reply</label>
+            </a>
+          </div>
+          
         </div>
         
       </div>
