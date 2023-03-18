@@ -41,7 +41,7 @@ function NewPassword() {
       setErrorMessage("Passwords do not match!");
     } else {
       axios
-        .post(`http://localhost:5000/api/reset-password`, {
+        .post(`http://localhost:5000/api/student/reset-password`, {
           resetToken,
           newPassword,
         })
