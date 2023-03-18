@@ -52,6 +52,8 @@ function DonationsPage() {
     lastName: "",
     email: "",
     phone: "",
+    howHear: "",
+    motivate: "",
   });
 
 
@@ -84,6 +86,12 @@ function DonationsPage() {
         newErrors.phone = "Phone number is required";
       } else if (!/^\d{11}$/.test(phone)) {
         newErrors.phone = "Phone number is invalid";
+      }
+      if (!howHear) {
+        newErrors.howHear= "This field is required";
+      }
+      if (!motivate) {
+        newErrors.motivate = "This field is required";
       }
       setErrors(newErrors);
       return newErrors;
@@ -207,7 +215,7 @@ function DonationsPage() {
           </label>
 
           <label for="Eaddress">
-            Email Adress:
+            Email Address:
             <input
               type="text"
               id="Eaddress"
