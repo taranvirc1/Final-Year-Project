@@ -278,7 +278,7 @@ app.post("/api/student/forgot-password", async (req, res) => {
     };
     await transporter.sendMail(mailOptions);
 
-    res.send("Email found!!!");
+    res.send("Email found. Email has been sent with reset link!!!");
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
