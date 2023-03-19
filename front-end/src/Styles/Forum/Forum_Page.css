@@ -186,6 +186,13 @@ cursor: default;
     -webkit-user-drag: none;
 }
 
+.DeleteReply:hover{
+    background-color: #4882ff;
+}
+.DeleteReply:active{
+    transform: scale(0.97);
+}
+
 .ThreadReply{
     display: inline;
     border:1px outset black;
