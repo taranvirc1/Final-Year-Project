@@ -144,27 +144,10 @@ body {
   border-radius: 10px;
   animation: drop-in 500ms ease 700ms backwards;
 }
-.avaiableBackgrounds {
 
-}
-button {
-  display: flex;
-  align-items: center;
-  height: 100px;
-  margin: 10px;
-  border-radius: 10px;
-  width: 98%;
-  
-  animation: drop-in 500ms ease 700ms backwards;
-}
 
-button img {
-  width: 100%;
-  height: 100px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
- 
-}
+
+
 /*FOOTER:*/
 .table-styled {
   border-collapse: collapse;
