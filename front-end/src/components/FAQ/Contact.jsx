@@ -19,12 +19,12 @@ function Contact() {
             <h1> Contact Form </h1>
             </div>
                   <form className="contact-form">
-                    <input type="text" id="firstname" placeholder="Enter Your First Name" required/>
-                    <input type="text" id="lastname" placeholder="Enter Your Lat Name" required/>
+                    <input type="text" id="firstName" placeholder="Enter Your First Name" required/>
+                    <input type="text" id="lastName" placeholder="Enter Your Lat Name" required/>
                     <input type="email" id="email" placeholder="Enter Your Email" required/>
                     <input type="phone" id="phone" placeholder="Enter Your Phone Number" required/>
         
-                    <textarea id="message" rows="6" placeholder="Please Provide A Brief Description Of Your Problem"></textarea>
+                    <textarea id="briefMessage" rows="6" placeholder="Please Provide A Brief Description Of Your Problem"></textarea>
                     <button type="submit" onClick={openPopup}>Send</button>
                     <div className="pop-up" id="popup">
                         <img src={tick_img}/>
