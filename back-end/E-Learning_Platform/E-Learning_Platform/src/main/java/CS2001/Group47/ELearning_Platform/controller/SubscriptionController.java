@@ -39,7 +39,7 @@ public class SubscriptionController {
         Threads threads = threadService.findByID(NewSubDTO.getThreadId());
         // Else create a thread with DTO
         Subscriptions newSub = new Subscriptions(
-            NewSubDTO.getEmail(), threads);
+            NewSubDTO.getSubEmail(), threads);
         // Add thread through ThreadService
         subscriptionService.addSub(newSub);
 
