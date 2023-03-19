@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom"
+import { useOutletContext, useNavigate } from "react-router-dom";
 import "../../Styles/Forum/Forum_Page.css"
 import DeleteIcon from "../../images/forum/delete.png"
 import SortIcon from "../../images/forum/sort.png"
@@ -8,31 +9,30 @@ import ReplyIcon from "../../images/forum/reply.png"
 import ProfileIcon from "../../images/forum/profile.png"
 import axios from 'axios'
 
-import BoldIcon from "../../images/forum/text-editor/bold.png"
-import ItalicIcon from "../../images/forum/text-editor/italic.png"
-import UnderlineIcon from "../../images/forum/text-editor/underline.png"
-import StrikethroughIcon from "../../images/forum/text-editor/strikethrough.png"
-import ColourWheelIcon from "../../images/forum/text-editor/colourwheel.png"
-import FontSizeIcon from "../../images/forum/text-editor/fontsize.png"
-import replyline from "../../images/forum/text-editor/replyline.png"
-import HyperlinkIcon from "../../images/forum/text-editor/hyperlink.png"
-import PhotoIcon from "../../images/forum/text-editor/photo.png"
-import EmojiIcon from "../../images/forum/text-editor/emoji.png"
-import ListIcon from "../../images/forum/text-editor/list.png"
-import TextAlignIcon from "../../images/forum/text-editor/textalign.png"
-import QuoteIcon from "../../images/forum/text-editor/quote.png"
-import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 import ReactPaginate from 'react-paginate';
+import Swal from "sweetalert2";
 
 function ForumPage() {
+  const reDirect = useNavigate();
+
   const [threadName,setthreadName]=useState([]);
+  const [threadTag,setthreadtag]=useState([]);
   const [itemOffset, setItemOffset] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [messages, setMessages] = useState([]);
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
+  const [subbed, setSubbed] = useState([]);
+  const[SubButton, setSubButton] = useState("Subscribe");
+  const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
+  const saveLoggedinUser = localStorage.getItem("loggedInUser");
+  const saveSubId = localStorage.getItem("SubId");
   const jwt = localStorage.getItem("jwt");
+
+  const getSubid = (item) => {
+    localStorage.setItem("SubId", item);
+  };
 
   const threadnameloader = (e) => {
     axios
@@ -40,6 +40,8 @@ function ForumPage() {
   
       .then((resp) => {
         setthreadName(resp.data.threadName);
+        setthreadtag(resp.data.fTags)
+        subscriptiondata();
         console.log("Thread Name: " + threadName);
       })
       .catch((error) => {
@@ -48,8 +50,6 @@ function ForumPage() {
   }
 
   useEffect(() => {
-
-    const saveLoggedinUser = localStorage.getItem("loggedInUser");
     axios.get(`http://localhost:8080/profile/${saveLoggedinUser}`, { headers})
       .then(response => {
         setStudentId(response.data.studentId)
@@ -78,6 +78,67 @@ const messageloader = (e) => {
 });
 }
 
+const subscriptiondata = (e) => {
+  axios
+  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
+
+    .then((resp) => {
+      console.log(resp.data);
+
+      setSubbed(resp.data);
+      getSubid(resp.data.subId);
+      console.log("getting subId: "+ subbed.subId);
+      console.log("getting subId: "+ saveSubId);
+    })
+    .catch((error) => {
+      console.error(error);
+});
+}
+
+const subscribe = (e) => {
+  axios
+  .get(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+
+    .then((resp) => {
+      console.log(resp.data);
+      
+    })
+    .catch((error) => {
+      console.error(error);
+    }
+  )
+}
+const unsubscribe = (SubId) => {
+    axios
+    .delete(`http://localhost:8080/deleteSub/${SubId}`,{ headers })
+    .then((response) => {
+      if (response.data != null) {
+        // alert("deleted successfully ");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  function subbuttonchange(){
+    if(SubButton==="Subscribed"){
+      confirmAlert("Are you sure you want to unsubscribe?","sub");
+      unsubscribe(saveSubId);
+      
+    }
+    else if(SubButton ==="Subscribe"){
+      subscribe();
+      setSubButton("Subscribed");
+      setsubcolor("orange");
+      const message = "You are now Subscribed to this thread",
+        icon = "success";
+        fireAlert(message, icon);
+        
+    }
+    
+  }
+
 //Get current posts
 const endOffset = itemOffset + postsPerPage;
 const currentMessages = messages.slice(itemOffset, endOffset);
@@ -91,24 +152,79 @@ const handlePageClick = (event) => {
   setItemOffset(newOffset);
 };
 
+const fireAlert = (message, icon, nevigate) => {
+  Swal.fire({
+    container: "swal2-container",
+
+    title: message,
+
+    icon: icon,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (nevigate)
+      if (result.isConfirmed) {
+        reDirect("/Account");
+      }
+  });
+};
+
+const confirmAlert = (message, alerttype, mId) => {
+  Swal.fire({
+    title: message,
+
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#ff0055",
+    cancelButtonColor: "#999999",
+    icon: "warning",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+
+    if (alerttype === "sub"){
+      if (result.isConfirmed) {
+        setSubButton("Subscribe");
+        setsubcolor("white");
+        Swal.fire("You are now Unsubscribed", "", "success");
+      }
+    }
+    else if (alerttype === "message"){
+      if (result.isConfirmed) {
+        deleteMessage(mId);
+        Swal.fire("Message Deleted", "", "success");
+      }
+    }
+  });
+};
+
+
+
 const newmessagehandle = (e) => {
   e.preventDefault();
   console.log(newMessage);
   if (localStorage.getItem("loggedInUser") === "") {
-    alert("Please Login to post a message");
+    const message = "Please Login To Post A Message",
+        icon = "error",
+        nevigate = "true";
+    fireAlert(message, icon, nevigate);
   }
   else if (newMessage === "") {
-    alert("Please fill in the text field");
+    const message = "Please Fill In The Text Field",
+            icon = "error";
+          fireAlert(message, icon);
   }
   else{
     axios
-    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId},
-      {headers: { Authorization: `Bearer ${jwt}` }},
-    )
+    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId}, {headers})
     .then((res) => {
         console.log(res);
 })
     .then(() => {
+      const message = "You have posted a new message",
+        icon = "success";
+      fireAlert(message, icon);
+      setnewMessage("");
       messageloader();
     })
     .catch((err) => {
@@ -116,48 +232,48 @@ const newmessagehandle = (e) => {
 
     });
   }
-    
-     
   }
 
+  const deleteMessage = (mId) => {
+    axios
+      .delete(`http://localhost:8080/deletemessage/${mId}`, {headers})
+      .then((response) => {
+        if (response.data != null) {
+          // alert("deleted successfully ");
+        }
+        messageloader();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      messageloader();
+  };
+
+  //subscribe button colour changer white to orange
+  
+  //subscribe button text changer "Subscribe" to "Subscribed"
+  
+  
+
+  
+
+  
 
   useEffect(() => {
+    subscriptiondata();
     messageloader();
     threadnameloader();
+    
   }, []);
 
 
-
-  
-  //subscribe button colour changer white to orange
-  const [subcolor,setsubcolor]=useState('white');
-  function subbg(){
-    if(subcolor==="white"){
-      setsubcolor("orange")
-    }
-    else{
-      setsubcolor("white")
-    }
-  }
-  //subscribe button text changer "Subscribe" to "Subscribed"
-  const[SubButton, setSubButton] = useState("Subscribe");
-  function watchthread(){
-    if(SubButton==="Subscribed"){
-      setSubButton("Subscribe")
-    }
-    else{
-      setSubButton("Subscribed")
-    }
-    
-  }
-
- 
   return (
     <>
     <div className='fp-navbar-spacing'>
     </div>
     <div className="forums-title">
-        <h2>{threadName}</h2>
+        <h2 className='threadName'>{threadName}</h2>
+        <h2 className='threadTag'>{threadTag}</h2>
     </div>
     <div className='thread-messages'>
       <ReactPaginate
@@ -172,25 +288,12 @@ const newmessagehandle = (e) => {
       />
     </div>
     
-    <div className='PageOptions'>
-        
-      <a className="PageSort">
-          
-          <label for="psortbtn"><img src={SortIcon}/></label>               
-          <input type="checkbox" id="psortbtn"/> 
-          
-          <ul class="pagesort-optn">
-            <li><a href="#">Last Updated</a></li> 
-            <li><a href="#">Most Liked</a></li>
-            <li><a href="#">Most Replies</a></li>
-          </ul>
-
-      </a>
-      <a>
-        <button id="subbtn" style={{background:subcolor}} onClick={event=>{watchthread();subbg();}}>{SubButton}</button>
-      </a> 
-          
-    </div>
+    {saveLoggedinUser && (
+      <div className='SubButton'>
+        <button id="subbtn" style={{background:subcolor}} onClick={event=>{subbuttonchange();}}>{SubButton}</button>
+      </div>
+    )}
+    
     {currentMessages.map((item, index) => (
 
       <div className='Thread-Messages'>
@@ -206,40 +309,34 @@ const newmessagehandle = (e) => {
         </div>
         <div className='ThreadUser'>{item.students.firstName}</div>
         <div className='dateandreply'>
-          <div className='ThreadTime'>Posted on {item.createdAtDate}</div>
-          <a href= "#replysection" className="ThreadReply">
-            <img src={ReplyIcon}/>
-            <label>Reply</label>
-          </a>
+          <div className='ThreadTime'>Posted on <span>{ (new Date(item.mDateCreated)).toLocaleDateString() }</span> at {item.mTimeCreated}</div>
+          
+          <div className='replydelete'>
+            {saveLoggedinUser === item.students.email && (
+                    <div
+                      className="DeleteReply"
+                      onClick={() => confirmAlert("Are you sure you want to delete this message?","message",item.messageID)}
+                    >
+                      <img src={DeleteIcon}/>
+                    </div>
+                  )}
+            <a href= "#replysection" className="ThreadReply">
+              <img src={ReplyIcon}/>
+              <label>Reply</label>
+            </a>
+          </div>
+          
         </div>
         
       </div>
     ))}
     <section id="replysection" className='ThreadReplySection'>
       <div className='ThreadTextEditor'>
-        <div className="ThreadTextEditorPanel">
-          <ul className='ThreadEditorIcons'>
-            <li><img src={BoldIcon}/></li>
-            <li><img src={ItalicIcon} style={{height: 42}}/></li>
-            <li><img src={UnderlineIcon} style={{height: 42}}/></li>
-            <li><img src={StrikethroughIcon}/></li>
-            <li><img src={ColourWheelIcon}/></li>
-            <li><img src={FontSizeIcon}/></li>
-            <img className="Replyline" src={replyline}/>
-            <li><img src={HyperlinkIcon}/></li>
-            <li><img src={PhotoIcon}/></li>
-            <li><img src={EmojiIcon}/></li>
-            <li><img src={ListIcon}/></li>
-            <li><img src={TextAlignIcon} style={{height: 44}}/></li>
-            <li><img src={QuoteIcon}/></li>
-            <li><img src={SpoilerIcon}/></li>
-          </ul>
-        </div>
         <div className='ThreadEditorText'>
-          <textarea rows="15" name="pagetext_body" onChange={(e) => setnewMessage(e.target.value)}></textarea>
+          <textarea rows="10" name="pagetext_body" value={newMessage} onChange={(e) => setnewMessage(e.target.value)}></textarea>
         </div>
       </div>
-      <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div>
+      {/* <div className='ThreadTextEditorTrash'><button className='Threadtrashbutton'><img src={DeleteIcon}/></button></div> */}
       <div className="ThreadTextEditorReply" onClick={newmessagehandle}>
         <a href="/" ><img src={ReplyIcon}/></a>
         <label>Post Reply</label>

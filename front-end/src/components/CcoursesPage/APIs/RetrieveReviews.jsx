@@ -7,9 +7,10 @@ export const getReviews = async ({
   average,
   setReviews,
   jwt,
+  CurrentCourseID,
 }) => {
   await axios
-    .get("http://localhost:8080/getReviews", {
+    .get(`http://localhost:8080/getReviews/${CurrentCourseID}`, {
       headers: { Authorization: `Bearer ${jwt}` },
     })
     .then((response) => {

@@ -1,5 +1,4 @@
 package CS2001.Group47.ELearning_Platform.controller;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
@@ -340,4 +339,5 @@ public class AvatarController {
     // }
     // }
 
+    
 }

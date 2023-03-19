@@ -42,7 +42,7 @@ public class SecurityConfiguration {
         http
             .authorizeRequests()
             // these are the url paths in the controllers that are allowed by the backend without a authorizations
-            .antMatchers( "/user", "/donators", "/payments", "/forgot_password","/getReviews","/categories","/threads", "/messages/{threadId}")
+            .antMatchers( "/user", "/donators", "/payments", "/forgot_password","/getReviews/{courseID}","/categories/{courseID}","/threads", "/messages/{threadId}", "/threadid/{threadId}")
             .permitAll()
             .and()
             .authorizeRequests()

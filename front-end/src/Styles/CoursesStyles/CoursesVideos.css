@@ -98,7 +98,7 @@
 
 .couresesVideos {
   position: relative;
-  background: rgb(46, 93, 107);
+  background-color: #343954;
   padding-top: 5%;
   padding-bottom: 10%;
 }
@@ -109,7 +109,7 @@
   color: aquamarine;
 }
 
-.sidenava {
+.Accordion {
   position: relative;
   max-width: 800px;
 
@@ -123,7 +123,7 @@
   border-radius: 4px;
 }
 
-.sidenava .videoLinks {
+.Accordion .videoLinks {
   border-bottom: 1px solid#ac0f0f;
 
   padding: 6px 8px 6px 16px;
@@ -152,7 +152,7 @@ button.dropdown-btn {
 .dropdown-btn {
   border-radius: 6px 6px 6px 6px;
   margin: auto;
-  color: #444;
+  color: #070606;
   max-height: 100px;
   text-align: center;
   cursor: pointer;
@@ -306,17 +306,20 @@ button.dropdown-btn {
 .ratingContainer {
   width: 300px;
   height: 330px;
-
-  background-color: #6b6c9e;
+color:white;
+  background-color: #4749b9;
   position: absolute;
   left: 55%;
   transform: translate(-50%, -50%);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  z-index: 10000;
+  z-index: 9;
   border: 3px solid rgb(0, 0, 0);
 }
 
+.swal2-container {
+  z-index: 10000000;
+}
 .star-rating > button {
   position: relative;
   background-color: transparent;
@@ -337,12 +340,12 @@ button.dropdown-btn {
 }
 .ratingContainer .submitButton {
   position: relative;
-  background-color: #a08bad;
+  background-color: #55c49f;
   right: 30%;
   top: -13px;
 }
 .ratingContainer > h1 {
-  color: #0e0c0c;
+  color: #f0eded;
   font-size: 17px;
   text-align: center;
   margin-top: 10%;
@@ -378,7 +381,9 @@ button.dropdown-btn {
   flex-flow: row wrap;
   align-content: space-between;
   justify-content: space-between;
-  margin-left: 50px;
+  margin-left: 60px;
+  margin-right: 60px;
+
 }
 .reviews .eachReview .top-review .reviewerName {
   font-size: 18px;
@@ -388,6 +393,18 @@ button.dropdown-btn {
   margin-right: 15px;
 }
 
+.reviews .eachReview .reviewphoto{
+  width: 30px;
+  height:30px;
+  border-radius: 50%;
+  left:500px;
+  margin-top: 18px;
+
+}
+.reviewBox{
+  margin-left: 16px;
+}
+
 .reviews .eachReview .top-review .reviewerName:first-letter {
   text-transform: uppercase;
 }
@@ -395,18 +412,32 @@ button.dropdown-btn {
 .reviewDiscription > p {
   margin-bottom: 5px;
   color: #090808;
-  text-transform: capitalize;
+
+
+
+}
+.reviewDiscription{
 }
 
 .reviewDiscription > p2 {
+
   font-size: 13px;
 }
 
 .reviews .eachReview {
   word-break: break-word;
+
+  
+
   width: 45%;
   margin-right: 10px;
-  margin-left: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+
+  border-top: 0.5px solid rgb(117, 103, 103);
+}
+.reviewSorter{
+  display: flex;
 }
 
 .viewMore {
@@ -428,12 +459,12 @@ button.dropdown-btn {
 }
 
 .editReview {
+
   border: 2px solid #555555;
   background: none;
   padding: 4px 8px;
   text-align: center;
 
-  display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   transition-duration: 0.4s;
@@ -445,6 +476,7 @@ button.dropdown-btn {
   color: black;
 }
 .deleteReview {
+
   background: none;
   border: 2px solid #555555;
   padding: 4px 8px;
@@ -461,6 +493,10 @@ button.dropdown-btn {
   background-color: #a53e4f;
   color: black;
 }
+.editanddeleteButton{
+  margin-left: 43px;
+}
+
 
 .trackerContainer {
   border: 3px solid rgb(245, 242, 242);
@@ -559,3 +595,94 @@ button.dropdown-btn {
 .tracker-item.active .tracker-name::before {
   background-color: orange;
 }
+
+
+
+.reviewFilterOptions{
+  
+  display: inline;
+  float: right;
+  position: relative;
+  block-size: fit-content;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  margin-right: 100px;
+  top: -7px;
+  
+}
+.reviewFilterOptions a{
+  display: inline-block;
+  background-color: none;
+
+  cursor: pointer;  height:30px;
+  width:35px;
+  background: none;
+
+}
+
+.reviewFilterOptions a:active{
+  background-color: orange;
+}
+
+.reviewFilterOptions a img{
+  user-select: none;
+  position: relative;
+  margin:auto;
+  height:30px;
+  width:35px;
+  border: 2px solid black;
+  padding: 2px;
+  background: none;
+
+}
+
+.reviewsSort {
+  cursor: pointer;
+  width : 55px;
+  height: 50px;
+  user-select: none;
+}
+
+.reviewsSort-optn {
+  width:230px;
+  height:0px;
+  overflow: hidden;
+  transition: height .4s ease;
+  list-style: none;
+  padding-left:0;
+  z-index: 1;
+  position: absolute;
+  right:0%;
+  color: white;
+  background-color: rgb(7, 233, 184);
+}
+.reviewsSort-optn :hover{
+  background-color: rgb(61, 196, 7);
+}
+
+.reviewsSort-optn li a{
+  color: #000;
+
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(7, 233, 184);
+
+  font-size:20px;
+  text-decoration: none;
+  text-align: left;
+}
+
+#reviewsortbtn { 
+  position: absolute; opacity: 0; height: 0px;
+}    
+
+#reviewsortbtn:checked + .reviewsSort-optn{
+  border: 2px solid white;
+  color: #000;
+  height: 170px;
+  background-color:rgb(7, 233, 184);
+  z-index: 1;
+  position: absolute;
+}
+
+
+

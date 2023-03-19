@@ -99,14 +99,9 @@ public class Payment implements Serializable {
       this.postCode = postCode;
   }
  
-
-
-
-
   public Integer getId() {
       return id;
   }
-
 
   public void setId(Integer id) {
       this.id = id;
@@ -118,144 +113,85 @@ public class Payment implements Serializable {
       this.dAmount = dAmount;
   }
 
-
-
-
   public String getCardNo() {
       return cardNo;
   }
-
-
-
 
   public void setCardNo(String cardNo) {
       this.cardNo = cardNo;
   }
 
-
   public String getCardType() {
       return cardType;
   }
-
-
-
 
   public void setCardType(String cardType) {
       this.cardType = cardType;
   }
 
-
   public String getBillingFirstName() {
       return billingFirstName;
   }
-
-
-
 
   public void setBillingFirstName(String billingFirstName) {
       this.billingFirstName = billingFirstName;
   }
 
-
-
-
   public String getBillingLastName() {
       return billingLastName;
   }
-
-
-
 
   public void setBillingLastName(String billingLastName) {
       this.billingLastName = billingLastName;
   }
 
-
-
-
   public String getCountry() {
       return country;
   }
-
-
-
 
   public void setCountry(String country) {
       this.country = country;
   }
 
-
-
-
   public String getCity() {
       return city;
   }
-
-
-
 
   public void setCity(String city) {
       this.city = city;
   }
 
-
-
-
   public String getAddress() {
       return address;
   }
-
-
-
 
   public void setAddress(String address) {
       this.address = address;
   }
 
-
-
-
   public String getAddress2() {
       return address2;
   }
-
-
-
 
   public void setAddress2(String address2) {
       this.address2 = address2;
   }
 
-
-
-
   public String getPostCode() {
       return postCode;
   }
-
-
-
 
   public void setPostCode(String postCode) {
       this.postCode = postCode;
   }
 
-
-
-
   public Date getCreatedAtDate() {
       return createdAtDate;
   }
 
-
-
-
   public void setCreatedAtDate(Date createdAtDate) {
       this.createdAtDate = createdAtDate;
   }
-
-
-
 
   @Override
   public String toString() {

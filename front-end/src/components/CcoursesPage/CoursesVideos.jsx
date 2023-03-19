@@ -2,12 +2,32 @@ import axios from "axios";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import ReactPlayer from "react-player";
 import "../../Styles/CoursesStyles/CoursesVideos.css";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { getReviews } from "./APIs/RetrieveReviews";
 import Background from "./background/Background";
 import Accordion from "./Accordion";
+import img1 from "../../images/footer image/brunel-logo-blue.png";
+import img2 from "../../images/footer image/codecademy-logo-vector.png";
+import img3 from "../../images/footer image/Logo_of_the_United_Nations.svg.png";
+import img4 from "../../images/footer image/ioc_logo_onwhite_aw.258x0-is-hidpi.png";
+import SortIcon from "../../images/forum/sort.png";
+import Swal from "sweetalert2";
+
 function CoursesVideos() {
+  const reDirect = useNavigate();
+
+  //getting logged in user from loaclStorage
+  const [loggedInUser, setLoggedinUser] = useState("");
+
+  useEffect(() => {
+    const saveLoggedinUser = localStorage.getItem("loggedInUser");
+    if (saveLoggedinUser) {
+      setLoggedinUser(saveLoggedinUser);
+    }
+  }, []);
+  console.log(loggedInUser);
+
   //getting the current date using this function
   const current = new Date();
   const getCurrentDate = `${current.getDate()}/${
@@ -26,7 +46,6 @@ function CoursesVideos() {
   });
 
   // used to get the current user
-  const [loggedInUser, setLoggedinUser] = useOutletContext();
   const [currentUser, setCurrentUser] = useState({
     email: loggedInUser,
   });
@@ -37,7 +56,7 @@ function CoursesVideos() {
 
   const [currentStudentID, setCurrentStudentID] = useState("");
 
-  const [checkrating, setCheckRating] = useState(0);
+  const [checkrating, setCheckRating] = useState("");
   const [checkReview, setCheckReview] = useState("");
 
   // getting the review text and store in the review object of posting purposes
@@ -70,15 +89,10 @@ function CoursesVideos() {
     setReview(reviewCopy);
   }
 
-  const enabled = checkrating.length > 0 && checkReview.length > 0;
-
-  console.log(checkReview.length);
-
   // method used to post and edit review--
   // if statement checks if review has an id to call the edit mapping else if null calls the post mapping
   const onSubmit = async (e) => {
     e.preventDefault();
-    setForm(false);
 
     const jwt = localStorage.getItem("jwt");
 
@@ -99,6 +113,7 @@ function CoursesVideos() {
             reviewDesc: "",
             createdAt: getCurrentDate,
           });
+          //alert("review edited");
         }) //;
         .catch(async (error) => {
           console.log(error);
@@ -109,17 +124,16 @@ function CoursesVideos() {
           headers: { Authorization: `Bearer ${jwt}` },
         })
         .then((response) => {
-          console.log(response);
+          console.log("status" + response);
           if (response.status === 201) {
-            alert("Registered Successfully!!!");
+            // alert("Registered Successfully!!!");
             setReview({
               courseID: "1",
               ratingStars: "",
               reviewDesc: "",
               createdAt: getCurrentDate,
             });
-          }
-          if (response.status === 400) {
+          } else {
             alert("you already have a review");
           }
         })
@@ -127,24 +141,37 @@ function CoursesVideos() {
         .catch(async (error) => {
           console.log(review);
           console.log(error);
+          alert("you already have a review");
         });
-      setCheckReview("");
 
       // setForm(false);
       // onStarsClick(0);
       //setHover(0);
     }
+
+    setReview({
+      courseID: "1",
+      ratingStars: "",
+      reviewDesc: "",
+      createdAt: getCurrentDate,
+    });
+    setForm(false);
+
     retrieveReviews();
+    setCheckReview("");
+    setCheckRating("");
+    setHover(0);
   };
 
   const [reviews, setReviews] = useState([]); // retrieved reveiws is stored in this array
   const [average, setAverage] = useState(0);
   const [totalReviews, setTotalReviews] = useState(null);
+  const CurrentCourseID = 1;
 
   const jwt = localStorage.getItem("jwt");
   console.log(jwt);
   const retrieveReviews = () =>
-    getReviews({ setTotalReviews, average, setReviews, jwt });
+    getReviews({ setTotalReviews, average, setReviews, jwt, CurrentCourseID });
 
   useEffect(() => {
     // getReviews();
@@ -160,6 +187,39 @@ function CoursesVideos() {
     setVisible((prevValue) => prevValue - 5);
   };
 
+  const sortByDescendingReviews = (event) => {
+    setReviews([
+      ...reviews.sort(
+        (a, b) =>
+          new Date(...b.createdAt.split("/").reverse()) -
+          new Date(...a.createdAt.split("/").reverse())
+      ),
+    ]);
+  };
+  const sortByAscendingReviews = (event) => {
+    setReviews([
+      ...reviews.sort(
+        (a, b) =>
+          new Date(...a.createdAt.split("/").reverse()) -
+          new Date(...b.createdAt.split("/").reverse())
+      ),
+    ]);
+  };
+
+  const sortBYRatingAsc = (event) => {
+    setReviews([
+      ...reviews.sort((a, b) => {
+        return a.ratingStars - b.ratingStars;
+      }),
+    ]);
+  };
+  const sortBYRatingDsc = (event) => {
+    setReviews([
+      ...reviews.sort((a, b) => {
+        return b.ratingStars - a.ratingStars;
+      }),
+    ]);
+  };
   console.log(reviews);
 
   const getAverage = (reviews) => {
@@ -181,13 +241,14 @@ function CoursesVideos() {
       })
       .then((response) => {
         if (response.data != null) {
-          alert("deleted successfully ");
+          // alert("deleted successfully ");
         }
         retrieveReviews();
       })
       .catch((error) => {
         console.error(error);
       });
+    retrieveReviews();
   };
 
   const [totalSum, setTotalSum] = useState(0);
@@ -219,7 +280,7 @@ function CoursesVideos() {
       })
       .catch((error) => {
         console.error(error);
-        alert("cant get quiz");
+        // alert("cant get quiz");
       });
   }, []);
   console.log("quiz", quiz);
@@ -246,8 +307,19 @@ function CoursesVideos() {
   function handleForm() {
     setForm(true);
   }
+  function closeForm() {
+    setReview({
+      courseID: "1",
+      ratingStars: "",
+      reviewDesc: "",
+      createdAt: getCurrentDate,
+    });
+    setCheckReview("");
+    setCheckRating("");
+    setForm(false);
+  }
 
-  function dropdown() {
+  /*function dropdown() {
     const dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
 
@@ -256,7 +328,7 @@ function CoursesVideos() {
         this.classList.toggle("active");
       });
     }
-  }
+  }*/
 
   const [videoUrl, setVideoUrl] = useState("");
 
@@ -289,14 +361,107 @@ function CoursesVideos() {
     setVideoUrl(url);
   };
 
+  const [hasReview, setHasReview] = useState(false);
+
+  useEffect(() => {
+    const hasReview = reviews.filter(
+      (item) => item.students.email === loggedInUser
+    );
+    if (hasReview.length > 0) {
+      console.log("rfrs true");
+      setHasReview(true);
+    } else {
+      setHasReview(false);
+    }
+  }, [reviews, loggedInUser]);
+  console.log(hasReview);
+
+  const deleteAlert = (x) => {
+    Swal.fire({
+      title: "Do you want to delete this Review?",
+
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#ff0055",
+      cancelButtonColor: "#999999",
+      icon: "warning",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+
+      if (result.isConfirmed) {
+        deleteReview(x);
+        Swal.fire("Review Deleted Successfully", "", "success");
+      } else Swal.fire(" Cancelled", "", "error");
+    });
+  };
+
+  const fireAlert = (message, icon, nevigate) => {
+    Swal.fire({
+      container: "swal2-container",
+
+      title: message,
+
+      icon: icon,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (nevigate)
+        if (result.isConfirmed) {
+          reDirect("/Account");
+        }
+    });
+  };
+
+  const checkIfFilled = (e) => {
+    if (!loggedInUser) {
+      const message = "Please log in to Review",
+        icon = "error",
+        nevigate = "true";
+      fireAlert(message, icon, nevigate);
+    } else if (!review.ratingID) {
+      if (hasReview) {
+        const message = "you already have a review",
+          icon = "warning";
+        fireAlert(message, icon);
+      } else {
+        if (checkReview && checkrating) {
+          //alert("check");
+          onSubmit(e);
+          const message = "Review added successfully",
+            icon = "success";
+          fireAlert(message, icon);
+        } else {
+          const message = "please fill all fields",
+            icon = "error";
+          fireAlert(message, icon);
+        }
+      }
+    } else {
+      if (review.ratingID) {
+        if (!checkReview && !checkrating) {
+          const message = "please change rating or review",
+            icon = "error";
+          fireAlert(message, icon);
+        } else {
+          onSubmit(e);
+
+          const message = "Review Edited successfully",
+            icon = "success";
+          fireAlert(message, icon);
+        }
+      }
+    }
+  };
+
   return (
     <div className="couresesVideos">
       <Background />
 
       <div className="discription">
-        <h1 className="header">Learn C# Programming (In Ten Easy Steps) </h1>
+        <h1 className="header">Learn Java Programming (In Ten Easy Steps) </h1>
         <h2 className="sub-header">
-          The simplest way to learn C# programming.
+          The simplest way to learn Java programming.
         </h2>
       </div>
       <div className="objectVideos">
@@ -305,12 +470,12 @@ function CoursesVideos() {
           <li>Use the source code examples to learn step-by-step </li>
         </div>
         <div className="b">
-          <li>Master C# programming concepts from the ground up</li>
+          <li>Master Java programming concepts from the ground up</li>
           <div className="c">
             <li>
               {" "}
               Use the source code examples to learn step-by-step Understand the
-              special features of C#: object orientation, the .NET framework,
+              special features of Java: object orientation, the .NET framework,
               error-handling, serialization
             </li>
           </div>
@@ -318,7 +483,11 @@ function CoursesVideos() {
       </div>
       <div className="Space"> </div>
 
-      <Accordion />
+      <Accordion
+        CurrentCourseID={CurrentCourseID}
+        loggedInUser={loggedInUser}
+        fireAlert={fireAlert}
+      />
 
       <div className="trackerContainer">
         Quiz Progress For this Course
@@ -345,29 +514,54 @@ function CoursesVideos() {
       <div className="Coursediscription">
         <h1 className="DescriptionHeader">Discription </h1>
         <div className="DescriptionText">
-          Learn C# Programming (in ten easy steps) [Version 2] is suitable for
-          beginner programmers or anyone with experience in another programming
-          language who needs to learn C# from the ground up. Step-by-step it
-          explains how to write C# code to develop Windows applications using
-          either the free Visual Studio Community Edition or a commercial
-          edition of Microsoft Visual Studio (it even explains how to write C#
-          programs using free tools for OS X). This is the completely revised
-          and updated second version of this course. C# is one of the most
-          widely used an important of all modern programming languages. If you
-          need to learn C# quickly and painlessly, this is the perfect course.
-          You will begin by learning the core features of programming variables,
-          constants, functions and data types. You will move on rapidly to learn
-          about Object Orientation and the more advanced features of C# and the
-          .NET framework such as file-handling, data-streaming, dealing with
-          exceptions (errors) and overriding methods. Even if you start out as a
-          complete beginner, by the end of this course you will have built a
-          really solid foundation of programming knowledge and skills.
+          The course consists of JAVA features, Java SE Concept of programming
+          are made simple and easy. Every topic is explained with real-life
+          examples. This course is designed to make you familiar with JAVA
+          Programming in detail. By the end of the course you will understand
+          Java extremely well and will be able to build your own Java
+          applications. After completion of the course, you will be as
+          productive as a software developer. The course is taken right from
+          basics to all the features in JAVA. Basic topics like – Methods,
+          Object-Orientation and Inheritance are explained. Features like –
+          Multithreading, AWT, Swing, Collection Framework and Networking are
+          also covered in a detailed manner.
         </div>
       </div>
 
       <div className="reviewsContainer">
         <div className="averageRating">
           {totalSum}
+          <div className="reviewFilterOptions">
+            <a href="#!" className="reviewsSort">
+              <label for="reviewsortbtn">
+                <img src={SortIcon} alt="" />
+              </label>
+              <input type="checkbox" id="reviewsortbtn" />
+
+              <ul className="reviewsSort-optn">
+                <li>
+                  <a href="#!" onClick={sortByDescendingReviews}>
+                    Sort By Date Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortByAscendingReviews}>
+                    Sort By Date Desc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingAsc}>
+                    Sort By Rating Asc
+                  </a>
+                </li>
+                <li>
+                  <a href="#!" onClick={sortBYRatingDsc}>
+                    Sort By Rating Desc
+                  </a>
+                </li>
+              </ul>
+            </a>
+          </div>
           <i className="star fa fa-star">
             Course Rating | {totalReviews} ratings
           </i>
@@ -381,8 +575,7 @@ function CoursesVideos() {
             <button
               className="ratingcloseIcon"
               onClick={() => {
-                setForm(false);
-                onStarsClick(0);
+                closeForm();
                 setHover(0);
               }}
             >
@@ -415,57 +608,82 @@ function CoursesVideos() {
               name="reviewDesc"
               onChange={(e) => onInputChange(e)}
               value={review.reviewDesc}
-              placeholder="Reivew Here..."
+              placeholder="Review Here..."
             ></textarea>
-            <Link to="/coursesvideos">
-              <button
-                className="submitButton"
-                type="button"
-                disabled={!(checkReview && checkrating)}
-                onClick={onSubmit}
-              >
-                Submit
-              </button>
-            </Link>
+
+            <button
+              className="submitButton"
+              type="button"
+              onClick={checkIfFilled}
+            >
+              Submit
+            </button>
           </div>
         )}
 
         <div className="reviews">
           {reviews.slice(0, visible).map((reviewd) => (
             <div className="eachReview">
-              <div className="top-review">
-                <h4 className="reviewerName">
-                  {reviewd.students.firstName}
-                  <span></span> {reviewd.students.lastName}
-                </h4>
-                {new Array(reviewd.ratingStars).fill().map(() => (
-                  <i className="fas fa-star icon-c" />
-                ))}
-              </div>
-              <div className="reviewDiscription">
-                <p>{reviewd.reviewDesc}</p>
-                <p2>{reviewd.createdAt}</p2>
-              </div>
-              {loggedInUser === reviewd.students.email && (
-                <button
-                  className="editReview"
-                  onClick={() => {
-                    handleEdit(reviewd.ratingID);
-                    handleForm();
-                  }}
-                >
-                  Edit
-                </button>
-              )}
+              <div className="reviewSorter">
+                {reviewd.students.avatar ? (
+                  <img
+                    className="reviewphoto"
+                    src={"data:image/png;base64," + reviewd.students.avatar}
+                    height="90"
+                    width="90"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="reviewphoto"
+                    src={
+                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    }
+                    height="90"
+                    width="90"
+                    alt=""
+                  />
+                )}
 
-              {loggedInUser === reviewd.students.email && (
-                <button
-                  className="deleteReview"
-                  onClick={() => deleteReview(reviewd.ratingID)}
-                >
-                  Delete
-                </button>
-              )}
+                <div className="reviewBox">
+                  <div className="top-review">
+                    <h4 className="reviewerName">
+                      {reviewd.students.firstName}
+                      <span></span> {reviewd.students.lastName}
+                    </h4>
+                    {new Array(reviewd.ratingStars).fill().map(() => (
+                      <i className="fas fa-star icon-c" />
+                    ))}
+                  </div>
+                  <div className="reviewDiscription">
+                    <p>{reviewd.reviewDesc}</p>
+                    <p2>{reviewd.createdAt}</p2>
+                  </div>
+                </div>
+              </div>
+
+              <div className="editanddeleteButton">
+                {loggedInUser === reviewd.students.email && (
+                  <button
+                    className="editReview"
+                    onClick={() => {
+                      handleEdit(reviewd.ratingID);
+                      handleForm();
+                    }}
+                  >
+                    Edit
+                  </button>
+                )}
+
+                {loggedInUser === reviewd.students.email && (
+                  <button
+                    className="deleteReview"
+                    onClick={() => deleteAlert(reviewd.ratingID)}
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -482,35 +700,19 @@ function CoursesVideos() {
 
         <div className="row">
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Logo_of_the_United_Nations.svg/1200px-Logo_of_the_United_Nations.svg.png"
-              style={{ width: "200px" }}
-            />
+            <img alt="" src={img1} style={{ width: "200px" }} />
           </div>
 
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src="https://www.dcs.bbk.ac.uk/site/assets/files/4102/ioc_logo_onwhite_aw.258x0-is-hidpi.png"
-              style={{ width: "155px" }}
-            />
+            <img alt="" src={img2} style={{ width: "155px" }} />
           </div>
 
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg"
-              style={{ width: "155px" }}
-            />
+            <img alt="" src={img3} style={{ width: "155px" }} />
           </div>
 
           <div className="sponsor-feature">
-            <img
-              alt=""
-              src="https://cdn.freebiesupply.com/logos/large/2x/codecademy-logo-svg-vector.svg"
-              style={{ width: "155px" }}
-            />
+            <img alt="" src={img4} style={{ width: "155px" }} />
           </div>
         </div>
       </div>

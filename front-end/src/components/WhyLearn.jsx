@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../Styles/Whylearn.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Whylearn() {
+  const [loggedInUser, setLoggedinUser] = useState("");
+  const Navigate = useNavigate();
+
+  const fireAlert = (message, icon) => {
+    Swal.fire({
+      container: "swal2-container",
+      title: message,
+      icon: icon,
+    }).then((result) => {
+      //
+    });
+  };
+
+  useEffect(() => {
+    const saveLoggedinUser = localStorage.getItem("loggedInUser");
+    if (saveLoggedinUser) {
+      setLoggedinUser(saveLoggedinUser);
+    }
+  }, []);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (!loggedInUser) {
+      Navigate("/account");
+    } else {
+      fireAlert("you are already logged in!!!", "warning", "true");
+    }
+  };
+
+  const handleScrollToStop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="whylearn">
       <div>
@@ -72,12 +105,14 @@ export default function Whylearn() {
         </div>
       </div>
       <div className="button-container">
-      {/* Link to login/signup page */}
-        <Link to="/account">
-          {/* <a href="/"> */}
-            <button className="btn-1">Get started</button>
-          {/* </a> */}
-        </Link>
+        {/* Link to login/signup page */}
+        {/* <Link to="/account"> */}
+        {/* <a href="/"> */}
+        <button className="btn-1" onClick={handleClick}>
+          Get started
+        </button>
+        {/* </a> */}
+        {/* </Link> */}
       </div>
     </div>
   );

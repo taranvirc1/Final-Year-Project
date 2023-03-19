@@ -23,14 +23,4 @@ public class DonatorService {
    public Donator save(Donator donator) {
        return donatorRepository.save(donator);
    }
-
-
-   public List<Donator> findAll() {
-       return donatorRepository.findAll();
-   }
-
-
-   public Donator findById(Integer id) {
-       return donatorRepository.findById(id).orElse(null);
-   }
 }
