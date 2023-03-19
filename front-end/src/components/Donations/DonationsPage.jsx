@@ -6,7 +6,6 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
 
 function DonationsPage() {
-
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const params = {
     email: loggedInUser,
@@ -18,32 +17,12 @@ function DonationsPage() {
     Authorization: `Bearer ${token}`,
   };
 
-  const [donator, setDonator] = useState([]);
-
-  useEffect(() => { 
-    axios
-      .get("http://localhost:8080/user/findByEmail", {headers, params})
-      .then((response) => {
-        setDonator(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [loggedInUser]);
-
- 
-
-  const FN= donator && donator.firstName;
-  const LN = donator && donator.lastName;
-  const NU = donator && donator.phone;
-  const EM = donator && donator.email;
-
-
+  const [donator, setDonator] = useState({});
   const [donatorTitle, setDonatorTitle] = useState("");
-  const [firstName, setFirstName] = useState(FN);
-  const [lastName, setLastName] = useState(LN);
-  const [phone, setPhone] = useState(NU);
-  const [email, setEmail] = useState(EM);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [howHear, setHowHear] = useState("");
   const [motivate, setMotivate] = useState("");
   const [errors, setErrors] = useState({
@@ -56,6 +35,20 @@ function DonationsPage() {
     motivate: "",
   });
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/user/findByEmail", { headers, params })
+      .then((response) => {
+        setDonator(response.data);
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+        setPhone(response.data.phone);
+        setEmail(response.data.email);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [loggedInUser]);
 
   const navigate = useNavigate();
   const Next = () => {
@@ -88,7 +81,7 @@ function DonationsPage() {
         newErrors.phone = "Phone number is invalid";
       }
       if (!howHear) {
-        newErrors.howHear= "This field is required";
+        newErrors.howHear = "This field is required";
       }
       if (!motivate) {
         newErrors.motivate = "This field is required";
@@ -99,6 +92,7 @@ function DonationsPage() {
 
     const errors = validateForm();
     if (Object.keys(errors).length !== 0) {
+
       setErrors(errors);
       return;
     }
