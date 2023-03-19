@@ -127,7 +127,7 @@ const unsubscribe = (SubId) => {
       unsubscribe(saveSubId);
       
     }
-    else{
+    else if(SubButton ==="Subscribe"){
       subscribe();
       setSubButton("Subscribed");
       setsubcolor("orange");
