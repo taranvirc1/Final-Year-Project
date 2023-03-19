@@ -26,7 +26,7 @@ function Courses() {
 
         <h4 className="drop-in-2">
           Computer Science Courses available for everyone free of cost. Learn
-          programming and its concepts through
+          programming and its concepts through topic based videos
         </h4>
       </div>
       <br></br>

@@ -160,7 +160,7 @@ const sortBYRatingDsc = (event) => {
            reviewDesc: "",
            createdAt: getCurrentDate,
          });
-         alert("review edited");
+         //alert("review edited");
        }) //;
        .catch(async (error) => {
          console.log(error);
@@ -173,7 +173,7 @@ const sortBYRatingDsc = (event) => {
        .then((response) => {
          console.log("status" + response);
          if (response.status === 201) {
-           alert("Registered Successfully!!!");
+          // alert("Registered Successfully!!!");
            setReview({
              courseID: "2",
              ratingStars: "",
@@ -181,14 +181,14 @@ const sortBYRatingDsc = (event) => {
              createdAt: getCurrentDate,
            });
          } else {
-           alert("you already have a review");
+         ///  alert("you already have a review");
          }
        })
 
        .catch(async (error) => {
          console.log(review);
          console.log(error);
-         alert("you already have a review");
+      //   alert("you already have a review");
        });
 
      // setForm(false);
@@ -254,7 +254,7 @@ const sortBYRatingDsc = (event) => {
      })
      .then((response) => {
        if (response.data != null) {
-         alert("deleted successfully ");
+       //  alert("deleted successfully ");
        }
        retrieveReviews();
      })
@@ -489,9 +489,9 @@ const checkIfFilled = (e) => {
     <Background />
 
     <div className="discription">
-      <h1 className="header">Learn C# Programming (In Ten Easy Steps) </h1>
+      <h1 className="header">Learn JavaScript Programming (In Ten Easy Steps) </h1>
       <h2 className="sub-header">
-        The simplest way to learn C# programming.
+        The simplest way to learn JavaScript programming.
       </h2>
     </div>
     <div className="objectVideos">
@@ -500,12 +500,12 @@ const checkIfFilled = (e) => {
         <li>Use the source code examples to learn step-by-step </li>
       </div>
       <div className="b">
-        <li>Master C# programming concepts from the ground up</li>
+        <li>Master JavaScript programming concepts from the ground up</li>
         <div className="c">
           <li>
             {" "}
             Use the source code examples to learn step-by-step Understand the
-            special features of C#: object orientation, the .NET framework,
+            special features of JavaScript: object orientation, the .NET framework,
             error-handling, serialization
           </li>
         </div>
@@ -540,19 +540,19 @@ const checkIfFilled = (e) => {
     <div className="Coursediscription">
       <h1 className="DescriptionHeader">Discription </h1>
       <div className="DescriptionText">
-        Learn C# Programming (in ten easy steps) [Version 2] is suitable for
+        Learn JavaScript Programming (in ten easy steps) [Version 2] is suitable for
         beginner programmers or anyone with experience in another programming
-        language who needs to learn C# from the ground up. Step-by-step it
-        explains how to write C# code to develop Windows applications using
+        language who needs to learn JavaScript from the ground up. Step-by-step it
+        explains how to write JavaScript code to develop Windows applications using
         either the free Visual Studio Community Edition or a commercial
-        edition of Microsoft Visual Studio (it even explains how to write C#
+        edition of Microsoft Visual Studio (it even explains how to write JavaScript
         programs using free tools for OS X). This is the completely revised
-        and updated second version of this course. C# is one of the most
+        and updated second version of this course. JavaScript is one of the most
         widely used an important of all modern programming languages. If you
-        need to learn C# quickly and painlessly, this is the perfect course.
+        need to learn JavaScript quickly and painlessly, this is the perfect course.
         You will begin by learning the core features of programming variables,
         constants, functions and data types. You will move on rapidly to learn
-        about Object Orientation and the more advanced features of C# and the
+        about Object Orientation and the more advanced features of JavaScript and the
         .NET framework such as file-handling, data-streaming, dealing with
         exceptions (errors) and overriding methods. Even if you start out as a
         complete beginner, by the end of this course you will have built a

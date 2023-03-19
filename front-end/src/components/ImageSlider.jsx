@@ -9,32 +9,34 @@ import Gif5 from "../images/leaderboard.gif";
 
 const delay = 4500;
 
-
 const SliderData = [
   {
     image:
       "https://cdn.discordapp.com/attachments/1048691975437684746/1048980068854141039/1.png",
-    text:"learn programming easily from anywhere and improve your knowledge"
+    text: "learn programming easily from anywhere and improve your knowledge",
   },
   {
     image:
       "https://miro.medium.com/v2/format:jpg/resize:fill:80:56/0*7Q3yvSIv_t0ioJ-Z.gif",
-      text:"Watch programming videos from a range of Courses"
+    text: "Watch programming videos from a range of Courses",
   },
-  
-  { image: "https://cdn.images.express.co.uk/img/dynamic/130/590x/Easy-quiz-questions-1282929.jpg?r=1621866486163",
-  text:"Do Quizzes on courses you feel confident about"},
-  
-  {
-    image: "https://cdn.imweb.me/upload/S202108243f92708905182/614781d074140.jpg",
-    text:"Join Us to meet UN's Quality Education Goal"
-  },
-  {
-    image: "https://img.freepik.com/free-vector/people-carrying-donation-charity-related-icons_53876-43091.jpg",
-    text:"Help us, so that we can help those who is in need of education"
 
+  {
+    image:
+      "https://cdn.images.express.co.uk/img/dynamic/130/590x/Easy-quiz-questions-1282929.jpg?r=1621866486163",
+    text: "Do Quizzes on courses you feel confident about",
   },
-  
+
+  {
+    image:
+      "https://cdn.imweb.me/upload/S202108243f92708905182/614781d074140.jpg",
+    text: "Join Us to meet UN's Quality Education Goal",
+  },
+  {
+    image:
+      "https://img.freepik.com/free-vector/people-carrying-donation-charity-related-icons_53876-43091.jpg",
+    text: "Help us, so that we can help those who are in need of education",
+  },
 ];
 const ImageSlider = () => {
   const [index, setIndex] = React.useState(0);
@@ -46,7 +48,7 @@ const ImageSlider = () => {
     }
   }
 
-useEffect(() => {
+  useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(
       () =>
@@ -68,11 +70,11 @@ useEffect(() => {
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
         {SliderData.map((item, index) => (
-          <div
-            className="slide"
-            key={index}
-           
-          >  <img src={item.image} alt="slider" /><p className="sliderText">{item.text}</p></div>
+          <div className="slide" key={index}>
+            {" "}
+            <img src={item.image} alt="slider" />
+            <p className="sliderText">{item.text}</p>
+          </div>
         ))}
       </div>
 
