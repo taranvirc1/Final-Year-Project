@@ -84,7 +84,7 @@ function DonationsPage() {
       }
       if (!phone) {
         newErrors.phone = "Phone number is required";
-      } else if (!/^\d{11}$/.test(phone)) {
+      } else if (!/^(\d{10,11})$/.test(phone)) {
         newErrors.phone = "Phone number is invalid";
       }
       if (!howHear) {
