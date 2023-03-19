@@ -166,7 +166,9 @@ function ForumLanding() {
           <ul className='tags'>
             <li>{item.fTags}</li>
           </ul>
-
+          <div className='thread-creator'>
+          By <span>{ (item.students.firstName).toUpperCase()} { (item.students.lastName).toUpperCase()}</span> 
+          </div>
           {saveLoggedinUser === item.students.email && (
                   <div
                     className="DeleteThread"
@@ -176,7 +178,7 @@ function ForumLanding() {
                   </div>
                 )}
           
-          <div className='thread-creatorname'>Started on {item.fDateCreated} at {item.fTimeCreated} By {item.students.firstName} {item.students.lastName} </div>
+          <div className='thread-time'>Started on <span>{ (new Date(item.fDateCreated)).toLocaleDateString() }</span> at {item.fTimeCreated}</div>
           
           
         </div>
