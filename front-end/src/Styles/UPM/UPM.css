@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   min-height: 100vh;
   margin: 0;
   margin-bottom: 10px;
@@ -31,7 +32,6 @@
   flex-direction: column;
   background-color: #231e39;
   overflow-y: scroll;
-  margin-top: 20px;
 }
 
 .upm-searchButton {
