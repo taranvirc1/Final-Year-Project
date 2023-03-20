@@ -27,21 +27,14 @@ function ForumPage() {
   const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
   const saveLoggedinUser = localStorage.getItem("loggedInUser");
-  const saveSubId = localStorage.getItem("SubId");
   const jwt = localStorage.getItem("jwt");
-
-  const getSubid = (item) => {
-    localStorage.setItem("SubId", item);
-  };
-
   const threadnameloader = (e) => {
     axios
     .get(`http://localhost:8080/threadid/${saveThreadID}`, { headers })
   
       .then((resp) => {
         setthreadName(resp.data.threadName);
-        setthreadtag(resp.data.fTags)
-        subscriptiondata();
+        setthreadtag(resp.data.fTags);
         console.log("Thread Name: " + threadName);
       })
       .catch((error) => {
@@ -78,17 +71,29 @@ const messageloader = (e) => {
 });
 }
 
+const subchecker = () => {
+  for(var i = 0; i < subbed.length; i++) {
+    if(subbed.subEmail===saveLoggedinUser){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+}
+
 const subscriptiondata = (e) => {
   axios
-  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
+  .get(`http://localhost:8080/getsubs/${saveThreadID}`, { headers })
 
-    .then((resp) => {
-      console.log(resp.data);
-
-      setSubbed(resp.data);
-      getSubid(resp.data.subId);
-      console.log("getting subId: "+ subbed.subId);
-      console.log("getting subId: "+ saveSubId);
+    .then((resp) => {;
+      setSubbed(...resp.data)
+      console.log("subbed data: "+subbed.subId)
+      subchecker(subbed, saveLoggedinUser);
+      if(subchecker){
+        setSubButton("Subscribed");
+        setsubcolor("orange");
+      }
     })
     .catch((error) => {
       console.error(error);
@@ -101,6 +106,7 @@ const subscribe = (e) => {
 
     .then((resp) => {
       console.log(resp.data);
+
       
     })
     .catch((error) => {
@@ -124,7 +130,7 @@ const unsubscribe = (SubId) => {
   function subbuttonchange(){
     if(SubButton==="Subscribed"){
       confirmAlert("Are you sure you want to unsubscribe?","sub");
-      unsubscribe(saveSubId);
+      unsubscribe(subbed.subId);
       
     }
     else if(SubButton ==="Subscribe"){
