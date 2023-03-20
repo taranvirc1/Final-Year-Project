@@ -4,9 +4,7 @@ import donate from "../images/navIcons/donate.png";
 import courseslogo from "../images/navIcons/courses.png";
 import quizzeslogo from "../images/navIcons/quizzes.png";
 import forumlogo from "../images/navIcons/forum.png";
-import rankinglogo from "../images/navIcons/ranking.png";
 import Loginlogo from "../images/navIcons/login.png";
-import Profilelogo from "../images/navIcons/profile.jpeg";
 import "../Styles/NavBar.css";
 import { Link } from "react-router-dom";
 
@@ -23,7 +21,7 @@ function Navbar() {
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
           <Link to="/">
-            <img src={Logo} alt="" style={{ width: 140 }} />
+            <img src={Logo} alt="Code4All logo" style={{ width: 140 }} />
           </Link>
         </div>
         {/* Menu for mobile version */}
