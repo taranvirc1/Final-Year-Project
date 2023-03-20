@@ -2,7 +2,7 @@ function validateSignUpForm(values) {
   let errors = {};
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
-  const regexName = /^[a-zA-Z]+$/;
+  const regexName = /^[a-zA-Z\s]+$/;
   const regexPhone1 = /^[0-9 ()+-]+$/;
 
   //Error handling for First Name
