@@ -9,7 +9,9 @@ import Loginlogo from "../images/navIcons/login.png";
 import Profilelogo from "../images/navIcons/profile.jpeg";
 import "../Styles/NavBar_Profile.css";
 import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
+import axios from "axios";
+import { useRef } from "react";
 function Navbar_Profile() {
   const handleScrollToStop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -17,6 +19,57 @@ function Navbar_Profile() {
 
   //used for setting the state of the navbar menu in mobile version
   const [clicked, setClicked] = useState(false);
+  const [logged, setLogged] = useState("");
+  const [jwt, setJwt] = useState("");
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    const valueFromLocalStorage = localStorage.getItem("loggedInUser");
+    const valueFromLocalStorage2 = localStorage.getItem("jwt");
+    if (valueFromLocalStorage) {
+      setLogged(valueFromLocalStorage);
+      setJwt(valueFromLocalStorage2);
+    }
+  }, []);
+
+  const token = jwt;
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const Api = "http://localhost:8080/user/findByEmail";
+  const params = {
+    email: logged,
+  };
+
+  useEffect(() => {
+    axios
+      .get(Api, { headers, params })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [logged]);
+
+  const userId = user && user.studentId;
+
+  const defaultAvatarUrl = Profilelogo;
+  const [image, setImage] = useState(defaultAvatarUrl);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/${userId}/image`, {
+        responseType: "arraybuffer",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const blob = new Blob([response.data], { type: "image/jpeg" });
+        const url = URL.createObjectURL(blob);
+        setImage(url);
+      })
+      .catch((error) => console.log(error));
+  }, [userId, token]);
   return (
     <>
       {/* Logo for website */}
@@ -89,8 +142,12 @@ function Navbar_Profile() {
           <li>
             {/* Link for profile page */}
             <Link to="UPM" className="navLink" onClick={handleScrollToStop}>
-              <img img src={Profilelogo} alt="profile icon" />
-              Profile
+              <img
+                className="nav-img-profile"
+                id="nav-img1"
+                src={image}
+                alt="profile icon"
+              />
             </Link>
           </li>
         </ul>

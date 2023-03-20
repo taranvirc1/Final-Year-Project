@@ -15,6 +15,8 @@ function Navbar() {
 
   //used for setting the state of the navbar menu in mobile version
   const [clicked, setClicked] = useState(false);
+
+  
   return (
     <>
       {/* Logo for website */}
@@ -79,7 +81,7 @@ function Navbar() {
           <li>
             {/* Link for login/signup page */}
             <Link to="account" className="navLink" onClick={handleScrollToStop}>
-              <img img src={Loginlogo} alt="login icon" />
+              <img className="" img src={Loginlogo} alt="login icon" />
               Login
             </Link>
           </li>
