@@ -47,6 +47,10 @@ public class SubscriptionController {
         return new ResponseEntity<>(Optional.ofNullable(newSub), HttpStatus.CREATED);
 
     }
+    @RequestMapping("/getsubs/{threadId}")
+    public Iterable<Subscriptions>  getsubs( @PathVariable("threadId") Integer threadId) {
+    return subscriptionRepository.findByThreads_ThreadId(threadId) ;
+    }
 
     @RequestMapping("/getsub/{subEmail}/{threadId}")
     public Iterable<Subscriptions>  getSub( @PathVariable("subEmail") String subEmail, @PathVariable("threadId") Integer threadId) {
