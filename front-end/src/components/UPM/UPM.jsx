@@ -115,7 +115,7 @@ function UPM() {
   const [number, setNumber] = useState(NU);
   const [Country, setCountry] = useState(CT);
   const [DOB, setDOB] = useState(D0B);
-  const [newPasswords, setNewPasswords] = useState("default");
+  const [newPasswords, setNewPasswords] = useState("Code4all123!");
   const [Bio, setBio] = useState(BI);
   const [Role, setRole] = useState("Basic");
   const [LinkedIn, setLink] = useState(LI);
