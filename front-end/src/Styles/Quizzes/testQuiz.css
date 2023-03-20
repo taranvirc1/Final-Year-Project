@@ -34,7 +34,7 @@
   box-shadow: 0px 0px 25px 10px rgba(0, 0, 0, 0.7);
   opacity: 85%;
   border-radius: 10px;
-  top: 240px;
+  top: -10px;
 }
 
 .question-count {
@@ -122,7 +122,6 @@ button svg {
   justify-content: space-around;
   font-family: 'Poppins', sans-serif;
   color: #120505;
-  margin-top: 4.6%;
   background: linear-gradient(to right, #a6bce1, #04befe);
   padding: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
