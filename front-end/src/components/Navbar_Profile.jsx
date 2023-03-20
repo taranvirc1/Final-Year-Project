@@ -11,10 +11,6 @@ import "../Styles/NavBar_Profile.css";
 import { Link } from "react-router-dom";
 
 function Navbar_Profile() {
-  const handleScrollToStop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   //used for setting the state of the navbar menu in mobile version
   const [clicked, setClicked] = useState(false);
   return (
@@ -42,18 +38,14 @@ function Navbar_Profile() {
         >
           <li>
             {/* Link for donations page */}
-            <Link
-              to="donations"
-              className="navLink"
-              onClick={handleScrollToStop}
-            >
+            <Link to="donations" className="navLink" href="#donate">
               <img src={donate} alt="donate icon" />
               Donate
             </Link>
           </li>
           <li>
             {/* Link for courses page */}
-            <Link to="courses" className="navLink" onClick={handleScrollToStop}>
+            <Link to="courses" className="navLink" href="#courses">
               <img src={courseslogo} alt="courses icon" />
               Courses
             </Link>
@@ -61,18 +53,14 @@ function Navbar_Profile() {
 
           <li>
             {/* Link for quizzes page */}
-            <Link to="Quizzes" className="navLink" onClick={handleScrollToStop}>
+            <Link to="Quizzes" className="navLink" href="#Quizzes">
               <img src={quizzeslogo} alt="quizzes icon" />
               Quizzes
             </Link>
           </li>
           <li>
             {/* Link for forum page */}
-            <Link
-              to="Forum_landing"
-              className="navLink"
-              onClick={handleScrollToStop}
-            >
+            <Link to="Forum_landing" className="navLink" href="/">
               <img img src={forumlogo} alt="forum icon" />
               Forum
             </Link>
@@ -80,15 +68,23 @@ function Navbar_Profile() {
 
           <li>
             {/* Link for rankings page */}
-            <Link to="Ranking" className="navLink" onClick={handleScrollToStop}>
+            <Link to="Ranking" className="navLink" href="#Rankings">
               <img img src={rankinglogo} alt="rankings icon" />
               Rankings
             </Link>
           </li>
 
+          {/* <li> */}
+            {/* Link for login/signup page */}
+            {/* <Link to="account" className="navLink" href="#log">
+              <img img src={Loginlogo} alt="login icon" />
+              Login
+            </Link>
+          </li> */}
+
           <li>
             {/* Link for profile page */}
-            <Link to="UPM" className="navLink" onClick={handleScrollToStop}>
+            <Link to="UPM" className="navLink" href="#log">
               <img img src={Profilelogo} alt="profile icon" />
               Profile
             </Link>

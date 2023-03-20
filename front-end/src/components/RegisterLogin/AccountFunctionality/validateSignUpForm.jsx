@@ -4,6 +4,7 @@ function validateSignUpForm(values) {
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
   const regexName = /^[a-zA-Z]+$/;
   const regexPhone1 = /^[0-9 ()+-]+$/;
+  const regexPhone2 = /[ ()+-]/g;
 
   //Error handling for First Name
   if (!values.firstName.trim()) {

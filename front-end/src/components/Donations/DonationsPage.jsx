@@ -77,7 +77,7 @@ function DonationsPage() {
       }
       if (!phone) {
         newErrors.phone = "Phone number is required";
-      } else if (phone.replace(/[ ()+-]/g, "").length < 10) {
+      } else if (!/^(\d{10,11})$/.test(phone)) {
         newErrors.phone = "Phone number is invalid";
       }
       if (!howHear) {
@@ -92,6 +92,7 @@ function DonationsPage() {
 
     const errors = validateForm();
     if (Object.keys(errors).length !== 0) {
+
       setErrors(errors);
       return;
     }
@@ -127,6 +128,7 @@ function DonationsPage() {
         console.log(error);
         alert("Error submitting donation form");
       });
+
   };
 
   return (
@@ -155,7 +157,7 @@ function DonationsPage() {
         <form className="donationsform" noValidate onSubmit={handleSubmit}>
           <h2 className="formtitle">Your Information</h2>
 
-          <label htmlFor="title">
+          <label for="title">
             Title:
             <input
               type="text"
@@ -167,7 +169,7 @@ function DonationsPage() {
             {errors.donatorTitle && <p>{errors.donatorTitle}</p>}
           </label>
 
-          <label htmlFor="fname">
+          <label for="fname">
             First name:
             <input
               type="text"
@@ -180,7 +182,7 @@ function DonationsPage() {
             {errors.firstName && <p>{errors.firstName}</p>}
           </label>
 
-          <label htmlFor="lname">
+          <label for="lname">
             Last name:
             <input
               type="text"
@@ -193,7 +195,7 @@ function DonationsPage() {
             {errors.lastName && <p>{errors.lastName}</p>}
           </label>
 
-          <label htmlFor="Pnumber">
+          <label for="Pnumber">
             Phone number:
             <input
               type="text"
@@ -206,7 +208,7 @@ function DonationsPage() {
             {errors.phone && <p>{errors.phone}</p>}
           </label>
 
-          <label htmlFor="Eaddress">
+          <label for="Eaddress">
             Email Address:
             <input
               type="text"
@@ -219,7 +221,7 @@ function DonationsPage() {
             {errors.email && <p>{errors.email}</p>}
           </label>
 
-          <label htmlFor="">
+          <label for="">
             How did you hear about us?
             <input
               type="text"
@@ -231,7 +233,7 @@ function DonationsPage() {
             {errors.howHear && <p>{errors.howHear}</p>}
           </label>
 
-          <label htmlFor="">
+          <label for="">
             What motivated you to donate today?
             <input
               type="text"

@@ -4,25 +4,25 @@ import donate from "../images/navIcons/donate.png";
 import courseslogo from "../images/navIcons/courses.png";
 import quizzeslogo from "../images/navIcons/quizzes.png";
 import forumlogo from "../images/navIcons/forum.png";
+import rankinglogo from "../images/navIcons/ranking.png";
 import Loginlogo from "../images/navIcons/login.png";
+import Profilelogo from "../images/navIcons/profile.jpeg";
 import "../Styles/NavBar.css";
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const handleScrollToStop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   //used for setting the state of the navbar menu in mobile version
   const [clicked, setClicked] = useState(false);
   return (
     <>
-      {/* Logo for website */}
+    {/* Logo for website */}
       <div className="nav" id="nav">
         <div id="code4ALLlogo">
+          
           <Link to="/">
-            <img src={Logo} alt="Code4All logo" style={{ width: 140 }} />
+            <img src={Logo} alt="" style={{ width: 140 }} />
           </Link>
+          
         </div>
         {/* Menu for mobile version */}
         {/* When menu is open show cross otherwise show a hamburguer menu when closed */}
@@ -40,48 +40,45 @@ function Navbar() {
         >
           <li>
             {/* Link for donations page */}
-            <Link
-              to="donations"
-              className="navLink"
-              onClick={handleScrollToStop}
-            >
+            <Link to="donations" className="navLink" href="#donate">
               <img src={donate} alt="donate icon" />
               Donate
             </Link>
+            
           </li>
           <li>
             {/* Link for courses page */}
-            <Link to="courses" className="navLink" onClick={handleScrollToStop}>
+            <Link to="courses" className="navLink" href="#courses">
               <img src={courseslogo} alt="courses icon" />
               Courses
             </Link>
+            
           </li>
 
           <li>
             {/* Link for quizzes page */}
-            <Link to="Quizzes" className="navLink" onClick={handleScrollToStop}>
+            <Link to="Quizzes" className="navLink" href="#Quizzes">
               <img src={quizzeslogo} alt="quizzes icon" />
               Quizzes
             </Link>
+            
           </li>
           <li>
             {/* Link for forum page */}
-            <Link
-              to="Forum_landing"
-              className="navLink"
-              onClick={handleScrollToStop}
-            >
+            <Link to="Forum_landing" className="navLink" href="/">
               <img img src={forumlogo} alt="forum icon" />
               Forum
             </Link>
+            
           </li>
 
           <li>
             {/* Link for login/signup page */}
-            <Link to="account" className="navLink" onClick={handleScrollToStop}>
+            <Link to="account" className="navLink" href="#log">
               <img img src={Loginlogo} alt="login icon" />
               Login
             </Link>
+            
           </li>
         </ul>
       </div>
