@@ -1,23 +1,28 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
-public class ContactDTO {
+import CS2001.Group47.ELearning_Platform.model.Contact;
+
+public class ContactDTO{
+
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
     private String briefMessage;
 
-    public ContactDTO() {}
+    public ContactDTO() {
+    
+    }
 
-    public ContactDTO(String firstName, String lastName, String email, String phone, String briefMessage) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public ContactDTO(Contact contact) {
+        this.firstName = contact.getFirstName();
+        this.lastName = lastName.getLastName();
+        this.email = email.getEmail();
         this.phone = phone;
         this.briefMessage = briefMessage;
     }
 
-    // Getters and setters
+    
 
     public String getFirstName() {
         return firstName;
@@ -57,6 +62,18 @@ public class ContactDTO {
 
     public void setBriefMessage(String briefMessage) {
         this.briefMessage = briefMessage;
+    }
+
+    public Contact toContact() {
+        Contact contact = new Contact();
+        contact.setFirstName(this.firstName);
+        contact.setLastName(this.lastName);
+        contact.setEmail(this.email);
+        contact.setPhone(this.phone);
+        contact.setBriefMessage(this.briefMessage);
+
+        return contact;
+
     }
 
     @Override

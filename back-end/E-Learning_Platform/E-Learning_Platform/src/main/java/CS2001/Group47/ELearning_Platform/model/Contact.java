@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "ContactInfo")
 @EntityListeners(AuditingEntityListener.class)
-public class ContactInfo implements Serializable {
+public class Contact implements Serializable {
 
 	/**
 	 * 
@@ -35,35 +35,35 @@ public class ContactInfo implements Serializable {
 	@CreatedDate
 	private Date tDateCreated;
 
-	@NotBlank
+	//@NotBlank
 	String firstName;
 
-	@NotBlank
+	//@NotBlank
 	String lastName;
 
-	@NotBlank
+	//@NotBlank
 	String email;
 
-	@NotBlank
+	//@NotBlank
 	String phone;
 
-	@NotBlank
+	//@NotBlank
 	String briefMessage;
 
-	public ContactInfo() {
+	public Contact() {
 
 		super();
 		
 	}
 
-	public ContactInfo(Date tDateCreated, String firstName, String lastName, String email, String phone, String briefMessage) {
+	public Contact(Date tDateCreated, String firstName, String lastName, String email, String phone, String briefMessage) {
 		super();
 		this.tDateCreated = tDateCreated;
-		this.contactFirstName = firstName;
-		this.contactLastName = lastName;
-		this.contactEmail = email;
-		this.contactPhone = phone;
-		this.contactMessage = briefMessage;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.briefMessage = briefMessage;
 
 	}
 
@@ -71,11 +71,11 @@ public class ContactInfo implements Serializable {
 		return contactId;
 	}
 
-	public void setContactID(Interger contactId){
+	public void setContactID(Integer contactId){
 		this.contactId = contactId;
 	}
 
-	public gettDateCreated(){
+	public Date gettDateCreated(){
 		return tDateCreated;
 	}
 
@@ -83,7 +83,7 @@ public class ContactInfo implements Serializable {
 		this.tDateCreated = tDateCreated;
 	}
 
-	public firstName(){
+	public String firstName(){
 		return firstName;
 	}
 
@@ -91,7 +91,7 @@ public class ContactInfo implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public getLastName(){
+	public String getLastName(){
 		return lastName;
 	}
 
@@ -99,7 +99,7 @@ public class ContactInfo implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public getEmail(){
+	public String getEmail(){
 		return email;
 	}
 
@@ -107,7 +107,7 @@ public class ContactInfo implements Serializable {
 		this.email = email;
 	}
 
-	public getPhone(){
+	public String getPhone(){
 		return phone;
 	}
 
@@ -115,7 +115,7 @@ public class ContactInfo implements Serializable {
 		this.phone = phone;
 	}
 
-	public getBriefMessage(){
+	public String getBriefMessage(){
 		return briefMessage;
 	}
 
