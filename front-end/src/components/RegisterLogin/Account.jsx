@@ -28,22 +28,14 @@ function Account() {
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   let interval;
-  //   if (timerActive) {
-  //     interval = setInterval(() => {
-  //       setTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 1);
-  //     }, 1000);
-  //   }
-  //   return () => clearInterval(interval);
-  // }, [timerActive]);
-
   useEffect(() => {
     // decrement value of interval every second (from 30 sec until it reaches zero)
     const interval = setInterval(() => {
       if (timeRemaining > 0) {
+        // subtract 1 from the timer as long as it is greater than 0
         setTimeRemaining(timeRemaining - 1);
       }
+      // 1 sec in miliseconds
     }, 1000);
 
     // clear the interval value when reaching zero
@@ -56,7 +48,7 @@ function Account() {
       confirmButtonText: "OK",
       confirmButtonColor: "#ff0055",
       icon: "success",
-    }).then((result) => {
+    }).then(() => {
       navigate("/");
     });
   };
@@ -86,55 +78,44 @@ function Account() {
           if (res.status === 200) {
             const token = res.headers.authorization.split(" ")[1];
             if (token !== null) {
-              console.log(res);
               console.log(token);
               localStorage.setItem("jwt", token);
-              // setInvalidAttempts(0);
-              setTimeRemaining(0);
-              setValidLoginAttempts(0);
               setLoginErrorMessages("");
-              // alert("You have logged in successfully!!!");
-              setLoginSuccess("You have logged in successfully!!!");
-              console.log("this is " + loggedInUser);
               setLoggedinUser(email);
+              setTimeRemaining(null);
               login();
             } else {
               setValidLoginAttempts(validLoginAttempts + 1);
               // setInvalidAttempts(invalidAttempts + 1);
-              setTimeRemaining(0);
-              // alert("Failed token!!!");
+              // setTimeRemaining(0);
               error();
               setLoggedinUser("");
             }
           } else {
             setValidLoginAttempts(validLoginAttempts + 1);
             // setInvalidAttempts(invalidAttempts + 1);
-            setTimeRemaining(0);
-            // alert("Login unsuccessful!!!");
+            // setTimeRemaining(0);
             error();
             setLoggedinUser("");
           }
         })
         .then(() => {
-          setValidLoginAttempts(0);
+          // setValidLoginAttempts(0);
           // setInvalidAttempts(0);
-          setTimeRemaining(0);
+          // setTimeRemaining(0);
+          setTimeRemaining(null);
           setLoginErrorMessages("");
           setEmail("");
           setPassword("");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           setValidLoginAttempts(validLoginAttempts + 1);
           // setInvalidAttempts(invalidAttempts + 1);
-          setInvalidAttempts(0);
-          // alert("PROBLEM WITH LOGIN!!!");
           error();
           setLoggedinUser("");
         });
-      if (validLoginAttempts >= 2) {
-        setValidLoginAttempts(0);
-        // setInvalidAttempts(0);
+      if (validLoginAttempts === 2) {
         setTimeRemaining(30);
       }
     }
@@ -188,89 +169,6 @@ function Account() {
       setNo(null);
     }
   }
-
-  // const indicator = document.querySelector(".pass-indicator");
-  // const input = document.querySelector(".pass");
-  // const weak = document.querySelector(".weak");
-  // const medium = document.querySelector(".medium");
-  // const strong = document.querySelector(".strong");
-  // const text = document.querySelector(".pass-text");
-  // const showPass = document.querySelector(".show-pass");
-  // var passRegexWeak = /[a-z]/;
-  // var passRegexMedium = /\d+/;
-  // var passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
-  // var no;
-
-  // function passwordIndicator() {
-  //   if (input.value !== "") {
-  //     indicator.style.display = "block";
-  //     indicator.style.display = "flex";
-  //     if (
-  //       input.value.length <= 3 &&
-  //       (input.value.match(passRegexWeak) ||
-  //         input.value.match(passRegexMedium) ||
-  //         input.value.match(passRegexStrong))
-  //     )
-  //       no = 1;
-  //     if (
-  //       input.value.length >= 6 &&
-  //       ((input.value.match(passRegexWeak) &&
-  //         input.value.match(passRegexMedium)) ||
-  //         (input.value.match(passRegexMedium) &&
-  //           input.value.match(passRegexStrong)) ||
-  //         (input.value.match(passRegexWeak) &&
-  //           input.value.match(passRegexStrong)))
-  //     )
-  //       no = 2;
-  //     if (
-  //       input.value.length >= 6 &&
-  //       input.value.match(passRegexWeak) &&
-  //       input.value.match(passRegexMedium) &&
-  //       input.value.match(passRegexStrong)
-  //     )
-  //       no = 3;
-  //     if (no === 1) {
-  //       weak.classList.add("active");
-  //       text.style.display = "block";
-  //       text.textContent = "Your password is too weak";
-  //       text.classList.add("weak");
-  //     }
-  //     if (no === 2) {
-  //       medium.classList.add("active");
-  //       text.textContent = "Your password is medium";
-  //       text.classList.add("medium");
-  //     } else {
-  //       medium.classList.remove("active");
-  //       text.classList.remove("medium");
-  //     }
-  //     if (no === 3) {
-  //       weak.classList.add("active");
-  //       medium.classList.add("active");
-  //       strong.classList.add("active");
-  //       text.textContent = "Your password is strong";
-  //       text.classList.add("strong");
-  //     } else {
-  //       strong.classList.remove("active");
-  //       text.classList.remove("strong");
-  //     }
-  //     showPass.style.display = "block";
-  //     showPass.onclick = function () {
-  //       if (input.type === "password") {
-  //         input.type = "text";
-  //         showPass.textContent = "HIDE";
-  //         showPass.style.color = "#acacac";
-  //       } else {
-  //         input.type = "password";
-  //         showPass.textContent = "SHOW";
-  //         showPass.style.color = "#000";
-  //       }
-  //     };
-  //   } else {
-  //     indicator.style.display = "none";
-  //     text.style.display = "none";
-  //     showPass.style.display = "none";
-  //   }
-  // }
 
   return (
     <div className="body">
