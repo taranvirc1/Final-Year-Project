@@ -149,10 +149,7 @@ function UpdatePassword() {
               {/* Form that contains new password and confirm password fields */}
               <form className="sign-in-form" noValidate onSubmit={handleSubmit}>
                 <h2 className="form-title">Reset Password</h2>
-                {/* {updateSuccess && <p className="emailSuccess">{updateSuccess}</p>}
-              {errorMessage && <p>{errorMessage}</p>} */}
                 {error && <p>{error}</p>}
-                {success && <p className="emailSuccess">{success}</p>}
                 <div className="input-field">
                   <i className="fas fa-envelope"></i>
                   <input
@@ -162,18 +159,6 @@ function UpdatePassword() {
                     placeholder="Email*"
                   />
                 </div>
-                {/* <div className="input-field">
-                  <i className="fas fa-lock"></i>
-                  <input
-                    // className="pass"
-                    type="password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    // onKeyUp={passwordIndicator}
-                    placeholder="Current Password*"
-                  />
-                  {/* <span className="show-pass">SHOW</span>
-                </div> */}
                 <div className="input-field">
                   <i className="fas fa-lock"></i>
                   <input

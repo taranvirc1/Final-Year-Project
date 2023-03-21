@@ -8,7 +8,6 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
-  // const baseUrl = "http://localhost:8080/forgot_password";
 
   const fireAlert = () => {
     Swal.fire({
@@ -24,12 +23,6 @@ function ResetPassword() {
   const handleEmailSubmit = (e) => {
     e.preventDefault();
 
-    // if (email === "2007048@brunel.ac.uk") {
-    //   setEmailSuccess(
-    //     `An email has been sent to ${email} with instructions to reset password!!!`
-    //   );
-    //   setEmailErrorMessage("");
-    // }
     if (email === "") {
       setEmailErrorMessage("Email Address required!");
     } else if (!email.match(regexEmail)) {
@@ -43,10 +36,6 @@ function ResetPassword() {
           console.log(res);
           console.log(email);
           if (res.status === 200) {
-            // alert(`Found email address. We have sent an email to ${email}`);
-            // setEmailSuccess(
-            //   `An email has been sent to ${email} with instructions to reset password!!!`
-            // );
             fireAlert();
             setEmail("");
           }
@@ -54,7 +43,6 @@ function ResetPassword() {
         .catch((error) => {
           console.log(email);
           console.log(error);
-          // alert("Email does not exist!!!");
           setEmailErrorMessage(
             "The email address you entered does not exist. Please, try again!"
           );
@@ -88,14 +76,12 @@ function ResetPassword() {
                   placeholder="Email Address*"
                 />
               </div>
-              {/* Link to new password page */}
-              {/* <Link to="/newPassword"> */}
+              {/* Link to send reset password email with link to second form */}
               <input
                 type="submit"
                 value="Send Reset Email"
                 className="account-btn"
               />
-              {/* </Link> */}
             </form>
           </div>
         </div>
