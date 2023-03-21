@@ -14,9 +14,6 @@ function Account() {
     useForm(validateSignUpForm);
 
   const today = new Date().toISOString().slice(0, 10);
-  // const [timeRemaining, setTimeRemaining] = useState(0);
-  // const [timerActive, setTimerActive] = useState(false);
-  const [invalidAttempts, setInvalidAttempts] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
   const [email, setEmail] = useState("");
@@ -46,7 +43,7 @@ function Account() {
     Swal.fire({
       title: "You have logged in successfully",
       confirmButtonText: "OK",
-      confirmButtonColor: "#ff0055",
+      confirmButtonColor: "#5995fd",
       icon: "success",
     }).then(() => {
       navigate("/");
@@ -59,7 +56,7 @@ function Account() {
       confirmButtonText: "OK",
       confirmButtonColor: "#ff0055",
       icon: "error",
-    }).then((result) => {});
+    }).then(() => {});
   };
 
   const handleLoginSubmit = (e) => {
@@ -86,32 +83,23 @@ function Account() {
               login();
             } else {
               setValidLoginAttempts(validLoginAttempts + 1);
-              // setInvalidAttempts(invalidAttempts + 1);
-              // setTimeRemaining(0);
               error();
               setLoggedinUser("");
             }
           } else {
             setValidLoginAttempts(validLoginAttempts + 1);
-            // setInvalidAttempts(invalidAttempts + 1);
-            // setTimeRemaining(0);
             error();
             setLoggedinUser("");
           }
         })
         .then(() => {
-          // setValidLoginAttempts(0);
-          // setInvalidAttempts(0);
-          // setTimeRemaining(0);
           setTimeRemaining(null);
           setLoginErrorMessages("");
           setEmail("");
           setPassword("");
         })
         .catch((err) => {
-          // console.log(err);
           setValidLoginAttempts(validLoginAttempts + 1);
-          // setInvalidAttempts(invalidAttempts + 1);
           error();
           setLoggedinUser("");
         });
