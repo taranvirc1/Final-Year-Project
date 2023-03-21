@@ -115,7 +115,7 @@ function UPM() {
   const [number, setNumber] = useState(NU);
   const [Country, setCountry] = useState(CT);
   const [DOB, setDOB] = useState(D0B);
-  const [newPasswords, setNewPasswords] = useState("default");
+  const [newPasswords, setNewPasswords] = useState("Code4all123!");
   const [Bio, setBio] = useState(BI);
   const [Role, setRole] = useState("Basic");
   const [LinkedIn, setLink] = useState(LI);
@@ -431,7 +431,7 @@ function UPM() {
                       <img class="upm-round" src={image} alt="avatar" />
                     )}
                     <button className="upm-click" onClick={handleButtonClick}>
-                      <MdOutlineModeEdit size={55} />
+                      <MdOutlineModeEdit size={30} />
                     </button>
                     <button
                       className="upm-saver-1"
@@ -568,37 +568,7 @@ function UPM() {
                               </label>
                             </div>
                           </div>
-                          <div className="upm-split-2">
-                            <div class="upm-form field">
-                              <select
-                                class="upm-field-2"
-                                color="black"
-                                defaultValue={user && user.country}
-                                onChange={(event) => {
-                                  const newValue = event.target.value;
-                                  setCountry(newValue);
-                                }}
-                                name="Country"
-                                required
-                              >
-                                <option className="upm-op" value="">
-                                  Select a country
-                                </option>
-                                <option
-                                  className="upm-op"
-                                  color="black"
-                                  value="USA"
-                                >
-                                  English
-                                </option>
-                                {/* Add more options as needed */}
-                              </select>
-
-                              <label for="name" class="upm-label">
-                                Language
-                              </label>
-                            </div>
-                          </div>
+                          <div className="upm-split-2"></div>
                           <div className="upm-split-3">
                             <button
                               className="upm-edit-button"

@@ -33,19 +33,24 @@ public class SubscriptionController {
     ThreadService threadService;
     
     @PostMapping("/sub/create")
-    public ResponseEntity<Optional<Subscriptions>> addThread(@RequestBody SubscribeDTO NewSubDTO) {
-
+    public ResponseEntity<Optional<Subscriptions>> addSub(@RequestBody SubscribeDTO NewSubDTO) {
 
         Threads threads = threadService.findByID(NewSubDTO.getThreadId());
         // Else create a thread with DTO
+
         Subscriptions newSub = new Subscriptions(
-            NewSubDTO.getSubEmail(), threads);
+            NewSubDTO.getSubEmail(),
+            threads);
+            subscriptionService.addSub(newSub);
         // Add thread through ThreadService
-        subscriptionService.addSub(newSub);
 
         // Return response entity with new thread and CREATED status
         return new ResponseEntity<>(Optional.ofNullable(newSub), HttpStatus.CREATED);
 
+    }
+    @RequestMapping("/getsubs/{threadId}")
+    public Iterable<Subscriptions>  getsubs( @PathVariable("threadId") Integer threadId) {
+    return subscriptionRepository.findByThreads_ThreadId(threadId) ;
     }
 
     @RequestMapping("/getsub/{subEmail}/{threadId}")
