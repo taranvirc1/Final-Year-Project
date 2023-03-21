@@ -6,13 +6,10 @@ import javax.validation.Valid; // Import the Valid class from the javax.validati
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 import CS2001.Group47.ELearning_Platform.model.Contact;
-import CS2001.Group47.ELearning_Platform.repository.ContactRepository;
 import CS2001.Group47.ELearning_Platform.service.ContactService;
 import CS2001.Group47.ELearning_Platform.dto.ContactDTO;
 
@@ -22,9 +19,9 @@ public class ContactController {
     @Autowired
     ContactService contactService;
 
-    @PostMapping("/ContactInfo") // Handle POST requests at the "/donators" endpoint.
-     public Contact createContact(@Valid @RequestBody ContactDTO contactDTO) {  // Define a method that creates a new Donator.
-      return contactService.save(contactDTO.createContact()); // Save the new Donator using the injected DonatorService.
+    @PostMapping("/ContactInfo") 
+     public Contact createContact(@Valid @RequestBody ContactDTO contactDTO) {  
+      return contactService.save(contactDTO.toContact());
   }
 
 

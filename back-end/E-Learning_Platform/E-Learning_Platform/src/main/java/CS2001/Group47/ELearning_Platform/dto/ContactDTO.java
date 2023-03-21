@@ -16,10 +16,10 @@ public class ContactDTO{
 
     public ContactDTO(Contact contact) {
         this.firstName = contact.getFirstName();
-        this.lastName = lastName.getLastName();
-        this.email = email.getEmail();
-        this.phone = phone;
-        this.briefMessage = briefMessage;
+        this.lastName = contact.getLastName();
+        this.email = contact.getEmail();
+        this.phone = contact.getPhone();
+        this.briefMessage = contact.getBriefMessage();
     }
 
     

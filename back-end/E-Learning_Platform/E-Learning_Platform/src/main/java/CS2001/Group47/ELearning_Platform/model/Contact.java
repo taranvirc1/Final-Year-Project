@@ -83,7 +83,7 @@ public class Contact implements Serializable {
 		this.tDateCreated = tDateCreated;
 	}
 
-	public String firstName(){
+	public String getFirstName(){
 		return firstName;
 	}
 
