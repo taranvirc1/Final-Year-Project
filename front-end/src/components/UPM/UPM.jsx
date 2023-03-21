@@ -501,7 +501,6 @@ function UPM() {
                                 class="upm-field"
                                 defaultValue={user && user.lastName}
                                 onChange={(event) => {
-                                  event.target.value = "asd";
                                   const newValue = event.target.value;
                                   setLastName(newValue);
                                 }}
