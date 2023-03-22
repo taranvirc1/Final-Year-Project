@@ -64,12 +64,12 @@ function UpdatePassword() {
   const strong = document.querySelector(".strong");
   const text = document.querySelector(".pass-text");
   const showPass = document.querySelector(".show-pass");
-  var passRegexWeak = /[a-z]/;
-  var passRegexMedium = /\d+/;
-  var passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+  const passRegexWeak = /[a-z]/;
+  const passRegexMedium = /\d+/;
+  const passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
   var no;
 
-  function passwordIndicator() {
+  const passwordIndicator = () => {
     if (input.value !== "") {
       indicator.style.display = "block";
       indicator.style.display = "flex";
@@ -138,7 +138,7 @@ function UpdatePassword() {
       text.style.display = "none";
       showPass.style.display = "none";
     }
-  }
+  };
 
   return (
     <div>
@@ -164,6 +164,7 @@ function UpdatePassword() {
                   <input
                     className="pass"
                     type="password"
+                    name="newPassword"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     onKeyUp={passwordIndicator}
@@ -176,7 +177,7 @@ function UpdatePassword() {
                   <span className="medium"></span>
                   <span className="strong"></span>
                 </div>
-                <div className="pass-text">Yours password is too weak</div>
+                <div className="pass-text"></div>
                 <div className="input-field">
                   <i className="fas fa-lock"></i>
                   <input
@@ -187,9 +188,7 @@ function UpdatePassword() {
                   />
                 </div>
                 {/* Redirect to login form */}
-                {/* <Link to="/account"> */}
                 <input type="submit" className="account-btn" value="Change" />
-                {/* </Link> */}
               </form>
             </div>
           </div>
