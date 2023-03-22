@@ -1,14 +1,15 @@
-import React from 'react'
-import {Link} from "react-router-dom"
+import React from 'react';
+import {Link} from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import axios from "axios";
-import  "../../Styles/Forum/Search_Thread.css"
-import ReplyIcon from "../../images/forum/reply.png"
-import SearchIcon from "../../images/forum/search.png"
-import SortIcon from "../../images/forum/sort.png"
+import  "../../Styles/Forum/Search_Thread.css";
+import ReplyIcon from "../../images/forum/reply.png";
+import SearchIcon from "../../images/forum/search.png";
+import SortIcon from "../../images/forum/sort.png";
 import { red } from '@mui/material/colors';
+import Swal from "sweetalert2";
 
 function SearchThread() {
 
@@ -35,9 +36,12 @@ function SearchThread() {
     e.preventDefault();
     console.log(threadName);
     if (threadName === "") {
-      alert("Please fill in ");
+      const message = "Please provide a thread title ",
+      icon = "error";
+      fireAlert(message, icon);
     }
     else{
+      
       axios
         .get(`http://localhost:8080/threadName/${threadName}`, { headers })
 
@@ -75,6 +79,17 @@ function SearchThread() {
     setItemOffset(newOffset);
   };
 
+  const fireAlert = (message, icon) => {
+    Swal.fire({
+      container: "swal2-container",
+  
+      title: message,
+  
+      icon: icon,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+    });
+  };
   
   return (
     <div className='s-navbar-spacing'>

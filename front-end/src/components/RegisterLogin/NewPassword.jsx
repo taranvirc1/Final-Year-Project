@@ -13,26 +13,6 @@ function NewPassword() {
   const { resetToken } = useParams();
   const Navigate = useNavigate();
   console.log(resetToken);
-  // const navigate = useNavigate();
-  // const { id, token } = useParams();
-  // const baseUrl = "http://localhost:8080/reset_password";
-
-  // const userValid = async () => {
-  //   const res = await fetch(`/forgot_password/${id}/${token}`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-
-  //   const userData = await res.json();
-
-  //   if (userData.status === 201) {
-  //     console.log("user valid");
-  //   } else {
-  //     navigate("/");
-  //   }
-  // };
 
   const fireAlert = () => {
     Swal.fire({
@@ -63,8 +43,6 @@ function NewPassword() {
           console.log(resetToken);
           console.log(newPassword);
           if (response.status === 200) {
-            // alert("password has been updated successfully!!!");
-            // setUpdateSuccess("Password updated!!!");
             fireAlert();
             setNewPassword("");
             setConfirmPassword("");
@@ -72,61 +50,10 @@ function NewPassword() {
         })
         .catch((error) => {
           console.log(error);
-          // alert("Password not updated!!!");
           setErrorMessage("Problem updating password!!!");
         });
-      // axios
-      //   .post(baseUrl, newPassword)
-      //   .then((res) => {
-      //     console.log(res);
-      //     console.log(newPassword);
-      //     if (res.status === 200) {
-      //       alert("Password has been updated!!!");
-      //       setUpdateSuccess(`Password has been reset successfully!!!`);
-      //       setNewPassword("");
-      //       setConfirmPassword("");
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.log(newPassword);
-      //     console.log(error);
-      //     alert("Password could not be updated!!!");
-      //     setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
-      //   });
     }
   };
-
-  // const passwordSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (newPassword === "" || confirmPassword === "") {
-  //     setErrorMessage("Password and confirm password required!");
-  //   } else if (confirmPassword !== newPassword) {
-  //     setErrorMessage("Passwords do not match!");
-  //   } else {
-  //     const res = await fetch(`/${id}/${token}`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ newPassword }),
-  //     });
-
-  //     const userData = await res.json();
-
-  //     if (userData.status === 201) {
-  //       alert("Password has been updated!!!");
-  //       setUpdateSuccess(`Password has been reset successfully!!!`);
-  //     } else {
-  //       alert("Password could not be updated!!!");
-  //       setErrorMessage("PROBLEM UPDATING PASSWORD!!!");
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   userValid();
-  // }, []);
 
   const indicator = document.querySelector(".pass-indicator");
   const input = document.querySelector(".pass");
@@ -233,6 +160,7 @@ function NewPassword() {
                 <input
                   className="pass"
                   type="password"
+                  name="newPassword"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   onKeyUp={passwordIndicator}
@@ -245,7 +173,7 @@ function NewPassword() {
                 <span className="medium"></span>
                 <span className="strong"></span>
               </div>
-              <div className="pass-text">Yours password is too weak</div>
+              <div className="pass-text"></div>
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
@@ -256,9 +184,7 @@ function NewPassword() {
                 />
               </div>
               {/* Redirect to login form */}
-              {/* <Link to="/account"> */}
               <input type="submit" className="account-btn" value="Change" />
-              {/* </Link> */}
             </form>
           </div>
         </div>

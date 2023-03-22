@@ -62,7 +62,6 @@ function CreateForum() {
           setfTags("");
         })
         .catch((err) => {
-          alert(`Please login to create a forum thread`);
           console.log(err);
 
         });

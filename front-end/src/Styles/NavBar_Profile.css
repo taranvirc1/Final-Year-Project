@@ -41,6 +41,7 @@ html {
 	text-align: center;
 	width: 87vw;
 	justify-content: flex-end;
+	align-items: center;
 }
 
 #list-switch a
@@ -53,9 +54,11 @@ html {
 	transition: all 0.3s ease 0s;
 }
 
-#list-switch img {
-	width: 20px;
-	margin-right: 10px;
+#list-switch #nav-img1 {
+	width: 60px;
+	height: 60px;
+	border-radius: 100px;
+	border-style: solid;
 }
 
 .navLink {
