@@ -19,7 +19,7 @@ public class ContactController {
     @Autowired
     ContactService contactService;
 
-    @PostMapping("/ContactInfo") 
+    @PostMapping("/contact_info") 
      public Contact createContact(@Valid @RequestBody ContactDTO contactDTO) {  
       return contactService.save(contactDTO.toContact());
   }

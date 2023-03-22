@@ -17,7 +17,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "ContactInfo")
+@Table(name = "contact_info")
 @EntityListeners(AuditingEntityListener.class)
 public class Contact implements Serializable {
 
@@ -38,7 +38,7 @@ public class Contact implements Serializable {
 	//@NotBlank
 	String firstName;
 
-	//@NotBlank
+	//NotBlank
 	String lastName;
 
 	//@NotBlank
