@@ -25,78 +25,69 @@ const headers = {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [briefMessage, setBriefMessage] = useState("");
-  //firstName:"";
-  //lastName:"";
-  //email:"";
- // phone:"";
- // breifMessage:"";
-
- //const [Contact, setContact] = useState({
- // firstName: "",
- //lastName: "",
- // email: "",
- // phone: "",
- // briefMessage: "",
-// })
-
- //const {firstName, lastName, email, phone, briefMessage } = Contact;
-
- //const onInputChange = (e) => {
-  //setContact({ ...Contact, [e.target.name]: e.target.value});
- //}
+  const [errors, setErrors] = useState({
+  firstName:"",
+  lastName:"",
+  email:"",
+ phone:"",
+ breifMessage:"",
+  });
 
   useEffect(() => {
     axios
    .get("http://localhost:8080/user/findByEmail", {params, headers})
    .then((response) => {
       setContact(response.data);
-      setFirstName(response.data);
-      setLastName(response.data);
-      setEmail(response.data);
-      setPhone(response.data);
-
+      setFirstName(response.data.firstName);
+      setLastName(response.data.lastName);
+      setEmail(response.data.email);
+      setPhone(response.data.phone);
+      setBriefMessage(response.data);
    })
     .catch((error) => {
     console.log(error);
     });
     }, [loggedInUser]);
     
-  //const Contact = {
-    //  firstName,
-     // lastName,
-     // email,
-     // phone,
-     // briefMessage,
-    //}
-
- //  axios
-  // .post("http://localhost:8080/contact_info", Contact)
- //.then((response) => {
- // console.log(response);
- //   if (response.status === 201){
-  //    console.log(response);
-   //   setFirstName("");
-   //   setLastName("");
-   //     setEmail("");
-   //   setPhone("");
-   //   }
-      //Next();
-   // })
-    //.catch(async(error) => {
-    // console.log(error);
-     //alert("Error Submitting Contact Form, Please Try Again")
-    //});
   
   const onSubmit =async (event) => {
     event.preventDefault();
 
-   const Contact = {
+    const newErrors = {};
+
+    const validateForm = () => {
+      if (!firstName) {
+        newErrors.firstName = "First name is required";
+      }
+      if (!lastName) {
+        newErrors.lastName = "Last name is required";
+      }
+      if (!email) {
+        newErrors.email = "Email is required";
+      } 
+      if (!phone) {
+        newErrors.phone = "Phone number is required";
+      } else if (phone.length < 10) {
+        newErrors.phone = "Phone number is invalid";
+      }
+      setErrors(newErrors);
+      return newErrors;
+    };
+
+    const errors = validateForm();
+    if (Object.keys(errors).length !== 0) {
+      setErrors(errors);
+      return;
+    }
+
+
+  const Contact = {
       firstName,
       lastName,
-      email,
-      phone,
-      briefMessage
-    }
+     email,
+     phone,
+     briefMessage
+   }
 
     await axios
    .post("http://localhost:8080/contact_info", Contact)
@@ -104,13 +95,20 @@ const headers = {
     console.log(response);
     if (response.status === 201){
       console.log(response);
-     setContact("");
+    setContact("");
+     setFirstName("");
+     setLastName("");
+     setEmail("");
+     setPhone("");
+    setBriefMessage("");
       }
-      //Next();
     })
+    .catch(async (error) => {
+      console.log(error);
+      alert("Error submitting donation form");
+    });
 
   }
-  
   const popup = document.getElementById("pop-up");
 
   function openPopup(){
@@ -129,38 +127,39 @@ const headers = {
                   <form className="contact-form" onSubmit={onSubmit}>
                   <input 
                   type="text" 
-                  name="firstName"
-                  placeholder="Enter Your First Time"
-                  defaultValue={Contact.firstName}
+                  name="FirstName"
+                  placeholder="Please Enter Your First Name:"
+                  value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   required/>
                   
                     <input 
                     type="text" 
-                    id="lastName" 
-                    placeholder="Enter your Last Name:"
-                    defaultValue={Contact.lastName}
+                    id="LastName" 
+                   placeholder="Please Enter Your Last Name"
+                    value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                      required/>
                     <input 
                     type="email" 
-                    id="email" 
-                    placeholder="Enter Your Email:"
-                    defaultValue={Contact.email}
+                    id="Email" 
+                   placeholder="Please Enter Your Email:"
+                    value={email}
                   onChange={(e) => setEmail(e.target.value)}
                     required/>
                     <input 
                     type="phone" 
-                    id="phone" 
-                    placeholder="Enter Your Phone Number:"
-                    defaultValue={Contact.phone}
+                    id="Phone" 
+                    placeholder="Please enter your Phone Number:"
+                    value={phone}
                   onChange={(e) => setPhone(e.target.value)} 
                     required/>
         
                     <textarea id="briefMessage"
                      rows="6" 
-                     placeholder="Please Provide A Brief Description Of Your Problem"
-                     value={briefMessage}
+                    // placeholder={Contact && Contact.briefMessage}
+                    placeholder="Please Enter A Short Description Of The Problem:"
+                     value={Contact.briefMessage}
                   onChange={(e) => setBriefMessage(e.target.value)} 
                      ></textarea>
                     <button type="submit" onClick={openPopup}>Send</button>
