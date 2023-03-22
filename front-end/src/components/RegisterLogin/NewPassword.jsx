@@ -160,6 +160,7 @@ function NewPassword() {
                 <input
                   className="pass"
                   type="password"
+                  name="newPassword"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   onKeyUp={passwordIndicator}
@@ -172,7 +173,7 @@ function NewPassword() {
                 <span className="medium"></span>
                 <span className="strong"></span>
               </div>
-              <div className="pass-text">Yours password is too weak</div>
+              <div className="pass-text"></div>
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
