@@ -4,6 +4,7 @@ import tick_img from "../../images/login-register-icons/404-tick.png"
 import axios from "axios";
 import {useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
+//import Swal from 'sweetalert2;'
 
 
 function Contact() {
@@ -15,8 +16,8 @@ function Contact() {
 
  const jwt = localStorage.getItem("jwt");
   const token = jwt;
-const headers = {
-    Authorization: `Bearer ${token}`,
+  const headers = {
+  Authorization: `Bearer ${token}`,
  };
 
  const [Contact, setContact] = useState({});
@@ -29,8 +30,8 @@ const headers = {
   firstName:"",
   lastName:"",
   email:"",
- phone:"",
- breifMessage:"",
+  phone:"",
+  breifMessage:"",
   });
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const headers = {
       setLastName(response.data.lastName);
       setEmail(response.data.email);
       setPhone(response.data.phone);
-      setBriefMessage(response.data);
+      setBriefMessage(response.data.briefMessage);
    })
     .catch((error) => {
     console.log(error);
@@ -101,22 +102,16 @@ const headers = {
      setEmail("");
      setPhone("");
     setBriefMessage("");
-      }
+      }alert("Successfully Submitted Contact Form")
     })
     .catch(async (error) => {
       console.log(error);
-      alert("Error submitting donation form");
+      alert("Error Submitting Contact Form");
     });
 
   }
-  const popup = document.getElementById("pop-up");
 
-  function openPopup(){
-        popup.classList.add("open-popup");
-    }
-  function closePopup(){
-        popup.classList.remove("open-popup");
-    }
+  
   return (
     <div className="body">
          <div className="contact-container">
@@ -162,12 +157,12 @@ const headers = {
                      value={Contact.briefMessage}
                   onChange={(e) => setBriefMessage(e.target.value)} 
                      ></textarea>
-                    <button type="submit" onClick={openPopup}>Send</button>
+                    <button type="submit" onClick="openPopup()">Submit</button>
                     <div className="pop-up" id="popup">
                         <img src={tick_img}/>
                         <h2>Thank You!</h2>
                         <p>Your details have been successfully submitted. A moderator will respond soon.</p>
-                        <button type="button" id="popup" onClick={closePopup}>OK</button>
+                        <button type="button" id="popup" onClick="closePopup()">OK</button>
                     </div>
                 </form>
                 </div>

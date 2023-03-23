@@ -16,6 +16,7 @@ const FAQ = () => {
           <button className="btn">Contact Us</button>
         </a>
       </Link>
+      
       </div>
     </div>
   );
