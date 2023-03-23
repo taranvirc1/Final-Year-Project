@@ -76,12 +76,23 @@ const getRemainingXP = (xp) => {
 
 
 
+const [selectedBadges, setSelectedBadges] = useState([basic, intermediate, advanced, rare]);
     useEffect(() => {
    
       const saveLoggedinUser = localStorage.getItem("loggedInUser");
       axios.get(`http://localhost:8080/profile/${saveLoggedinUser}`, { headers})
         .then(response => {
           setProfile(response.data);
+          const badge1 = response.data.selected_badges[0];
+          const badge2 = response.data.selected_badges[1];
+          const badge3 = response.data.selected_badges[2];
+          const badge4 = response.data.selected_badges[3];
+          setSelectedBadges([
+            badgeImages[badge1],
+            badgeImages[badge2],
+            badgeImages[badge3],
+            badgeImages[badge4],
+          ]);
           setStudentId(response.data.studentId)
           const remainingXP = getRemainingXP(response.data.xp);
           updateXP(remainingXP, 1000);
@@ -125,16 +136,21 @@ const getRemainingXP = (xp) => {
         .catch(error => {
           console.log(error);
         });
+        
+   
     }, []);
 
 console.log(profile);
 console.log("logged user studentId is : "+studentId );
 
 //BADGE SELECTION FUNCTIONALITY SECTION
-const [selectedBadges, setSelectedBadges] = useState([basic, intermediate, advanced, rare]);
+
 const [popupVisible, setPopupVisible] = useState(false);
 const [activeBadge, setActiveBadge] = useState(null);
 const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+
+
+
 const badgeImages = {
   basic: basic,
   intermediate: intermediate,
@@ -145,6 +161,7 @@ const badgeImages = {
   nft1: nft1,
   nft2: nft2,
 };
+
 const [badgeStatus, setBadgeStatus] = useState({
   basic: true,
   intermediate: true,
@@ -180,13 +197,34 @@ const handleBadgeClick = (e, badgeName) => {
 };
 
 //function places active badge at index of selectedBadges array
-const handlePopupClick = (index) => {
+const handlePopupClick = async (index) => {
   setSelectedBadges((prevBadges) => {
+    
     const newBadges = [...prevBadges];
     newBadges[index] = badgeImages[activeBadge];
     return newBadges;
   });
   setPopupVisible(false);
+
+  try {
+    const url = "http://localhost:8080/saveSelectedBadges";
+    
+    const payload = {
+      badgeName: activeBadge,
+      badgeIndex: index,
+      studentId: profile.studentId, // assuming the studentId is available in the profile object
+    };
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+    const response = await axios.post(url, payload, { headers });
+    console.log(response.data);
+   
+  } catch (error) {
+    console.error(error);
+    alert("Failed to update badge.");
+  }
 };
 
 const renderPopup = () => {
@@ -205,6 +243,7 @@ const renderPopup = () => {
     borderRadius: "5px",
     padding: "5px",
   };
+  
 
 //connects the handlePopupClick to the onclick event of the const 'renderPopUp
   return (
@@ -217,6 +256,7 @@ const renderPopup = () => {
     </div>
   );
 };
+
 
 return (
     
