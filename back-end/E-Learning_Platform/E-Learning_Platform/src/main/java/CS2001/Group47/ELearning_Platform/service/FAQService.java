@@ -11,22 +11,13 @@ import CS2001.Group47.ELearning_Platform.repository.FAQRepository;
 @Service
 public class FAQService{
   
-    List<FAQ> getAllFaqs()
+    @Autowired
+    FAQRepository faqRepository;
 
-}
-@Service
-class FAQServiceImpl implements FAQService {
-  
-    //@Autowired
-    //FAQRepository faqRepository;
-
-    public List<FAQ> findFAQ(FAQ faq){
-        return faqRepository.findFAQ();
+    public List<FAQ> getFAQ(FAQ faq){
+        return faqRepository.findAll();
     }
 
 
-
-   
-
-
 }
+
