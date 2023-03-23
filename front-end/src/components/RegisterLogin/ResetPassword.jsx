@@ -38,6 +38,7 @@ function ResetPassword() {
           if (res.status === 200) {
             fireAlert();
             setEmail("");
+            setEmailErrorMessage("");
           }
         })
         .catch((error) => {
@@ -62,11 +63,9 @@ function ResetPassword() {
               onSubmit={handleEmailSubmit}
             >
               <h2 className="form-title">Reset Password</h2>
-              {emailSuccess ? (
-                <p className="emailSuccess">{emailSuccess}</p>
-              ) : (
-                emailErrorMessage && <p>{emailErrorMessage}</p>
-              )}
+              {emailSuccess
+                ? ""
+                : emailErrorMessage && <p>{emailErrorMessage}</p>}
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input
