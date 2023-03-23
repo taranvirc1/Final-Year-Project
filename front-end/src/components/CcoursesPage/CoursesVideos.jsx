@@ -102,10 +102,10 @@ function CoursesVideos() {
           headers: { Authorization: `Bearer ${jwt}` },
         })
         .then((d) => {
-          const reviewsCopy = [...reviews];
+         /* const reviewsCopy = [...reviews];
           const i = reviewsCopy.findIndex((review) => review.ratingID === d.id);
           reviewsCopy[i] = d;
-          setReviews(reviewsCopy);
+          setReviews(reviewsCopy);*/
 
           setReview({
             courseID: "1",
@@ -340,7 +340,7 @@ function CoursesVideos() {
         headers: { Authorization: `Bearer ${jwt}` },
       })
       .then((response) => {
-        console.log(response.data);
+      //  console.log(response.data);
 
         setVideos(response.data);
       })
@@ -592,7 +592,7 @@ function CoursesVideos() {
                     className={index <= (hover || ratingStars) ? "on" : "off"}
                     onClick={() => onStarsClick(index)}
                     onMouseEnter={() => setHover(index)}
-                    // onMouseLeave={() => setHover(ratingStars)}
+                     onMouseLeave={() => setHover(ratingStars)}
                     name="ratingStars"
                     value={review.ratingStars}
                     // onChange={(e) =>  onInputChange(e.target.value)}
