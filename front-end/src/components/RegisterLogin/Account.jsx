@@ -16,6 +16,7 @@ function Account() {
   const today = new Date().toISOString().slice(0, 10);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginErrorMessages, setLoginErrorMessages] = useState("");
@@ -37,6 +38,13 @@ function Account() {
 
     // clear the interval value when reaching zero
     return () => clearInterval(interval);
+  }, [timeRemaining, disabled]);
+
+  useEffect(() => {
+    if (timeRemaining === 0) {
+      // enable button when timer reaches zero
+      setDisabled(false);
+    }
   }, [timeRemaining]);
 
   const login = () => {
@@ -105,6 +113,7 @@ function Account() {
         });
       if (validLoginAttempts === 2) {
         setTimeRemaining(30);
+        setDisabled(true);
       }
     }
   };
@@ -243,6 +252,7 @@ function Account() {
                 type="submit"
                 value="Login"
                 className="account-btn solid"
+                disabled={disabled}
               />
               {/* show reset timer unless it reaches zero */}
               {timeRemaining > 0 && (
