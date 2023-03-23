@@ -16,7 +16,6 @@ function Account() {
   const today = new Date().toISOString().slice(0, 10);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [validLoginAttempts, setValidLoginAttempts] = useState(0);
-  const [disabled, setDisabled] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginErrorMessages, setLoginErrorMessages] = useState("");
@@ -38,13 +37,6 @@ function Account() {
 
     // clear the interval value when reaching zero
     return () => clearInterval(interval);
-  }, [timeRemaining, disabled]);
-
-  useEffect(() => {
-    if (timeRemaining === 0) {
-      // enable button when timer reaches zero
-      setDisabled(false);
-    }
   }, [timeRemaining]);
 
   const login = () => {
@@ -113,7 +105,6 @@ function Account() {
         });
       if (validLoginAttempts === 2) {
         setTimeRemaining(30);
-        setDisabled(true);
       }
     }
   };
@@ -129,88 +120,43 @@ function Account() {
     setIsSignUpClick(false);
   };
 
-  const indicator = document.querySelector(".pass-indicator");
-  const input = document.querySelector(".pass");
-  const weak = document.querySelector(".weak");
-  const medium = document.querySelector(".medium");
-  const strong = document.querySelector(".strong");
-  const text = document.querySelector(".pass-text");
-  const showPass = document.querySelector(".show-pass");
+  const [no, setNo] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
   const passRegexWeak = /[a-z]/;
   const passRegexMedium = /\d+/;
   const passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
-  var no;
 
-  const passwordIndicator = () => {
-    if (input.value !== "") {
-      indicator.style.display = "block";
-      indicator.style.display = "flex";
+  function checkPasswordStrength() {
+    if (values.password !== "") {
       if (
-        input.value.length <= 3 &&
-        (input.value.match(passRegexWeak) ||
-          input.value.match(passRegexMedium) ||
-          input.value.match(passRegexStrong))
+        values.password.length <= 3 &&
+        (values.password.match(passRegexWeak) ||
+          values.password.match(passRegexMedium) ||
+          values.password.match(passRegexStrong))
       )
-        no = 1;
+        setNo(1);
       if (
-        input.value.length >= 6 &&
-        ((input.value.match(passRegexWeak) &&
-          input.value.match(passRegexMedium)) ||
-          (input.value.match(passRegexMedium) &&
-            input.value.match(passRegexStrong)) ||
-          (input.value.match(passRegexWeak) &&
-            input.value.match(passRegexStrong)))
+        values.password.length >= 6 &&
+        ((values.password.match(passRegexWeak) &&
+          values.password.match(passRegexMedium)) ||
+          (values.password.match(passRegexMedium) &&
+            values.password.match(passRegexStrong)) ||
+          (values.password.match(passRegexWeak) &&
+            values.password.match(passRegexStrong)))
       )
-        no = 2;
+        setNo(1 && 2);
       if (
-        input.value.length >= 6 &&
-        input.value.match(passRegexWeak) &&
-        input.value.match(passRegexMedium) &&
-        input.value.match(passRegexStrong)
+        values.password.length >= 6 &&
+        values.password.match(passRegexWeak) &&
+        values.password.match(passRegexMedium) &&
+        values.password.match(passRegexStrong)
       )
-        no = 3;
-      if (no === 1) {
-        weak.classList.add("active");
-        text.style.display = "block";
-        text.textContent = "Your password is too weak";
-        text.classList.add("weak");
-      }
-      if (no === 2) {
-        medium.classList.add("active");
-        text.textContent = "Your password is medium";
-        text.classList.add("medium");
-      } else {
-        medium.classList.remove("active");
-        text.classList.remove("medium");
-      }
-      if (no === 3) {
-        weak.classList.add("active");
-        medium.classList.add("active");
-        strong.classList.add("active");
-        text.textContent = "Your password is strong";
-        text.classList.add("strong");
-      } else {
-        strong.classList.remove("active");
-        text.classList.remove("strong");
-      }
-      showPass.style.display = "block";
-      showPass.onclick = function () {
-        if (input.type === "password") {
-          input.type = "text";
-          showPass.textContent = "HIDE";
-          showPass.style.color = "#acacac";
-        } else {
-          input.type = "password";
-          showPass.textContent = "SHOW";
-          showPass.style.color = "#000";
-        }
-      };
+        setNo(1 && 2 && 3);
     } else {
-      indicator.style.display = "none";
-      text.style.display = "none";
-      showPass.style.display = "none";
+      setNo(null);
     }
-  };
+  }
 
   return (
     <div className="body">
@@ -248,11 +194,11 @@ function Account() {
                 />
               </div>
               {/* Redirect to home page after login */}
+              {/* <Link to="/"> */}
               <input
                 type="submit"
                 value="Login"
                 className="account-btn solid"
-                disabled={disabled}
               />
               {/* show reset timer unless it reaches zero */}
               {timeRemaining > 0 && (
@@ -261,14 +207,27 @@ function Account() {
                   again.
                 </p>
               )}
+              {/* <p>
+                {timerActive
+                  ? `Time remaining: ${timeRemaining}`
+                  : "Timer not started"}
+              </p> */}
+              {/* </Link> */}
               {/* Link to reset password form when user forgets password */}
               <Link to="/resetPassword" className="forgot">
+                {/* <a href="/" className="forgot"> */}
                 Forgot your password?
+                {/* </a> */}
               </Link>
             </form>
 
             {/* Signup form which contains name, dob, country, phone, email and password */}
-            <form className="sign-up-form" noValidate onSubmit={handleSubmit}>
+            <form
+              // action="#"
+              className="sign-up-form"
+              noValidate
+              onSubmit={handleSubmit}
+            >
               <h2 className="form-title">Sign up</h2>
               <div className="input-field">
                 <i className="fas fa-user"></i>
@@ -302,6 +261,7 @@ function Account() {
                   className="date"
                   type="date"
                   name="dob"
+                  // min={minDate}
                   max={today}
                   value={values.dob}
                   onChange={handleChange}
@@ -350,7 +310,7 @@ function Account() {
                 : ""}
               <div className="input-field">
                 <i className="fas fa-lock"></i>
-                <input
+                {/* <input
                   className="pass"
                   type="password"
                   name="password"
@@ -358,15 +318,49 @@ function Account() {
                   onChange={handleChange}
                   onKeyUp={passwordIndicator}
                   placeholder="Password*"
+                /> */}
+                <input
+                  className="pass"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onKeyUp={checkPasswordStrength}
+                  placeholder="Password*"
                 />
-                <span className="show-pass">SHOW</span>
+                <span
+                  className="show-pass"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  <i
+                    className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}
+                  ></i>
+                  {/* {showPassword ? "HIDE" : "SHOW"} */}
+                </span>
+                {/* <span className="show-pass">SHOW</span> */}
               </div>
-              <div className="pass-indicator">
+              {values.password && (
+                <div className="pass-indicator">
+                  <span className={`weak ${no === 1 ? "active" : ""}`}></span>
+                  <span className={`medium ${no === 2 ? "active" : ""}`}></span>
+                  <span className={`strong ${no === 3 ? "active" : ""}`}></span>
+                </div>
+              )}
+              {no === 1 && (
+                <div className="pass-text weak">Your password is too weak</div>
+              )}
+              {no === 2 && (
+                <div className="pass-text medium">Your password is medium</div>
+              )}
+              {no === 3 && (
+                <div className="pass-text strong">Your password is strong</div>
+              )}
+              {/* <div className="pass-indicator">
                 <span className="weak"></span>
                 <span className="medium"></span>
                 <span className="strong"></span>
               </div>
-              <div className="pass-text"></div>
+              <div className="pass-text">Yours password is too weak</div> */}
               {errors
                 ? errors.password && showErrors && <p>{errors.password}</p>
                 : ""}
@@ -385,7 +379,9 @@ function Account() {
                   showErrors && <p>{errors.confirmPassword}</p>
                 : ""}
               {/* Link to confirmation page after sign up */}
+              {/* <Link to="/confirmAccount"> */}
               <input type="submit" className="account-btn" value="Sign up" />
+              {/* </Link> */}
             </form>
           </div>
         </div>

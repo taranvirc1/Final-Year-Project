@@ -131,25 +131,25 @@ function ForumLanding() {
     
     <div className='LandingOptions'>
         
-      <a className="LandingSort">
-        
-        <label for="lsortbtn"><img src={SortIcon}/></label>               
-        <input type="checkbox" id="lsortbtn"/> 
-        
-        <ul className="landingsort-optn">
-          <li><a href="#!" onClick={oldestthreadsort}>Oldest Threads</a></li>
-          <li><a href="#!" onClick={latestthreadsort}>Last Updated</a></li>
+        <a className="LandingSort">
           
-        </ul>
+          <label for="lsortbtn"><img src={SortIcon}/></label>               
+          <input type="checkbox" id="lsortbtn"/> 
+          
+          <ul className="landingsort-optn">
+            <li><a href="#!" onClick={oldestthreadsort}>Oldest Threads</a></li>
+            <li><a href="#!" onClick={latestthreadsort}>Last Updated</a></li>
+            
+          </ul>
 
-      </a>
-      <Link to="/Search_thread">
-        <a href="/Search_thread"><img src={SearchIcon}/></a>
-      </Link>
-      
-      <Link to="/Create_forum">
-        <a href="/"><img src={CreateIcon}/></a>
-      </Link>
+        </a>
+        <Link to="/Search_thread">
+          <a href="/Search_thread"><img src={SearchIcon}/></a>
+        </Link>
+        
+        <Link to="/Create_forum">
+          <a href="/"><img src={CreateIcon}/></a>
+        </Link>
           
     </div>
     <section className='Thread-List'>

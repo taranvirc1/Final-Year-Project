@@ -316,7 +316,28 @@ public class StudentService {
 		}
 	}
 	 
-	
+	public void initializeSelectedBadges(Student user) {
+		List<String> selectedBadges = user.getSelected_badges();
+		while (selectedBadges.size() < 4) {
+			selectedBadges.add(null);
+		}
+		user.setSelected_badges(selectedBadges);
+	}
 
+	public Student updateSelectedBadges(Integer userId, String badgeName, int badgeIndex) {
+		Optional<Student> userOptional = studentRepository.findById(userId);
+		if (userOptional.isPresent()) {
+			Student user = userOptional.get();
+			
+			initializeSelectedBadges(user); // Call the method to ensure the list has at least 4 elements
+			
+			List<String> selectedBadges = user.getSelected_badges();
+			selectedBadges.set(badgeIndex, badgeName);
+			user.setSelected_badges(selectedBadges);
+			return studentRepository.save(user);
+		} else {
+			throw new RuntimeException("User not found");
+		}
+	}
 
 }

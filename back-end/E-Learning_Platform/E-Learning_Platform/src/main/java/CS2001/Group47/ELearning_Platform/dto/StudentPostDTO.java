@@ -1,6 +1,8 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class StudentPostDTO {
 
@@ -21,6 +23,7 @@ public class StudentPostDTO {
     String instagram;
     String linkedIn;
     String username;
+    List<String> selectedBadges;
 
     public StudentPostDTO(String username, String twitter, String instagram, String linkedIn, String role,
             String optionValue, String bio, byte[] avatar,byte[] backavatar, String firstName,
@@ -29,7 +32,8 @@ public class StudentPostDTO {
             String dateOfBirth,
             String country,
             String phone, String email,
-            String password) {
+            String password,
+            List<String> selectedBadges) {
         super();
         this.backavatar = backavatar;
         this.username = username;
@@ -48,6 +52,7 @@ public class StudentPostDTO {
         this.phone = phone;
         this.email = email;
         this.password = password;
+        this.selectedBadges = selectedBadges;
     }
 
     public byte[] getBackavatar() {
@@ -186,6 +191,14 @@ public class StudentPostDTO {
         this.password = password;
     }
 
+    public List<String> getSelectedBadges() {
+        return selectedBadges;
+    }
+    
+    public void setBadges(List<String> selectedBadges) {
+        this.selectedBadges = selectedBadges;
+    }
+
     @Override
     public String toString() {
         return "StudentPostDTO [firstName=" + "username=" + username + "backavatar=" + backavatar + "role=" + role + firstName + "twitter=" + twitter
@@ -194,7 +207,7 @@ public class StudentPostDTO {
                 + "profile=" + avatar
                 + ", lastName="
                 + lastName + ", dateoOfBirth=" + dateOfBirth
-                + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password=" + password + "]";
+                + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password=" + password + "selectedBadges=" + selectedBadges + "]";
     }
 
 }
