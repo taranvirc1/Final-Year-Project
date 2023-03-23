@@ -48,7 +48,8 @@ function SearchThread() {
           .then((resp) => {
             console.log(resp.data);
             setthreads(resp.data);
-            setshowresult(true);
+            resultcheck();
+            
           })
           .catch((error) => {
             console.error(error);
@@ -56,6 +57,17 @@ function SearchThread() {
     }
     
   }
+
+  const resultcheck = (e) => {
+    if (threads.length>0){
+      setshowresult(true);
+    }
+    else{
+      fireAlert("No results found","error")
+    }
+
+  }
+
 
 
   const latestthreadsort = (event) => {

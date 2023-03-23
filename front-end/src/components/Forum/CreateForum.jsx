@@ -31,6 +31,7 @@ function CreateForum() {
   console.log(threadName);
   console.log(fTags);
   const CreateLanding = (newthreadId) => {
+    fireAlert("New Thread Has Been Created", "success");
     localStorage.setItem("ThreadID", newthreadId);
     navigate("/Forum_page");
   };

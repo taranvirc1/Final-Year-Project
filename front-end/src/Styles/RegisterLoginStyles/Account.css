@@ -262,6 +262,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: #fff;
 }
 
+.account-btn:disabled {
+  background-color: #7692c1;
+  cursor: auto;
+}
+
 /* Styling for forgot password link the signin form */
 
 .forgot {
