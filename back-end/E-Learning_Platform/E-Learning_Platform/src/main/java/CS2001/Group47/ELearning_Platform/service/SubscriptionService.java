@@ -22,7 +22,7 @@ public class SubscriptionService {
 	}
 
 
-    public Iterable<Subscriptions> findSub(String subEmail, Integer threadId) {
+    public Subscriptions findSub(String subEmail, Integer threadId) {
 		return subscriptionRepository.findBySubEmailAndThreads_ThreadId(subEmail, threadId);
     }
     
