@@ -14,7 +14,7 @@ function Contact() {
     email: loggedInUser,
   };
 
- const jwt = localStorage.getItem("jwt");
+  const jwt = localStorage.getItem("jwt");
   const token = jwt;
   const headers = {
   Authorization: `Bearer ${token}`,
@@ -152,7 +152,6 @@ function Contact() {
         
                     <textarea id="briefMessage"
                      rows="6" 
-                    // placeholder={Contact && Contact.briefMessage}
                     placeholder="Please Enter A Short Description Of The Problem:"
                      value={Contact.briefMessage}
                   onChange={(e) => setBriefMessage(e.target.value)} 
