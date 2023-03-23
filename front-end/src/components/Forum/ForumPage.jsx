@@ -77,40 +77,36 @@ const subchecker = () => {
   for(var i = 0; i < subbed.length; i++) {
     if(subbed.subEmail===saveLoggedinUser){
       localStorage.setItem("subId",subbed.subId);
+      setSubButton("Subscribed");
+      setsubcolor("orange");
       return true;
     }
     else{
       localStorage.setItem("subId",0);
+      setSubButton("Subscribe");
+      setsubcolor("white");
       return false;
     }
   }
 }
 
-const subscriptiondata = (e) => {
+useEffect(() => {
   axios
   .get(`http://localhost:8080/getsubs/${saveThreadID}`, { headers })
 
     .then((resp) => {;
       setSubbed(...resp.data);
-      console.log(...resp.data.subId);
+      console.log(...resp.data);
       console.log("subbed data: "+subbed.subId);
       if (subbed){
         subchecker(subbed, saveLoggedinUser);
-        if(subchecker == true){
-          setSubButton("Subscribed");
-          setsubcolor("orange");
-        }
-        else{
-          setSubButton("Subscribe");
-          setsubcolor("white");
-        }
       }
       
     })
     .catch((error) => {
       console.error(error);
-});
-}
+    });
+}, []);
 
 const subscribe = (e) => {
   const saveThreadID = localStorage.getItem("ThreadID");
@@ -122,7 +118,10 @@ const subscribe = (e) => {
 
     .then((resp) => {
       console.log(resp.data);
-      subscriptiondata();
+
+      const message = "You are now Subscribed to this thread",
+        icon = "success";
+        fireAlert(message, icon);
 
       
     })
@@ -130,40 +129,32 @@ const subscribe = (e) => {
       console.error(error);
     }
   )
-  subscriptiondata();
 }
 const unsubscribe = (SubId) => {
     axios
     .delete(`http://localhost:8080/deleteSub/${SubId}`,{ headers })
     .then((response) => {
       if (response.data != null) {
-        // alert("deleted successfully ");
-        subscriptiondata();
       }
     })
     .catch((error) => {
       console.error(error);
     });
-    subscriptiondata();
   }
 
-  function subbuttonchange(){
-    if(SubButton==="Subscribed"){
-      confirmAlert("Are you sure you want to unsubscribe?","sub");
-      unsubscribe(subbed.subId);
-      
-    }
-    else if(SubButton ==="Subscribe"){
-      subscribe();
-      setSubButton("Subscribed");
-      setsubcolor("orange");
-      const message = "You are now Subscribed to this thread",
-        icon = "success";
-        fireAlert(message, icon);
-        
-    }
+function subbuttonchange(){
+  if(SubButton==="Subscribed"){
+    confirmAlert("Are you sure you want to unsubscribe?","sub");
+    unsubscribe(subbed.subId);
     
   }
+  else if(SubButton ==="Subscribe"){
+    subscribe();
+    console.log("test");
+      
+  }
+  
+}
 
 //Get current posts
 const endOffset = itemOffset + postsPerPage;
@@ -286,7 +277,6 @@ const newmessagehandle = (e) => {
   
 
   useEffect(() => {
-    subscriptiondata();
     messageloader();
     threadnameloader();
     
