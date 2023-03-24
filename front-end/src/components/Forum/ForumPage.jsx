@@ -9,6 +9,20 @@ import ReplyIcon from "../../images/forum/reply.png"
 import ProfileIcon from "../../images/forum/profile.png"
 import axios from 'axios'
 
+import BoldIcon from "../../images/forum/text-editor/bold.png"
+import ItalicIcon from "../../images/forum/text-editor/italic.png"
+import UnderlineIcon from "../../images/forum/text-editor/underline.png"
+import StrikethroughIcon from "../../images/forum/text-editor/strikethrough.png"
+import ColourWheelIcon from "../../images/forum/text-editor/colourwheel.png"
+import FontSizeIcon from "../../images/forum/text-editor/fontsize.png"
+import replyline from "../../images/forum/text-editor/replyline.png"
+import HyperlinkIcon from "../../images/forum/text-editor/hyperlink.png"
+import PhotoIcon from "../../images/forum/text-editor/photo.png"
+import EmojiIcon from "../../images/forum/text-editor/emoji.png"
+import ListIcon from "../../images/forum/text-editor/list.png"
+import TextAlignIcon from "../../images/forum/text-editor/textalign.png"
+import QuoteIcon from "../../images/forum/text-editor/quote.png"
+import SpoilerIcon from "../../images/forum/text-editor/spoiler.png"
 import ReactPaginate from 'react-paginate';
 import Swal from "sweetalert2";
 
@@ -29,12 +43,14 @@ function ForumPage() {
   const saveThreadID = localStorage.getItem("ThreadID");
   const saveLoggedinUser = localStorage.getItem("loggedInUser");
   const jwt = localStorage.getItem("jwt");
+
   const threadnameloader = (e) => {
     axios
     .get(`http://localhost:8080/threadid/${saveThreadID}`, { headers })
   
       .then((resp) => {
         setthreadName(resp.data.threadName);
+  setthreadtag(resp.data.fTags)
         setthreadtag(resp.data.fTags);
         console.log("Thread Name: " + threadName);
       })
@@ -164,7 +180,6 @@ const unsubscribe = (SubId) => {
     }
     
   }
-
 //Get current posts
 const endOffset = itemOffset + postsPerPage;
 const currentMessages = messages.slice(itemOffset, endOffset);
@@ -194,9 +209,9 @@ const fireAlert = (message, icon, nevigate) => {
   });
 };
 
-const confirmAlert = (message, alerttype, mId) => {
+const unSubAlert = (x) => {
   Swal.fire({
-    title: message,
+    title: "Do you want to unsubscribe from this thread?",
 
     showConfirmButton: true,
     showCancelButton: true,
@@ -208,22 +223,11 @@ const confirmAlert = (message, alerttype, mId) => {
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
 
-    if (alerttype === "sub"){
-      if (result.isConfirmed) {
-        setSubButton("Subscribe");
-        setsubcolor("white");
-        Swal.fire("You are now Unsubscribed", "", "success");
-      }
-    }
-    else if (alerttype === "message"){
-      if (result.isConfirmed) {
-        deleteMessage(mId);
-        Swal.fire("Message Deleted", "", "success");
-      }
-    }
+    if (result.isConfirmed) {
+      Swal.fire("You are now Unsubscribed", "", "success");
+    } else Swal.fire(" Cancelled", "", "error");
   });
 };
-
 
 
 const newmessagehandle = (e) => {
@@ -242,7 +246,9 @@ const newmessagehandle = (e) => {
   }
   else{
     axios
-    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId}, {headers})
+    .post("http://localhost:8080/messages/create", {newMessage,saveThreadID,studentId},
+      {headers: { Authorization: `Bearer ${jwt}` }},
+    )
     .then((res) => {
         console.log(res);
 })
@@ -258,35 +264,91 @@ const newmessagehandle = (e) => {
 
     });
   }
+    
+     
   }
-
-  const deleteMessage = (mId) => {
-    axios
-      .delete(`http://localhost:8080/deletemessage/${mId}`, {headers})
-      .then((response) => {
-        if (response.data != null) {
-          // alert("deleted successfully ");
-        }
-        messageloader();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-      messageloader();
-  };
 
   //subscribe button colour changer white to orange
   
   //subscribe button text changer "Subscribe" to "Subscribed"
   
-  
+  function subbuttonchange(){
+    if(SubButton==="Subscribed"){
+      unSubAlert();
+      setSubButton("Subscribe");
+      setsubcolor("white");
+
+    }
+    else{
+      setSubButton("Subscribed");
+      setsubcolor("orange");
+      const message = "You are now Subscribed to this thread",
+        icon = "success";
+        fireAlert(message, icon);
+    }
+    
+  }
+
+  // useEffect(() => {
+  //   const saveSubId = subbed.filter((item) => item.subEmail === saveLoggedinUser);
+  //   if(saveSubId){
+  //     console.log("subId saved"+saveSubId)
+  //   }
+  //   else{
+
+  //   }
+  // }, [subbed]);
 
   
 
+  // const subscriptiondata = (e) => {
+  //   axios
+  //   .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
   
+  //     .then((resp) => {
+  //       console.log(resp.data);
+  
+  //       setSubbed(resp.data);
+  //       console.log("getting subId: "+ subbed);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  // });
+  // }
+
+  // const subscribe = (e) => {
+  //   if(subbed){
+  //     axios
+  //     .delete(`http://localhost:8080/deleteSub/${s}`,{ headers })
+  //     .then((response) => {
+  //       if (response.data != null) {
+  //         // alert("deleted successfully ");
+  //       }
+  //       subbuttonchange();
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+      
+  //   }
+  //   else{
+      
+  //     axios
+  //     .get(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+    
+  //       .then((resp) => {
+  //         console.log(resp.data);
+  //         subbuttonchange();
+          
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       }
+  //     )
+  //   }
+  // }
 
   useEffect(() => {
-    subscriptiondata();
     messageloader();
     threadnameloader();
     
@@ -314,12 +376,24 @@ const newmessagehandle = (e) => {
       />
     </div>
     
-    {saveLoggedinUser && (
-      <div className='SubButton'>
+    <div className='PageOptions'>
+        
+      {/* <a className="PageSort">
+          
+          <label for="psortbtn"><img src={SortIcon}/></label>               
+          <input type="checkbox" id="psortbtn"/> 
+          
+          <ul class="pagesort-optn">
+            <li><a href="#">Last Updated</a></li>
+            <li><a href="#">Most Replies</a></li>
+          </ul>
+
+      </a> */}
+      <a>
         <button id="subbtn" style={{background:subcolor}} onClick={event=>{subbuttonchange();}}>{SubButton}</button>
-      </div>
-    )}
-    
+      </a> 
+          
+    </div>
     {currentMessages.map((item, index) => (
 
       <div className='Thread-Messages'>
@@ -335,23 +409,11 @@ const newmessagehandle = (e) => {
         </div>
         <div className='ThreadUser'>{item.students.firstName}</div>
         <div className='dateandreply'>
-          <div className='ThreadTime'>Posted on <span>{ (new Date(item.mDateCreated)).toLocaleDateString() }</span> at {item.mTimeCreated}</div>
-          
-          <div className='replydelete'>
-            {saveLoggedinUser === item.students.email && (
-                    <div
-                      className="DeleteReply"
-                      onClick={() => confirmAlert("Are you sure you want to delete this message?","message",item.messageID)}
-                    >
-                      <img src={DeleteIcon}/>
-                    </div>
-                  )}
-            <a href= "#replysection" className="ThreadReply">
-              <img src={ReplyIcon}/>
-              <label>Reply</label>
-            </a>
-          </div>
-          
+          <div className='ThreadTime'>Posted on {item.mDateCreated} at {item.mTimeCreated}</div>
+          <a href= "#replysection" className="ThreadReply">
+            <img src={ReplyIcon}/>
+            <label>Reply</label>
+          </a>
         </div>
         
       </div>

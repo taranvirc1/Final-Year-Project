@@ -2,21 +2,11 @@ import React, { useState } from "react";
 import forgotPassword from "../../images/login-register-icons/forgot_password.svg";
 import "../../Styles/RegisterLoginStyles/ResetPassword.css";
 import axios from "axios";
-import Swal from "sweetalert2";
 
 function ResetPassword() {
   const [email, setEmail] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
-
-  const fireAlert = () => {
-    Swal.fire({
-      title: `An email has been sent to ${email} with instructions to reset password!!!`,
-      icon: "success",
-    }).then(() => {
-      //
-    });
-  };
 
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
@@ -31,11 +21,16 @@ function ResetPassword() {
       );
     } else {
       axios
-        .post("http://localhost:5000/api/student/forgot-password", { email })
+        .post("http://localhost:5000/api/forgot-password", { email })
         .then((res) => {
           console.log(res);
           console.log(email);
           if (res.status === 200) {
+    alert(`Found email address. We have sent an email to ${email}`);
+            setEmailSuccess(
+              `An email has been sent to ${email} with instructions to reset password!!!`
+            );
+
             fireAlert();
             setEmail("");
             setEmailErrorMessage("");
@@ -44,6 +39,7 @@ function ResetPassword() {
         .catch((error) => {
           console.log(email);
           console.log(error);
+ alert("Email does not exist!!!");
           setEmailErrorMessage(
             "The email address you entered does not exist. Please, try again!"
           );
@@ -79,22 +75,22 @@ function ResetPassword() {
               <input
                 type="submit"
                 value="Send Reset Email"
-                className="account-btn"
+                class="account-btn"
               />
             </form>
           </div>
         </div>
 
-        <div className="reset-panels-container">
-          <div className="reset-panel reset-left-panel">
-            <div className="reset-panel-content">
+        <div class="reset-panels-container">
+          <div class="reset-panel reset-left-panel">
+            <div class="reset-panel-content">
               <h3>Forgot your password ?</h3>
               <p>
                 No problem, tech friend. Just enter your email and we'll send
                 you an reset email!
               </p>
             </div>
-            <img src={forgotPassword} className="image" alt="sign up logo" />
+            <img src={forgotPassword} class="image" alt="sign up logo" />
           </div>
         </div>
       </div>

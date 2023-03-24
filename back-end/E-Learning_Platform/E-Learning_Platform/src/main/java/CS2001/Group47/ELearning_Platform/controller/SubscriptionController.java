@@ -39,9 +39,7 @@ public class SubscriptionController {
         // Else create a thread with DTO
 
         Subscriptions newSub = new Subscriptions(
-            NewSubDTO.getSubEmail(),
-            threads);
-            subscriptionService.addSub(newSub);
+
         // Add thread through ThreadService
 
         // Return response entity with new thread and CREATED status

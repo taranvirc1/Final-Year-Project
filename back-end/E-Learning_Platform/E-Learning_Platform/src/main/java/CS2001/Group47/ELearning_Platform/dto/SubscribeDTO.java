@@ -3,46 +3,43 @@ package CS2001.Group47.ELearning_Platform.dto;
 import CS2001.Group47.ELearning_Platform.model.Subscriptions;
 
 public class SubscribeDTO {
-    String subEmail;
+    String email;
 
-    private Integer subId;
-    private	Integer threadId;
+    private int subId;
+    private	int threadId;
 
-    public SubscribeDTO(String subEmail, Integer subId, Integer threadId) {
-        this.subEmail = subEmail;
+    public SubscribeDTO(String email, int subId, int threadId) {
+        this.email = email;
         this.subId = subId;
         this.threadId = threadId;
     }
 
-    
 
-    public String getSubEmail() {
-        return subEmail;
     }
 
-    public void setSubEmail(String subEmail) {
-        this.subEmail = subEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Integer getSubId() {
+    public int getSubId() {
         return subId;
     }
 
-    public void setSubId(Integer subId) {
+    public void setSubId(int subId) {
         this.subId = subId;
     }
 
-    public Integer getThreadId() {
+    public int getThreadId() {
         return threadId;
     }
 
-    public void setThreadId(Integer threadId) {
+    public void setThreadId(int threadId) {
         this.threadId = threadId;
     }
 
     @Override
     public String toString() {
-        return "SubscribeDTO [subEmail=" + subEmail + ", subId=" + subId + ", threadId=" + threadId + "]";
+        return "SubscribeDTO [email=" + email + ", subId=" + subId + ", threadId=" + threadId + "]";
     }
 
     

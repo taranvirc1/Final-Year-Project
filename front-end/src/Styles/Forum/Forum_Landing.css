@@ -177,6 +177,9 @@ cursor: default;
     border-radius: 10px;
     border-color: rgb(75, 75, 75);
 }
+.thread-creatorname{
+    margin: 5px;
+=======
 
 .DeleteThread{
     display: inline;
@@ -211,8 +214,7 @@ cursor: default;
     font-size: 1.3rem;
     position: absolute;
     left: 1000px;
-    top:15px;
-}
+    top:15px;}
 .Stats{
     display: inline-block;
     float:right;
