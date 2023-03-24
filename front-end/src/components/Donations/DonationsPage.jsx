@@ -215,7 +215,7 @@ function DonationsPage() {
           </label>
 
           <label for="Eaddress">
-            Email Address:
+            Email Adress:
             <input
               type="text"
               id="Eaddress"

@@ -306,8 +306,8 @@ button.dropdown-btn {
 .ratingContainer {
   width: 300px;
   height: 330px;
-color:white;
-  background-color: #4749b9;
+
+  background-color: #6b6c9e;
   position: absolute;
   left: 55%;
   transform: translate(-50%, -50%);
@@ -340,12 +340,12 @@ color:white;
 }
 .ratingContainer .submitButton {
   position: relative;
-  background-color: #55c49f;
+  background-color: #a08bad;
   right: 30%;
   top: -13px;
 }
 .ratingContainer > h1 {
-  color: #f0eded;
+  color: #0e0c0c;
   font-size: 17px;
   text-align: center;
   margin-top: 10%;
