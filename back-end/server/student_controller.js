@@ -71,6 +71,7 @@ module.exports = {
 
     try {
       const student = await getStudentByResetToken(resetToken);
+      console.log("Line 74");
       console.log(student);
 
       if (!student) {
@@ -82,7 +83,7 @@ module.exports = {
       if (!student || student.reset_exp < new Date()) {
         return res.status(400).json({ message: "Invalid or expired token" });
       }
-      console.log(student.reset_exp);
+      console.log("Line 85: expiration: " + student.reset_exp);
 
       const enteredPassword = newPassword;
       console.log("Line 95: " + enteredPassword);
