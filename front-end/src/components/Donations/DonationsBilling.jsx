@@ -146,7 +146,7 @@ function DonationsBilling() {
     <div className="billingcontainer">
       <h1 className="billingtitle">Billing Information</h1>
 
-      <div class="buttons">
+      <div className="buttons">
         <button onClick={showForm}>Card</button>
         <button>
           {" "}
@@ -161,8 +161,8 @@ function DonationsBilling() {
         </button>
       </div>
 
-      <form class="billing-form" novalidate onSubmit={handleSubmit}>
-        <label for="Donation-Amount">
+      <form className="billing-form" noValidate onSubmit={handleSubmit}>
+        <label htmlFor="Donation-Amount">
           Donation Amount (£):{" "}
           <input
             type="text"
@@ -173,7 +173,7 @@ function DonationsBilling() {
           {errors.dAmount && <p>{errors.dAmount}</p>}
         </label>
 
-        <label for="billing-fname">
+        <label htmlFor="billing-fname">
           First Name:{" "}
           <input
             type="text"
@@ -184,7 +184,7 @@ function DonationsBilling() {
           {errors.billingFirstName && <p>{errors.billingFirstName}</p>}
         </label>
 
-        <label for="billing-lname">
+        <label htmlFor="billing-lname">
           Last Name:{" "}
           <input
             type="text"
@@ -195,59 +195,59 @@ function DonationsBilling() {
           {errors.billingLastName && <p>{errors.billingLastName}</p>}
         </label>
 
-        <label for="card-number">
+        <label htmlFor="card-number">
           Card number:
           <input
             type="text"
             id="cardNo"
             name="cardNo"
-            maxlength="16"
+            maxLength="16"
             value={cardNo}
             onChange={(e) => setCardNo(e.target.value)}
           />
           {errors.cardNo && <p>{errors.cardNo}</p>}
         </label>
 
-        <label for="CVV">
+        <label htmlFor="CVV">
           CVV:
           <input
             type="text"
             id="CVV"
             name="CVV"
-            maxlength="3"
+            maxLength="3"
             value={cvv}
             onChange={(e) => setCvv(e.target.value)}
           />
           {errors.cvv && <p>{errors.cvv}</p>}
         </label>
 
-        <label for="card-type">
+        <label htmlFor="card-type">
           Card type:
           <input
             type="text"
             id="cardType"
             name="cardType"
-            maxlength="16"
+            maxLength="16"
             value={cardType}
             onChange={(e) => setCardType(e.target.value)}
           />
           {errors.cardType && <p>{errors.cardType}</p>}
         </label>
 
-        <label for="expiry-date">
+        <label htmlFor="expiry-date">
           Expiry date:
           <input
             type="month"
             id="expiryDate"
             name="expiryDate"
-            maxlength="16"
+            maxLength="16"
             value={expiryDate}
             onChange={(e) => setExpiryDate(e.target.value)}
           />
           {errors.expiryDate && <p>{errors.expiryDate}</p>}
         </label>
 
-        <label for="country">
+        <label htmlFor="country">
           Country:{" "}
           <input
             type="text"
@@ -258,7 +258,7 @@ function DonationsBilling() {
           {errors.country && <p>{errors.country}</p>}
         </label>
 
-        <label for="billing-address">
+        <label htmlFor="billing-address">
           Address:{" "}
           <input
             type="text"
@@ -269,7 +269,7 @@ function DonationsBilling() {
           {errors.address && <p>{errors.address}</p>}
         </label>
 
-        <label for="billing-address2">
+        <label htmlFor="billing-address2">
           Address2:{" "}
           <input
             type="text"
@@ -280,7 +280,7 @@ function DonationsBilling() {
           {errors.address2 && <p>{errors.address2}</p>}
         </label>
 
-        <label for="city">
+        <label htmlFor="city">
           City:{" "}
           <input
             type="text"
@@ -291,7 +291,7 @@ function DonationsBilling() {
           {errors.city && <p>{errors.city}</p>}
         </label>
 
-        <label for="postal-code">
+        <label htmlFor="postal-code">
           Postal Code:{" "}
           <input
             type="text"

@@ -31,12 +31,12 @@ function UpdatePassword() {
   const strong = document.querySelector(".strong");
   const text = document.querySelector(".pass-text");
   const showPass = document.querySelector(".show-pass");
-  var passRegexWeak = /[a-z]/;
-  var passRegexMedium = /\d+/;
-  var passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+  const passRegexWeak = /[a-z]/;
+  const passRegexMedium = /\d+/;
+  const passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
   var no;
 
-  function passwordIndicator() {
+  const passwordIndicator = () => {
     if (input.value !== "") {
       indicator.style.display = "block";
       indicator.style.display = "flex";
@@ -105,7 +105,7 @@ function UpdatePassword() {
       text.style.display = "none";
       showPass.style.display = "none";
     }
-  }
+  };
 
   return (
     <div>
@@ -116,10 +116,7 @@ function UpdatePassword() {
               {/* Form that contains new password and confirm password fields */}
               <form className="sign-in-form" noValidate onSubmit={handleSubmit}>
                 <h2 className="form-title">Reset Password</h2>
-                {/* {updateSuccess && <p className="emailSuccess">{updateSuccess}</p>}
-              {errorMessage && <p>{errorMessage}</p>} */}
                 {error && <p>{error}</p>}
-                {success && <p className="emailSuccess">{success}</p>}
                 <div className="input-field">
                   <i className="fas fa-envelope"></i>
                   <input
@@ -130,23 +127,12 @@ function UpdatePassword() {
                     placeholder="Email*"
                   />
                 </div>
-                {/* <div className="input-field">
-                  <i className="fas fa-lock"></i>
-                  <input
-                    // className="pass"
-                    type="password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    // onKeyUp={passwordIndicator}
-                    placeholder="Current Password*"
-                  />
-                  {/* <span className="show-pass">SHOW</span>
-                </div> */}
                 <div className="input-field">
                   <i className="fas fa-lock"></i>
                   <input
                     className="pass"
                     type="password"
+                    name="newPassword"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     onKeyUp={passwordIndicator}
@@ -159,7 +145,7 @@ function UpdatePassword() {
                   <span className="medium"></span>
                   <span className="strong"></span>
                 </div>
-                <div className="pass-text">Yours password is too weak</div>
+                <div className="pass-text"></div>
                 <div className="input-field">
                   <i className="fas fa-lock"></i>
                   <input
@@ -170,9 +156,7 @@ function UpdatePassword() {
                   />
                 </div>
                 {/* Redirect to login form */}
-                {/* <Link to="/account"> */}
                 <input type="submit" className="account-btn" value="Change" />
-                {/* </Link> */}
               </form>
             </div>
           </div>

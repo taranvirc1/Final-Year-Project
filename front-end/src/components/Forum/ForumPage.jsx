@@ -37,6 +37,7 @@ function ForumPage() {
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
   const [subbed, setSubbed] = useState([]);
+  const [Subid, setSubid] = useState(0);
   const[SubButton, setSubButton] = useState("Subscribe");
   const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
@@ -49,7 +50,8 @@ function ForumPage() {
   
       .then((resp) => {
         setthreadName(resp.data.threadName);
-        setthreadtag(resp.data.fTags)
+  setthreadtag(resp.data.fTags)
+        setthreadtag(resp.data.fTags);
         console.log("Thread Name: " + threadName);
       })
       .catch((error) => {
@@ -80,14 +82,104 @@ const messageloader = (e) => {
       console.log(resp.data);
 
       setMessages(resp.data);
+      
     })
     .catch((error) => {
       console.error(error);
 });
 }
 
+const subchecker = () => {
+  for(var i = 0; i < subbed.length; i++) {
+    if(subbed.subEmail===saveLoggedinUser){
+      localStorage.setItem("subId",subbed.subId);
+      return true;
+    }
+    else{
+      localStorage.setItem("subId",0);
+      return false;
+    }
+  }
+}
 
+const subscriptiondata = (e) => {
+  axios
+  .get(`http://localhost:8080/getsubs/${saveThreadID}`, { headers })
 
+    .then((resp) => {;
+      setSubbed(...resp.data);
+      console.log(...resp.data.subId);
+      console.log("subbed data: "+subbed.subId);
+      if (subbed){
+        subchecker(subbed, saveLoggedinUser);
+        if(subchecker == true){
+          setSubButton("Subscribed");
+          setsubcolor("orange");
+        }
+        else{
+          setSubButton("Subscribe");
+          setsubcolor("white");
+        }
+      }
+      
+    })
+    .catch((error) => {
+      console.error(error);
+});
+}
+
+const subscribe = (e) => {
+  const saveThreadID = localStorage.getItem("ThreadID");
+  const saveLoggedinUser = localStorage.getItem("loggedInUser");
+  console.log(saveLoggedinUser);
+  console.log(saveThreadID);
+  axios
+  .post(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+
+    .then((resp) => {
+      console.log(resp.data);
+      subscriptiondata();
+
+      
+    })
+    .catch((error) => {
+      console.error(error);
+    }
+  )
+  subscriptiondata();
+}
+const unsubscribe = (SubId) => {
+    axios
+    .delete(`http://localhost:8080/deleteSub/${SubId}`,{ headers })
+    .then((response) => {
+      if (response.data != null) {
+        // alert("deleted successfully ");
+        subscriptiondata();
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+    subscriptiondata();
+  }
+
+  function subbuttonchange(){
+    if(SubButton==="Subscribed"){
+      confirmAlert("Are you sure you want to unsubscribe?","sub");
+      unsubscribe(subbed.subId);
+      
+    }
+    else if(SubButton ==="Subscribe"){
+      subscribe();
+      setSubButton("Subscribed");
+      setsubcolor("orange");
+      const message = "You are now Subscribed to this thread",
+        icon = "success";
+        fireAlert(message, icon);
+        
+    }
+    
+  }
 //Get current posts
 const endOffset = itemOffset + postsPerPage;
 const currentMessages = messages.slice(itemOffset, endOffset);

@@ -6,7 +6,6 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
 
 function DonationsPage() {
-
   const [loggedInUser, setLoggedinUser] = useOutletContext();
   const params = {
     email: loggedInUser,
@@ -18,32 +17,12 @@ function DonationsPage() {
     Authorization: `Bearer ${token}`,
   };
 
-  const [donator, setDonator] = useState([]);
-
-  useEffect(() => { 
-    axios
-      .get("http://localhost:8080/user/findByEmail", {headers, params})
-      .then((response) => {
-        setDonator(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [loggedInUser]);
-
- 
-
-  const FN= donator && donator.firstName;
-  const LN = donator && donator.lastName;
-  const NU = donator && donator.phone;
-  const EM = donator && donator.email;
-
-
+  const [donator, setDonator] = useState({});
   const [donatorTitle, setDonatorTitle] = useState("");
-  const [firstName, setFirstName] = useState(FN);
-  const [lastName, setLastName] = useState(LN);
-  const [phone, setPhone] = useState(NU);
-  const [email, setEmail] = useState(EM);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [howHear, setHowHear] = useState("");
   const [motivate, setMotivate] = useState("");
   const [errors, setErrors] = useState({
@@ -56,6 +35,20 @@ function DonationsPage() {
     motivate: "",
   });
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/user/findByEmail", { headers, params })
+      .then((response) => {
+        setDonator(response.data);
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+        setPhone(response.data.phone);
+        setEmail(response.data.email);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [loggedInUser]);
 
   const navigate = useNavigate();
   const Next = () => {
@@ -84,11 +77,11 @@ function DonationsPage() {
       }
       if (!phone) {
         newErrors.phone = "Phone number is required";
-      } else if (!/^\d{11}$/.test(phone)) {
+      } else if (phone.replace(/[ ()+-]/g, "").length < 10) {
         newErrors.phone = "Phone number is invalid";
       }
       if (!howHear) {
-        newErrors.howHear= "This field is required";
+        newErrors.howHear = "This field is required";
       }
       if (!motivate) {
         newErrors.motivate = "This field is required";
@@ -134,7 +127,6 @@ function DonationsPage() {
         console.log(error);
         alert("Error submitting donation form");
       });
-
   };
 
   return (
@@ -163,7 +155,7 @@ function DonationsPage() {
         <form className="donationsform" noValidate onSubmit={handleSubmit}>
           <h2 className="formtitle">Your Information</h2>
 
-          <label for="title">
+          <label htmlFor="title">
             Title:
             <input
               type="text"
@@ -175,7 +167,7 @@ function DonationsPage() {
             {errors.donatorTitle && <p>{errors.donatorTitle}</p>}
           </label>
 
-          <label for="fname">
+          <label htmlFor="fname">
             First name:
             <input
               type="text"
@@ -188,7 +180,7 @@ function DonationsPage() {
             {errors.firstName && <p>{errors.firstName}</p>}
           </label>
 
-          <label for="lname">
+          <label htmlFor="lname">
             Last name:
             <input
               type="text"
@@ -201,7 +193,7 @@ function DonationsPage() {
             {errors.lastName && <p>{errors.lastName}</p>}
           </label>
 
-          <label for="Pnumber">
+          <label htmlFor="Pnumber">
             Phone number:
             <input
               type="text"
@@ -214,8 +206,10 @@ function DonationsPage() {
             {errors.phone && <p>{errors.phone}</p>}
           </label>
 
-          <label for="Eaddress">
+ <label for="Eaddress">
             Email Adress:
+          <label htmlFor="Eaddress">
+            Email Address:
             <input
               type="text"
               id="Eaddress"
@@ -227,7 +221,7 @@ function DonationsPage() {
             {errors.email && <p>{errors.email}</p>}
           </label>
 
-          <label for="">
+          <label htmlFor="">
             How did you hear about us?
             <input
               type="text"
@@ -239,7 +233,7 @@ function DonationsPage() {
             {errors.howHear && <p>{errors.howHear}</p>}
           </label>
 
-          <label for="">
+          <label htmlFor="">
             What motivated you to donate today?
             <input
               type="text"

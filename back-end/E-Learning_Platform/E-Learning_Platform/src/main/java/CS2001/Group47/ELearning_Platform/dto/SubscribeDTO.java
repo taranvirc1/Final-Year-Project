@@ -1,5 +1,7 @@
 package CS2001.Group47.ELearning_Platform.dto;
 
+import CS2001.Group47.ELearning_Platform.model.Subscriptions;
+
 public class SubscribeDTO {
     String email;
 
@@ -12,8 +14,7 @@ public class SubscribeDTO {
         this.threadId = threadId;
     }
 
-    public String getEmail() {
-        return email;
+
     }
 
     public void setEmail(String email) {
