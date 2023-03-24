@@ -19,7 +19,7 @@ module.exports = {
   updatePasswordByEmail: (email, password) => {
     return new Promise((resolve, reject) => {
       db.query(
-        "UPDATE student SET password = ? WHERE email = ?",
+        "UPDATE student SET password = ?, reset_password_token = NULL, reset_exp = NULL WHERE email = ?",
         [password, email],
         (error, results) => {
           if (error) {
