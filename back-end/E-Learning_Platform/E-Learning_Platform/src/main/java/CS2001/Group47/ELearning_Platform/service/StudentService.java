@@ -315,8 +315,8 @@ public class StudentService {
 			throw new RuntimeException("User not found");
 		}
 	}
-	public Student getStudentByStudentId(Integer studentId) {
-		return studentRepository.findByStudentId(studentId);
-	}
+	 
 	
+
+
 }
