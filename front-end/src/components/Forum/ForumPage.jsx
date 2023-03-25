@@ -43,6 +43,7 @@ function ForumPage() {
         setthreadName(resp.data.threadName);
         setthreadtag(resp.data.fTags)
         subscriptiondata();
+        subscriptiondata();
         console.log("Thread Name: " + threadName);
       })
       .catch((error) => {
@@ -113,6 +114,23 @@ const subscriptiondata = (e) => {
         }
       }
       
+    })
+    .catch((error) => {
+      console.error(error);
+});
+}
+
+const subscriptiondata = (e) => {
+  axios
+  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
+
+    .then((resp) => {
+      console.log(resp.data);
+
+      setSubbed(resp.data);
+      getSubid(resp.data.subId);
+      console.log("getting subId: "+ subbed.subId);
+      console.log("getting subId: "+ saveSubId);
     })
     .catch((error) => {
       console.error(error);

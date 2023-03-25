@@ -18,6 +18,15 @@ function ResetPassword() {
     });
   };
 
+  const fireAlert = () => {
+    Swal.fire({
+      title: `An email has been sent to ${email} with instructions to reset password!!!`,
+      icon: "success",
+    }).then(() => {
+      //
+    });
+  };
+
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
   const handleEmailSubmit = (e) => {
