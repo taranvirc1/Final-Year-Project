@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,5 +65,15 @@ public class MessagesController {
     @RequestMapping("/messages/{threadId}")
     public Iterable<Messages>  getMessages( @PathVariable("threadId") Integer threadId) {
     return messagesRepository.findByThreads_ThreadId(threadId) ;
-}
+    }
+
+    @DeleteMapping("/deletemessage/{messageID}")
+
+    public String deletemessage(@PathVariable Integer messageID) {
+  
+      // Delete message by the the ID
+      messageService.deletemessage(messageID);
+      return "Message Deleted";
+  
+    }
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import CS2001.Group47.ELearning_Platform.exception.ResourceNotFoundException;
 import CS2001.Group47.ELearning_Platform.model.Threads;
 import CS2001.Group47.ELearning_Platform.repository.ThreadsRepository;
 
@@ -47,4 +48,9 @@ public class ThreadService {
 		return null;
 	}
 
+	public void deletethread(Integer threadId) {
+		Threads threads = threadsRepository.findById(threadId)
+				.orElseThrow(() -> new ResourceNotFoundException("threads", "threadId", threadId));
+                threadsRepository.delete(threads);
+	}
 }

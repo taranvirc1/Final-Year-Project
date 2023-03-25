@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import new_password from "../../images/login-register-icons/reset_email.svg";
+import Swal from "sweetalert2";
 
 function UpdatePassword() {
   const [email, setEmail] = useState("");
@@ -9,6 +11,33 @@ function UpdatePassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const Navigate = useNavigate();
+
+  const fireAlert = (message, icon, navigate) => {
+    Swal.fire({
+      title: message,
+      icon: icon,
+    }).then((result) => {
+      if (navigate) {
+        if (result.isConfirmed) {
+          Navigate("/account");
+        }
+      }
+    });
+  };
+
+  const fireAlert1 = (message, icon, navigate) => {
+    Swal.fire({
+      title: message,
+      icon: icon,
+    }).then((result) => {
+      if (navigate) {
+        if (result.isDismissed) {
+          //
+        }
+      }
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,8 +49,12 @@ function UpdatePassword() {
         email,
       }
     );
-    console.log(res.data);
-    setSuccess("Password changed successfully!!!");
+    if (res.status === 200) {
+      console.log(res.data);
+      fireAlert("Password updated successfully!!!", "success", "true");
+    } else {
+      fireAlert1("Password not updated!!!", "error", "false");
+    }
   };
 
   const indicator = document.querySelector(".pass-indicator");
@@ -120,7 +153,6 @@ function UpdatePassword() {
                 <div className="input-field">
                   <i className="fas fa-envelope"></i>
                   <input
-                    className="pass"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
