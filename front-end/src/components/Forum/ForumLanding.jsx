@@ -8,7 +8,8 @@ import axios from "axios";
 import SearchIcon from "../../images/forum/search.png"
 import CreateIcon from "../../images/forum/create.png"
 import SortIcon from "../../images/forum/sort.png"
-import ReplyIcon from "../../images/forum/reply.png"
+import DeleteIcon from "../../images/forum/delete.png"
+import Swal from "sweetalert2"
 
 function ForumLanding() {
   const [threads, setthreads] = useState([]);
@@ -16,11 +17,13 @@ function ForumLanding() {
   const [itemOffset, setItemOffset] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const jwt = localStorage.getItem("jwt");
+  const saveLoggedinUser = localStorage.getItem("loggedInUser");
   const navigate = useNavigate();
   const ViewForum = (item) => {
     localStorage.setItem("ThreadID", item);
     navigate("/Forum_page");
   };
+
 
   const headers = {
     Authorization: `Bearer ${jwt}`,
@@ -29,7 +32,7 @@ function ForumLanding() {
     setPostsPerPage(topicamount);
   };
 
-  useEffect(() => {
+  const threadloader = (e) => {
     axios
       .get(`http://localhost:8080/threads`, {headers,
       })
@@ -40,7 +43,7 @@ function ForumLanding() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+    }
 
 
   const latestthreadsort = (event) => {
@@ -63,6 +66,48 @@ function ForumLanding() {
     );
     setItemOffset(newOffset);
   };
+
+  
+
+  const confirmAlert = (message, tId) => {
+    Swal.fire({
+      title: message,
+  
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#ff0055",
+      cancelButtonColor: "#999999",
+      icon: "warning",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        deleteThread(tId);
+        Swal.fire("Topic Thread Deleted", "", "success");
+      }
+    });
+  };
+
+  const deleteThread = (tId) => {
+    axios
+      .delete(`http://localhost:8080/deletethread/${tId}`, {headers})
+      .then((response) => {
+        if (response.data != null) {
+          // alert("deleted successfully ");
+        }
+        threadloader();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      threadloader();
+  };
+
+  useEffect(() => {
+    threadloader();
+    
+  }, []);
 
   return (
     <>
@@ -121,8 +166,19 @@ function ForumLanding() {
           <ul className='tags'>
             <li>{item.fTags}</li>
           </ul>
+          <div className='thread-creator'>
+          By <span>{ (item.students.firstName).toUpperCase()} { (item.students.lastName).toUpperCase()}</span> 
+          </div>
+          {saveLoggedinUser === item.students.email && (
+                  <div
+                    className="DeleteThread"
+                    onClick={() => confirmAlert("Are you sure you want to delete this thread?",item.threadId)}
+                  >
+                    <img src={DeleteIcon}/>
+                  </div>
+                )}
           
-          <div className='thread-creatorname'>Started on {item.fDateCreated} at {item.fTimeCreated} By {item.students.firstName} {item.students.lastName} </div>
+          <div className='thread-time'>Started on <span>{ (new Date(item.fDateCreated)).toLocaleDateString() }</span> at {item.fTimeCreated}</div>
           
           
         </div>

@@ -63,7 +63,7 @@
 cursor: default;
 }
 
-.PageOptions{
+.SubButton{
     display: inline;
     float: right;
     position: relative;
@@ -71,24 +71,6 @@ cursor: default;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
     margin-right: 40px;
     height:0;
-}
-.PageOptions a{
-    display: inline-block;
-    background-color: rgb(255, 255, 255);
-    cursor: pointer;
-    block-size: fit-content;
-    
-}
-
-.PageOptions a img{
-    user-select: none;
-    position: relative;
-    margin:auto;
-    height:50px;
-    width:55px;
-    border: 2px solid black;
-    padding: 2px;
-    -webkit-user-drag: none;
 }
 
 
@@ -112,58 +94,6 @@ cursor: default;
     transform: scale(0.99);
 }
 
-.PageSort {
-    bottom:7px;
-    display:inline-block;
-    position: relative;
-    cursor: pointer;
-    height: 40px;
-    width : 55px;
-    user-select: none;
-
-}
-
-
-.PageSort:active{
-    background-color: orange;
-}
-.pagesort-optn {
-    width:225px;
-    height:0px;
-    overflow: hidden;
-    transition: height .4s ease;
-    list-style: none;
-    padding-left:0;
-    z-index: 1;
-    position: absolute;
-    background-color: black;
-    
-}
-.pagesort-optn :hover{
-    background-color: orange;
-}
-
-.pagesort-optn li a{
-    padding: 10px;
-    width: 100%;
-    background-color: black;
-    color:white;
-    font-size:20px;
-    text-decoration: none;
-    text-align: left;
-}
-
-#psortbtn { /* hidden checkbox*/
-    position: absolute; opacity: 0; height: 0px;
-}    
-
-#psortbtn:checked + .pagesort-optn {
-    height: 100px;
-    background-color: black;
-    z-index: 1;
-    position: absolute;
-    
-}
 
 .Thread-Messages{
     width: 96%;
@@ -218,15 +148,51 @@ cursor: default;
 }
 .dateandreply{
     display: inline;
-    float:right;
     margin-top: 10px;
+    
 }
 .ThreadTime{
+    position: absolute;
+    left:300px;
+    margin-top: 15px;
     display: inline-block;
     margin-left: 20px;
     font-family:'Poppins', sans-serif;
     font-size: 1.5rem;
 }
+
+.replydelete{
+    display: inline;
+    float: right;
+    padding: 10px 0px;
+}
+
+.DeleteReply{
+    display: inline;
+    border:1px outset black;
+    border-radius: 20px;
+    padding: 5px 5px;
+    font-size: 25px;
+    margin-left: 20px;
+    background-color: #6193ff;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.DeleteReply img{
+    height: 30px;
+    width: 35px;
+    -webkit-user-drag: none;
+}
+
+.DeleteReply:hover{
+    background-color: #4882ff;
+}
+.DeleteReply:active{
+    transform: scale(0.97);
+}
+
 .ThreadReply{
     display: inline;
     border:1px outset black;
@@ -291,28 +257,6 @@ cursor: default;
     border-style: none;
     outline-style: none;
     background-color: white;
-}
-
-.ThreadTextEditorTrash{
-    display: inline-block;
-    user-select: none;
-    padding-left: 35px;
-}
-.Threadtrashbutton{
-    margin-top: 20px;
-    border: 1px outset black;
-    border-radius: 10px;
-    padding: 0.25%;
-
-}
-.Threadtrashbutton:active {
-    background-color: #b1b1b1;
-    box-shadow: 0 1px #666;
-    transform:scale(0.99);
-  }
-.Threadtrashbutton img{
-    height:40px;
-    width:40px
 }
 
 .ThreadTextEditorReply{

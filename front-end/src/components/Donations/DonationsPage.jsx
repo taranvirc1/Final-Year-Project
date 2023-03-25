@@ -206,8 +206,6 @@ function DonationsPage() {
             {errors.phone && <p>{errors.phone}</p>}
           </label>
 
- <label for="Eaddress">
-            Email Adress:
           <label htmlFor="Eaddress">
             Email Address:
             <input
