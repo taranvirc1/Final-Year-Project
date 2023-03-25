@@ -1,15 +1,14 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React from 'react'
+import {Link} from "react-router-dom"
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import axios from "axios";
-import  "../../Styles/Forum/Search_Thread.css";
-import ReplyIcon from "../../images/forum/reply.png";
-import SearchIcon from "../../images/forum/search.png";
-import SortIcon from "../../images/forum/sort.png";
+import  "../../Styles/Forum/Search_Thread.css"
+import ReplyIcon from "../../images/forum/reply.png"
+import SearchIcon from "../../images/forum/search.png"
+import SortIcon from "../../images/forum/sort.png"
 import { red } from '@mui/material/colors';
-import Swal from "sweetalert2";
 
 function SearchThread() {
 
@@ -36,20 +35,16 @@ function SearchThread() {
     e.preventDefault();
     console.log(threadName);
     if (threadName === "") {
-      const message = "Please provide a thread title ",
-      icon = "error";
-      fireAlert(message, icon);
+      alert("Please fill in ");
     }
     else{
-      
       axios
         .get(`http://localhost:8080/threadName/${threadName}`, { headers })
 
           .then((resp) => {
             console.log(resp.data);
             setthreads(resp.data);
-            resultcheck();
-            
+            setshowresult(true);
           })
           .catch((error) => {
             console.error(error);
@@ -57,17 +52,6 @@ function SearchThread() {
     }
     
   }
-
-  const resultcheck = (e) => {
-    if (threads.length>0){
-      setshowresult(true);
-    }
-    else{
-      fireAlert("No results found","error")
-    }
-
-  }
-
 
 
   const latestthreadsort = (event) => {
@@ -91,17 +75,6 @@ function SearchThread() {
     setItemOffset(newOffset);
   };
 
-  const fireAlert = (message, icon) => {
-    Swal.fire({
-      container: "swal2-container",
-  
-      title: message,
-  
-      icon: icon,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-    });
-  };
   
   return (
     <div className='s-navbar-spacing'>

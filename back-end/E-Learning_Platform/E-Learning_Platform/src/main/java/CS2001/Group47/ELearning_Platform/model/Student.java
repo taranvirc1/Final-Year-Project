@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,6 +76,12 @@ public class Student implements Serializable {
 	@Column(name = "role")
 	private String role;
 
+	@ElementCollection
+    @CollectionTable(name = "selected_badges", joinColumns = @JoinColumn(name = "student_id"))
+    @Column(name = "selected_badges")
+    private List<String> selectedBadges = new ArrayList<>(4); 
+	
+
 	@Column(name = "twitter")
 	private String twitter;
 
@@ -131,6 +142,8 @@ public class Student implements Serializable {
 
 	private List<Messages> messages = new ArrayList<>();
 
+
+
 	public Student() {
 
 		super();
@@ -176,6 +189,7 @@ public class Student implements Serializable {
 		this.email = email;
 		this.password = password;
 		this.xp = xp;
+		this.selectedBadges = selectedBadges;
 
 	}
 
@@ -350,6 +364,8 @@ public class Student implements Serializable {
 	public void setRate_Reviews(List<Rate_Review> rate_Reviews) {
 		this.rate_Reviews = rate_Reviews;
 	}
+	
+    
 
 	
 
@@ -361,13 +377,21 @@ public class Student implements Serializable {
 		this.xp = xp;
 	}
 
+	public List<String> getSelected_badges() {
+        return selectedBadges;
+    }
+
+	public void setSelected_badges(List<String> selectedBadges) {
+        this.selectedBadges = selectedBadges;
+    }
+
 	@Override
 	public String toString() {
 		return "Student [id=" + studentId  + "profile=" + avatar+ "backavatar" + backavatar+ "twitter=" +twitter + "linkedIn="+ "username=" + username +linkedIn+ "instagram=" +instagram+ "role=" + role + "bio=" + bio + "optionValue=" + optionValue
 				+  ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", country=" + country + ", phone=" + phone + ", email=" + email + ", password="
-				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + ", xp=" + xp + "]";
+				+ password + ", createdAtDate=" + createdAtDate + ", updatedAt=" + updatedAt + ", xp=" + xp + "selectedBadges =" + selectedBadges +"]";
 	}
 	public List<Result> getResults() {         //for the result
         return results;

@@ -12,6 +12,6 @@ public interface SubscriptionRepository extends JpaRepository<Subscriptions, Int
     
     List <Subscriptions> findByThreads_ThreadId(Integer id);
 
-    Subscriptions findBySubEmailAndThreads_ThreadId(String subEmail, Integer threadId);
+    Iterable<Subscriptions> findBySubEmailAndThreads_ThreadId(String subEmail, Integer threadId);
 
 }

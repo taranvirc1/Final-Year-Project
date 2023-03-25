@@ -385,7 +385,9 @@ function Account() {
                   showErrors && <p>{errors.confirmPassword}</p>
                 : ""}
               {/* Link to confirmation page after sign up */}
+              {/* <Link to="/confirmAccount"> */}
               <input type="submit" className="account-btn" value="Sign up" />
+              {/* </Link> */}
             </form>
           </div>
         </div>

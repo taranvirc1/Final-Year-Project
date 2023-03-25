@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -132,5 +133,18 @@ public class StudentController {
     public List<Student> getRankings() {
 
         return studentRepository.findByOrderByXpDesc();
+    }
+    
+    @PostMapping ("/saveSelectedBadges")
+
+    public Student setSelectedBadges (@RequestBody Map<String, Object> payload) {
+        
+        String badgeName = (String) payload.get("badgeName");
+        int badgeIndex = (Integer)  payload.get("badgeIndex");
+        Integer studentId = (Integer) payload.get("studentId");
+        if (badgeName == null || studentId == null || payload.get("badgeIndex") == null) {
+            throw new RuntimeException("Required fields missing in payload");
+        }
+        return studentService.updateSelectedBadges(studentId, badgeName, badgeIndex);
     }
 }

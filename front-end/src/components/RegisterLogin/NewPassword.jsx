@@ -46,6 +46,7 @@ function NewPassword() {
             fireAlert();
             setNewPassword("");
             setConfirmPassword("");
+            setErrorMessage("");
           }
         })
         .catch((error) => {
@@ -62,12 +63,12 @@ function NewPassword() {
   const strong = document.querySelector(".strong");
   const text = document.querySelector(".pass-text");
   const showPass = document.querySelector(".show-pass");
-  var passRegexWeak = /[a-z]/;
-  var passRegexMedium = /\d+/;
-  var passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+  const passRegexWeak = /[a-z]/;
+  const passRegexMedium = /\d+/;
+  const passRegexStrong = /.[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
   var no;
 
-  function passwordIndicator() {
+  const passwordIndicator = () => {
     if (input.value !== "") {
       indicator.style.display = "block";
       indicator.style.display = "flex";
@@ -136,7 +137,7 @@ function NewPassword() {
       text.style.display = "none";
       showPass.style.display = "none";
     }
-  }
+  };
 
   return (
     <div className="body">
