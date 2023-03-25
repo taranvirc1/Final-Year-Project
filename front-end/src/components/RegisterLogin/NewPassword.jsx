@@ -68,7 +68,6 @@ function NewPassword() {
             fireAlert();
             setNewPassword("");
             setConfirmPassword("");
-            setErrorMessage("");
           }
         })
         .catch((error) => {
