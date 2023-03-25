@@ -85,6 +85,11 @@ function DonationsBilling() {
       } else if (!/^[a-zA-Z0-9\s,'-]+$/.test(address)) {
         newErrors.address = "Invalid address";
       }
+      if (!address2) {
+        newErrors.address2 = "Address 2 is required";
+      } else if (!/^[a-zA-Z0-9\s,'-]+$/.test(address2)) {
+        newErrors.address2 = "Invalid address";
+      }
       if (!postCode) {
         newErrors.postCode = "Postal code is required";
       } else if (!/^[a-zA-Z0-9]+$/.test(postCode)) {

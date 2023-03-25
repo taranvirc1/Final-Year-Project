@@ -262,9 +262,6 @@ function Account() {
                 </p>
               )}
               {/* Link to reset password form when user forgets password */}
-  <Link to="/updatePassword" className="forgot">
-                {/* <a href="/" className="forgot"> */}
-
               <Link to="/resetPassword" className="forgot">
                 Forgot your password?
               </Link>
