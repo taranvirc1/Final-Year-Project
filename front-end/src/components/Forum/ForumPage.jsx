@@ -87,7 +87,7 @@ const subscriptiondata = async(e) => {
       console.log(resp.data);
       console.log(subbed);
       console.log(resp.data.subId);
-      if (subbed){
+      if (resp.data.length>0){
         setSubButton("Subscribed");
         setsubcolor("orange");
         
