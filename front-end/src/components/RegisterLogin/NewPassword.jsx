@@ -13,26 +13,6 @@ function NewPassword() {
   const { resetToken } = useParams();
   const Navigate = useNavigate();
   console.log(resetToken);
-  // const navigate = useNavigate();
-  // const { id, token } = useParams();
-  // const baseUrl = "http://localhost:8080/reset_password";
-
-  // const userValid = async () => {
-  //   const res = await fetch(`/forgot_password/${id}/${token}`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-
-  //   const userData = await res.json();
-
-  //   if (userData.status === 201) {
-  //     console.log("user valid");
-  //   } else {
-  //     navigate("/");
-  //   }
-  // };
 
   const fireAlert = () => {
     Swal.fire({
@@ -63,16 +43,14 @@ function NewPassword() {
           console.log(resetToken);
           console.log(newPassword);
           if (response.status === 200) {
-            // alert("password has been updated successfully!!!");
-            // setUpdateSuccess("Password updated!!!");
             fireAlert();
             setNewPassword("");
             setConfirmPassword("");
+            setErrorMessage("");
           }
         })
         .catch((error) => {
           console.log(error);
-          // alert("Password not updated!!!");
           setErrorMessage("Problem updating password!!!");
         });
     }

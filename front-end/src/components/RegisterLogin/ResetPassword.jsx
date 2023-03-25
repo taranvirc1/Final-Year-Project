@@ -18,15 +18,6 @@ function ResetPassword() {
     });
   };
 
-  const fireAlert = () => {
-    Swal.fire({
-      title: `An email has been sent to ${email} with instructions to reset password!!!`,
-      icon: "success",
-    }).then(() => {
-      //
-    });
-  };
-
   const regexEmail = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$";
 
   const handleEmailSubmit = (e) => {
@@ -45,10 +36,6 @@ function ResetPassword() {
           console.log(res);
           console.log(email);
           if (res.status === 200) {
-            // alert(`Found email address. We have sent an email to ${email}`);
-            // setEmailSuccess(
-            //   `An email has been sent to ${email} with instructions to reset password!!!`
-            // );
             fireAlert();
             setEmail("");
             setEmailErrorMessage("");
@@ -57,7 +44,6 @@ function ResetPassword() {
         .catch((error) => {
           console.log(email);
           console.log(error);
-          // alert("Email does not exist!!!");
           setEmailErrorMessage(
             "The email address you entered does not exist. Please, try again!"
           );

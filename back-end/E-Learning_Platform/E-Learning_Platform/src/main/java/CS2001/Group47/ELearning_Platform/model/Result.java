@@ -9,58 +9,80 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "result")
 public class Result {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long id;
 
+  @Column(name = "score")
+  private int score;
 
+  @Column(name = "start_time")
+  private LocalDateTime startTime;
 
+  @Column(name = "end_time")
+  private LocalDateTime endTime;
 
-    @Column(name = "score")
-    private Integer score;
+  
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "studentId", referencedColumnName = "studentId")
+  private Student student;
+  
+  // constructors
+  public Result() {
+  }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
-private Student student;
+  public Result(int score, LocalDateTime startTime, LocalDateTime endTime, Student student) {
+    this.score = score;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.student = student;
+  }
 
-    public Result() {
-    }
+  // getters and setters
+  public Long getId() {
+    return id;
+  }
 
-    public Result(Student  student, Integer score) {
-        this.student = student;
-        this.score = score;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public int getScore() {
+    return score;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setScore(int score) {
+    this.score = score;
+  }
 
+  public LocalDateTime getStartTime() {
+    return startTime;
+  }
 
-    public Integer getScore() {
-        return score;
-    }
+  public void setStartTime(LocalDateTime startTime) {
+    this.startTime = startTime;
+  }
 
-    public void setScore(Integer score) {
-        this.score = score;
-    }
+  public LocalDateTime getEndTime() {
+    return endTime;
+  }
 
-   
-    public Student getStudent() {
-        return student;
-    }
-    
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-    
+  public void setEndTime(LocalDateTime endTime) {
+    this.endTime = endTime;
+  }
+
+  public Student getStudent() {
+    return student;
+  }
+
+  public void setStudent(Student student) {
+    this.student = student;
+  }
 }

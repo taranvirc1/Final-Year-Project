@@ -219,7 +219,8 @@ cursor: default;
     font-size: 1.3rem;
     position: absolute;
     left: 1000px;
-    top:15px;}
+    top:15px;
+}
 .Stats{
     display: inline-block;
     float:right;

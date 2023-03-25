@@ -14,6 +14,8 @@ public class SubscribeDTO {
         this.threadId = threadId;
     }
 
+    
+
     public String getSubEmail() {
         return subEmail;
     }

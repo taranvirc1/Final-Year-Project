@@ -28,22 +28,14 @@ function ForumPage() {
   const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
   const saveLoggedinUser = localStorage.getItem("loggedInUser");
-  const saveSubId = localStorage.getItem("SubId");
   const jwt = localStorage.getItem("jwt");
-
-  const getSubid = (item) => {
-    localStorage.setItem("SubId", item);
-  };
-
   const threadnameloader = (e) => {
     axios
     .get(`http://localhost:8080/threadid/${saveThreadID}`, { headers })
   
       .then((resp) => {
         setthreadName(resp.data.threadName);
-        setthreadtag(resp.data.fTags)
-        subscriptiondata();
-        subscriptiondata();
+        setthreadtag(resp.data.fTags);
         console.log("Thread Name: " + threadName);
       })
       .catch((error) => {
@@ -120,52 +112,25 @@ const subscriptiondata = (e) => {
 });
 }
 
-const subscriptiondata = (e) => {
-  axios
-  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
-
-    .then((resp) => {
-      console.log(resp.data);
-
-      setSubbed(resp.data);
-      getSubid(resp.data.subId);
-      console.log("getting subId: "+ subbed.subId);
-      console.log("getting subId: "+ saveSubId);
-    })
-    .catch((error) => {
-      console.error(error);
-});
-}
-
-const subscriptiondata = (e) => {
-  axios
-  .get(`http://localhost:8080/getsub/${saveLoggedinUser}/${saveThreadID}`, { headers })
-
-    .then((resp) => {
-      console.log(resp.data);
-
-      setSubbed(resp.data);
-      getSubid(resp.data.subId);
-      console.log("getting subId: "+ subbed.subId);
-      console.log("getting subId: "+ saveSubId);
-    })
-    .catch((error) => {
-      console.error(error);
-});
-}
-
 const subscribe = (e) => {
+  const saveThreadID = localStorage.getItem("ThreadID");
+  const saveLoggedinUser = localStorage.getItem("loggedInUser");
+  console.log(saveLoggedinUser);
+  console.log(saveThreadID);
   axios
-  .get(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+  .post(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
 
     .then((resp) => {
       console.log(resp.data);
+      subscriptiondata();
+
       
     })
     .catch((error) => {
       console.error(error);
     }
   )
+  subscriptiondata();
 }
 const unsubscribe = (SubId) => {
     axios
@@ -173,17 +138,19 @@ const unsubscribe = (SubId) => {
     .then((response) => {
       if (response.data != null) {
         // alert("deleted successfully ");
+        subscriptiondata();
       }
     })
     .catch((error) => {
       console.error(error);
     });
+    subscriptiondata();
   }
 
   function subbuttonchange(){
     if(SubButton==="Subscribed"){
       confirmAlert("Are you sure you want to unsubscribe?","sub");
-      unsubscribe(saveSubId);
+      unsubscribe(subbed.subId);
       
     }
     else if(SubButton ==="Subscribe"){
