@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 function UpdatePassword() {
   const [email, setEmail] = useState("");
+  // const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
