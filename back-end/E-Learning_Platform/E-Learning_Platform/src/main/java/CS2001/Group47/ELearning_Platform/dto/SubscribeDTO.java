@@ -4,17 +4,15 @@ import CS2001.Group47.ELearning_Platform.model.Subscriptions;
 
 public class SubscribeDTO {
     String subEmail;
+    private int subId;
+    private	int threadId;
 
-    private Integer subId;
-    private	Integer threadId;
-
-    public SubscribeDTO(String subEmail, Integer subId, Integer threadId) {
+    public SubscribeDTO(String subEmail, int subId, int threadId) {
         this.subEmail = subEmail;
         this.subId = subId;
         this.threadId = threadId;
     }
 
-    
 
     public String getSubEmail() {
         return subEmail;
@@ -24,19 +22,20 @@ public class SubscribeDTO {
         this.subEmail = subEmail;
     }
 
-    public Integer getSubId() {
+
+    public int getSubId() {
         return subId;
     }
 
-    public void setSubId(Integer subId) {
+    public void setSubId(int subId) {
         this.subId = subId;
     }
 
-    public Integer getThreadId() {
+    public int getThreadId() {
         return threadId;
     }
 
-    public void setThreadId(Integer threadId) {
+    public void setThreadId(int threadId) {
         this.threadId = threadId;
     }
 
@@ -45,6 +44,10 @@ public class SubscribeDTO {
         return "SubscribeDTO [subEmail=" + subEmail + ", subId=" + subId + ", threadId=" + threadId + "]";
     }
 
+
+
+
+    
     
 
 

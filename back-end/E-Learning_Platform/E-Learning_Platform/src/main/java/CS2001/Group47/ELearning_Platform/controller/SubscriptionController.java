@@ -1,5 +1,6 @@
 package CS2001.Group47.ELearning_Platform.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,10 @@ public class SubscriptionController {
         return new ResponseEntity<>(Optional.ofNullable(newSub), HttpStatus.CREATED);
 
     }
-    @RequestMapping("/getsubs/{threadId}")
-    public Iterable<Subscriptions>  getsubs( @PathVariable("threadId") Integer threadId) {
-    return subscriptionRepository.findByThreads_ThreadId(threadId) ;
-    }
+    // @RequestMapping("/getsubs/{threadId}")
+    // public List<Subscriptions>  getsubs( @PathVariable("threadId") Integer threadId) {
+    // return subscriptionRepository.findByThreads_ThreadId(threadId) ;
+    // }
 
     @RequestMapping("/getsub/{subEmail}/{threadId}")
     public Iterable<Subscriptions>  getSub( @PathVariable("subEmail") String subEmail, @PathVariable("threadId") Integer threadId) {
