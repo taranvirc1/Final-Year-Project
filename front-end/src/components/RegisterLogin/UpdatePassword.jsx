@@ -4,6 +4,7 @@ import new_password from "../../images/login-register-icons/reset_email.svg";
 
 function UpdatePassword() {
   const [email, setEmail] = useState("");
+  // const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
