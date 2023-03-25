@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import new_password from "../../images/login-register-icons/reset_email.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../Styles/RegisterLoginStyles/NewPassword.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function NewPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -10,7 +11,39 @@ function NewPassword() {
   const [errorMessage, setErrorMessage] = useState("");
   const [updateSuccess, setUpdateSuccess] = useState("");
   const { resetToken } = useParams();
+  const Navigate = useNavigate();
   console.log(resetToken);
+  // const navigate = useNavigate();
+  // const { id, token } = useParams();
+  // const baseUrl = "http://localhost:8080/reset_password";
+
+  // const userValid = async () => {
+  //   const res = await fetch(`/forgot_password/${id}/${token}`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+
+  //   const userData = await res.json();
+
+  //   if (userData.status === 201) {
+  //     console.log("user valid");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
+
+  const fireAlert = () => {
+    Swal.fire({
+      title: "Password has been updated successfully!!!",
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Navigate("/account");
+      }
+    });
+  };
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +54,7 @@ function NewPassword() {
       setErrorMessage("Passwords do not match!");
     } else {
       axios
-        .post(`http://localhost:5000/api/reset-password`, {
+        .post(`http://localhost:5000/api/student/reset-password`, {
           resetToken,
           newPassword,
         })
@@ -30,9 +63,8 @@ function NewPassword() {
           console.log(resetToken);
           console.log(newPassword);
           if (response.status === 200) {
-alert("password has been updated successfully!!!");
-            setUpdateSuccess("Password updated!!!");
-
+            // alert("password has been updated successfully!!!");
+            // setUpdateSuccess("Password updated!!!");
             fireAlert();
             setNewPassword("");
             setConfirmPassword("");
@@ -41,7 +73,7 @@ alert("password has been updated successfully!!!");
         })
         .catch((error) => {
           console.log(error);
- alert("Password not updated!!!");
+          // alert("Password not updated!!!");
           setErrorMessage("Problem updating password!!!");
         });
     }
