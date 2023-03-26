@@ -7,7 +7,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Swal from "sweetalert2";
 import axios from "axios";
-
+import "./Home.css";
 const Home = () => {
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -16,6 +16,7 @@ const Home = () => {
   const [studentId, setStudentId] = useState(null);
   const [scores, setScores] = useState([]);
   const Navigate = useNavigate();
+  const [scoreButtonClicked, setScoreButtonClicked] = useState(false);
 
   const jwt = localStorage.getItem("jwt");
 
@@ -38,7 +39,9 @@ const Home = () => {
     if (loggedInUser) {
       fetchStudentId(loggedInUser);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser, jwt]);
+  
 
   const fetchScores = async (studentId) => {
     if (!studentId) {
@@ -144,17 +147,22 @@ const Home = () => {
   onClick={() => {
     if (studentId) {
       fetchScores(studentId);
+      setScoreButtonClicked(true); 
     } else {
       console.error("Student ID is not available.");
     }
   }}
-  style={{ marginRight: 15, position: 'absolute', top: '260px', right: '15px', textTransform: 'none',  backgroundColor: '#1976d2'  }}
+  style={{ 
+  marginRight: 15, 
+  position: 'absolute', top: '260px',
+  right: '15px', textTransform: 'none',
+  backgroundColor: '#1976d2',  
+  }}
+  className="score-history-button"
+  
 >
-  Click here to see your all scores history as percentage once you login
+View Your Score History
 </Button>
-
-
-
       <Button
         variant="contained"
         color="primary"
@@ -166,6 +174,8 @@ const Home = () => {
     </div>
   </div>
   <div className="score-history">
+  {scoreButtonClicked && <p>Your Scores: Newest to Oldest (out of 100)
+</p>}
   {scores
     .slice()
     .reverse()
@@ -175,6 +185,7 @@ const Home = () => {
       </p>
     ))}
 </div>
+
 
   <img src="/quiz.png" className="banner" alt="quiz app" />
 </div>
