@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-import axios from "axios";
 import DonationsBilling from "./components/Donations/DonationsBilling";
 import DonationsConfirmation from "./components/Donations/DonationsConfirmation";
 import DonationsPage from "./components/Donations/DonationsPage";
@@ -27,13 +26,6 @@ import TestQuiz from "./components/Quizzes/TestQuiz";
 import PythonVideos from "./components/CcoursesPage/AllVideoPages/PythonVideos";
 function AppRoute() {
 
-  
-  
-
-  const fetchQuestions = async (category = "", difficulty = "") => {
-    await axios.get(`http://localhost:8080/api/questions`);
-  };
-  
   
   return (
     <div>
@@ -79,7 +71,6 @@ function AppRoute() {
               path="/Quizzes"
               element={
                 <Home
-                  fetchQuestions={fetchQuestions}
                 />
               }
             />
