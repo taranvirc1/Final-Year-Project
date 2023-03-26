@@ -3,15 +3,15 @@ package CS2001.Group47.ELearning_Platform.dto;
 public class ResultDTO {
     private Long id;
     private Integer score;
-    private String email; // Change this to email
+    private Integer studentId;
 
     public ResultDTO() {
     }
 
-    public ResultDTO(Long id, Integer score, String email) { // Change this to email
+    public ResultDTO(Long id, Integer score, Integer studentId) {
         this.id = id;
         this.score = score;
-        this.email = email;
+        this.studentId = studentId;
     }
 
     public Long getId() {
@@ -30,11 +30,11 @@ public class ResultDTO {
         this.score = score;
     }
 
-    public String getEmail() { // Change this to email
-        return email;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setEmail(String email) { // Change this to email
-        this.email = email;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 }
