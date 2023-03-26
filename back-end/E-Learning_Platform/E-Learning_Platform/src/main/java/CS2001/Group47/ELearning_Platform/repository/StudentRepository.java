@@ -22,7 +22,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 	Student findByResetPasswordToken(String token);
 
-	Student findByStudentId(Integer userId);
+	Student findByStudentId(Integer integer);
 
 	List<Student> findByOrderByXpDesc();
 }
