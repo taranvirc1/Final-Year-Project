@@ -21,7 +21,9 @@ function App() {
   }, [loggedInUser]);
 
   return (
+    
     <div className="App">
+      
       {!loggedInUser ? <Navbar /> : <NavbarProfile />}
       <main className="App-main">
         <Outlet context={[loggedInUser, setLoggedinUser]} />
