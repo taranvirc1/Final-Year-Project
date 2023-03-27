@@ -210,6 +210,14 @@ cursor: default;
     display: inline;
     font-size: 1.3rem;
     position: absolute;
+    left: 1300px;
+    top:15px;
+}
+
+.thread-creator{
+    display: inline;
+    font-size: 1.3rem;
+    position: absolute;
     left: 1000px;
     top:15px;
 }

@@ -23,7 +23,7 @@ function ForumPage() {
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
   const [subbed, setSubbed] = useState([]);
-  const [Subid, setSubid] = useState(0);
+  const [subId, setSubId] = useState(0);
   const[SubButton, setSubButton] = useState("Subscribe");
   const [subcolor,setsubcolor]=useState('white');
   const saveThreadID = localStorage.getItem("ThreadID");
@@ -73,37 +73,29 @@ const messageloader = (e) => {
 });
 }
 
-const subchecker = () => {
-  for(var i = 0; i < subbed.length; i++) {
-    if(subbed.subEmail===saveLoggedinUser){
-      localStorage.setItem("subId",subbed.subId);
-      return true;
-    }
-    else{
-      localStorage.setItem("subId",0);
-      return false;
-    }
-  }
-}
 
-const subscriptiondata = (e) => {
-  axios
-  .get(`http://localhost:8080/getsubs/${saveThreadID}`, { headers })
+const subscriptiondata = async(e) => {
+  const subEmail = localStorage.getItem("loggedInUser");
+  const threadId = localStorage.getItem("ThreadID");
+  await axios
+  .get(`http://localhost:8080/getsub/${subEmail}/${threadId}`, { headers })
 
     .then((resp) => {;
-      setSubbed(...resp.data);
-      console.log(...resp.data.subId);
-      console.log("subbed data: "+subbed.subId);
-      if (subbed){
-        subchecker(subbed, saveLoggedinUser);
-        if(subchecker == true){
-          setSubButton("Subscribed");
-          setsubcolor("orange");
-        }
-        else{
-          setSubButton("Subscribe");
-          setsubcolor("white");
-        }
+      setSubbed(resp.data);
+      setSubId(resp.data[0].subId);
+      
+      console.log("subbed data:")
+      console.log(resp.data);
+      console.log(subbed);
+      console.log(resp.data.subId);
+      if (resp.data.length>0){
+        setSubButton("Subscribed");
+        setsubcolor("orange");
+        
+      }
+      else{
+        setSubButton("Subscribe");
+        setsubcolor("white");
       }
       
     })
@@ -113,12 +105,12 @@ const subscriptiondata = (e) => {
 }
 
 const subscribe = (e) => {
-  const saveThreadID = localStorage.getItem("ThreadID");
-  const saveLoggedinUser = localStorage.getItem("loggedInUser");
+  const threadId = localStorage.getItem("ThreadID");
+  const subEmail = localStorage.getItem("loggedInUser");
   console.log(saveLoggedinUser);
   console.log(saveThreadID);
   axios
-  .post(`http://localhost:8080/sub/create`,{saveLoggedinUser,saveThreadID}, { headers })
+  .post(`http://localhost:8080/sub/create`,{subEmail,threadId}, { headers })
 
     .then((resp) => {
       console.log(resp.data);
@@ -132,25 +124,24 @@ const subscribe = (e) => {
   )
   subscriptiondata();
 }
-const unsubscribe = (SubId) => {
+const unsubscribe = (e) => {
+  
     axios
-    .delete(`http://localhost:8080/deleteSub/${SubId}`,{ headers })
+    .delete(`http://localhost:8080/deletesub/${subId}`,{ headers })
     .then((response) => {
       if (response.data != null) {
         // alert("deleted successfully ");
-        subscriptiondata();
       }
     })
     .catch((error) => {
       console.error(error);
     });
-    subscriptiondata();
   }
 
   function subbuttonchange(){
     if(SubButton==="Subscribed"){
       confirmAlert("Are you sure you want to unsubscribe?","sub");
-      unsubscribe(subbed.subId);
+      
       
     }
     else if(SubButton ==="Subscribe"){
@@ -210,6 +201,7 @@ const confirmAlert = (message, alerttype, mId) => {
 
     if (alerttype === "sub"){
       if (result.isConfirmed) {
+        unsubscribe();
         setSubButton("Subscribe");
         setsubcolor("white");
         Swal.fire("You are now Unsubscribed", "", "success");
@@ -281,9 +273,7 @@ const newmessagehandle = (e) => {
   
   
 
-  
-
-  
+ 
 
   useEffect(() => {
     subscriptiondata();
@@ -291,6 +281,8 @@ const newmessagehandle = (e) => {
     threadnameloader();
     
   }, []);
+  console.log(subbed);
+  console.log(subId);
 
 
   return (
