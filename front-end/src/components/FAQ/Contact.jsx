@@ -20,7 +20,7 @@ function Contact() {
   Authorization: `Bearer ${token}`,
  };
 
- const [Contact, setContact] = useState({});
+  const [Contact, setContact] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -85,9 +85,9 @@ function Contact() {
   const Contact = {
       firstName,
       lastName,
-     email,
-     phone,
-     briefMessage
+      email,
+      phone,
+      briefMessage
    }
 
     await axios
