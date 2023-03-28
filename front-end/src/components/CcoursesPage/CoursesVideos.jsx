@@ -48,6 +48,7 @@ function CoursesVideos() {
   });
 
   // used to get the current user
+  //
  
 
   //console.log("ff"+currentUser.email)
