@@ -8,9 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 function TestQuiz() {
   const [questionss, setQuestionss] = useState([]);
-
+  const [studentId, setStudentId] = useState(null);
   const reDirect = useNavigate();
-
   const jwt = localStorage.getItem("jwt");
 
   useEffect(() => {
@@ -23,7 +22,6 @@ function TestQuiz() {
       })
       .then((response) => {
         setQuestionss(response.data);
-        //  setQuizLength(response.data.length);
       })
       .catch((error) => {
         console.error(error);
@@ -31,24 +29,76 @@ function TestQuiz() {
       });
   }, [jwt]);
 
-  const fireAlert = (score, questionss) => {
-    Swal.fire({
-      container: "swal2-container",
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    const Api = "http://localhost:8080/user/findByEmail";
+    const params = { email: loggedInUser };
+  
+    if (loggedInUser) {
+      axios
+        .get(Api, { headers: { Authorization: `Bearer ${jwt}` }, params })
+        .then((response) => {
+          setStudentId(parseInt(response.data.studentId, 10)); // Convert the studentId to an integer
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [jwt]);
+  
 
-      title: " you scored " + score + " out of " + questionss,
-      allowOutsideClick: false,
-      icon: "success",
-    }).then((result) => {
-    
-      if ((score / questionss) * 100 > 50) {
-        Swal.fire("you passed", "", "success");
-        reDirect("/Quizzes");
-      } else {
-        Swal.fire("you failed", "", "error");
-        reDirect("/Quizzes");
-      }
+  const saveScore = () => {
+    const percentageScore = (score / questionss.length) * 100;
+  
+    const resultData = {
+      studentId: studentId, // Replace userId with studentId
+      score: percentageScore, // Save the score as a percentage
+      totalQuestions: questionss.length,
+    };
+  
+    console.log('Result data:', resultData); // Log the result data to check the format
+  
+    const config = { headers: { Authorization: `Bearer ${jwt}` } }; // Add the config object for authentication
+  
+    axios
+      .post("http://localhost:8080/api/results", resultData, config)
+      .then((response) => {
+        console.log(response);
+        fireAlert(score, questionss.length);
+      })
+      .catch((error) => {
+        console.error("Unable to save the score:", error);
+      });
+  };
+  
+  
+  
+
+  const handleQuizCompletion = () => {
+    fireAlert(score, questionss.length).then((passed) => {
+      saveScore(studentId, score); // Move this outside of the if statement
+      reDirect("/Quizzes");
     });
   };
+  
+  
+  const fireAlert = (score, questionss) => {
+    return new Promise((resolve) => {
+      const passed = (score / questionss) * 100 > 50;
+      const resultText = passed ? "you passed" : "you failed";
+      const resultIcon = passed ? "success" : "error";
+  
+      Swal.fire({
+        container: "swal2-container",
+        title: " you scored " + score + " out of " + questionss,
+        allowOutsideClick: false,
+        icon: resultIcon,
+      }).then(() => {
+        resolve(passed);
+      });
+    });
+  };
+  
 
   console.log(questionss);
 
@@ -68,43 +118,46 @@ function TestQuiz() {
       setShowScore(true);
     }
   };
+
   return (
     <div className="quizTesdwdwt">
       <div className="quizContainer">
         {showScore ? (
           <div className="score-section">
-            {fireAlert(score, questionss.length)};
-          </div>
-        ) : (
-          <div className="question-section">
-            <div className="question-count">
-              <span>Question {currentQuestion + 1}</span>/{questionss.length}
-            </div>
-
-            {questionss
-              .slice(currentQuestion, currentQuestion + 1)
-              .map((question, index) => (
-                <>
-                  <div className="question-text">{question.questionText}</div>
-                  <div className="answer-section">
-                    {question.answer.map((answerOption) => (
-                      <button
-                        className="answerButtons"
-                        onClick={() =>
-                          handleAnswerOptionClick(answerOption.correct)
-                        }
-                      >
-                        {answerOption.answerText}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              ))}
-          </div>
-        )}
+            {handleQuizCompletion()}
       </div>
-    </div>
-  );
+    ) : (
+      <div className="question-section">
+        <div className="question-count">
+          <span>Question {currentQuestion + 1}</span>/{questionss.length}
+        </div>
+
+        {questionss
+          .slice(currentQuestion, currentQuestion + 1)
+          .map((question, index) => (
+            <>
+              <div className="question-text">{question.questionText}</div>
+              <div className="answer-section">
+              {question.answer.map((answerOption, index) => (
+  <button
+    key={index} // Add this line
+    className="answerButtons"
+    onClick={() =>
+      handleAnswerOptionClick(answerOption.correct)
+    }
+  >
+    {answerOption.answerText}
+  </button>
+))}
+
+              </div>
+            </>
+          ))}
+      </div>
+    )}
+  </div>
+</div>
+);
 }
 
 export default TestQuiz;

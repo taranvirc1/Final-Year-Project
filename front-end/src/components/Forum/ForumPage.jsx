@@ -82,12 +82,13 @@ const subscriptiondata = async(e) => {
 
     .then((resp) => {;
       setSubbed(resp.data);
+      setSubId(resp.data[0].subId);
       
       console.log("subbed data:")
       console.log(resp.data);
       console.log(subbed);
       console.log(resp.data.subId);
-      if (subbed){
+      if (resp.data.length>0){
         setSubButton("Subscribed");
         setsubcolor("orange");
         
@@ -130,13 +131,11 @@ const unsubscribe = (e) => {
     .then((response) => {
       if (response.data != null) {
         // alert("deleted successfully ");
-        subscriptiondata();
       }
     })
     .catch((error) => {
       console.error(error);
     });
-    subscriptiondata();
   }
 
   function subbuttonchange(){
