@@ -23,6 +23,7 @@ function JavaScriptVideos() {
    }
  }, []);
  console.log(loggedInUser);
+ const curUser = localStorage.getItem("loggedInUser");
 
  //getting the current date using this function
  const current = new Date();
@@ -39,12 +40,10 @@ function JavaScriptVideos() {
    ratingStars: "",
    reviewDesc: "",
    createdAt: getCurrentDate,
+   email:curUser
  });
 
  // used to get the current user
- const [currentUser, setCurrentUser] = useState({
-   email: loggedInUser,
- });
 
  //console.log("ff"+currentUser.email)
  console.log("this");
@@ -57,7 +56,7 @@ function JavaScriptVideos() {
 
  // getting the review text and store in the review object of posting purposes
 
- const { courseID, ratingStars, reviewDesc, createdAt } = review;
+ const { courseID, ratingStars, reviewDesc, createdAt,email } = review;
  const onInputChange = (e) => {
    setReview({ ...review, [e.target.name]: e.target.value });
    setCheckReview(e.target.value);
@@ -93,6 +92,8 @@ function JavaScriptVideos() {
      ratingStars: reviews[i].ratingStars,
      reviewDesc: reviews[i].reviewDesc,
      createdAt: getCurrentDate,
+     email:curUser
+
    };
    setReview(reviewCopy);
  }
@@ -159,6 +160,8 @@ const sortBYRatingDsc = (event) => {
            ratingStars: "",
            reviewDesc: "",
            createdAt: getCurrentDate,
+           email:curUser
+
          });
          //alert("review edited");
        }) //;
@@ -179,6 +182,8 @@ const sortBYRatingDsc = (event) => {
              ratingStars: "",
              reviewDesc: "",
              createdAt: getCurrentDate,
+             email:curUser
+
            });
          } else {
          ///  alert("you already have a review");
@@ -201,6 +206,8 @@ const sortBYRatingDsc = (event) => {
      ratingStars: "",
      reviewDesc: "",
      createdAt: getCurrentDate,
+     email:curUser
+
    });
    setForm(false);
 
@@ -326,6 +333,8 @@ const sortBYRatingDsc = (event) => {
      ratingStars: "",
      reviewDesc: "",
      createdAt: getCurrentDate,
+     email:curUser
+
    });
    setCheckReview("");
    setCheckRating("");
@@ -624,7 +633,7 @@ const checkIfFilled = (e) => {
                   className={index <= (hover || ratingStars) ? "on" : "off"}
                   onClick={() => onStarsClick(index)}
                   onMouseEnter={() => setHover(index)}
-                  // onMouseLeave={() => setHover(ratingStars)}
+                  onMouseLeave={() => setHover(ratingStars)}
                   name="ratingStars"
                   value={review.ratingStars}
                   // onChange={(e) =>  onInputChange(e.target.value)}
