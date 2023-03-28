@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.management.RuntimeErrorException;
+import javax.validation.constraints.Null;
 
 @RestController
 public class Rate_ReviewController {
@@ -50,10 +51,10 @@ public class Rate_ReviewController {
     String email = currentUserName(principal);
 
     if (reviewService.findByEmail(email,newReviewPostDTO.getCourseID()) != null) {
-      return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
     }
     ;
-    if (newReviewPostDTO.getRatingStars() == 0 || newReviewPostDTO.getReviewDesc() == null) {
+    if (newReviewPostDTO.getRatingStars() == 0 || newReviewPostDTO.getReviewDesc() == null|| newReviewPostDTO.getCreatedAt() == null || email == null || newReviewPostDTO.getCourseID()==0 ) {
       // This is for testing purposes
 
       // Return response entity with error and BAD REQUEST status
@@ -63,7 +64,7 @@ public class Rate_ReviewController {
 
     Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
 
-    Student student = studentController.getByEmail(email);
+    Student student = studentController.getByEmail(newReviewPostDTO.getEmail());
 
     Rate_Review newReview = new Rate_Review(newReviewPostDTO.getRatingStars(), newReviewPostDTO.getReviewDesc(),
         courses, student, newReviewPostDTO.getCreatedAt());
@@ -103,7 +104,7 @@ public class Rate_ReviewController {
 
     Courses courses = coursesService.getCoursesById(newReviewPostDTO.getCourseID());
 
-    Student student = studentController.getByEmail(email);
+    Student student = studentController.getByEmail(newReviewPostDTO.getEmail());
 
     Rate_Review newReview = new Rate_Review();
     newReview.setRatingID(newReviewPostDTO.getRatingID());
