@@ -27,6 +27,7 @@ function CoursesVideos() {
     }
   }, []);
   console.log(loggedInUser);
+  const curUser = localStorage.getItem("loggedInUser");
 
   //getting the current date using this function
   const current = new Date();
@@ -43,25 +44,23 @@ function CoursesVideos() {
     ratingStars: "",
     reviewDesc: "",
     createdAt: getCurrentDate,
+    email:curUser,
   });
 
   // used to get the current user
-  const [currentUser, setCurrentUser] = useState({
-    email: loggedInUser,
-  });
+  //
+ 
 
   //console.log("ff"+currentUser.email)
   console.log("this");
-  const [userdata, setUserdata] = useState("");
 
-  const [currentStudentID, setCurrentStudentID] = useState("");
 
   const [checkrating, setCheckRating] = useState("");
   const [checkReview, setCheckReview] = useState("");
 
   // getting the review text and store in the review object of posting purposes
 
-  const { courseID, ratingStars, reviewDesc, createdAt } = review;
+  const { courseID, ratingStars, reviewDesc, createdAt,email } = review;
   const onInputChange = (e) => {
     setReview({ ...review, [e.target.name]: e.target.value });
     setCheckReview(e.target.value);
@@ -85,6 +84,8 @@ function CoursesVideos() {
       ratingStars: reviews[i].ratingStars,
       reviewDesc: reviews[i].reviewDesc,
       createdAt: getCurrentDate,
+      email:curUser,
+
     };
     setReview(reviewCopy);
   }
@@ -102,16 +103,15 @@ function CoursesVideos() {
           headers: { Authorization: `Bearer ${jwt}` },
         })
         .then((d) => {
-          const reviewsCopy = [...reviews];
-          const i = reviewsCopy.findIndex((review) => review.ratingID === d.id);
-          reviewsCopy[i] = d;
-          setReviews(reviewsCopy);
+          
 
           setReview({
             courseID: "1",
             ratingStars: "",
             reviewDesc: "",
             createdAt: getCurrentDate,
+            email:curUser,
+
           });
           //alert("review edited");
         }) //;
@@ -132,16 +132,16 @@ function CoursesVideos() {
               ratingStars: "",
               reviewDesc: "",
               createdAt: getCurrentDate,
+              email:curUser,
+
             });
-          } else {
-            alert("you already have a review");
-          }
+          } 
         })
 
         .catch(async (error) => {
           console.log(review);
           console.log(error);
-          alert("you already have a review");
+        //  alert("you already have a review");
         });
 
       // setForm(false);
@@ -154,6 +154,8 @@ function CoursesVideos() {
       ratingStars: "",
       reviewDesc: "",
       createdAt: getCurrentDate,
+      email:curUser,
+
     });
     setForm(false);
 
@@ -222,17 +224,7 @@ function CoursesVideos() {
   };
   console.log(reviews);
 
-  const getAverage = (reviews) => {
-    if (reviews.length == null) {
-      return;
-    }
-    const sum = 0;
-    for (let i = 0; i < reviews.length; i++) {
-      sum += parseInt(reviews[i].ratingStars);
-    }
-    const averagee = sum / reviews.length;
-    return averagee;
-  };
+  
 
   const deleteReview = (ratingID) => {
     axios
@@ -283,7 +275,7 @@ function CoursesVideos() {
         // alert("cant get quiz");
       });
   }, []);
-  console.log("quiz", quiz);
+  //console.log("quiz", quiz);
 
   const [widthValue, setWidthValue] = useState(0);
 
@@ -296,12 +288,8 @@ function CoursesVideos() {
     setWidthValue(progressBarWidth);
   }, [quiz]);
 
-  const [showPlayer, setShowPlayer] = useState(false);
 
-  function handleClick(url) {
-    setVideoUrl(url);
-    setShowPlayer(true);
-  }
+ 
 
   const [showForm, setForm] = useState(false);
   function handleForm() {
@@ -313,53 +301,21 @@ function CoursesVideos() {
       ratingStars: "",
       reviewDesc: "",
       createdAt: getCurrentDate,
+      email:curUser,
+
     });
     setCheckReview("");
     setCheckRating("");
     setForm(false);
   }
 
-  /*function dropdown() {
-    const dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
+ 
 
-    for (i = 0; i < dropdown.length; i++) {
-      dropdown[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-      });
-    }
-  }*/
 
-  const [videoUrl, setVideoUrl] = useState("");
 
-  const [videos, setVideos] = useState([]);
+ 
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/videos`, {
-        headers: { Authorization: `Bearer ${jwt}` },
-      })
-      .then((response) => {
-        console.log(response.data);
-
-        setVideos(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  console.log(videos);
-
-  const retrieveUrl = (videoName, courseID) => {
-    const i = videos.find(
-      (video) =>
-        video.videoName === videoName && video.course.courseID === courseID
-    );
-    const url = i.url;
-
-    setVideoUrl(url);
-  };
+  
 
   const [hasReview, setHasReview] = useState(false);
 
@@ -592,7 +548,7 @@ function CoursesVideos() {
                     className={index <= (hover || ratingStars) ? "on" : "off"}
                     onClick={() => onStarsClick(index)}
                     onMouseEnter={() => setHover(index)}
-                    // onMouseLeave={() => setHover(ratingStars)}
+                    onMouseLeave={() => setHover(ratingStars)}
                     name="ratingStars"
                     value={review.ratingStars}
                     // onChange={(e) =>  onInputChange(e.target.value)}
