@@ -96,12 +96,12 @@ function Contact() {
     console.log(response);
     if (response.status === 201){
       console.log(response);
-    setContact("");
-     setFirstName("");
-     setLastName("");
-     setEmail("");
-     setPhone("");
-    setBriefMessage("");
+      setContact("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setBriefMessage("");
       }alert("Successfully Submitted Contact Form")
     })
     .catch(async (error) => {
