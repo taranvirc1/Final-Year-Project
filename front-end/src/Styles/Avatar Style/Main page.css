@@ -16,7 +16,7 @@ body {
 
 /* Style the header section */
 .topPart {
-  margin-top: 78px;
+  margin-top: 115px;
   display: flex;
   opacity: 1;
   align-items: center;
@@ -191,5 +191,13 @@ button img {
   color: white;
   background: darkslateblue;
 }
-
-
+.upm-ic-lock-text {
+font-weight: bold;
+position: relative;
+z-index: 10;
+left: 34.3%;
+top: 50px;
+color: rgb(0, 255, 68);
+cursor: pointer;
+bottom: 22%;
+}
