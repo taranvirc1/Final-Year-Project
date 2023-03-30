@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const bp = require("body-parser");
 
-const routes = require("./student_routes","./subscription_routes");
+const routes = require("./student_routes");
 
 app.use(cors());
 app.use(express.json());
