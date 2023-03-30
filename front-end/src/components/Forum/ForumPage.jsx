@@ -23,7 +23,6 @@ function ForumPage() {
   const [newMessage, setnewMessage] = useState("");
   const [studentId, setStudentId] = useState("");
   const [subbed, setSubbed] = useState([]);
-  const [mailingList, setmailingList] = useState([]);
   const [subId, setSubId] = useState(0);
   const[SubButton, setSubButton] = useState("Subscribe");
   const [subcolor,setsubcolor]=useState('white');
@@ -68,20 +67,6 @@ const messageloader = (e) => {
 
       setMessages(resp.data);
       
-    })
-    .catch((error) => {
-      console.error(error);
-});
-}
-
-const getmailinglist = (e) => {
-  const threadId = localStorage.getItem("ThreadID");
-  axios
-  .get(`http://localhost:8080/getsubs/${threadId}`, { headers })
-
-    .then((resp) => {
-      setmailingList(resp.data);
-     
     })
     .catch((error) => {
       console.error(error);
@@ -291,14 +276,12 @@ const newmessagehandle = (e) => {
 
   useEffect(() => {
     subscriptiondata();
-    getmailinglist();
     messageloader();
     threadnameloader();
     
   }, []);
   console.log(subbed);
   console.log(subId);
-  console.log(mailingList)
 
 
   return (

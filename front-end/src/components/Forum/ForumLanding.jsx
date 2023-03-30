@@ -96,6 +96,7 @@ function ForumLanding() {
         if (response.data != null) {
           // alert("deleted successfully ");
         }
+        console.log(response);
         threadloader();
       })
       .catch((error) => {
