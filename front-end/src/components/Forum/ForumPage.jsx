@@ -73,7 +73,6 @@ const messageloader = (e) => {
 });
 }
 
-
 const subscriptiondata = async(e) => {
   const subEmail = localStorage.getItem("loggedInUser");
   const threadId = localStorage.getItem("ThreadID");
