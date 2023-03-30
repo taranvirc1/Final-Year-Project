@@ -25,8 +25,12 @@ import nft2 from "../../images/UPM/assets/nft2_low.png";
  
 function Avatar() {
   //Gets the logged in student's email and sets the varaible 'loggedInUser' as the string value. 
+    const [scores, setScores] = useState([]);
     const [loggedInUser, setLoggedinUser] = useState("");
     const [profile, setProfile] = useState([]);
+    const [student, setStudent] = useState([]);
+    const [studentId, setStudentId] = useState("");
+    const jwt = localStorage.getItem("jwt");
     useEffect(() => {
       const saveLoggedinUser = localStorage.getItem("loggedInUser");
       if (saveLoggedinUser) {
@@ -35,9 +39,7 @@ function Avatar() {
     }, []);
     console.log("user email is "+loggedInUser); 
     //constant declarations
-        const [student, setStudent] = useState([]);
-        const [studentId, setStudentId] = useState("");
-        const jwt = localStorage.getItem("jwt");
+       
 
   useEffect(() => {
     axios.get("http://localhost:8080/getRankings",{  headers: {"Authorization" : `Bearer ${jwt}`} })
@@ -74,14 +76,78 @@ const getRemainingXP = (xp) => {
   return xp % 1000;
 };
 
+const fetchScores = async (studentId) => {
+  if (!studentId) {
+    console.error("Student ID is not available.");
+    return;
+  }
 
-
-const [selectedBadges, setSelectedBadges] = useState([basic, intermediate, advanced, rare]);
-    useEffect(() => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/results/student/${studentId}`,
+      { headers: { Authorization: `Bearer ${jwt}` } }
+    );
+    setScores(response.data);
+  } catch (error) {
+    console.error("Error fetching scores:", error);
+  }
+};
+const [totalScore, setTotalScore] = useState(0);
+useEffect(() => {
+  const newTotalScore = scores.reduce((accumulator, currentScore) => {
+    return accumulator + currentScore.score;
+  }, 0);
+ 
+  if (scores.length > 0) { 
+    setTotalScore(newTotalScore);
+    const remainingXP = getRemainingXP(newTotalScore);
+    updateXP(remainingXP, 1000);
    
+    const rank = Math.floor(newTotalScore / 1000) + 1;
+    switch (rank) {
+      case 1:
+        setRankImg(rank1);
+        break;
+      case 2:
+        setRankImg(rank2);
+        break;
+      case 3:
+        setRankImg(rank3);
+        break;
+      case 4:
+        setRankImg(rank4);
+        break;
+      case 5:
+        setRankImg(rank5);
+        break;
+      case 6:
+        setRankImg(rank6);
+        break;
+      case 7:
+        setRankImg(rank7);
+        break;
+      case 8:
+        setRankImg(rank8);
+        break;
+      case 9:
+        setRankImg(rank9);
+        break;
+      case 10:
+        setRankImg(rank10);
+        break;
+      default:
+        setRankImg(rank1);
+    }
+  }
+}, [scores]);
+
+const [selectedBadges, setSelectedBadges] = useState([]);
+    useEffect(() => {
+     
       const saveLoggedinUser = localStorage.getItem("loggedInUser");
       axios.get(`http://localhost:8080/profile/${saveLoggedinUser}`, { headers})
         .then(response => {
+          fetchScores(response.data.studentId);
           setProfile(response.data);
           const badge1 = response.data.selected_badges[0];
           const badge2 = response.data.selected_badges[1];
@@ -94,49 +160,13 @@ const [selectedBadges, setSelectedBadges] = useState([basic, intermediate, advan
             badgeImages[badge4],
           ]);
           setStudentId(response.data.studentId)
-          const remainingXP = getRemainingXP(response.data.xp);
-          updateXP(remainingXP, 1000);
           
-          const rank = Math.floor(response.data.xp / 1000) + 1;
-          switch (rank) {
-            case 1:
-              setRankImg(rank1);
-              break;
-            case 2:
-              setRankImg(rank2);
-              break;
-            case 3:
-              setRankImg(rank3);
-              break;
-            case 4:
-              setRankImg(rank4);
-              break;
-            case 5:
-              setRankImg(rank5);
-              break;
-            case 6:
-              setRankImg(rank6);
-              break;
-            case 7:
-              setRankImg(rank7);
-              break;
-            case 8:
-              setRankImg(rank8);
-              break;
-            case 9:
-              setRankImg(rank9);
-              break;
-            case 10:
-              setRankImg(rank10);
-              break;
-            default:
-              setRankImg(rank1);
-          }
+          
         })
         .catch(error => {
           console.log(error);
         });
-        
+          
    
     }, []);
 
@@ -185,14 +215,86 @@ useEffect(() => {
 }, [badgeStatus, loggedInUser]);
 
 //function checks if the badgeStatus for a badge object is locked (true) or unlocked (false)
-const handleBadgeClick = (e, badgeName) => {
+const handleBadgeClick = (e, badgeName, totalXp) => {
   setPopupPosition({ x: e.clientX, y: e.clientY });
 
   if (!badgeStatus[badgeName]) {
     setActiveBadge(badgeName);
     setPopupVisible(true);
   } else {
-    setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+   
+  
+
+      switch (badgeName) {
+        case "basic":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 3 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        case "intermediate":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 4 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        case "advanced":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 5 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        case "rare":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 6 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        case "rare2":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 7 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        case "nft":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 8 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        case "nft1":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 9 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        case "nft2":
+          for (let i = 1; i <= 10; i++) {
+            if (i >= 10 && rankImg.includes(`Rank ${i}`)) {
+              setBadgeStatus({ ...badgeStatus, [badgeName]: !badgeStatus[badgeName] });
+              break;
+            }
+          }
+          break;
+        default:
+          console.log("Invalid badge name.");
+      }
+    
+    
   }
 };
 
@@ -276,7 +378,7 @@ return (
       </div>
           <div class="xp-container">
             <div class="xp-bar">
-                {profile.xp % 1000} / 1000
+                {totalScore % 1000} / 1000
             </div>
           </div>
         </div>
@@ -287,7 +389,7 @@ return (
     <h3 class="titles">unlock/choose a badge:</h3>
     <div class="badgeCollagePosition">
       <div class="Collage">
-        
+       
        <li>
         <h6></h6>
         <div className="upm-info">
@@ -297,7 +399,7 @@ return (
 
               <div
                       className="upm-avatar-container"
-                      onClick={(e) => handleBadgeClick(e, "basic")}
+                      onClick={(e) => handleBadgeClick(e, "basic", profile.totalXp)}
                     >
                       <div className="upm-avatar">
                         <img
@@ -308,14 +410,14 @@ return (
                         />
                       </div>
                       {badgeStatus.basic && (
-                        <AiFillLock className="upm-ic-lock" size={50} />
+                        <><AiFillLock className="upm-ic-lock" size={50} /><div className="upm-ic-lock-text">Rank 3</div></>
                       )}
               </div>
 
 
               <div
                       className="upm-avatar-container"
-                      onClick={(e) => handleBadgeClick(e, "intermediate")}
+                      onClick={(e) => handleBadgeClick(e, "intermediate", profile.totalXp)}
                     >
                       <div className="upm-avatar">
                         <img
@@ -325,29 +427,25 @@ return (
                           }}
                         />
                       </div>
-                      {badgeStatus.inter && (
-                        <AiFillLock className="upm-ic-lock" size={50} />
+                      {badgeStatus.intermediate && (
+                        <><AiFillLock className="upm-ic-lock" size={50} /><div className="upm-ic-lock-text">Rank 4</div></>
                       )}
-              </div>
+            </div>
+              <div className="upm-avatar-container" onClick={(e) => handleBadgeClick(e, "advanced",profile.totalXp)}>
+                <div className="upm-avatar">
+                  <img src={advanced} style={{ filter: badgeStatus.advanced ? "grayscale(100%)" : "grayscale(0%)" }} />
+                </div>
+                {badgeStatus.advanced ? (
+                  <>
+                    <AiFillLock className="upm-ic-lock" size={50} />
+                    <div className="upm-ic-lock-text">Rank 5</div>
+                  </>
+                ) : null}
+            </div>
+
               <div
                       className="upm-avatar-container"
-                      onClick={(e) => handleBadgeClick(e, "advanced")}
-                    >
-                      <div className="upm-avatar">
-                        <img
-                          src={advanced}
-                          style={{
-                            filter: badgeStatus.advanced ? "grayscale(100%)" : "grayscale(0%)",
-                          }}
-                        />
-                      </div>
-                      {badgeStatus.advanced && (
-                        <AiFillLock className="upm-ic-lock" size={50} />
-                      )}
-              </div>
-              <div
-                      className="upm-avatar-container"
-                      onClick={(e) => handleBadgeClick(e, "rare")}
+                      onClick={(e) => handleBadgeClick(e, "rare" , profile.totalXp)}
                     >
                       <div className="upm-avatar">
                         <img
@@ -358,12 +456,12 @@ return (
                         />
                       </div>
                       {badgeStatus.rare && (
-                        <AiFillLock className="upm-ic-lock" size={50} />
+                        <><AiFillLock className="upm-ic-lock" size={50} /><div className="upm-ic-lock-text">Rank 6</div></>
                       )}
               </div>
               <div
                       className="upm-avatar-container"
-                      onClick={(e) => handleBadgeClick(e, "rare2")}
+                      onClick={(e) => handleBadgeClick(e, "rare2", profile.totalXp)}
                     >
                       <div className="upm-avatar">
                         <img
@@ -374,12 +472,12 @@ return (
                         />
                       </div>
                       {badgeStatus.rare2 && (
-                        <AiFillLock className="upm-ic-lock" size={50} />
+                        <><AiFillLock className="upm-ic-lock" size={50} /><div className="upm-ic-lock-text">Rank 7</div></>
                       )}
               </div>
               <div
                       className="upm-avatar-container"
-                      onClick={(e) => handleBadgeClick(e, "nft")}
+                      onClick={(e) => handleBadgeClick(e, "nft", profile.totalXp)}
                     >
                       <div className="upm-avatar">
                         <img
@@ -390,7 +488,7 @@ return (
                         />
                       </div>
                       {badgeStatus.nft && (
-                        <AiFillLock className="upm-ic-lock" size={50} />
+                        <><AiFillLock className="upm-ic-lock" size={50} /><div className="upm-ic-lock-text">Rank 8</div></>
                       )}
               </div>
 
