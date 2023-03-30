@@ -236,6 +236,7 @@ function Account() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address"
+                  disabled={disabled}
                 />
               </div>
               <div className="input-field">
@@ -245,6 +246,7 @@ function Account() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
+                  disabled={disabled}
                 />
               </div>
               {/* Redirect to home page after login */}
