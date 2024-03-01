@@ -1,0 +1,17 @@
+.body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 100% of the viewport height */
+}
+
+.center-container {
+  text-align: center;
+}
+
+.center-text {
+  font-size: 24px;
+  font-weight: bold;
+  
+}
